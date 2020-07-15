@@ -1,0 +1,7 @@
+example/
+node_modules/
+src/
+.gitignore
+.npmrc
+rollup.config.js
+webpack.config.js
