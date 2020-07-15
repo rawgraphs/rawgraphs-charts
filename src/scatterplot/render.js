@@ -2,7 +2,9 @@ import * as d3 from 'd3'
 // import { categoryLegend } from 'rawgraphs-core'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
-    
+
+  console.log(mapping)
+
   const { 
     width = 500,
     height = 500,
@@ -39,7 +41,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   // y scale
   const yDomain = yOrigin?[0,d3.max(data, (d) => d.y)]:d3.extent(data, (d) => d.y)
   
-  const y = dataTypes[mapping.y.value].type?d3.scaleTime():d3.scaleLinear();
+  const y = mapping.y.dataType ? d3.scaleTime() : d3.scaleLinear();
     
   y.domain(yDomain).rangeRound([chartHeight, 0])
   
@@ -49,12 +51,12 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
      .rangeRound([0, maxRadius]);
   
   // color scale
-  const colorDomain = (mapping.color && dataTypes[mapping.color.value] === "string") ? [...new Set(data.map(d => d.color))].sort() : d3.extent(data,d=>d.color)
+  const colorDomain = (mapping.color && mapping.color.dataType === "string") ? [...new Set(data.map(d => d.color))].sort() : d3.extent(data,d=>d.color)
  
   const color = d3.scaleSequential()
 
-  color.domain((mapping.color && dataTypes[mapping.color.value] === "string")?[0, colorDomain.length-1]:colorDomain)
-  color.interpolator((mapping.color && dataTypes[mapping.color.value] === "string")?d3.interpolateSpectral:d3.interpolateYlGn)
+  color.domain((mapping.color && mapping.color.dataType === "string")?[0, colorDomain.length-1]:colorDomain)
+  color.interpolator((mapping.color && mapping.color.dataType === "string")?d3.interpolateSpectral:d3.interpolateYlGn)
   
   const xAxis = (g) => {
     return g
@@ -118,7 +120,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr("cx", (d) => x(d.x))
     .attr("cy", (d) => y(d.y))
     .attr("fill", d=>{
-      const colorValue = (mapping.color && dataTypes[mapping.color.value] === "string")?colorDomain.indexOf(d.color):d.color;
+      const colorValue = (mapping.color && mapping.color.dataType === "string")?colorDomain.indexOf(d.color):d.color;
       return mapping.color?color(colorValue):"grey";
     })
     .attr("r", d=>{
@@ -166,7 +168,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         .labelOffset(5)
         .labelWrap(legendWidth-20)
       
-      if(dataTypes[mapping.color.value] === "string"){
+      if(mapping.color.dataType === "string"){
         legendColor
           .cells(colorDomain.length)
           .labels(colorDomain)

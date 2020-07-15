@@ -1,0 +1,25 @@
+.chart-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.chart-list {
+  padding: 20px;
+  border-right: 1px solid #ccc;
+}
+
+.chart-preview {
+  flex-grow: 1;
+  padding: 0 20px;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
