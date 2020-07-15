@@ -1,14 +1,15 @@
+import { metadata } from './metadata'
 import { dimensions }  from './dimensions'
 import { mapData } from './mapping'
 import { render } from './render'
-import { metadata } from './metadata'
-
+import { visualOptions } from './visualOptions'
 
 export default {
   metadata,
   dimensions,
   mapData,
   render,
+  visualOptions,
 
 }
 

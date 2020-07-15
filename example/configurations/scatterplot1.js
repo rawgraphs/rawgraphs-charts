@@ -19,6 +19,7 @@ export default {
   },
   visualOptions: {
     width: 500,
-    height: 1500
+    height: 500,
+    xOrigin: false,
   },
 }
