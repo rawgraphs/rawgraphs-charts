@@ -17,7 +17,7 @@ const ChartPreview = ({ chart, data, mapping, dataTypes, visualOptions }) => {
   }, [chart, data, mapping, dataTypes, visualOptions])
 
   return (
-    <div ref={domRef}></div>
+    <div ref={domRef} className="chart-container"></div>
   )
 }
 

@@ -1,25 +1,44 @@
+* {
+    box-sizing: border-box;
+  }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }  
+  
 .chart-page {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
 .chart-list {
   padding: 20px;
-  border-right: 1px solid #ccc;
+  border-right: 1px solid #222;
+  height: 100%;
+  width: 200px;
 }
 
 .chart-preview {
   flex-grow: 1;
-  padding: 0 20px;
+  padding: 50px;
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
+.chart-container {
+    border: solid 1px #ccc;
+    background-color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px
+
 }
 
-* {
-  box-sizing: border-box;
-}
