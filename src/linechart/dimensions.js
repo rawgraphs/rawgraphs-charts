@@ -10,18 +10,21 @@ export const dimensions = [
     id: "x",
     name: "x",
     operation: "get",
+    validTypes: ["number", "date"],
     required: true,
   },
   {
     id: "y",
     name: "y",
     operation: "get",
+    validTypes: ["number", "date"],
     required: false,
   },
   {
     id: "color",
     name: "color",
     operation: "get",
+    validTypes: ["number", "string", "date"],
     required: false,
   },
 ];
