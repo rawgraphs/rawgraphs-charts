@@ -1,27 +1,6 @@
 export const visualOptions = {
   
-  xOrigin : {
-    type: 'boolean',
-    label: 'Set x origin to 0',
-    default: false,
-    group: 'chart'
-  },
-
-  yOrigin : {
-    type: 'boolean',
-    label: 'Set y origin to 0',
-    default: false,
-    group: 'chart'
-  },
-
-  maxRadius : {
-    type: 'number',
-    label: 'Max radius (px)',
-    default: 10,
-    step: 'any',
-    group: 'chart'
-  },
-
+   
   showPoints : {
     type: 'boolean',
     label: 'Show points',
@@ -38,6 +17,37 @@ export const visualOptions = {
     disabled: {
       showPoints: false
     }
+  },
+
+  interpolation: {
+    type: "text",
+    label: "Interpolation",
+    default: "Cardinal",
+    options: [
+      "Basis",
+      "Bundle",
+      "Cardinal",
+      "Catmull–Rom",
+      "Linear",
+      "Monotone X",
+      "Natural",
+      "Step",
+      "Step After",
+      "Step Before",
+    ],
+    group: "chart",
+  },
+
+  strokeWidth: {
+    type: "number",
+    label: "Stroke width",
+    default: 1.5,
+    options: [
+      { label: 'light', value: 1 },
+      { label: 'medium', value: 1.5 },
+      { label: 'bold', value: 3 },
+    ],
+    group: "chart",
   },
 
 }

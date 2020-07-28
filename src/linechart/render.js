@@ -35,6 +35,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     fillGaps = true,
     showPoints = true,
     pointsRadius = 3,
+    strokeWidth = 1.5,
     // series options
     columnsNumber = 2,
     useSameScale = false,
@@ -169,7 +170,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .append("g")
     .attr("id", "viz")
     .attr("fill", "none")
-    .attr("stroke-width", 1.5)
+    .attr("stroke-width", strokeWidth)
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round");
 
