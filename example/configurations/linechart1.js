@@ -9,22 +9,23 @@ export default {
     Format: "string",
     Year: "number",
     Units: "number",
-    Revenues: "number"
+    Revenues: "number",
+	"Revenues-Adjusted": "number"
   },
   mapping: {
-	series: { value: ["Category"] },
+	series: { value: ["Format"] },
     lines: { value: ["Category"] },
     x: { value: ["Year"] },
-    y: { value: ["Revenues"] },
+    y: { value: ["Revenues-Adjusted"] },
     color: { value: ["Category"] }
   },
   visualOptions: {
     width: 1000,
-    height: 1000,
+    height: 700,
 	showPoints:true,
-	interpolation:"Step Before",
+	interpolation:"Natural",
 	pointsRadius:2,
-	columnsNumber:2,
-	gutter: 20
+	columnsNumber:5,
+	gutter: 50
   },
 };

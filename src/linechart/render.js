@@ -3,8 +3,6 @@ import * as d3 from "d3";
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
 
-	const singleData = data[0] //for now no series
-
   const {
     // artboard options
     width,
@@ -20,10 +18,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     pointsRadius,
     strokeWidth,
     // series options
-    columnsNumber = 2,
-    useSameScale = false,
-    sortSeriesBy = "Total value (descending)",
-    gutter = 2,
+    columnsNumber,
+    useSameScale = false, // TODO: add
+    sortSeriesBy = "Total value (descending)", // TODO: add
+    gutter,
     //TODO add labels legends and colors
   } = visualOptions;
 
@@ -34,26 +32,24 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     left: marginLeft,
   };
 
-  const chartWidth = width - margin.left - margin.right
-  const chartHeight = height - margin.top - margin.bottom
+  // compute the series grid according to amount of series and user optionss
+  const rowsNumber = Math.ceil(data.length/columnsNumber)
 
-  // const rowsNumber = Math.ceil(data.length/columnsNumber)
-  //
-  // const chartWidth = ((width - margin.left - margin.right) - (columnsNumber - 1) * gutter) / columnsNumber
-  // const chartHeight = ((height - margin.top - margin.bottom) - (rowsNumber - 1) * gutter) / rowsNumber
-  //
-  // let grid = data.map(function(d,i){
-  //
-	//   const xpos = Math.floor(i/rowsNumber);
-	//   const ypos = i%rowsNumber;
-  //
-	//   return {
-	// 	  x: xpos * (chartWidth + gutter),
-	// 	  y: ypos * (chartHeight + gutter),
-	// 	  width: chartWidth,
-	// 	  height: chartHeight
-	//   }
-  // })
+  const chartWidth = ((width - margin.left - margin.right) - (columnsNumber - 1) * gutter) / columnsNumber
+  const chartHeight = ((height - margin.top - margin.bottom) - (rowsNumber - 1) * gutter) / rowsNumber
+
+  let grid = data.map(function(d,i){
+
+    const xpos = i%columnsNumber;
+    const ypos =  Math.floor(i/columnsNumber);
+
+    return {
+      x: xpos * (chartWidth + gutter),
+      y: ypos * (chartHeight + gutter),
+      width: chartWidth,
+      height: chartHeight
+    }
+  })
 
   // get domains
   const xDomain = d3.extent(originalData, d => d[mapping.x.value]) // calculate from original data, simpler.
@@ -138,37 +134,29 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
     .attr("id", "visualization")
 
-  const axisLayer = svg.append("g").attr("id", "axis");
-
-  axisLayer.append("g").call(xAxis);
-  axisLayer.append("g").call(yAxis);
-
-  // const gridLayer = svg
-  // 	.append("g")
-	// .selectAll("rect")
-	// .data(grid)
-	// .join("rect")
-	// .attr("x", (d) => d.x)
-	// .attr("y", (d) => d.y)
-	// .attr("width", (d) => d.width)
-	// .attr("height", (d) => d.height)
-	// .attr("fill", "none")
-	// .attr("stroke", "gray")
-
   const vizLayer = svg
     .append("g")
-    .attr("id", "viz")
+    .selectAll("g")
+    .data(data)
+    .join("g")
+    .attr("id", (d) => d[0])
+    .attr("transform", (d,i) => "translate(" + grid[i].x + "," + grid[i].y + ")")
     .attr("fill", "none")
     .attr("stroke-width", strokeWidth)
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round");
 
-	//understand how to create a line for each entry in the dataset
+  const axisLayer = vizLayer.append("g").attr("id", "axes")
+    axisLayer.append("g").call(xAxis);
+    axisLayer.append("g").call(yAxis);
 
   const groups = vizLayer
+    .append("g")
+    .attr("id", "viz")
     .selectAll("g")
-    .data(data[0][1])
+    .data((d) => d[1])
     .join("g")
+	.attr('id', (d) => d[0])
 
   groups
     .append("path")
