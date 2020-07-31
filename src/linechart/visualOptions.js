@@ -1,6 +1,5 @@
 export const visualOptions = {
-  
-   
+
   showPoints : {
     type: 'boolean',
     label: 'Show points',
@@ -11,7 +10,7 @@ export const visualOptions = {
   pointsRadius : {
     type: 'number',
     label: 'Points radius (px)',
-    default: 5,
+    default: 3,
     group: 'chart',
     //#TODO: not implemented in lib/frontend
     disabled: {
@@ -48,6 +47,19 @@ export const visualOptions = {
       { label: 'bold', value: 3 },
     ],
     group: "chart",
+  },
+
+  columnsNumber: {
+    type: "number",
+    label: "Number of columns",
+    default: 1,
+    group: "series",
+  },
+  gutter: {
+    type: "number",
+    label: "Space between series",
+    default: 2,
+    group: "series",
   },
 
 }

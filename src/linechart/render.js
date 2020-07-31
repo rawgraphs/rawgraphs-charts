@@ -2,40 +2,23 @@ import * as d3 from "d3";
 // import { categoryLegend } from 'rawgraphs-core'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
-  // console.log(mapping)
-  //
-  // const {
-  //   width = 500,
-  //   height = 500,
-  //   background='#ffffff',
-  //   xOrigin,
-  //   yOrigin,
-  //   maxRadius,
-  //   showPoints,
-  //   pointsRadius,
-  //   showLegend,
-  //   legendWidth,
-  //   marginTop = 20,
-  //   marginRight = 20,
-  //   marginBottom = 20,
-  //   marginLeft = 20
-  // } = visualOptions;
+
+	const singleData = data[0] //for now no series
 
   const {
     // artboard options
     width,
     height,
-    background = "red",
+    background,
     marginTop = 20,
     marginRight = 20,
     marginBottom = 20,
     marginLeft = 20,
     // chart options
-    interpolation = "Cardinal",
-    fillGaps = true,
-    showPoints = true,
-    pointsRadius = 3,
-    strokeWidth = 1.5,
+    interpolation,
+    showPoints,
+    pointsRadius,
+    strokeWidth,
     // series options
     columnsNumber = 2,
     useSameScale = false,
@@ -51,49 +34,40 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     left: marginLeft,
   };
 
-  const chartWidth = width - margin.left - margin.right;
-  const chartHeight = height - margin.top - margin.bottom;
+  const chartWidth = width - margin.left - margin.right
+  const chartHeight = height - margin.top - margin.bottom
 
-  // get string for colors
-  const colorKeys = data.map(function (d) {
-    const uniq = d3
-      .map(d[1], (d) => d.color)
-      .keys()
-      .join(",");
-    d[2] = uniq;
-    return uniq;
-  });
+  // const rowsNumber = Math.ceil(data.length/columnsNumber)
+  //
+  // const chartWidth = ((width - margin.left - margin.right) - (columnsNumber - 1) * gutter) / columnsNumber
+  // const chartHeight = ((height - margin.top - margin.bottom) - (rowsNumber - 1) * gutter) / rowsNumber
+  //
+  // let grid = data.map(function(d,i){
+  //
+	//   const xpos = Math.floor(i/rowsNumber);
+	//   const ypos = i%rowsNumber;
+  //
+	//   return {
+	// 	  x: xpos * (chartWidth + gutter),
+	// 	  y: ypos * (chartHeight + gutter),
+	// 	  width: chartWidth,
+	// 	  height: chartHeight
+	//   }
+  // })
 
+  // get domains
+  const xDomain = d3.extent(originalData, d => d[mapping.x.value]) // calculate from original data, simpler.
+  const yDomain = d3.extent(originalData, d => d[mapping.y.value]) // same as above
+
+  // get list of unique strings for colors
+  // we take them from mapped data since they could be aggregated.
+  const colorKeysSet = new Set();
+  data.forEach(serie => serie[1].forEach(line => colorKeysSet.add(line[1][0][1]['color']))) // the line[1][0][1] notation is due to the nested array structure
+  const colorKeys = [...colorKeysSet]
+
+  // create the scales
   const colorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(colorKeys);
-
-  const xDomain = [
-    d3.min(
-      data.map(function (d) {
-        return d3.min(d[1], (e) => e.x);
-      })
-    ),
-    d3.max(
-      data.map(function (d) {
-        return d3.max(d[1], (e) => e.x);
-      })
-    ),
-  ];
-
-  const yDomain = [
-    d3.min(
-      data.map(function (d) {
-        return d3.min(d[1], (e) => e.y);
-      })
-    ),
-    d3.max(
-      data.map(function (d) {
-        return d3.max(d[1], (e) => e.y);
-      })
-    ),
-  ];
-
   const x = d3.scaleLinear().domain(xDomain).nice().range([0, chartWidth]);
-
   const y = d3.scaleLinear().domain(yDomain).nice().range([chartHeight, 0]);
 
   const xAxis = (g) => {
@@ -148,23 +122,38 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   const line = d3
     .line()
     .x(function (d) {
-      return x(d.x);
+      return x(d[1].x);
     })
     .y(function (d) {
-      return y(d.y);
+      return y(d[1].y);
     })
-    .curve(curveType[interpolation]); // TODO: use variables
+    .curve(curveType[interpolation]);
+
+  // define SVG background color
+  d3.select(svgNode).attr("style","background-color:"+background);
 
   const svg = d3
     .select(svgNode)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-    .attr("id", "visualization");
+    .attr("id", "visualization")
 
   const axisLayer = svg.append("g").attr("id", "axis");
 
   axisLayer.append("g").call(xAxis);
   axisLayer.append("g").call(yAxis);
+
+  // const gridLayer = svg
+  // 	.append("g")
+	// .selectAll("rect")
+	// .data(grid)
+	// .join("rect")
+	// .attr("x", (d) => d.x)
+	// .attr("y", (d) => d.y)
+	// .attr("width", (d) => d.width)
+	// .attr("height", (d) => d.height)
+	// .attr("fill", "none")
+	// .attr("stroke", "gray")
 
   const vizLayer = svg
     .append("g")
@@ -174,17 +163,18 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round");
 
+	//understand how to create a line for each entry in the dataset
+
   const groups = vizLayer
     .selectAll("g")
-    .data(data)
+    .data(data[0][1])
     .join("g")
-    .attr("stroke", (d) => colorScale(d[2]))
-    .attr("fill", (d) => colorScale(d[2]));
 
   groups
     .append("path")
     .style("mix-blend-mode", "multiply")
-    .attr("d", (d) => line(d[1]))
+    .attr("d", (d) => line(d[1].sort((a, b) => d3.descending(a[0], b[0]))))
+    .attr("stroke", (d) => colorScale(d[1][0][1]['color']))
     .attr("fill", "none");
 
   if (showPoints) {
@@ -194,8 +184,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .data((d) => d[1])
       .join("circle")
       .attr("class", "dot")
-      .attr("cx", (d) => x(d.x))
-      .attr("cy", (d) => y(d.y))
-      .attr("r", pointsRadius);
+      .attr("cx", (d) => x(d[1].x))
+      .attr("cy", (d) => y(d[1].y))
+      .attr("r", pointsRadius)
+      .attr("fill", (d) => colorScale(d[1]['color']));
   }
 }

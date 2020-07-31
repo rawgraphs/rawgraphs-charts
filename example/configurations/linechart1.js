@@ -5,23 +5,26 @@ export default {
   chart: linechart,
   data,
   dataTypes: {
+	Category:"string",
     Format: "string",
     Year: "number",
     Units: "number",
-    // Title: "string",
-    // Genre: "string",
+    Revenues: "number"
   },
   mapping: {
-    lines: { value: ["Format"] },
+	series: { value: ["Category"] },
+    lines: { value: ["Category"] },
     x: { value: ["Year"] },
-    y: { value: ["Units"] },
-    //color: { value: ["Genre"] },
-    // label: { value: ["Rating"] },
-    // size: { value: ["Rating"] },
+    y: { value: ["Revenues"] },
+    color: { value: ["Category"] }
   },
   visualOptions: {
-    width: 500,
-    height: 500,
-    //xOrigin: false,
+    width: 1000,
+    height: 1000,
+	showPoints:true,
+	interpolation:"Step Before",
+	pointsRadius:2,
+	columnsNumber:2,
+	gutter: 20
   },
 };
