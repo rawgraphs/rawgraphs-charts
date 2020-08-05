@@ -3,7 +3,7 @@ import * as d3Array from 'd3-array'
 
 export const mapData = function(data, mapping, dataTypes, dimensions) {
 
-	console.log({data, mapping, dataTypes, dimensions})
+	//console.log({data, mapping, dataTypes, dimensions})
 
 	const result = d3Array.rollups(data,
 		v => {
