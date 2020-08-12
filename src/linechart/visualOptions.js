@@ -61,6 +61,13 @@ export const visualOptions = {
     default: 2,
     group: "series",
   },
+  sortSeriesBy: {
+    type: "text",
+    label: "Sort series by",
+    group: "series",
+	options: ["Total value (descending)", "Total value (ascending)", "Name", "Original"],
+	default: "Total value (descending)"
+  },
 
 }
 

@@ -20,7 +20,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     // series options
     columnsNumber,
     useSameScale = false, // TODO: add
-    sortSeriesBy = "Total value (descending)", // TODO: add
+    sortSeriesBy = "Total value (descending)",
     gutter,
     //TODO add labels legends and colors
   } = visualOptions;
@@ -51,6 +51,23 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     }
   })
 
+  // comupte max values for series
+  // will add it as property to each series.
+
+  data.forEach(function(serie){
+    const serieName = serie[0]
+    let serieValue = originalData.filter(item => item[mapping.series.value] == serieName).reduce((result, item) => result + item[mapping.y.value], 0)
+    serie.maxVlaue = serieValue
+  })
+  // sort the dataset
+  if(sortSeriesBy == "Total value (descending)"){
+    data.sort((a,b) => d3.descending(a.maxVlaue, b.maxVlaue))
+  } else if(sortSeriesBy == "Total value (ascending)") {
+    data.sort((a,b) => d3.ascending(a.maxVlaue, b.maxVlaue))
+  } else if(sortSeriesBy == "Name"){
+    data.sort((a,b) => d3.ascending(a[0], b[0]))
+  }
+
   // get domains
   const xDomain = d3.extent(originalData, d => d[mapping.x.value]) // calculate from original data, simpler.
   const yDomain = d3.extent(originalData, d => d[mapping.y.value]) // same as above
@@ -62,7 +79,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   const colorKeys = [...colorKeysSet]
 
   // create the scales
-  const colorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(colorKeys);
+  const colorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(colorKeys); //TODO: use RAWGraphs color scales
   const x = d3.scaleLinear().domain(xDomain).nice().range([0, chartWidth]);
   const y = d3.scaleLinear().domain(yDomain).nice().range([chartHeight, 0]);
 

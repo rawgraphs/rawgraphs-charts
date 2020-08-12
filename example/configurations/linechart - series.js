@@ -13,11 +13,11 @@ export default {
 	"Revenues-Adjusted": "number"
   },
   mapping: {
-	series: { value: ["Format"] },
-    lines: { value: ["Category"] },
+	series: { value: ["Category"] },
+    lines: { value: ["Format"] },
     x: { value: ["Year"] },
     y: { value: ["Revenues-Adjusted"] },
-    color: { value: ["Category"] }
+    color: { value: ["Format"] }
   },
   visualOptions: {
     width: 1000,
