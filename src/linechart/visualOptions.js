@@ -1,5 +1,33 @@
 export const visualOptions = {
 
+  marginTop : {
+    type: 'number',
+    label: 'Margin (top)',
+    default: 10,
+    group: 'artboard',
+  },
+
+  marginRight : {
+    type: 'number',
+    label: 'Margin (right)',
+    default: 10,
+    group: 'artboard',
+  },
+
+  marginBottom : {
+    type: 'number',
+    label: 'Margin (bottom)',
+    default: 10,
+    group: 'artboard',
+  },
+
+  marginLeft : {
+    type: 'number',
+    label: 'Margin (left)',
+    default: 10,
+    group: 'artboard',
+  },
+
   showPoints : {
     type: 'boolean',
     label: 'Show points',
@@ -55,26 +83,67 @@ export const visualOptions = {
     default: 1,
     group: "series",
   },
+
   gutter: {
     type: "number",
     label: "Space between series",
-    default: 2,
+    default: 24,
     group: "series",
   },
+
   sortSeriesBy: {
     type: "text",
     label: "Sort series by",
     group: "series",
-	options: ["Total value (descending)", "Total value (ascending)", "Name", "Original"],
-	default: "Total value (descending)"
+    options: ["Total value (descending)", "Total value (ascending)", "Name", "Original"],
+    default: "Total value (descending)"
   },
+
+  showSeriesLabels: {
+    type: 'boolean',
+    label: 'Show series labels',
+    default: true,
+    group: 'series'
+  },
+
+  repeatAxesLabels: {
+    type: 'boolean',
+    label: 'Repeat axis labels for each series',
+    default: false,
+    group: 'series'
+  },
+
+  showLabels: {
+    type: 'boolean',
+    label: 'Show Labels',
+    default: true,
+    group: 'labels'
+  },
+
+  labelsPosition: {
+    type: "text",
+    label: "Labels position",
+    group: "series",
+    options: ["inline", "side"],
+    default: "inline"
+  },
+
+  labelsShorten: {
+    type: 'boolean',
+    label: 'Shorten Labels',
+    default: false,
+    group: 'labels'
+  },
+
+  labelsChars: {
+    type: "number",
+    label: "Max number of charachters",
+    default: 1,
+    group: "labels",
+  }
 
 }
 
 
 // showLegend,
 // legendWidth,
-// marginTop = 20,
-// marginRight = 20,
-// marginBottom = 20,
-// marginLeft = 20

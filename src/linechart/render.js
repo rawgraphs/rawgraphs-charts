@@ -1,4 +1,5 @@
 import * as d3 from "d3";
+import * as d3Array from 'd3-array'
 // import { categoryLegend } from 'rawgraphs-core'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
@@ -8,10 +9,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     width,
     height,
     background,
-    marginTop = 20,
-    marginRight = 20,
-    marginBottom = 20,
-    marginLeft = 20,
+    marginTop,
+    marginRight,
+    marginBottom,
+    marginLeft,
     // chart options
     interpolation,
     showPoints,
@@ -20,8 +21,15 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     // series options
     columnsNumber,
     useSameScale = false, // TODO: add
-    sortSeriesBy = "Total value (descending)",
+    sortSeriesBy,
     gutter,
+    showSeriesLabels,
+    repeatAxesLabels,
+    // labels options
+    showLabels,
+    labelsPosition,
+    labelsShorten,
+    labelsChars
     //TODO add labels legends and colors
   } = visualOptions;
 
@@ -32,11 +40,13 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     left: marginLeft,
   };
 
+  const verticalGutter = gutter + ((showSeriesLabels ? 12 : 0)) // if series labels are shown, increase gutter
+  margin.top += showSeriesLabels ? 24 : 0;
   // compute the series grid according to amount of series and user optionss
   const rowsNumber = Math.ceil(data.length/columnsNumber)
 
   const chartWidth = ((width - margin.left - margin.right) - (columnsNumber - 1) * gutter) / columnsNumber
-  const chartHeight = ((height - margin.top - margin.bottom) - (rowsNumber - 1) * gutter) / rowsNumber
+  const chartHeight = ((height - margin.top - margin.bottom) - (rowsNumber - 1) * verticalGutter) / rowsNumber
 
   let grid = data.map(function(d,i){
 
@@ -45,7 +55,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
     return {
       x: xpos * (chartWidth + gutter),
-      y: ypos * (chartHeight + gutter),
+      y: ypos * (chartHeight + verticalGutter),
       width: chartWidth,
       height: chartHeight
     }
@@ -57,13 +67,13 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   data.forEach(function(serie){
     const serieName = serie[0]
     let serieValue = originalData.filter(item => item[mapping.series.value] == serieName).reduce((result, item) => result + item[mapping.y.value], 0)
-    serie.maxVlaue = serieValue
+    serie.maxValue = serieValue
   })
   // sort the dataset
   if(sortSeriesBy == "Total value (descending)"){
-    data.sort((a,b) => d3.descending(a.maxVlaue, b.maxVlaue))
+    data.sort((a,b) => d3.descending(a.maxValue, b.maxValue))
   } else if(sortSeriesBy == "Total value (ascending)") {
-    data.sort((a,b) => d3.ascending(a.maxVlaue, b.maxVlaue))
+    data.sort((a,b) => d3.ascending(a.maxValue, b.maxValue))
   } else if(sortSeriesBy == "Name"){
     data.sort((a,b) => d3.ascending(a[0], b[0]))
   }
@@ -90,10 +100,11 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .call((g) =>
         g
           .append("text")
-          .attr("font-family", "Arial, sans-serif")
+          .attr("font-family", "Helvetica, Arial, sans-serif")
           .attr("font-size", 12)
           .attr("x", chartWidth)
           .attr("dy", -5)
+          .attr('display',(d,i)=>{return i == 0 || repeatAxesLabels ? '' : 'none'})
           .attr("fill", "black")
           .attr("font-weight", "bold")
           .attr("text-anchor", "end")
@@ -111,6 +122,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
           .attr("font-family", "sans-serif")
           .attr("font-size", 12)
           .attr("x", 4)
+          .attr('display',(d,i)=>{return i == 0 || repeatAxesLabels ? '' : 'none'})
           .attr("fill", "black")
           .attr("font-weight", "bold")
           .attr("text-anchor", "start")
@@ -157,11 +169,24 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .data(data)
     .join("g")
     .attr("id", (d) => d[0])
-    .attr("transform", (d,i) => "translate(" + grid[i].x + "," + grid[i].y + ")")
+    .attr("transform", (d,i) => "translate(" + grid[i].x + "," + grid[i].y + ")") // translate each serie according to the grid object
     .attr("fill", "none")
     .attr("stroke-width", strokeWidth)
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round");
+
+  // add the series title
+  if(showSeriesLabels){
+    vizLayer.append('text')
+      .attr("font-family", "Helvetica, Arial, sans-serif")
+      .attr("font-size", 12)
+      .attr("x", -margin.left)
+      .attr("y", -6)
+      .attr("fill", "black")
+      .attr("text-anchor", "start")
+      .attr("font-weight", "bold")
+      .text(d =>d[0])
+  }
 
   const axisLayer = vizLayer.append("g").attr("id", "axes")
     axisLayer.append("g").call(xAxis);
@@ -171,14 +196,14 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .append("g")
     .attr("id", "viz")
     .selectAll("g")
-    .data((d) => d[1])
+    .data((d) => d[1]) // pass the single series
     .join("g")
-	.attr('id', (d) => d[0])
+    .attr('id', (d) => d[0])
 
   groups
     .append("path")
     .style("mix-blend-mode", "multiply")
-    .attr("d", (d) => line(d[1].sort((a, b) => d3.descending(a[0], b[0]))))
+    .attr("d", (d) => line(d[1].sort((a, b) => d3.descending(a[0], b[0])))) // sorting values by the x axis
     .attr("stroke", (d) => colorScale(d[1][0][1]['color']))
     .attr("fill", "none");
 
@@ -193,5 +218,38 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr("cy", (d) => y(d[1].y))
       .attr("r", pointsRadius)
       .attr("fill", (d) => colorScale(d[1]['color']));
+  }
+
+  if(showLabels){
+
+    let labels = groups
+      .append("text")
+      .attr("font-family", "Helvetica, Arial, sans-serif")
+      .attr("font-size", 12)
+      .attr("fill", "black");
+
+    if(labelsPosition == "side"){
+      labels
+        .attr("x", d => x(d[1][0][1]['x']))
+        .attr("y", d => y(d[1][0][1]['y']))
+        .attr("dx", 5)
+        .attr("dy", 4)
+        .attr("text-anchor", "start")
+        .text(d => labelsShorten ? d[0].slice(0, labelsChars): d[0])
+    } else if(labelsPosition == "inline"){
+      labels
+        .attr("x", d => {
+          const maxPos = d3Array.greatest(d[1], e => e[1].y)
+          return x(maxPos[1].x)
+        })
+        .attr("y", d => {
+          const maxPos = d3Array.greatest(d[1], e=> e[1].y)
+          return y(maxPos[1].y)
+        })
+        .attr("dx", 0)
+        .attr("dy", -6)
+        .attr("text-anchor", "middle")
+        .text(d => labelsShorten ? d[0].slice(0, labelsChars): d[0])
+    }
   }
 }

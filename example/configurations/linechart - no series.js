@@ -5,15 +5,15 @@ export default {
   chart: linechart,
   data,
   dataTypes: {
-	Category:"string",
+  Category:"string",
     Format: "string",
     Year: "number",
     Units: "number",
     Revenues: "number",
-	"Revenues-Adjusted": "number"
+  "Revenues-Adjusted": "number"
   },
   mapping: {
-	series: { value: undefined },
+  series: { value: undefined },
     lines: { value: ["Category"] },
     x: { value: ["Year"] },
     y: { value: ["Revenues-Adjusted"] },
@@ -22,8 +22,11 @@ export default {
   visualOptions: {
     width: 1000,
     height: 700,
-	showPoints:true,
-	interpolation:"Natural",
-	pointsRadius:2
+    showPoints:true,
+    interpolation:"Natural",
+    pointsRadius:2,
+    marginLeft: 50,
+    marginBottom:20,
+    marginRight: 15,
   },
 };
