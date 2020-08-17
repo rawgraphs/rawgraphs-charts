@@ -43,45 +43,45 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   //
   d3.select(svgNode).append('style')
   .text(`
-		svg {
-			font-family: Helvetica, Arial, sans-serif;
-			font-size: 12px;
-		}
+    svg {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 12px;
+    }
 
-		.title {
-			font-weight: bold;
-    	fill: black;
-			text-anchor: start;
-			transform: translate(0px, -18px)
-		}
+    .title {
+      font-weight: bold;
+      fill: black;
+      text-anchor: start;
+      transform: translate(0px, -18px)
+    }
 
-		.tick > text {
-			fill: #4d4d4d;
-		}
+    .tick > text {
+      fill: #4d4d4d;
+    }
 
-		#axes path, #axes line {
-			stroke:#161616
-		}
+    #axes path, #axes line {
+      stroke:#161616
+    }
 
-		.axisTitle {
-			fill: #161616;
-			font-weight: bold;
-			font-size: 12px;
-		}
+    .axisTitle {
+      fill: #161616;
+      font-weight: bold;
+      font-size: 12px;
+    }
 
-		.yAxis .axisTitle {
-			text-anchor: start;
-			font-size: 8px;
-			transform: translate(14px, 0px)
-		}
+    .yAxis .axisTitle {
+      text-anchor: start;
+      font-size: 8px;
+      transform: translate(14px, 0px)
+    }
 
-		.xAxis .axisTitle {
-			text-anchor: end;
-		}
+    .xAxis .axisTitle {
+      text-anchor: end;
+    }
 
-		.labels {
-			fill: #161616;
-		}
+    .labels {
+      fill: #161616;
+    }
 
     `);
 
@@ -161,7 +161,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
           .select(".tick:last-of-type text")
           .clone()
           .attr('display',(d,i)=>{return i == 0 || repeatAxesLabels ? '' : 'none'}) // display according to options
-					.attr("class","axisTitle")
+          .attr("class","axisTitle")
           .text(mapping["y"].value)
       );
   };
@@ -214,7 +214,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   // add the series title
   if(showSeriesLabels){
     vizLayer.append('text')
-		.attr("x", -margin.left)
+    .attr("x", -margin.left)
       .attr("class", "title")
       .text(d =>d[0])
   }
@@ -255,7 +255,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
     let labels = groups
       .append("text")
-			.attr("class","labels")
+      .attr("class","labels")
 
     if(labelsPosition == "side"){
       labels
