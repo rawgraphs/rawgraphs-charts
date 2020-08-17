@@ -40,6 +40,51 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     left: marginLeft,
   };
 
+  //
+  d3.select(svgNode).append('style')
+  .text(`
+		svg {
+			font-family: Helvetica, Arial, sans-serif;
+			font-size: 12px;
+		}
+
+		.title {
+			font-weight: bold;
+    	fill: black;
+			text-anchor: start;
+			transform: translate(0px, -18px)
+		}
+
+		.tick > text {
+			fill: #4d4d4d;
+		}
+
+		#axes path, #axes line {
+			stroke:#161616
+		}
+
+		.axisTitle {
+			fill: #161616;
+			font-weight: bold;
+			font-size: 12px;
+		}
+
+		.yAxis .axisTitle {
+			text-anchor: start;
+			font-size: 8px;
+			transform: translate(14px, 0px)
+		}
+
+		.xAxis .axisTitle {
+			text-anchor: end;
+		}
+
+		.labels {
+			fill: #161616;
+		}
+
+    `);
+
   const verticalGutter = gutter + ((showSeriesLabels ? 12 : 0)) // if series labels are shown, increase gutter
   margin.top += showSeriesLabels ? 24 : 0;
   // compute the series grid according to amount of series and user optionss
@@ -98,16 +143,12 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr("transform", `translate(0,${chartHeight})`)
       .call(d3.axisBottom(x).ticks(width / 80))
       .call((g) =>
-        g
+        g.attr("class", "xAxis")
           .append("text")
-          .attr("font-family", "Helvetica, Arial, sans-serif")
-          .attr("font-size", 12)
           .attr("x", chartWidth)
           .attr("dy", -5)
-          .attr('display',(d,i)=>{return i == 0 || repeatAxesLabels ? '' : 'none'})
-          .attr("fill", "black")
-          .attr("font-weight", "bold")
-          .attr("text-anchor", "end")
+          .attr('display',(d,i)=>{return i == 0 || repeatAxesLabels ? '' : 'none'}) // display according to options
+          .attr("class","axisTitle")
           .text(mapping["x"].value)
       );
   };
@@ -116,16 +157,11 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     return g
       .call(d3.axisLeft(y))
       .call((g) =>
-        g
+        g.attr("class", "yAxis")
           .select(".tick:last-of-type text")
           .clone()
-          .attr("font-family", "sans-serif")
-          .attr("font-size", 12)
-          .attr("x", 4)
-          .attr('display',(d,i)=>{return i == 0 || repeatAxesLabels ? '' : 'none'})
-          .attr("fill", "black")
-          .attr("font-weight", "bold")
-          .attr("text-anchor", "start")
+          .attr('display',(d,i)=>{return i == 0 || repeatAxesLabels ? '' : 'none'}) // display according to options
+					.attr("class","axisTitle")
           .text(mapping["y"].value)
       );
   };
@@ -178,13 +214,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   // add the series title
   if(showSeriesLabels){
     vizLayer.append('text')
-      .attr("font-family", "Helvetica, Arial, sans-serif")
-      .attr("font-size", 12)
-      .attr("x", -margin.left)
-      .attr("y", -6)
-      .attr("fill", "black")
-      .attr("text-anchor", "start")
-      .attr("font-weight", "bold")
+		.attr("x", -margin.left)
+      .attr("class", "title")
       .text(d =>d[0])
   }
 
@@ -224,9 +255,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
     let labels = groups
       .append("text")
-      .attr("font-family", "Helvetica, Arial, sans-serif")
-      .attr("font-size", 12)
-      .attr("fill", "black");
+			.attr("class","labels")
 
     if(labelsPosition == "side"){
       labels
@@ -236,6 +265,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         .attr("dy", 4)
         .attr("text-anchor", "start")
         .text(d => labelsShorten ? d[0].slice(0, labelsChars): d[0])
+
     } else if(labelsPosition == "inline"){
       labels
         .attr("x", d => {
