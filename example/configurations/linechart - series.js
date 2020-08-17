@@ -5,13 +5,16 @@ export default {
   chart: linechart,
   data,
   dataTypes: {
-  Category:"string",
+    Category:"string",
     Format: "string",
     Year: "number",
-  Year_date:"date",
+    Year_date:{
+      "type": "date",
+      "dateFormat": "YYYY-MM-DD"
+    },
     Units: "number",
     Revenues: "number",
-  "Revenues-Adjusted": "number"
+    "Revenues-Adjusted": "number"
   },
   mapping: {
   series: { value: ["Category"] },

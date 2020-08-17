@@ -10,7 +10,11 @@ export default {
     Year: "number",
     Units: "number",
     Revenues: "number",
-  "Revenues-Adjusted": "number"
+    "Revenues-Adjusted": "number",
+		Year_date:{
+      "type": "date",
+      "dateFormat": "YYYY-MM-DD"
+    },
   },
   mapping: {
   series: { value: undefined },
