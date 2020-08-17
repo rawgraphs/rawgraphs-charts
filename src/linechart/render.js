@@ -135,7 +135,18 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
   // create the scales
   const colorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(colorKeys); //TODO: use RAWGraphs color scales
-  const x = d3.scaleLinear().domain(xDomain).nice().range([0, chartWidth]);
+
+	console.log(mapping)
+  let x;
+	switch(mapping.x.dataType) {
+		case "number":
+			x = d3.scaleLinear().domain(xDomain).nice().range([0, chartWidth]);
+			break;
+		case "date":
+			// x = d3.scaleLinear().domain(xDomain).nice().range([0, chartWidth]); // TODO parse date
+			break;
+	}
+
   const y = d3.scaleLinear().domain(yDomain).nice().range([chartHeight, 0]);
 
   const xAxis = (g) => {
