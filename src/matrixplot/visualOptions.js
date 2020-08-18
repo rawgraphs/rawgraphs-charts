@@ -28,6 +28,13 @@ export const visualOptions = {
     group: 'artboard',
   },
 
+	rounding: {
+    type: "number",
+    label: "Rounding radius",
+    default: 0,
+    group: "chart",
+  },
+
   padding: {
     type: "number",
     label: "Space between rows and lines",
@@ -51,19 +58,42 @@ export const visualOptions = {
     default: "Original"
   },
 
+	showGrid: {
+    type: 'boolean',
+    label: 'Show grid',
+    default: false,
+    group: 'chart'
+  },
+
   showLabels: {
     type: 'boolean',
     label: 'Show labels',
-    default: true,
+    default: false,
     group: 'labels'
   },
 
-  labelsStyle: {
+  label1Style: {
     type: "text",
-    label: "Labels style",
+    label: "Labels 1 style",
     group: "series",
     options: ["Primary", "Secondary", "Tertiary"],
     default: "Primary"
+  },
+
+	label2Style: {
+    type: "text",
+    label: "Labels 1 style",
+    group: "series",
+    options: ["Primary", "Secondary", "Tertiary"],
+    default: "Secondary"
+  },
+
+	label3Style: {
+    type: "text",
+    label: "Labels 1 style",
+    group: "series",
+    options: ["Primary", "Secondary", "Tertiary"],
+    default: "Tertiary"
   },
 
 }

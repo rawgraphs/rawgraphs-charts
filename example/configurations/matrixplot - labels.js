@@ -17,7 +17,7 @@ export default {
     x: { value: ["Category"] },
     y: { value: ["Year"] },
     color: { value: ["Revenues-Adjusted"] },
-    label: { value: ["Format","Units"] },
+    label: { value: ["Units"] },
     size: { value: ["Revenues-Adjusted"] },
   },
 	visualOptions: {
@@ -26,6 +26,7 @@ export default {
 		marginTop: 100,
 		marginLeft: 100,
 		sortXAxisBy: "Total value (ascending)",
-		sortYAxisBy: "Original"
+		sortYAxisBy: "Original",
+		showLabels: true
 	}
 }
