@@ -1,10 +1,17 @@
 export const dimensions = [
   {
+      id: "series",
+      name: "series",
+      validTypes: ["number", "string", "date"],
+      required: false,
+      operation: "get",
+    },
+  {
     id: "lines",
     name: "lines",
     validTypes: ["number", "string", "date"],
     required: false,
-    operation: "groups",
+    operation: "get",
   },
   {
     id: "x",
@@ -18,7 +25,7 @@ export const dimensions = [
     name: "y",
     operation: "get",
     validTypes: ["number", "date"],
-    required: false,
+    required: true,
   },
   {
     id: "color",

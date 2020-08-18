@@ -1,46 +1,35 @@
 import * as d3 from "d3";
+import * as d3Array from 'd3-array'
 // import { categoryLegend } from 'rawgraphs-core'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
-  // console.log(mapping)
-  //
-  // const {
-  //   width = 500,
-  //   height = 500,
-  //   background='#ffffff',
-  //   xOrigin,
-  //   yOrigin,
-  //   maxRadius,
-  //   showPoints,
-  //   pointsRadius,
-  //   showLegend,
-  //   legendWidth,
-  //   marginTop = 20,
-  //   marginRight = 20,
-  //   marginBottom = 20,
-  //   marginLeft = 20
-  // } = visualOptions;
 
   const {
     // artboard options
     width,
     height,
-    background = "red",
-    marginTop = 20,
-    marginRight = 20,
-    marginBottom = 20,
-    marginLeft = 20,
+    background,
+    marginTop,
+    marginRight,
+    marginBottom,
+    marginLeft,
     // chart options
-    interpolation = "Cardinal",
-    fillGaps = true,
-    showPoints = true,
-    pointsRadius = 3,
-    strokeWidth = 1.5,
+    interpolation,
+    showPoints,
+    pointsRadius,
+    strokeWidth,
     // series options
-    columnsNumber = 2,
-    useSameScale = false,
-    sortSeriesBy = "Total value (descending)",
-    gutter = 2,
+    columnsNumber,
+    useSameScale = false, // TODO: add
+    sortSeriesBy,
+    gutter,
+    showSeriesLabels,
+    repeatAxesLabels,
+    // labels options
+    showLabels,
+    labelsPosition,
+    labelsShorten,
+    labelsChars
     //TODO add labels legends and colors
   } = visualOptions;
 
@@ -51,48 +40,111 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     left: marginLeft,
   };
 
-  const chartWidth = width - margin.left - margin.right;
-  const chartHeight = height - margin.top - margin.bottom;
+  //
+  d3.select(svgNode).append('style')
+  .text(`
+    svg {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 12px;
+    }
 
-  // get string for colors
-  const colorKeys = data.map(function (d) {
-    const uniq = d3
-      .map(d[1], (d) => d.color)
-      .keys()
-      .join(",");
-    d[2] = uniq;
-    return uniq;
-  });
+    .title {
+      font-weight: bold;
+      fill: black;
+      text-anchor: start;
+      transform: translate(0px, -18px)
+    }
 
-  const colorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(colorKeys);
+    .tick > text {
+      fill: #4d4d4d;
+    }
 
-  const xDomain = [
-    d3.min(
-      data.map(function (d) {
-        return d3.min(d[1], (e) => e.x);
-      })
-    ),
-    d3.max(
-      data.map(function (d) {
-        return d3.max(d[1], (e) => e.x);
-      })
-    ),
-  ];
+    #axes path, #axes line {
+      stroke:#161616
+    }
 
-  const yDomain = [
-    d3.min(
-      data.map(function (d) {
-        return d3.min(d[1], (e) => e.y);
-      })
-    ),
-    d3.max(
-      data.map(function (d) {
-        return d3.max(d[1], (e) => e.y);
-      })
-    ),
-  ];
+    .axisTitle {
+      fill: #161616;
+      font-weight: bold;
+      font-size: 12px;
+    }
 
-  const x = d3.scaleLinear().domain(xDomain).nice().range([0, chartWidth]);
+    .yAxis .axisTitle {
+      text-anchor: start;
+      font-size: 8px;
+      transform: translate(14px, 0px)
+    }
+
+    .xAxis .axisTitle {
+      text-anchor: end;
+    }
+
+    .labels {
+      fill: #161616;
+    }
+
+    `);
+
+  const verticalGutter = gutter + ((showSeriesLabels ? 12 : 0)) // if series labels are shown, increase gutter
+  margin.top += showSeriesLabels ? 24 : 0;
+  // compute the series grid according to amount of series and user optionss
+  const rowsNumber = Math.ceil(data.length/columnsNumber)
+
+  const chartWidth = ((width - margin.left - margin.right) - (columnsNumber - 1) * gutter) / columnsNumber
+  const chartHeight = ((height - margin.top - margin.bottom) - (rowsNumber - 1) * verticalGutter) / rowsNumber
+
+  let grid = data.map(function(d,i){
+
+    const xpos = i%columnsNumber;
+    const ypos =  Math.floor(i/columnsNumber);
+
+    return {
+      x: xpos * (chartWidth + gutter),
+      y: ypos * (chartHeight + verticalGutter),
+      width: chartWidth,
+      height: chartHeight
+    }
+  })
+
+  // comupte max values for series
+  // will add it as property to each series.
+
+  data.forEach(function(serie){
+    const serieName = serie[0]
+    let serieValue = originalData.filter(item => item[mapping.series.value] == serieName).reduce((result, item) => result + item[mapping.y.value], 0)
+    serie.maxValue = serieValue
+  })
+  // sort the dataset
+  if(sortSeriesBy == "Total value (descending)"){
+    data.sort((a,b) => d3.descending(a.maxValue, b.maxValue))
+  } else if(sortSeriesBy == "Total value (ascending)") {
+    data.sort((a,b) => d3.ascending(a.maxValue, b.maxValue))
+  } else if(sortSeriesBy == "Name"){
+    data.sort((a,b) => d3.ascending(a[0], b[0]))
+  }
+
+  // get domains
+  const xDomain = d3.extent(originalData, d => d[mapping.x.value]) // calculate from original data, simpler.
+  const yDomain = d3.extent(originalData, d => d[mapping.y.value]) // same as above
+
+  // get list of unique strings for colors
+  // we take them from mapped data since they could be aggregated.
+  const colorKeysSet = new Set();
+  data.forEach(serie => serie[1].forEach(line => colorKeysSet.add(line[1][0][1]['color']))) // the line[1][0][1] notation is due to the nested array structure
+  const colorKeys = [...colorKeysSet]
+
+  // create the scales
+  const colorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(colorKeys); //TODO: use RAWGraphs color scales
+
+  let x;
+
+  if(mapping.x.dataType === "number") {
+    x = d3.scaleLinear().domain(xDomain).nice().range([0, chartWidth]);
+  }
+
+  if(typeof mapping.x.dataType === 'object' && mapping.x.dataType.type === "date") {
+    x = d3.scaleTime().domain(xDomain).nice().range([0, chartWidth]);
+  }
 
   const y = d3.scaleLinear().domain(yDomain).nice().range([chartHeight, 0]);
 
@@ -101,15 +153,12 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr("transform", `translate(0,${chartHeight})`)
       .call(d3.axisBottom(x).ticks(width / 80))
       .call((g) =>
-        g
+        g.attr("class", "xAxis")
           .append("text")
-          .attr("font-family", "Arial, sans-serif")
-          .attr("font-size", 12)
           .attr("x", chartWidth)
           .attr("dy", -5)
-          .attr("fill", "black")
-          .attr("font-weight", "bold")
-          .attr("text-anchor", "end")
+          .attr('display',(d,i)=>{return i == 0 || repeatAxesLabels ? '' : 'none'}) // display according to options
+          .attr("class","axisTitle")
           .text(mapping["x"].value)
       );
   };
@@ -118,15 +167,11 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     return g
       .call(d3.axisLeft(y))
       .call((g) =>
-        g
+        g.attr("class", "yAxis")
           .select(".tick:last-of-type text")
           .clone()
-          .attr("font-family", "sans-serif")
-          .attr("font-size", 12)
-          .attr("x", 4)
-          .attr("fill", "black")
-          .attr("font-weight", "bold")
-          .attr("text-anchor", "start")
+          .attr('display',(d,i)=>{return i == 0 || repeatAxesLabels ? '' : 'none'}) // display according to options
+          .attr("class","axisTitle")
           .text(mapping["y"].value)
       );
   };
@@ -148,43 +193,59 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   const line = d3
     .line()
     .x(function (d) {
-      return x(d.x);
+      return x(d[1].x);
     })
     .y(function (d) {
-      return y(d.y);
+      return y(d[1].y);
     })
-    .curve(curveType[interpolation]); // TODO: use variables
+    .curve(curveType[interpolation]);
+
+  // define SVG background color
+  d3.select(svgNode).attr("style","background-color:"+background);
 
   const svg = d3
     .select(svgNode)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-    .attr("id", "visualization");
-
-  const axisLayer = svg.append("g").attr("id", "axis");
-
-  axisLayer.append("g").call(xAxis);
-  axisLayer.append("g").call(yAxis);
+    .attr("id", "visualization")
 
   const vizLayer = svg
     .append("g")
-    .attr("id", "viz")
+    .selectAll("g")
+    .data(data)
+    .join("g")
+    .attr("id", (d) => d[0])
+    .attr("transform", (d,i) => "translate(" + grid[i].x + "," + grid[i].y + ")") // translate each serie according to the grid object
     .attr("fill", "none")
     .attr("stroke-width", strokeWidth)
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round");
 
+  // add the series title
+  if(showSeriesLabels){
+    vizLayer.append('text')
+    .attr("x", -margin.left)
+      .attr("class", "title")
+      .text(d =>d[0])
+  }
+
+  const axisLayer = vizLayer.append("g").attr("id", "axes")
+    axisLayer.append("g").call(xAxis);
+    axisLayer.append("g").call(yAxis);
+
   const groups = vizLayer
+    .append("g")
+    .attr("id", "viz")
     .selectAll("g")
-    .data(data)
+    .data((d) => d[1]) // pass the single series
     .join("g")
-    .attr("stroke", (d) => colorScale(d[2]))
-    .attr("fill", (d) => colorScale(d[2]));
+    .attr('id', (d) => d[0])
 
   groups
     .append("path")
     .style("mix-blend-mode", "multiply")
-    .attr("d", (d) => line(d[1]))
+    .attr("d", (d) => line(d[1].sort((a, b) => d3.descending(a[1].x, b[1].x)))) // sorting values by the x axis
+    .attr("stroke", (d) => colorScale(d[1][0][1]['color']))
     .attr("fill", "none");
 
   if (showPoints) {
@@ -194,8 +255,41 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .data((d) => d[1])
       .join("circle")
       .attr("class", "dot")
-      .attr("cx", (d) => x(d.x))
-      .attr("cy", (d) => y(d.y))
-      .attr("r", pointsRadius);
+      .attr("cx", (d) => x(d[1].x))
+      .attr("cy", (d) => y(d[1].y))
+      .attr("r", pointsRadius)
+      .attr("fill", (d) => colorScale(d[1]['color']));
+  }
+
+  if(showLabels){
+
+    let labels = groups
+      .append("text")
+      .attr("class","labels")
+
+    if(labelsPosition == "side"){
+      labels
+        .attr("x", d => x(d[1][0][1]['x']))
+        .attr("y", d => y(d[1][0][1]['y']))
+        .attr("dx", 5)
+        .attr("dy", 4)
+        .attr("text-anchor", "start")
+        .text(d => labelsShorten ? d[0].slice(0, labelsChars): d[0])
+
+    } else if(labelsPosition == "inline"){
+      labels
+        .attr("x", d => {
+          const maxPos = d3Array.greatest(d[1], e => e[1].y)
+          return x(maxPos[1].x)
+        })
+        .attr("y", d => {
+          const maxPos = d3Array.greatest(d[1], e=> e[1].y)
+          return y(maxPos[1].y)
+        })
+        .attr("dx", 0)
+        .attr("dy", -6)
+        .attr("text-anchor", "middle")
+        .text(d => labelsShorten ? d[0].slice(0, labelsChars): d[0])
+    }
   }
 }
