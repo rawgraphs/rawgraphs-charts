@@ -32,6 +32,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       svg {
         background-color: ${background}
       }
+
+			.tick > line {
+				stroke: #e5e5e5;
+			}
       `)
 
   let chartWidth = width - margin.left - margin.right;
@@ -126,18 +130,37 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
     .attr("id", "visualization")
 
+	// add the X gridlines
+	svg.append("g")
+      .attr("class", "grid")
+      .attr("transform", "translate(" + (cellSize/2+2) + ",0)") // not clear why there is an offset of 2px
+      .call(d3.axisTop(x)
+        .tickSize(Math.round(-chartHeight))
+				.tickSizeOuter(0)
+      	.tickFormat("")
+      )
+
+  // add the Y gridlines
+  svg.append("g")
+      .attr("class", "grid")
+			.attr("transform", "translate(0," + (cellSize/2+2) + ")") // not clear why there is an offset of 2px
+      .call(d3.axisLeft(y)
+          .tickSize(Math.round(-chartWidth))
+					.tickSizeOuter(0)
+          .tickFormat("")
+      )
+
   svg.append("g")
     .style("font-size", 12)
-    .call(d3.axisTop(x))
+    .call(d3.axisTop(x).tickSizeOuter(0))
     .selectAll("text")
       .style("text-anchor", "start")
       .attr("dx", "0.5em")
-      // .attr("dy", "-1em")
       .attr("transform", "rotate(-45)")
 
   svg.append("g")
     .style("font-size", 12)
-    .call(d3.axisLeft(y))
+    .call(d3.axisLeft(y).tickSizeOuter(0))
 
   svg.selectAll()
     .data(data)
