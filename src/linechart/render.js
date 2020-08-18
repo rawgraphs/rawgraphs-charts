@@ -136,16 +136,15 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   // create the scales
   const colorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(colorKeys); //TODO: use RAWGraphs color scales
 
-	console.log(mapping)
   let x;
-	switch(mapping.x.dataType) {
-		case "number":
-			x = d3.scaleLinear().domain(xDomain).nice().range([0, chartWidth]);
-			break;
-		case "date":
-			// x = d3.scaleLinear().domain(xDomain).nice().range([0, chartWidth]); // TODO parse date
-			break;
-	}
+
+  if(mapping.x.dataType === "number") {
+    x = d3.scaleLinear().domain(xDomain).nice().range([0, chartWidth]);
+  }
+
+  if(typeof mapping.x.dataType === 'object' && mapping.x.dataType.type === "date") {
+    x = d3.scaleTime().domain(xDomain).nice().range([0, chartWidth]);
+  }
 
   const y = d3.scaleLinear().domain(yDomain).nice().range([chartHeight, 0]);
 
@@ -245,7 +244,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   groups
     .append("path")
     .style("mix-blend-mode", "multiply")
-    .attr("d", (d) => line(d[1].sort((a, b) => d3.descending(a[0], b[0])))) // sorting values by the x axis
+    .attr("d", (d) => line(d[1].sort((a, b) => d3.descending(a[1].x, b[1].x)))) // sorting values by the x axis
     .attr("stroke", (d) => colorScale(d[1][0][1]['color']))
     .attr("fill", "none");
 

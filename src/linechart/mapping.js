@@ -16,7 +16,7 @@ export const mapData = function(data, mapping, dataTypes, dimensions) {
       }
     },
     d => d[mapping.series.value], // series grouping
-    d => d[mapping.lines.value], d => d[mapping.x.value] // group functions
+    d => d[mapping.lines.value], d => d[mapping.x.value].toString()// group functions
   )
 
   return result

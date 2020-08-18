@@ -5,28 +5,32 @@ export default {
   chart: linechart,
   data,
   dataTypes: {
-	Category:"string",
+  Category:"string",
     Format: "string",
     Year: "number",
     Units: "number",
     Revenues: "number",
-	"Revenues-Adjusted": "number"
+    "Revenues-Adjusted": "number",
+    Year_date: {
+      type: 'date',
+      dateFormat: "YYYY-MM-DD"
+    }
   },
   mapping: {
-	series: { value: ["Format"] },
+  series: { value: ["Format"] },
     lines: { value: ["Format"] },
-    x: { value: ["Year"] },
+    x: { value: ["Year_date"] },
     y: { value: ["Revenues-Adjusted"] },
     color: { value: ["Category"] }
   },
   visualOptions: {
     width: 1000,
     height: 3000,
-	showPoints:true,
-	interpolation:"Natural",
-	pointsRadius:1.5,
-	columnsNumber:1,
-	gutter: 50,
-	sortSeriesBy: "Total value (descending)"
+  showPoints:true,
+  interpolation:"Natural",
+  pointsRadius:1.5,
+  columnsNumber:1,
+  gutter: 50,
+  sortSeriesBy: "Total value (descending)"
   },
 };
