@@ -96,4 +96,15 @@ export const visualOptions = {
     default: "Tertiary"
   },
 
+  colorScale : {
+    type: 'colorScale',
+    label: 'The color scale',
+    dimension: 'color',
+    default: {
+      scaleType: 'ordinal',
+      interpolator: 'interpolateSpectral'
+    },
+    group: 'chart'
+  },
+
 }

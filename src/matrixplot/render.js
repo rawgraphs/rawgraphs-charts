@@ -22,9 +22,14 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     label1Style,
     label2Style,
     label3Style, // TODO: add labels styles
+    colorScale,
   } = visualOptions;
+  
+  
+  console.log("colorScale", colorScale)
 
   const labelStyles = [label1Style, label2Style, label3Style];
+  
 
   const margin = {
     top: marginTop,
@@ -72,9 +77,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   let chartWidth = width - margin.left - margin.right;
   let chartHeight = height - margin.top - margin.bottom;
 
-  // let's flatten the data array
-  data = data.map(d => d[1])
-
   // sort data
   const rowsValues = d3.nest()
     .key(d => d.y)
@@ -113,6 +115,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   const cols = d3.map(colsValues, d => d.key).keys()
   const colorKeys = d3.map(data, d => d.color).keys()
 
+  console.log("colorKeys", colorKeys )
+
   let cellSize;
 
   if(rows.length > cols.length){
@@ -137,17 +141,17 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .domain([0, d3.max(data, d => d.size)])
     .range([0, cellSize]);
 
-  let colorScale;
+  // let colorScaleOriginal;
 
-  if(mapping.color.dataType == "string"){
+  // if(mapping.color.dataType == "string"){
 
-    colorScale = d3.scaleOrdinal(d3.schemeCategory10)
-      .domain(colorKeys);
-  } else if (mapping.color.dataType == "number") {
-    colorScale = d3.scaleSequential()
-      .interpolator(d3.interpolateInferno)
-      .domain(d3.extent(data, d => d.color))
-  }
+  //   colorScaleOriginal = d3.scaleOrdinal(d3.schemeCategory10)
+  //     .domain(colorKeys);
+  // } else if (mapping.color.dataType == "number") {
+  //   colorScaleOriginal = d3.scaleSequential()
+  //     .interpolator(d3.interpolateInferno)
+  //     .domain(d3.extent(data, d => d.color))
+  // }
 
   const svg = d3
     .select(svgNode)

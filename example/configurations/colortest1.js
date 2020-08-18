@@ -18,10 +18,10 @@ export default {
   visualOptions: {
     width: 500,
     height: 500,
-    // colorScale : {
-    //   scaleType: 'ordinal',
-    //   interpolator: 'schemeCategory10',
-    // }
+    colorScale : {
+      scaleType: 'ordinal',
+      interpolator: 'interpolateSpectral',
+    }
 
   },
 };

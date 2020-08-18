@@ -13,11 +13,3 @@ export const visualOptions = {
   
 
 }
-
-
-// showLegend,
-// legendWidth,
-// marginTop = 20,
-// marginRight = 20,
-// marginBottom = 20,
-// marginLeft = 20

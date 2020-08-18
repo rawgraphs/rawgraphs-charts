@@ -20,5 +20,5 @@ export const mapData = function(data, mapping, dataTypes, dimensions) {
     d => d[mapping.x.value] + d[mapping.y.value] // crossgrup functions
   )
 
-  return result
+  return result.map(d => d[1])
 }

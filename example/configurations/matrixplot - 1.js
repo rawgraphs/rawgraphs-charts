@@ -16,7 +16,7 @@ export default {
   mapping: {
     x: { value: ["Category"] },
     y: { value: ["Year"] },
-    color: { value: ["Revenues-Adjusted"] },
+    color: { value: ["Format"] },
     label: { value: ["Format","Units"] },
     size: { value: ["Revenues-Adjusted"] },
   },
