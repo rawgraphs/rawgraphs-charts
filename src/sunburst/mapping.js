@@ -22,7 +22,7 @@ export const mapData = function(data, mapping, dataTypes, dimensions) {
     ...mapping.hierarchy.value.map(level => (d => d[level])) // create a grouping for each level of the hierarchy
   )
 
-	console.log(results)
+	console.log("mapping")
 
   return results
 }

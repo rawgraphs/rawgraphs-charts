@@ -28,4 +28,15 @@ export const visualOptions = {
     group: 'artboard',
   },
 
+	colorScale : {
+    type: 'colorScale',
+    label: 'The color scale',
+    dimension: 'color',
+    default: {
+      scaleType: 'ordinal',
+      interpolator: 'interpolateSpectral'
+    },
+    group: 'chart'
+  },
+
 }
