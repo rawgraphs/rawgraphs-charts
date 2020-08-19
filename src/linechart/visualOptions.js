@@ -140,7 +140,18 @@ export const visualOptions = {
     label: "Max number of charachters",
     default: 1,
     group: "labels",
-  }
+  },
+
+	colorScale : {
+		type: 'colorScale',
+		label: 'The color scale',
+		dimension: 'color',
+		default: {
+			scaleType: 'ordinal',
+			interpolator: 'interpolateSpectral'
+		},
+		group: 'chart'
+	},
 
 }
 

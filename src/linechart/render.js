@@ -31,7 +31,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     showLabels,
     labelsPosition,
     labelsShorten,
-    labelsChars
+    labelsChars,
+		colorScale
     //TODO add labels legends and colors
   } = visualOptions;
 
@@ -137,10 +138,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   // get domains
   const xDomain = d3.extent(data, d => d.x)
   const yDomain = d3.extent(data, d => d.y)
-  const colorDomain = d3.map(data, d => d.color).keys()
+  // const colorDomain = d3.map(data, d => d.color).keys()
 
   // create the scales
-  const colorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(colorDomain); //TODO: use RAWGraphs color scales
+  // const colorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(colorDomain); //TODO: use RAWGraphs color scales
 
 
   let x;
