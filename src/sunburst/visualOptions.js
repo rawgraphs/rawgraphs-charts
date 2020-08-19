@@ -1,6 +1,6 @@
 export const visualOptions = {
 
-	marginTop : {
+  marginTop : {
     type: 'number',
     label: 'Margin (top)',
     default: 10,
@@ -28,7 +28,7 @@ export const visualOptions = {
     group: 'artboard',
   },
 
-	colorScale : {
+  colorScale : {
     type: 'colorScale',
     label: 'The color scale',
     dimension: 'color',

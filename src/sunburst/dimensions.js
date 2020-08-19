@@ -5,7 +5,7 @@ export const dimensions = [
     "validTypes": [
       "number",
       "date",
-			"string"
+      "string"
     ],
     "required": true,
     "multiple": true
