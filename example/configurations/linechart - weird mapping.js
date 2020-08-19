@@ -17,9 +17,9 @@ export default {
     "Revenues-Adjusted": "number"
   },
   mapping: {
-  series: { value: ["Category"] },
-    lines: { value: ["Format"] },
-    x: { value: ["Year"] },
+  series: { value: [] },
+    lines: { value: ["Category"] },
+    x: { value: ["Year_date"] },
     y: { value: ["Revenues-Adjusted"] },
     color: { value: ["Format"] }
   },
@@ -35,8 +35,5 @@ export default {
     marginBottom:20,
     marginRight: 15,
     marginTop: 10,
-		sortSeriesBy: "Total value (descending)",
-		labelsPosition: 'inline',
-		showLabels: true
   },
 };

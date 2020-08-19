@@ -87,15 +87,23 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
     `);
 
+  // create nest structure
+  const nestedData = d3.nest()
+    .key(d => d.series)
+    .key(d => d.lines)
+    .rollup(v => v.sort((a,b) => d3.ascending(a.x, b.x)))
+    .entries(data);
+
   const verticalGutter = gutter + ((showSeriesLabels ? 12 : 0)) // if series labels are shown, increase gutter
   margin.top += showSeriesLabels ? 24 : 0;
   // compute the series grid according to amount of series and user optionss
-  const rowsNumber = Math.ceil(data.length/columnsNumber)
+  const rowsNumber = Math.ceil(nestedData.length/columnsNumber)
 
-  const chartWidth = ((width - margin.left - margin.right) - (columnsNumber - 1) * gutter) / columnsNumber
-  const chartHeight = ((height - margin.top - margin.bottom) - (rowsNumber - 1) * verticalGutter) / rowsNumber
+  const chartWidth = ((width - margin.left - margin.right) - (columnsNumber - 1) * gutter) / columnsNumber;
+  const chartHeight = ((height - margin.top - margin.bottom) - (rowsNumber - 1) * verticalGutter) / rowsNumber;
 
-  let grid = data.map(function(d,i){
+  // create the grid
+  let grid = nestedData.map(function(d,i){
 
     const xpos = i%columnsNumber;
     const ypos =  Math.floor(i/columnsNumber);
@@ -106,37 +114,34 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       width: chartWidth,
       height: chartHeight
     }
-  })
+  }) // grid OK
+
 
   // comupte max values for series
   // will add it as property to each series.
 
-  data.forEach(function(serie){
-    const serieName = serie[0]
-    let serieValue = originalData.filter(item => item[mapping.series.value] == serieName).reduce((result, item) => result + item[mapping.y.value], 0)
-    serie.maxValue = serieValue
+  nestedData.forEach(function(serie){
+    serie.totalValue = data.filter(item => item.series == serie.key).reduce((result, item) => result + item.y, 0)
   })
-  // sort the dataset
+
+  // sort the dataset according to sortSeriesBy option
+
   if(sortSeriesBy == "Total value (descending)"){
-    data.sort((a,b) => d3.descending(a.maxValue, b.maxValue))
+    nestedData.sort((a,b) => d3.descending(a.totalValue, b.totalValue))
   } else if(sortSeriesBy == "Total value (ascending)") {
-    data.sort((a,b) => d3.ascending(a.maxValue, b.maxValue))
+    nestedData.sort((a,b) => d3.ascending(a.totalValue, b.totalValue))
   } else if(sortSeriesBy == "Name"){
-    data.sort((a,b) => d3.ascending(a[0], b[0]))
+    nestedData.sort((a,b) => d3.ascending(a.key, b.key))
   }
 
   // get domains
-  const xDomain = d3.extent(originalData, d => d[mapping.x.value]) // calculate from original data, simpler.
-  const yDomain = d3.extent(originalData, d => d[mapping.y.value]) // same as above
-
-  // get list of unique strings for colors
-  // we take them from mapped data since they could be aggregated.
-  const colorKeysSet = new Set();
-  data.forEach(serie => serie[1].forEach(line => colorKeysSet.add(line[1][0][1]['color']))) // the line[1][0][1] notation is due to the nested array structure
-  const colorKeys = [...colorKeysSet]
+  const xDomain = d3.extent(data, d => d.x)
+  const yDomain = d3.extent(data, d => d.y)
+  const colorDomain = d3.map(data, d => d.color).keys()
 
   // create the scales
-  const colorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(colorKeys); //TODO: use RAWGraphs color scales
+  const colorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(colorDomain); //TODO: use RAWGraphs color scales
+
 
   let x;
 
@@ -180,14 +185,14 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
   // convert string to d3 functions
   const curveType = {
-    Basis: d3.curveBasis,
-    Bundle: d3.curveBundle,
-    Cardinal: d3.curveCardinal,
+    "Basis": d3.curveBasis,
+    "Bundle": d3.curveBundle,
+    "Cardinal": d3.curveCardinal,
     "Catmull–Rom": d3.curveCatmullRom,
-    Linear: d3.curveLinear,
+    "Linear": d3.curveLinear,
     "Monotone X": d3.curveMonotoneX,
-    Natural: d3.curveNatural,
-    Step: d3.curveStep,
+    "Natural": d3.curveNatural,
+    "Step": d3.curveStep,
     "Step After": d3.curveStepAfter,
     "Step Before": d3.curveStepBefore,
   };
@@ -195,15 +200,12 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   const line = d3
     .line()
     .x(function (d) {
-      return x(d[1].x);
+      return x(d.x);
     })
     .y(function (d) {
-      return y(d[1].y);
+      return y(d.y);
     })
     .curve(curveType[interpolation]);
-
-  // define SVG background color
-  d3.select(svgNode).attr("style","background-color:"+background);
 
   const svg = d3
     .select(svgNode)
@@ -214,9 +216,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   const vizLayer = svg
     .append("g")
     .selectAll("g")
-    .data(data)
+    .data(nestedData)
     .join("g")
-    .attr("id", (d) => d[0])
+    .attr("id", d => d.key)
     .attr("transform", (d,i) => "translate(" + grid[i].x + "," + grid[i].y + ")") // translate each serie according to the grid object
     .attr("fill", "none")
     .attr("stroke-width", strokeWidth)
@@ -228,7 +230,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     vizLayer.append('text')
     .attr("x", -margin.left)
       .attr("class", "title")
-      .text(d =>d[0])
+      .text(d =>d.key)
   }
 
   const axisLayer = vizLayer.append("g").attr("id", "axes")
@@ -239,28 +241,27 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .append("g")
     .attr("id", "viz")
     .selectAll("g")
-    .data((d) => d[1]) // pass the single series
+    .data(d => d.values) // pass the single line
     .join("g")
-    .attr('id', (d) => d[0])
+    .attr('id', d => d.key)
 
   groups
     .append("path")
-    .style("mix-blend-mode", "multiply")
-    .attr("d", (d) => line(d[1].sort((a, b) => d3.descending(a[1].x, b[1].x)))) // sorting values by the x axis
-    .attr("stroke", (d) => colorScale(d[1][0][1]['color']))
+    .attr("d", d => line(d.value)) // sorting values by the x axis
+    .attr("stroke", d => colorScale(d.value[0].color))
     .attr("fill", "none");
 
   if (showPoints) {
     groups
       .append("g")
       .selectAll("circle")
-      .data((d) => d[1])
+      .data(d => d.value)
       .join("circle")
       .attr("class", "dot")
-      .attr("cx", (d) => x(d[1].x))
-      .attr("cy", (d) => y(d[1].y))
+      .attr("cx", d => x(d.x))
+      .attr("cy", d => y(d.y))
       .attr("r", pointsRadius)
-      .attr("fill", (d) => colorScale(d[1]['color']));
+      .attr("fill", d => colorScale(d.color))
   }
 
   if(showLabels){
@@ -268,30 +269,29 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     let labels = groups
       .append("text")
       .attr("class","labels")
+      .text(d => labelsShorten ? d.key.slice(0, labelsChars) : d.key)
 
     if(labelsPosition == "side"){
       labels
-        .attr("x", d => x(d[1][0][1]['x']))
-        .attr("y", d => y(d[1][0][1]['y']))
+        .attr("x", d => x(d.value.slice(-1)[0].x)) // get last x
+        .attr("y", d => y(d.value.slice(-1)[0].y)) // get last x
         .attr("dx", 5)
         .attr("dy", 4)
         .attr("text-anchor", "start")
-        .text(d => labelsShorten ? d[0].slice(0, labelsChars): d[0])
 
     } else if(labelsPosition == "inline"){
       labels
         .attr("x", d => {
-          const maxPos = d3Array.greatest(d[1], e => e[1].y)
-          return x(maxPos[1].x)
+          const maxPos = d3Array.greatest(d.value, e => e.y)
+          return x(maxPos.x)
         })
         .attr("y", d => {
-          const maxPos = d3Array.greatest(d[1], e=> e[1].y)
-          return y(maxPos[1].y)
+          const maxPos = d3Array.greatest(d.value, e=> e.y)
+          return y(maxPos.y)
         })
         .attr("dx", 0)
         .attr("dy", -6)
         .attr("text-anchor", "middle")
-        .text(d => labelsShorten ? d[0].slice(0, labelsChars): d[0])
     }
   }
 }
