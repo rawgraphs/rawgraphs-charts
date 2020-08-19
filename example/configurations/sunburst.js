@@ -1,8 +1,6 @@
 import sunburst from "rawcharts/sunburst"
 import data from "../datasets/WineTasting.tsv"
 
-console.log(data)
-
 export default {
   chart: sunburst,
   data,
@@ -14,8 +12,8 @@ export default {
 	  "results": "number"
 	},
   mapping: {
-    hierarchy: { value: ["Root","Level1", "Level2", "Level3"] },
-    color: { value: ["Level3"] },
+    hierarchy: { value: ["Root","Level1", "Level2","Level3"] },
+    color: { value: ["Level1"] },
     label: { value: ["Level3"] },
     size: { value: ["results"] },
   },
