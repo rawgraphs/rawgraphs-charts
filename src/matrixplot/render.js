@@ -3,8 +3,6 @@ import * as d3 from 'd3'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
 
-  console.log(data)
-
   const {
     width = 500,
     height = 500,
@@ -26,7 +24,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   } = visualOptions;
   
   
-  console.log("colorScale", colorScale)
 
   const labelStyles = [label1Style, label2Style, label3Style];
   
@@ -113,9 +110,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   // first thing, understand if there are more rows or lines
   const rows = d3.map(rowsValues, d => d.key).keys()
   const cols = d3.map(colsValues, d => d.key).keys()
-  const colorKeys = d3.map(data, d => d.color).keys()
-
-  console.log("colorKeys", colorKeys )
 
   let cellSize;
 
