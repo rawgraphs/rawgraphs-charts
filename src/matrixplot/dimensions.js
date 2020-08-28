@@ -36,7 +36,8 @@ export const dimensions = [
       "date",
       "string"
     ],
-    "required": true
+    "required": true,
+    "aggregation": true,
   },
   {
     "id": "label",
@@ -47,6 +48,7 @@ export const dimensions = [
       "string"
     ],
     "required": true,
-    "multiple": true
+    "multiple": true,
+    "aggregation": true,
   }
 ]
