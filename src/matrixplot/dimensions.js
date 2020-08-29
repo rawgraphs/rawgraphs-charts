@@ -27,6 +27,7 @@ export const dimensions = [
     ],
     "required": false,
     "aggregation": true,
+    "aggregationDefault": "sum"
   },
   {
     "id": "color",
@@ -38,6 +39,11 @@ export const dimensions = [
     ],
     "required": true,
     "aggregation": true,
+    "aggregationDefault": {
+      "number": "sum",
+      "string": "csvDistinct",
+      "date": "csvDistinct"
+    },
   },
   {
     "id": "label",
@@ -50,5 +56,6 @@ export const dimensions = [
     "required": true,
     "multiple": true,
     "aggregation": true,
+    "aggregationDefault": "csvDistinct",
   }
 ]
