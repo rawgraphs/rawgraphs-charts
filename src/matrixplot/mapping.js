@@ -7,6 +7,8 @@ export const mapData = function(data, mapping, dataTypes, dimensions) {
   const sizeAggregator = getDimensionAggregator('size', mapping, dataTypes, dimensions)
   const labelAggregators = getDimensionAggregator('label', mapping, dataTypes, dimensions)
 
+  // console.log("sizeAggregator", sizeAggregator, mapping, dataTypes, dimensions)
+
   const result = d3Array.rollups(data,
     v => {
       return {
