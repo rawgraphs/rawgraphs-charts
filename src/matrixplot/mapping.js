@@ -1,4 +1,4 @@
-import * as d3Array from 'd3-array'
+import * as d3 from 'd3'
 import { getDimensionAggregator } from '@raw-temp/rawgraphs-core'
 
 export const mapData = function(data, mapping, dataTypes, dimensions) {
@@ -15,7 +15,7 @@ export const mapData = function(data, mapping, dataTypes, dimensions) {
   'size' in mapping ? null : mapping.size = {value: undefined};
   'label' in mapping ? null : mapping.size = {value: undefined};
 
-  const result = d3Array.rollups(data,
+  const result = d3.rollups(data,
     v => {
       return {
         'x': v[0][mapping.x.value], // get the first one since it's grouped

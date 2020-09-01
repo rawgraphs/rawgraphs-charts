@@ -78,15 +78,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   let chartHeight = height - margin.top - margin.bottom;
 
   // sort data
-  const rowsValues = d3.nest()
-    .key(d => d.y)
-    .rollup(v => d3.sum(v, d => d.size))
-    .entries(data)
+  let rowsValues = d3.rollups(data, v => d3.sum(v, d => d.size), d => d.y).map(d => ({key:d[0], value:d[1]}));
 
-  const colsValues = d3.nest()
-    .key(d => d.x)
-    .rollup(v => d3.sum(v, d => d.size))
-    .entries(data)
+  const colsValues = d3.rollups(data, v => d3.sum(v, d => d.size), d => d.x).map(d => ({key:d[0], value:d[1]}));
 
   switch(sortXAxisBy) {
   case "Total value (descending)":
@@ -111,8 +105,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   }
 
   // first thing, understand if there are more rows or lines
-  const rows = d3.map(rowsValues, d => d.key).keys()
-  const cols = d3.map(colsValues, d => d.key).keys()
+  const rows = [...new Set(rowsValues.map(d =>d.key))]
+  const cols = [...new Set(colsValues.map(d =>d.key))]
 
   let cellSize;
 
