@@ -22,11 +22,11 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     label3Style, // TODO: add labels styles
     colorScale,
   } = visualOptions;
-  
-  
+
+
 
   const labelStyles = [label1Style, label2Style, label3Style];
-  
+
 
   const margin = {
     top: marginTop,
@@ -57,14 +57,17 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         font-weight: bold;
         fill: #161616;
       }
+
       tspan.Primary {
         font-size: 8px;
         fill:red;
       }
+
       tspan.Secondary {
         font-size: 8px;
         fill:blue;
       }
+
       tspan.Tertiary {
         font-size: 8px;
         fill:green;
@@ -135,18 +138,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .domain([0, d3.max(data, d => d.size)])
     .range([0, cellSize]);
 
-  // let colorScaleOriginal;
-
-  // if(mapping.color.dataType == "string"){
-
-  //   colorScaleOriginal = d3.scaleOrdinal(d3.schemeCategory10)
-  //     .domain(colorKeys);
-  // } else if (mapping.color.dataType == "number") {
-  //   colorScaleOriginal = d3.scaleSequential()
-  //     .interpolator(d3.interpolateInferno)
-  //     .domain(d3.extent(data, d => d.color))
-  // }
-
   const svg = d3
     .select(svgNode)
     .append("g")
@@ -174,34 +165,41 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
             .tickFormat("")
         )
   }
-
+ // add top x axis
   svg.append("g")
     .call(d3.axisTop(x).tickSizeOuter(0))
     .selectAll("text")
-      .attr("dx", "0.5em")
-      .attr("dy", cellSize)
+      .attr("dx", Math.sqrt(12)) // proportional to text size. @TODO we should use a variable.
+      .attr("dy", Math.sqrt(12)) // proportional to text size. @TODO we should use a variable
       .attr("text-anchor", "start")
       .attr("transform", "rotate(-45)")
 
+  // add left y axis
   svg.append("g")
     .call(d3.axisLeft(y).tickSizeOuter(0))
     .selectAll("text")
-      .attr("dy", cellSize/2)
+      // .attr("dy", cellSize/2)
 
+  // add y axis title
   svg.append("text")
-    .attr("dx", -9)
+    .attr("dx", -9) // proportional to tick lines
+    .attr("dy", -9) // proportional to tick lines
     .style("text-anchor", "end")
     .attr("class","axisTitle")
     .text(mapping.y.value)
 
+  // add x axis title
   svg.append("text")
-    .attr("dx", -Math.sqrt(8))
-    .attr("dy", -Math.sqrt(8))
+    .attr("x", (chartWidth+9)/Math.sqrt(2)) // proportional to tick lines
+    .attr("y", (chartWidth+9)/Math.sqrt(2)) // proportional to tick lines
+    .attr("dx", Math.sqrt(12)) // proportional to text size. @TODO we should use a variable.
+    .attr("dy", -Math.sqrt(12)) // proportional to text size. @TODO we should use a variable.
     .attr("transform", "rotate(-45)")
     .style("text-anchor", "start")
     .attr("class","axisTitle")
     .text(mapping.x.value)
 
+  // draw squares or circles for each value
   svg.selectAll()
     .data(data)
     .enter()

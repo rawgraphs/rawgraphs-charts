@@ -31,7 +31,7 @@ export default {
   },
   visualOptions: {
     width: 1000,
-    height: 800,
+    height: 5000,
     marginTop: 100,
     marginLeft: 100,
     sortXAxisBy: "Total value (ascending)",

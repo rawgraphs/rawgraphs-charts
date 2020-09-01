@@ -37,7 +37,7 @@ export const dimensions = [
       "date",
       "string"
     ],
-    "required": true,
+    "required": false,
     "aggregation": true,
     "aggregationDefault": {
       "number": "sum",
@@ -53,7 +53,7 @@ export const dimensions = [
       "date",
       "string"
     ],
-    "required": true,
+    "required": false,
     "multiple": true,
     "aggregation": true,
     "aggregationDefault": "csvDistinct",
