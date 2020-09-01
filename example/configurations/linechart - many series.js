@@ -20,7 +20,10 @@ export default {
   series: { value: ["Format"] },
     lines: { value: ["Format"] },
     x: { value: ["Year_date"] },
-    y: { value: ["Revenues-Adjusted"] },
+    y: {
+			value: ["Revenues-Adjusted"],
+			config: {"aggregation": ["sum"]}
+		},
     color: { value: ["Category"] }
   },
   visualOptions: {

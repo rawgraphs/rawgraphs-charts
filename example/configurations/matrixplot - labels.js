@@ -4,7 +4,7 @@ import data from "../datasets/Music.csv";
 export default {
   chart: matrixplot,
   data,
-	dataTypes: {
+  dataTypes: {
     Category:"string",
     Format: "string",
     Year: "number",
@@ -16,17 +16,26 @@ export default {
   mapping: {
     x: { value: ["Category"] },
     y: { value: ["Year"] },
-    color: { value: ["Revenues-Adjusted"] },
-    label: { value: ["Units"] },
-    size: { value: ["Revenues-Adjusted"] },
+    color: {
+      value: ["Format"],
+      config: {"aggregation": ["csvDistinct"]}
+    },
+    label: {
+      value: ["Units"],
+      config: {"aggregation": ["sum"]}
+    },
+    size: {
+      value: ["Revenues-Adjusted"],
+      config: {"aggregation": ["sum"]}
+    },
   },
-	visualOptions: {
+  visualOptions: {
     width: 1000,
     height: 800,
-		marginTop: 100,
-		marginLeft: 100,
-		sortXAxisBy: "Total value (ascending)",
-		sortYAxisBy: "Original",
-		showLabels: true
-	}
+    marginTop: 100,
+    marginLeft: 100,
+    sortXAxisBy: "Total value (ascending)",
+    sortYAxisBy: "Original",
+    showLabels: true
+  }
 }

@@ -32,7 +32,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     labelsPosition,
     labelsShorten,
     labelsChars,
-		colorScale
+    colorScale
     //TODO add labels legends and colors
   } = visualOptions;
 
@@ -138,20 +138,17 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   // get domains
   const xDomain = d3.extent(data, d => d.x)
   const yDomain = d3.extent(data, d => d.y)
-  // const colorDomain = d3.map(data, d => d.color).keys()
 
-  // create the scales
-  // const colorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(colorDomain); //TODO: use RAWGraphs color scales
-
-
+  // define the x scale
   let x;
 
-  if(mapping.x.dataType === "number") {
-    x = d3.scaleLinear().domain(xDomain).nice().range([0, chartWidth]);
-  }
-
-  if(typeof mapping.x.dataType === 'object' && mapping.x.dataType.type === "date") {
-    x = d3.scaleTime().domain(xDomain).nice().range([0, chartWidth]);
+  switch(mapping.x.dataType.type) {
+    case "number":
+      x = d3.scaleLinear().domain(xDomain).nice().range([0, chartWidth]);
+      break;
+    case "date":
+      x = d3.scaleTime().domain(xDomain).nice().range([0, chartWidth]);
+      break;
   }
 
   const y = d3.scaleLinear().domain(yDomain).nice().range([chartHeight, 0]);
