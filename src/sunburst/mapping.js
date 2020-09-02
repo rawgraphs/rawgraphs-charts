@@ -1,11 +1,10 @@
 import * as d3 from "d3";
-import * as d3Array from 'd3-array'
 
 export const mapData = function(data, mapping, dataTypes, dimensions) {
 
   const results = [];
 
-  const result = d3Array.rollups(data,
+  const result = d3.rollups(data,
     v => {
       const item = {
         'hierarchy': new Map(mapping.hierarchy.value.map(d => [d,v[0][d]])), //get the first one since it's grouped

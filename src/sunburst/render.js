@@ -36,23 +36,16 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   const radius = chartWidth > chartHeight ? chartHeight/2 : chartWidth/2;
 
   // create the hierarchical structure
-  let nest = d3.nest();
+  const nest = d3.rollup(data, v => v[0], ...mapping.hierarchy.value.map(level => (d => d.hierarchy.get(level))))
 
-  // add one nesting for each hierarchy level
-  mapping.hierarchy.value.forEach(function(level){
-    nest = nest.key(d => d.hierarchy.get(level))
-  });
-  // compute the nest
-  nest = nest.rollup(v => v[0]) // avoid arrays with just one item
-    .entries(data)
+  const hierarchy = d3.hierarchy(nest)
+    .sum(d => d[1].size);
 
-  const nestedData = {"key":"root", "values":nest};
-
-  const hierarchy = d3.hierarchy(nestedData, d => d.values)
-    .sum(d => d.value ? d.value.size : 0);
-
-  const partition = d3.partition()
+  const partition = nest => d3.partition() // copied from example of d3v6, not clear the meaning
     .size([2 * Math.PI, radius])
+  (hierarchy)
+
+  const root = partition(nest);
 
   const arc = d3.arc()
     .startAngle(d => d.x0)
@@ -61,8 +54,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .padRadius(radius / 2)
     .innerRadius(d => d.y0)
     .outerRadius(d => d.y1 - 1)
-
-  const root = partition(hierarchy);
 
   const svg = d3
     .select(svgNode)
@@ -74,21 +65,20 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .data(root.descendants().filter(d => d.depth))
       .join("path")
         .attr("fill", function(d){
-          // if not leaf, check if leaves has the same value
-          if('children' in d) {
-            const childrenColors = [...new Set(d.leaves().map(l => l.data.value.color))]
-            const c = childrenColors.length == 1 ? colorScale(childrenColors[0]) : 'gray'
-            return c
-          } else {
-            return(colorScale(d.data.value.color))
-          }
 
-          return 'gray'
+          if('children' in d) {
+            // if not leaf, check if leaves has the same value
+            const childrenColors = [...new Set(d.leaves().map(l => l.data[1].color))]
+            return childrenColors.length == 1 ? colorScale(childrenColors[0]) : 'gray'
+          } else {
+            // otherwise, if it's a leaf use its own color
+            return(colorScale(d.data[1].color))
+          }
         })
-        .attr("display", d => d.data.key != "" ? '' : 'none')
+        .attr("display", d => d.data[0] != "" ? '' : 'none')
         .attr("d", arc)
         .append("title")
-          .text(d => d.data.key)
+          .text(d => d.data[0])
 
     svg.append("g")
       .attr("transform", `translate(${width / 2},${width / 2})`)
@@ -105,6 +95,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
       })
       .attr("dy", "0.35em")
-      .text(d => d.data.key) // TODO: expose labels mapping
+      .text(d => d.data[0]) // TODO: expose labels mapping
 
 }

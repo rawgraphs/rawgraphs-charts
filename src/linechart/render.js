@@ -89,14 +89,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     `);
 
   // create nest structure
-  // const nestedData = d3.nest()
-  //   [0](d => d.series)
-  //   [0](d => d.lines)
-  //   .rollup(v => v.sort((a,b) => d3.ascending(a.x, b.x)))
-  //   .entries(data);
-	const nestedData = d3.rollups(data, v => v.sort((a,b) => d3.ascending(a.x, b.x)), d=> d.series, d=> d.lines)
-
-	console.log(nestedData)
+	const nestedData = d3.rollups(data, v => v.sort((a,b) => d3.ascending(a.x, b.x)), d => d.series, d => d.lines)
 
   const verticalGutter = gutter + ((showSeriesLabels ? 12 : 0)) // if series labels are shown, increase gutter
   margin.top += showSeriesLabels ? 24 : 0;
@@ -118,10 +111,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       width: chartWidth,
       height: chartHeight
     }
-  }) // grid OK
-
-	console.log(grid)
-
+  })
 
   // comupte max values for series
   // will add it as property to each series.
