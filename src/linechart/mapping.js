@@ -6,6 +6,11 @@ export const mapData = function(data, mapping, dataTypes, dimensions) {
   const colorAggregator = getDimensionAggregator('color', mapping, dataTypes, dimensions)
   const yAggregator = getDimensionAggregator('y', mapping, dataTypes, dimensions)
 
+  // add the non-compulsory dimensions.
+  'color' in mapping ? null : mapping.color = {value: undefined};
+  'series' in mapping ? null : mapping.series = {value: undefined};
+  'lines' in mapping ? null : mapping.lines = {value: undefined};
+
   let results = [];
 
   const result = d3.rollups(data,

@@ -1,6 +1,16 @@
 import * as d3 from "d3";
+import { getDimensionAggregator } from '@raw-temp/rawgraphs-core'
 
 export const mapData = function(data, mapping, dataTypes, dimensions) {
+
+  const colorAggregator = getDimensionAggregator('color', mapping, dataTypes, dimensions)
+  const sizeAggregator = getDimensionAggregator('size', mapping, dataTypes, dimensions)
+  const labelAggregators = getDimensionAggregator('label', mapping, dataTypes, dimensions)
+
+  // add the non-compulsory dimensions.
+  'color' in mapping ? null : mapping.color = {value: undefined};
+  'size' in mapping ? null : mapping.size = {value: undefined};
+  'label' in mapping ? null : mapping.label = {value: undefined};
 
   const results = [];
 
@@ -8,11 +18,9 @@ export const mapData = function(data, mapping, dataTypes, dimensions) {
     v => {
       const item = {
         'hierarchy': new Map(mapping.hierarchy.value.map(d => [d,v[0][d]])), //get the first one since it's grouped
-        'size': d3['sum'](v, d => d[mapping.size.value]),
-        'color': dataTypes[mapping.color.value] == 'number' ? d3['sum'](v, d => d[mapping.color.value]) : [...new Set(v.map(d => d[mapping.color.value]))].join(','),
-        'label': mapping.label.value.map((label,i) =>{
-            return mapping.label.dataType[i] == 'number' ? d3['sum'](v, d => d[label]) : [...new Set(v.map(d => d[label]))].join(',')
-        })
+        'size': mapping.size.value ? sizeAggregator(v.map(d => d[mapping.size.value])) : 1,
+        'color': mapping.color.value ? colorAggregator(v.map(d => d[mapping.color.value])) : 'cells color',
+        'label': mapping.label.value ? mapping.label.value.map((label,i) =>{return labelAggregators[i](v.map(d =>d[label]))}) : undefined // create array of strings
       }
 
       results.push(item)

@@ -13,18 +13,10 @@ export default {
 	},
   mapping: {
     hierarchy: { value: ["Root"] },
-		color: {
+    color: {
 			value: ["Level1"],
 			config: {"aggregation": ["csvDistinct"]}
-		},
-    label: {
-			value: ["Level3"],
-			config: {"aggregation": ["csvDistinct"]}
-		},
-    size: {
-			value: ["results"],
-			config: {"aggregation": ["sum"]}
-		},
+		}
   },
   visualOptions: {
     width: 500,

@@ -7,22 +7,19 @@ export const mapData = function(data, mapping, dataTypes, dimensions) {
   const sizeAggregator = getDimensionAggregator('size', mapping, dataTypes, dimensions)
   const labelAggregators = getDimensionAggregator('label', mapping, dataTypes, dimensions)
 
-  // console.log("sizeAggregator", sizeAggregator, mapping, dataTypes, dimensions)
-
-
-
+  // add the non-compulsory dimensions.
   'color' in mapping ? null : mapping.color = {value: undefined};
   'size' in mapping ? null : mapping.size = {value: undefined};
-  'label' in mapping ? null : mapping.size = {value: undefined};
+  'label' in mapping ? null : mapping.label = {value: undefined};
 
   const result = d3.rollups(data,
     v => {
       return {
         'x': v[0][mapping.x.value], // get the first one since it's grouped
         'y': v[0][mapping.y.value], // get the first one since it's grouped
-        'size': mapping.size.value ? sizeAggregator(v.map(d => d[mapping.size.value])) : 1, // aggregate. by default assign the same size
-        'color': mapping.size.value ? colorAggregator(v.map(d => d[mapping.color.value])) : 'cells color', // aggregate, by default single color.
-        'label': mapping.size.value ? mapping.label.value.map((label,i) =>{return labelAggregators[i](v.map(d =>d[label]))}) : undefined
+        'size': mapping.size.value ? sizeAggregator(v.map(d => d[mapping.size.value])) : 1, // aggregate. If not mapped, give 1 as size
+        'color': mapping.color.value ? colorAggregator(v.map(d => d[mapping.color.value])) : 'default', // aggregate, by default single color.
+        'label': mapping.label.value ? mapping.label.value.map((label,i) =>{return labelAggregators[i](v.map(d =>d[label]))}) : undefined // create array of strings
       }
     },
     d => d[mapping.x.value] + d[mapping.y.value] // crossgrup functions
