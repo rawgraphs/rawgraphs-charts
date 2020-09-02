@@ -89,11 +89,14 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     `);
 
   // create nest structure
-  const nestedData = d3.nest()
-    .key(d => d.series)
-    .key(d => d.lines)
-    .rollup(v => v.sort((a,b) => d3.ascending(a.x, b.x)))
-    .entries(data);
+  // const nestedData = d3.nest()
+  //   [0](d => d.series)
+  //   [0](d => d.lines)
+  //   .rollup(v => v.sort((a,b) => d3.ascending(a.x, b.x)))
+  //   .entries(data);
+	const nestedData = d3.rollups(data, v => v.sort((a,b) => d3.ascending(a.x, b.x)), d=> d.series, d=> d.lines)
+
+	console.log(nestedData)
 
   const verticalGutter = gutter + ((showSeriesLabels ? 12 : 0)) // if series labels are shown, increase gutter
   margin.top += showSeriesLabels ? 24 : 0;
@@ -117,12 +120,14 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     }
   }) // grid OK
 
+	console.log(grid)
+
 
   // comupte max values for series
   // will add it as property to each series.
 
   nestedData.forEach(function(serie){
-    serie.totalValue = data.filter(item => item.series == serie.key).reduce((result, item) => result + item.y, 0)
+    serie.totalValue = data.filter(item => item.series == serie[0]).reduce((result, item) => result + item.y, 0)
   })
 
   // sort the dataset according to sortSeriesBy option
@@ -132,7 +137,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   } else if(sortSeriesBy == "Total value (ascending)") {
     nestedData.sort((a,b) => d3.ascending(a.totalValue, b.totalValue))
   } else if(sortSeriesBy == "Name"){
-    nestedData.sort((a,b) => d3.ascending(a.key, b.key))
+    nestedData.sort((a,b) => d3.ascending(a[0], b[0]))
   }
 
   // get domains
@@ -141,6 +146,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
   // define the x scale
   let x;
+
+	mapping.x.dataType === "number" ? mapping.x.dataType = {"type":"number"} : null // @TODO it should be better to have always the same kind of object in mapping
 
   switch(mapping.x.dataType.type) {
     case "number":
@@ -164,7 +171,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
           .attr("dy", -5)
           .attr('display',(d,i)=>{return i == 0 || repeatAxesLabels ? '' : 'none'}) // display according to options
           .attr("class","axisTitle")
-          .text(mapping["x"].value)
+          .text(mapping["x"][1])
       );
   };
 
@@ -177,7 +184,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
           .clone()
           .attr('display',(d,i)=>{return i == 0 || repeatAxesLabels ? '' : 'none'}) // display according to options
           .attr("class","axisTitle")
-          .text(mapping["y"].value)
+          .text(mapping["y"][1])
       );
   };
 
@@ -216,7 +223,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .selectAll("g")
     .data(nestedData)
     .join("g")
-    .attr("id", d => d.key)
+    .attr("id", d => d[0])
     .attr("transform", (d,i) => "translate(" + grid[i].x + "," + grid[i].y + ")") // translate each serie according to the grid object
     .attr("fill", "none")
     .attr("stroke-width", strokeWidth)
@@ -228,7 +235,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     vizLayer.append('text')
     .attr("x", -margin.left)
       .attr("class", "title")
-      .text(d =>d.key)
+      .text(d =>d[0])
   }
 
   const axisLayer = vizLayer.append("g").attr("id", "axes")
@@ -239,21 +246,21 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .append("g")
     .attr("id", "viz")
     .selectAll("g")
-    .data(d => d.values) // pass the single line
+    .data(d => d[1]) // pass the single line
     .join("g")
-    .attr('id', d => d.key)
+    .attr('id', d => d[0])
 
   groups
     .append("path")
-    .attr("d", d => line(d.value)) // sorting values by the x axis
-    .attr("stroke", d => colorScale(d.value[0].color))
+    .attr("d", d => line(d[1]))
+    .attr("stroke", d => colorScale(d[1][0].color))
     .attr("fill", "none");
 
   if (showPoints) {
     groups
       .append("g")
       .selectAll("circle")
-      .data(d => d.value)
+      .data(d => d[1])
       .join("circle")
       .attr("class", "dot")
       .attr("cx", d => x(d.x))
@@ -267,12 +274,12 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     let labels = groups
       .append("text")
       .attr("class","labels")
-      .text(d => labelsShorten ? d.key.slice(0, labelsChars) : d.key)
+      .text(d => labelsShorten ? d[0].slice(0, labelsChars) : d[0])
 
     if(labelsPosition == "side"){
       labels
-        .attr("x", d => x(d.value.slice(-1)[0].x)) // get last x
-        .attr("y", d => y(d.value.slice(-1)[0].y)) // get last x
+        .attr("x", d => x(d[1].slice(-1)[0].x)) // get last x
+        .attr("y", d => y(d[1].slice(-1)[0].y)) // get last x
         .attr("dx", 5)
         .attr("dy", 4)
         .attr("text-anchor", "start")
@@ -280,11 +287,11 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     } else if(labelsPosition == "inline"){
       labels
         .attr("x", d => {
-          const maxPos = d3Array.greatest(d.value, e => e.y)
+          const maxPos = d3Array.greatest(d[1], e => e.y)
           return x(maxPos.x)
         })
         .attr("y", d => {
-          const maxPos = d3Array.greatest(d.value, e=> e.y)
+          const maxPos = d3Array.greatest(d[1], e=> e.y)
           return y(maxPos.y)
         })
         .attr("dx", 0)
