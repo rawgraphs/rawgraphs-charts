@@ -84,12 +84,19 @@ export const visualOptions = {
     group: "series",
   },
 
-  gutter: {
+  gutterX: {
     type: "number",
-    label: "Space between series",
-    default: 24,
+    label: "Horizontal space between series",
+    default: 25,
     group: "series",
   },
+
+	gutterY: {
+		type: "number",
+		label: "Vertical space between series",
+		default: 50,
+		group: "series",
+	},
 
   sortSeriesBy: {
     type: "text",

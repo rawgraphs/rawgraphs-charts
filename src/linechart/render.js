@@ -24,7 +24,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     columnsNumber,
     useSameScale = false, // TODO: add
     sortSeriesBy,
-    gutter,
+    gutterX,
+		gutterY,
     showSeriesLabels,
     repeatAxesLabels,
     // labels options
@@ -91,13 +92,12 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   // create nest structure
 	const nestedData = d3.rollups(data, v => v.sort((a,b) => d3.ascending(a.x, b.x)), d => d.series, d => d.lines)
 
-  const verticalGutter = gutter + ((showSeriesLabels ? 12 : 0)) // if series labels are shown, increase gutter
   margin.top += showSeriesLabels ? 24 : 0;
   // compute the series grid according to amount of series and user optionss
   const rowsNumber = Math.ceil(nestedData.length/columnsNumber)
 
-  const chartWidth = ((width - margin.left - margin.right) - (columnsNumber - 1) * gutter) / columnsNumber;
-  const chartHeight = ((height - margin.top - margin.bottom) - (rowsNumber - 1) * verticalGutter) / rowsNumber;
+  const chartWidth = ((width - margin.left - margin.right) - (columnsNumber - 1) * gutterX) / columnsNumber;
+  const chartHeight = ((height - margin.top - margin.bottom) - (rowsNumber - 1) * gutterY) / rowsNumber;
 
   // create the grid
   let grid = nestedData.map(function(d,i){
@@ -106,8 +106,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     const ypos =  Math.floor(i/columnsNumber);
 
     return {
-      x: xpos * (chartWidth + gutter),
-      y: ypos * (chartHeight + verticalGutter),
+      x: xpos * (chartWidth + gutterX),
+      y: ypos * (chartHeight + gutterY),
       width: chartWidth,
       height: chartHeight
     }

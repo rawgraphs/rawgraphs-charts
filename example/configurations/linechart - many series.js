@@ -33,7 +33,8 @@ export default {
   interpolation:"Natural",
   pointsRadius:1.5,
   columnsNumber:1,
-  gutter: 50,
+  gutterX: 50,
+  gutterY: 50,
   sortSeriesBy: "Total value (descending)"
   },
 };
