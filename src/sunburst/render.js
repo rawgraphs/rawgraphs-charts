@@ -39,7 +39,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   const nest = d3.rollup(data, v => v[0], ...mapping.hierarchy.value.map(level => (d => d.hierarchy.get(level))))
 
   const hierarchy = d3.hierarchy(nest)
-    .sum(d => d[0] ? d[1].size : 0); // sum only leaves, to avoid double-counting
+    .sum(d => d[1] instanceof Map ? 0 : d[1].size); // since maps have also a .size porperty, sum only values for leaves, and not for Maps
 
   const partition = nest => d3.partition() // copied from example of d3v6, not clear the meaning
     .size([2 * Math.PI, radius])
@@ -65,7 +65,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .data(root.descendants().filter(d => d.depth))
       .join("path")
         .attr("fill", function(d){
-
           if('children' in d) {
             // if not leaf, check if leaves has the same value
             const childrenColors = [...new Set(d.leaves().map(l => l.data[1].color))]
