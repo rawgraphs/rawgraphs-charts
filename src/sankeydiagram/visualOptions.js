@@ -28,19 +28,33 @@ export const visualOptions = {
     group: 'artboard',
   },
 
-	nodesWidth: {
+  nodesWidth: {
     type: "number",
     label: "Nodes width",
     default: 5,
     group: "chart",
   },
 
-  alignments: {
+  nodesPadding: {
+    type: "number",
+    label: "Nodes padding",
+    default: 5,
+    group: "chart",
+  },
+
+  alignment: {
     type: "text",
     label: "Nodes alignment",
     group: "chart",
     options: ["Left", "Right", "Center", "Justify"],
     default: "Left"
+  },
+
+  iterations: {
+    type: "number",
+    label: "Amount of iterations (higher values can require long time)",
+    default: 6,
+    group: "chart",
   }
 
 }

@@ -5,20 +5,22 @@ export default {
   chart: sankeydiagram,
   data,
   dataTypes: {
-	  "source": "string",
-	  "target": "string",
-	  "value": "number"
-	},
+    "source": "string",
+    "target": "string",
+    "value": "number"
+  },
   mapping: {
     source: { value: ["source"] },
-		target: { value: ["target"] },
+    target: { value: ["target"] },
     size: {
-			value: ["value"],
-			config: {"aggregation": ["sum"]}
-		},
+      value: ["value"],
+      config: {"aggregation": ["sum"]}
+    },
   },
   visualOptions: {
-    width: 500,
-    height: 500
+    width: 1200,
+    height: 700,
+    alignment:'Justify',
+    iterations:100
   },
 }
