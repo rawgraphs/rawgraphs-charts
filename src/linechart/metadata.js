@@ -6,6 +6,6 @@ export const metadata = {
   category: "Dispersion",
   description:
     "A line chart (or line plot, line graph, curve chart) is a chart which displays information as a series of data points connected by segments.",
-  code: "https://github.com/rawgraphs/raw",
-  tutorial: "https://rawgraphs.io/learning/",
+  // code: "https://github.com/rawgraphs/raw",
+  // tutorial: "https://rawgraphs.io/learning/",
 };

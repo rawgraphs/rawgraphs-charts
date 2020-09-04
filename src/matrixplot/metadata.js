@@ -5,6 +5,6 @@ export const metadata =  {
   // icon,
   category: 'Dispersion',
   description: 'A matrix plot',
-  code:'https://github.com/rawgraphs/raw',
-  tutorial:'https://rawgraphs.io/learning/'
+  // code:'https://github.com/rawgraphs/raw',
+  // tutorial:'https://rawgraphs.io/learning/'
 }
