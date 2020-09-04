@@ -14,7 +14,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       marginLeft,
       nodesWidth,
       nodesPadding,
-			alignment = 'Left'
+			linksOpacity,
+			sortNodesBy,
+			verticalAlignment,
   } = visualOptions;
 
   const margin = {
@@ -28,10 +30,15 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   const chartHeight = height - margin.top - margin.bottom;
 
   const links = data;
-  //get nodes from links
-  const nodes = Array.from(new Set(links.flatMap(l => [l.source, l.target])), id => ({
-    id
-  }));
+
+  //get unique nodes from links. @TODO: probably it could be improved
+	let nodes = links.flatMap(l => [{id:l.source, step:l.sourceStep}, {id:l.target, step:l.targetStep}])
+										.reduce((map, obj) => {
+										    map.set(obj.id, obj)
+										    return map;
+										}, new Map())
+
+	nodes = Array.from(nodes).map(d => d[1])
 
   // convert option with alignment function names
   const alignments = {
@@ -41,11 +48,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     'Justify': 'sankeyJustify'
 }
 
-console.log(alignments[alignment])
-
   const sankey = d3Sankey.sankey()
     .nodeId(d => d.id)
-    .nodeAlign(d3Sankey[alignments[alignment]])
     .nodeWidth(nodesWidth)
     .nodePadding(nodesPadding)
     .extent([
@@ -54,10 +58,60 @@ console.log(alignments[alignment])
     ])
     .iterations(1)
 
+		// compute the sankey network (calculate size, define x and y positions.)
   const network = sankey({
     nodes,
     links
   })
+
+	//network.nodes.sort((a,b) => d3.descending(a.value, b.value))
+
+	switch(sortNodesBy) {
+		case "Total value (descending)":
+			network.nodes.sort((a,b) => d3.descending(a.value, b.value));
+			break;
+		case "Total value (ascending)":
+			network.nodes.sort((a,b) => d3.ascending(a.value, b.value));
+			break;
+		case "Name":
+			network.nodes.sort((a,b) => d3.ascending(a.id, b.id));
+			break;
+	}
+
+
+	// update nodes position
+	d3.groups(network.nodes, d => d.step)
+		// for each group, compute position
+		.forEach(group => {
+			// compute the starting point.
+			// if top, do nothing.
+			// if bottom, sum the size of nodes and required padding.
+			// if center, the hal of the previous
+			let yPos0 = 0;
+			const totalSize = d3.sum(group[1], d => d.y1 - d.y0) + (group[1].length - 1) * nodesPadding
+			console.log(totalSize)
+			switch(verticalAlignment) {
+				case 'Bottom':
+					yPos0 = chartHeight - totalSize;
+					break;
+				case "Center":
+					yPos0 = (chartHeight - totalSize)/2;
+					break;
+			}
+
+			// take the list of nodes in the group, and recompute positions
+			group[1].reduce((ypos, node) => {
+				console.log(ypos, node);
+				const nodeSize = node.y1 - node.y0;
+				node.y0 = ypos;
+				node.y1 = ypos + nodeSize;
+				return ypos + nodeSize + nodesPadding
+			}, yPos0)
+
+		});
+
+	// updates link position
+	sankey.update(network);
 
   const svg = d3.select(svgNode).append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
@@ -77,7 +131,7 @@ console.log(alignments[alignment])
 
   const link = svg.append("g")
     .attr("fill", "none")
-    .attr("stroke-opacity", 0.5)
+    .attr("stroke-opacity", linksOpacity)
     .selectAll("g")
     .data(network.links)
     .join("g")
@@ -102,4 +156,21 @@ console.log(alignments[alignment])
     .attr("dy", "0.35em")
     .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
     .text(d => d.id);
+
+	// add steps titles
+	const firstNodes = d3.groups(network.nodes, d => d.step).map(d => d[1][0])
+	console.log(firstNodes)
+
+	svg.append("g")
+	.attr("font-family", "sans-serif")
+	.attr("font-size", 10)
+	.attr("font-weight", "bold")
+	.selectAll("text")
+	.data(firstNodes)
+	.join("text")
+	.attr("x", d => d.x0 + nodesPadding/2)
+	.attr("y", d => d.y0 - 6)
+	.attr("text-anchor", "middle")
+	.text(d => d.step)
+
 }
