@@ -4,8 +4,6 @@ import * as d3Array from 'd3-array'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
 
-  console.log("linechart data",data)
-
   const {
     // artboard options
     width,

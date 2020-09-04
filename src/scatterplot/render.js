@@ -3,9 +3,7 @@ import * as d3 from 'd3'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
 
-  console.log(mapping)
-
-  const { 
+  const {
     width = 500,
     height = 500,
     background='#ffffff',
@@ -21,7 +19,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     marginBottom = 20,
     marginLeft = 20
   } = visualOptions;
-  
+
   const margin = {
     top: marginTop,
     right: marginRight,
@@ -30,34 +28,34 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   }
   const chartWidth = width-margin.left-margin.right-(showLegend?legendWidth:0);
   const chartHeight = height-margin.top-margin.bottom;
-  
+
   // x scale
   const xDomain = xOrigin?[0,d3.max(data, (d) => d.x)]:d3.extent(data, (d) => d.x)
-  
+
   const x = mapping.x.dataType === 'date' ?d3.scaleTime():d3.scaleLinear();
-    
+
   x.domain(xDomain).rangeRound([0,chartWidth])
-  
+
   // y scale
   const yDomain = yOrigin?[0,d3.max(data, (d) => d.y)]:d3.extent(data, (d) => d.y)
-  
+
   const y = mapping.y.dataType ? d3.scaleTime() : d3.scaleLinear();
-    
+
   y.domain(yDomain).rangeRound([chartHeight, 0])
-  
+
   // size scale
   const size = d3.scaleSqrt()
      .domain([0,d3.max(data, (d) => d.size)])
      .rangeRound([0, maxRadius]);
-  
+
   // color scale
   const colorDomain = (mapping.color && mapping.color.dataType === "string") ? [...new Set(data.map(d => d.color))].sort() : d3.extent(data,d=>d.color)
- 
+
   const color = d3.scaleSequential()
 
   color.domain((mapping.color && mapping.color.dataType === "string")?[0, colorDomain.length-1]:colorDomain)
   color.interpolator((mapping.color && mapping.color.dataType === "string")?d3.interpolateSpectral:d3.interpolateYlGn)
-  
+
   const xAxis = (g) => {
     return g
       .attr("transform", `translate(0,${chartHeight})`)
@@ -93,7 +91,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       );
 
   }
-  
+
   const artboardBackground = d3.select(svgNode).append("rect")
     .attr("width", width)
     .attr("height", height)
@@ -101,18 +99,18 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr("y",0)
     .attr("fill", background)
     .attr("id", "backgorund")
-      
+
   const svg = d3.select(svgNode).append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
     .attr("id", "visualization")
-  
+
   const axisLayer = svg.append("g").attr("id", "axis")
-  
+
   axisLayer.append("g").call(xAxis);
   axisLayer.append("g").call(yAxis);
 
   const vizLayer = svg.append("g").attr("id", "viz")
-  
+
   vizLayer
     .selectAll("circle")
     .data(data)
@@ -126,9 +124,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr("r", d=>{
       return mapping.size?size(d.size):maxRadius;
     });
-  
+
   const pointsLayer = svg.append("g").attr("id", "points")
-  
+
   pointsLayer
     .selectAll("circle")
     .data(showPoints?data:[])
@@ -137,9 +135,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr("cy", (d) => y(d.y))
     .attr("fill", "black")
     .attr("r", pointsRadius);
-     
+
   const labelsLayer = svg.append("g").attr("id", "labels")
-  
+
   labelsLayer
     .selectAll("text")
     .data((mapping.label && mapping.label.value.length)?data:[])
@@ -151,15 +149,15 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr("font-size", 10)
     .attr("text-anchor", "middle")
     .text((d) => Array.isArray(d.label)?d.label.join(", "):d.label);
-  
+
   if(showLegend){
     const legendLayer = d3.select(svgNode).append("g").attr("id", "legend")
       .attr("transform", `translate(${width-legendWidth},${margin.top})`)
-    
+
     d3.select(legendSvg).html(null)
     const externalSvg = d3.select(legendSvg).append("g").attr("id", "legendSvg")
       .attr("transform", `translate(0,20)`)
-    
+
     if(mapping.color){
       const legendColor = d3Legend.legendColor()
         .titleWidth(legendWidth)
@@ -167,13 +165,13 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         .title(mapping.color.value)
         .labelOffset(5)
         .labelWrap(legendWidth-20)
-      
+
       if(mapping.color.dataType === "string"){
         legendColor
           .cells(colorDomain.length)
           .labels(colorDomain)
        }
-      
+
       externalSvg.call(legendColor).call(g=>{
         g.selectAll("text")
           .attr("font-family","Arial, sans-serif")
@@ -181,7 +179,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         g.select(".legendTitle").attr("font-weight", "bold")
        })
     }
-    
+
     legendLayer.node().appendChild(legendSvg)
   }
 }
