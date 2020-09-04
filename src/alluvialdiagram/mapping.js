@@ -3,8 +3,6 @@ import { getDimensionAggregator } from '@raw-temp/rawgraphs-core'
 
 export const mapData = function(data, mapping, dataTypes, dimensions) {
 
-
-
   const sizeAggregator = getDimensionAggregator('size', mapping, dataTypes, dimensions)
 
   const results = [];
@@ -14,7 +12,6 @@ export const mapData = function(data, mapping, dataTypes, dimensions) {
 		//get the second step
 		const step2 = mapping.steps.value[index + 1]
 
-		// console.log(mapping.size)
 		const result = d3.rollups(data,
 	    v => {
 	      const item = {
@@ -29,10 +26,7 @@ export const mapData = function(data, mapping, dataTypes, dimensions) {
 	    },
 	    d => d[step1] + d[step2]
 	  );
-		// console.log(result)
 	})
-
-	console.log(results)
 
   return results
 

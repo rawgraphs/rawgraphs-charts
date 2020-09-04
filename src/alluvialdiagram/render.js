@@ -62,7 +62,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 			[0, 0],
 			[chartWidth, chartHeight]
 		])
-		.iterations(1)
+		.iterations(0) // no iterations since we compute all the positions
 
 	// compute the sankey network (calculate size, define x and y positions.)
 	const network = sankey({
@@ -70,8 +70,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 		links
 	})
 
-	//network.nodes.sort((a,b) => d3.descending(a.value, b.value))
-
+	// sort nodes according to options
 	switch (sortNodesBy) {
 		case "Total value (descending)":
 			network.nodes.sort((a, b) => d3.descending(a.value, b.value));
@@ -84,18 +83,27 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 			break;
 	}
 
+	// compute x positions of groups
+	// @TODO remove iterations in the sankey
+	// get the first node for each category
+	const xScale = d3.scaleBand()
+		.rangeRound([0, chartWidth])
+		.domain(mapping.steps.value)
+		.align(0)
+		.paddingOuter(0) // no outer padding
+		// inner padding is the chart size minus the node widths, divided by the spaces among steps
+		.paddingInner((chartWidth-mapping.steps.value.length)/(mapping.steps.value.length-1));
 
 	// update nodes position
 	d3.groups(network.nodes, d => d.step)
 		// for each group, compute position
 		.forEach(group => {
 			// compute the starting point.
+			let yPos0 = 0;
+			const totalSize = d3.sum(group[1], d => d.y1 - d.y0) + (group[1].length - 1) * nodesPadding
 			// if top, do nothing.
 			// if bottom, sum the size of nodes and required padding.
 			// if center, the hal of the previous
-			let yPos0 = 0;
-			const totalSize = d3.sum(group[1], d => d.y1 - d.y0) + (group[1].length - 1) * nodesPadding
-			console.log(totalSize)
 			switch (verticalAlignment) {
 				case 'Bottom':
 					yPos0 = chartHeight - totalSize;
@@ -107,10 +115,11 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
 			// take the list of nodes in the group, and recompute positions
 			group[1].reduce((ypos, node) => {
-				console.log(ypos, node);
 				const nodeSize = node.y1 - node.y0;
 				node.y0 = ypos;
 				node.y1 = ypos + nodeSize;
+				node.x0 = xScale(node.step);
+				node.x1 = node.x0 + nodesWidth
 				return ypos + nodeSize + nodesPadding
 			}, yPos0)
 
@@ -165,7 +174,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
 	// add steps titles
 	const firstNodes = d3.groups(network.nodes, d => d.step).map(d => d[1][0])
-	console.log(firstNodes)
 
 	svg.append("g")
 		.attr("font-family", "sans-serif")
