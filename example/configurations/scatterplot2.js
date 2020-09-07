@@ -19,7 +19,7 @@ export default {
     y: { value: ["Box Office (Millions, adjusted for inflation)"] },
     color: { value: ["Genre"] },
     label: { value: ["Title"] },
-    size: { value: ["Rating"] },
+    //size: { value: ["Rating"] },
   },
   visualOptions: {
     width: 800,

@@ -121,10 +121,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr("cx", (d) => x(d.x))
     .attr("cy", (d) => y(d.y))
     .attr("fill", (d) => {
-      return mapping.color ? colorScale(d.color) : "grey";
+      return mapping.color.value ? colorScale(d.color) : "grey";
     })
     .attr("r", (d) => {
-      return mapping.size ? size(d.size) : maxRadius;
+      return mapping.size.value ? size(d.size) : maxRadius;
     });
 
   const pointsLayer = svg.append("g").attr("id", "points");
@@ -142,7 +142,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
   labelsLayer
     .selectAll("text")
-    .data(mapping.label ? data : [])
+    .data(mapping.label.value ? data : [])
     .join("text")
     .attr("dy", "0.35em")
     .attr("x", (d) => x(d.x))
