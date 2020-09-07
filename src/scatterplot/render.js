@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-// import { categoryLegend } from 'rawgraphs-core'
+import { rawgraphsLegend } from "@raw-temp/rawgraphs-core";
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
   const {
@@ -26,8 +26,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     bottom: marginBottom,
     left: marginLeft,
   };
-  const chartWidth =
-    width - margin.left - margin.right - (showLegend ? legendWidth : 0);
+  const chartWidth = width - margin.left - margin.right;
   const chartHeight = height - margin.top - margin.bottom;
 
   // x scale
@@ -153,35 +152,31 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .text((d) => (Array.isArray(d.label) ? d.label.join(", ") : d.label));
 
   if (showLegend) {
-    // const legendLayer = d3.select(svgNode).append("g").attr("id", "legend")
-    //   .attr("transform", `translate(${width-legendWidth},${margin.top})`)
-    //
-    // d3.select(legendSvg).html(null)
-    // const externalSvg = d3.select(legendSvg).append("g").attr("id", "legendSvg")
-    //   .attr("transform", `translate(0,20)`)
-    //
-    // if(mapping.color){
-    //   const legendColor = d3Legend.legendColor()
-    //     .titleWidth(legendWidth)
-    //     .scale(color)
-    //     .title(mapping.color.value)
-    //     .labelOffset(5)
-    //     .labelWrap(legendWidth-20)
-    //
-    //   if(mapping.color.dataType === "string"){
-    //     legendColor
-    //       .cells(colorDomain.length)
-    //       .labels(colorDomain)
-    //    }
-    //
-    //   externalSvg.call(legendColor).call(g=>{
-    //     g.selectAll("text")
-    //       .attr("font-family","Arial, sans-serif")
-    //       .attr("font-size", 12)
-    //     g.select(".legendTitle").attr("font-weight", "bold")
-    //    })
-    // }
-    //
-    // legendLayer.node().appendChild(legendSvg)
+    d3.select(svgNode).attr("width", width + legendWidth);
+
+    const legendLayer = d3
+      .select(svgNode)
+      .append("g")
+      .attr("id", "legend")
+      .attr("transform", `translate(${width},${marginTop})`);
+
+    const legend = rawgraphsLegend().legendWidth(legendWidth);
+
+    if (mapping.color.value) {
+      legend.addColor(mapping.color.value, colorScale);
+    }
+
+    if (mapping.size.value) {
+      const legendSizeScale = size.copy();
+      legendSizeScale
+        .domain(d3.extent(data, (d) => d.size))
+        .rangeRound([size(d3.min(data, (d) => d.size)), maxRadius]);
+
+      legend.addSize(mapping.size.value, legendSizeScale, "circle");
+    }
+
+    setTimeout(function () {
+      legendLayer.call(legend);
+    }, 0);
   }
 }
