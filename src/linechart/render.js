@@ -4,6 +4,8 @@ import * as d3Array from 'd3-array'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
 
+	console.log('- render')
+
   const {
     // artboard options
     width,
@@ -45,43 +47,43 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   //
   d3.select(svgNode).append('style')
   .text(`
-    svg {
+    svg#viz {
       font-family: Helvetica, Arial, sans-serif;
       font-size: 12px;
     }
 
-    .title {
+    #viz .title {
       font-weight: bold;
       fill: black;
       text-anchor: start;
       transform: translate(0px, -18px)
     }
 
-    .tick > text {
+    #viz .tick > text {
       fill: #4d4d4d;
     }
 
-    #axes path, #axes line {
+    #viz #axes path, #axes line {
       stroke:#161616
     }
 
-    .axisTitle {
+    #viz .axisTitle {
       fill: #161616;
       font-weight: bold;
       font-size: 12px;
     }
 
-    .yAxis .axisTitle {
+    #viz .yAxis .axisTitle {
       text-anchor: start;
       font-size: 8px;
       transform: translate(14px, 0px)
     }
 
-    .xAxis .axisTitle {
+    #viz .xAxis .axisTitle {
       text-anchor: end;
     }
 
-    .labels {
+    #viz .labels {
       fill: #161616;
     }
 
@@ -204,7 +206,17 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .select(svgNode)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-    .attr("id", "visualization")
+    .attr("id", "viz")
+
+	// add background
+	d3.select(svgNode)
+		.append("rect")
+		.attr("width", width)
+		.attr("height", height)
+		.attr("x", 0)
+		.attr("y", 0)
+		.attr("fill", background)
+		.attr("id", "backgorund");
 
   const vizLayer = svg
     .append("g")

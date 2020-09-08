@@ -2,6 +2,8 @@ import * as d3 from 'd3'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
 
+	console.log('- render')
+
   const {
     width,
     height,
@@ -23,8 +25,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   // define style
   d3.select(svgNode).append('style')
     .text(`
-      svg {
-        background-color: ${background};
+      svg#viz {
         font-family: Helvetica, Arial, sans-serif;
         font-size: 12px;
       }
@@ -58,9 +59,22 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   const svg = d3
     .select(svgNode)
 
+	// add background
+	d3.select(svgNode)
+		.append("rect")
+		.attr("width", width)
+		.attr("height", height)
+		.attr("x", 0)
+		.attr("y", 0)
+		.attr("fill", background)
+		.attr("id", "backgorund");
+
+		console.log(data)
+
     svg.append("g")
       .attr("transform", `translate(${width / 2},${width / 2})`)
-      .attr("fill-opacity", 0.6)
+			.attr("id", "viz")
+      // .attr("fill-opacity", 0.6)
       .selectAll("path")
       .data(root.descendants().filter(d => d.depth))
       .join("path")

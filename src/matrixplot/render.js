@@ -3,6 +3,8 @@ import * as d3 from 'd3'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
 
+	console.log('- render')
+
   const {
     width = 500,
     height = 500,
@@ -38,37 +40,36 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   // define style
   d3.select(svgNode).append('style')
     .text(`
-      svg {
-        background-color: ${background};
+      svg#viz {
         font-family: Helvetica, Arial, sans-serif;
         font-size: 12px;
       }
 
-      #axes path, #axes line {
+      #viz #axes path, #axes line {
         stroke:#161616
       }
 
-      .tick > line {
+      #viz .tick > line {
         stroke: #e5e5e5;
       }
 
-      .axisTitle {
+      #viz .axisTitle {
         font-size: 12px;
         font-weight: bold;
         fill: #161616;
       }
 
-      tspan.Primary {
+      #viz tspan.Primary {
         font-size: 8px;
         fill:red;
       }
 
-      tspan.Secondary {
+      #viz tspan.Secondary {
         font-size: 8px;
         fill:blue;
       }
 
-      tspan.Tertiary {
+      #viz tspan.Tertiary {
         font-size: 8px;
         fill:green;
       }
@@ -136,7 +137,17 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .select(svgNode)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-    .attr("id", "visualization")
+    .attr("id", "viz")
+
+	// add background
+	d3.select(svgNode)
+		.append("rect")
+		.attr("width", width)
+		.attr("height", height)
+		.attr("x", 0)
+		.attr("y", 0)
+		.attr("fill", background)
+		.attr("id", "backgorund");
 
   if(showGrid){
   // add the X gridlines

@@ -4,6 +4,7 @@ import * as d3Sankey from 'd3-sankey'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
 
+	console.log('- render')
 	const {
 		width,
 		height,
@@ -127,6 +128,16 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
 	// updates link position
 	sankey.update(network);
+
+	// draw background
+	d3.select(svgNode)
+    .append("rect")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("fill", background)
+    .attr("id", "backgorund");
 
 	const svg = d3.select(svgNode).append("g")
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")")

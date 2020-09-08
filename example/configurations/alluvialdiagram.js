@@ -26,6 +26,7 @@ export default {
   },
   visualOptions: {
     width: 1200,
-    height: 700
+    height: 700,
+		background:'red'
   },
 }

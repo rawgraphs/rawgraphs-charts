@@ -4,6 +4,8 @@ import * as d3Array from 'd3-array'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
 
+	console.log('- render')
+
 	const {
 		// artboard options
 		width,
@@ -102,6 +104,16 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 		.attr("id", "visualization")
 
+	// add background
+	d3.select(svgNode)
+		.append("rect")
+		.attr("width", width)
+		.attr("height", height)
+		.attr("x", 0)
+		.attr("y", 0)
+		.attr("fill", background)
+		.attr("id", "backgorund");
+
 	// draw the scale and axes
 	const axisLayer = svg
 		.append("g")
@@ -131,12 +143,12 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
 	// let the simulation run in background
 	// @TODO move this to a web worker
-	console.log("---------------new simulation---------------")
+	//console.log("---------------new simulation---------------")
 	for (var i = 0, n = Math.ceil(Math.log(simulation.alphaMin()) / Math.log(1 - simulation.alphaDecay())); i < n; ++i) {
-		console.log(i+"/"+n+"("+ (i/n*100) + ")")
+		//console.log(i+"/"+n+"("+ (i/n*100) + ")")
 		simulation.tick();
 	}
-	console.log("---------------end of simulation---------------")
+	//console.log("---------------end of simulation---------------")
 
 	//add all the circles
 	let circles = vizLayer.append("g")

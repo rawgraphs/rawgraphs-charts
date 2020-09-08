@@ -3,6 +3,8 @@ import { getDimensionAggregator } from '@raw-temp/rawgraphs-core'
 
 export const mapData = function(data, mapping, dataTypes, dimensions) {
 
+	console.log('- mapping')
+
   const sizeAggregator = getDimensionAggregator('size', mapping, dataTypes, dimensions)
 
   const results = [];
