@@ -28,6 +28,35 @@ export const visualOptions = {
     group: 'artboard',
   },
 
+	tiling: {
+    type: "text",
+    label: "Tiling method",
+    group: "chart",
+    options: ["Binary", "Dice", "Slice", "Slice and dice", "Squarify"],
+    default: "Squarify"
+  },
+
+	padding : {
+    type: 'number',
+    label: 'Padding between treemap levels',
+    default: 2,
+    group: 'chart',
+  },
+
+	rounding : {
+    type: 'boolean',
+    label: 'Snap to pixel',
+    default: true,
+    group: 'chart',
+  },
+
+	drawHierarchy: {
+    type: 'boolean',
+    label: 'Draw hierarchy structure',
+    default: false,
+    group: 'chart',
+  },
+
   colorScale : {
     type: 'colorScale',
     label: 'The color scale',
@@ -38,5 +67,29 @@ export const visualOptions = {
     },
     group: 'chart'
   },
+
+	label1Style: {
+		type: "text",
+		label: "Labels 1 style",
+		group: "labels",
+		options: ["Primary", "Secondary", "Tertiary"],
+		default: "Primary"
+	},
+
+	label2Style: {
+		type: "text",
+		label: "Labels 1 style",
+		group: "labels",
+		options: ["Primary", "Secondary", "Tertiary"],
+		default: "Secondary"
+	},
+
+	label3Style: {
+		type: "text",
+		label: "Labels 1 style",
+		group: "labels",
+		options: ["Primary", "Secondary", "Tertiary"],
+		default: "Tertiary"
+	},
 
 }
