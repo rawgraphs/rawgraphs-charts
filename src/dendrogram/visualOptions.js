@@ -28,17 +28,6 @@ export const visualOptions = {
     group: 'artboard',
   },
 
-  colorScale : {
-    type: 'colorScale',
-    label: 'The color scale',
-    dimension: 'color',
-    default: {
-      scaleType: 'ordinal',
-      interpolator: 'interpolateSpectral'
-    },
-    group: 'chart'
-  },
-
 	maxRadius: {
 		type: 'number',
 		label: 'Maximum radius',
@@ -54,11 +43,22 @@ export const visualOptions = {
     default: "Tree"
   },
 
-	separationStress: {
-		type: 'number',
-		label: 'Separation multiplier',
-		default: 2,
-		group: 'chart'
-	},
+	sizeOnlyLeaves: {
+    type: "boolean",
+    label: "Size only leaf nodes",
+    default: true,
+    group: "artboard",
+  },
+
+	colorScale : {
+    type: 'colorScale',
+    label: 'The color scale',
+    dimension: 'color',
+    default: {
+      scaleType: 'ordinal',
+      interpolator: 'interpolateSpectral'
+    },
+    group: 'color'
+  },
 
 }

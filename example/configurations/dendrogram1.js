@@ -12,15 +12,15 @@ export default {
 	  "results": "number"
 	},
   mapping: {
-    hierarchy: { value: ["Root", "Level1", "Level2", "Level3"] },
+    hierarchy: { value: ["Root", "Level1", "Level2"] },
     color: {
 			value: ["Level1"],
 			config: {"aggregation": ["csvDistinct"]}
 		},
-		size: {
-			value: ["results"],
-			config: {"aggregation": ["sum"]}
-		},
+		// size: {
+		// 	value: ["results"],
+		// 	config: {"aggregation": ["sum"]}
+		// },
   },
   visualOptions: {
     width: 500,
