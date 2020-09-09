@@ -13,13 +13,11 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 		marginBottom,
 		marginLeft,
 		colorScale,
-		tiling,
 		label1Style,
-    label2Style,
-    label3Style,
+		label2Style,
+		label3Style,
 		padding,
-		rounding,
-		drawHierarchy
+		sortCirclesBy = 'Size (descending)',
 	} = visualOptions;
 
 	const margin = {
@@ -50,38 +48,40 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
 			#viz .ancestors {
 				fill: none;
-				stroke: gray
+				stroke: gray;
 			}
+
       `)
 
 	const chartWidth = width - margin.left - margin.right;
 	const chartHeight = height - margin.top - margin.bottom;
 
-	const radius = chartWidth > chartHeight ? chartHeight / 2 : chartWidth / 2;
+	switch(sortCirclesBy) {
+  case "Size (descending)":
+    data.sort((a,b) => d3.descending(a.size, b.size))
+    break;
+  case "Size (ascending)":
+    data.sort((a,b) => d3.ascending(a.size, b.size))
+    break;
+	case "Original":
+    //do nothing
+    break;
+  }
 
 	// create the hierarchical structure
-	const nest = d3.rollup(data, v => v[0], ...mapping.hierarchy.value.map(level => (d => d.hierarchy.get(level))))
+	const nest = d3.rollup(data,
+		v => v[0],
+		...mapping.hierarchy.value.map(level => (d => d.hierarchy.get(level))))
 
 	const hierarchy = d3.hierarchy(nest)
 		.sum(d => d[1] instanceof Map ? 0 : d[1].size); // since maps have a .size porperty in native javascript, sum only values for leaves, and not for Maps
 
-	// convert string to d3 functions
-  const tileType = {
-		"Binary": d3.treemapBinary,
-		"Dice": d3.treemapDice,
-		"Slice": d3.treemapSlice,
-		"Slice and dice": d3.treemapSliceDice,
-		"Squarify": d3.treemapSquarify
-	};
-
-	const treemap = nest => d3.treemap()
-		.tile(tileType[tiling])
+	const pack = data => d3.pack()
 		.size([chartWidth, chartHeight])
 		.padding(padding)
-		.round(rounding)
 		(hierarchy)
 
-	const root = treemap(nest);
+	const root = pack(nest);
 
 	// add background
 	d3.select(svgNode)
@@ -99,59 +99,38 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 		.attr("id", "viz")
 
-	console.log('groups', root.descendants())
-
-	if(drawHierarchy){
-		const ancestors = svg.append("g")
-		.attr("id", "ancestors")
-		.selectAll("rect")
-		.data(root.descendants())
-		.join("rect")
-		.attr("x", d => d.x0)
-		.attr("y", d => d.y0)
-		.attr("width", d => d.x1 - d.x0)
-		.attr("height", d => d.y1 - d.y0)
-		.attr("class", "ancestors")
-	}
-
-	const leaves = svg.append("g")
-		.attr("id", "leaves")
+	const node = svg.append("g")
+		.attr("id", "nodes")
 		.selectAll("g")
-		.data(root.leaves())
+		.data(root.descendants())
 		.join("g")
-		.attr("transform", d => `translate(${d.x0},${d.y0})`);
-
-	leaves.append("title")
-		.text(d => d.data[0]);
-
-	leaves.append("rect")
+		.attr("transform", d => `translate(${d.x + 1},${d.y + 1})`)
 		.attr("id", d => d.data[0])
-		.attr("fill", function(d) {
-			if ('children' in d) {
-				// if not leaf, check if leaves has the same value
-				const childrenColors = [...new Set(d.leaves().map(l => l.data[1].color))]
-				return childrenColors.length == 1 ? colorScale(childrenColors[0]) : 'gray'
-			} else {
-				// otherwise, if it's a leaf use its own color
-				return (colorScale(d.data[1].color))
-			}
-		})
-		.attr("width", d => d.x1 - d.x0)
-		.attr("height", d => d.y1 - d.y0);
+
+	node.append("circle")
+		.attr("r", d => d.r)
+		.attr("class", "ancestors")
+		.attr("fill", d => colorScale(d.data[1].color))
+
+	const leaves = node.filter(d => !d.children); // filter nodes that are not leaves
+
+	leaves.select("circle")
+		.attr("id", (d, i) => "path" + i)
+		.attr("class", "leaves")
 
 	leaves.append("clipPath")
-		.attr("id", (d,i) => "clip" + i)
-		.append("rect")
-		.attr("width", d => d.x1 - d.x0)
-		.attr("height", d => d.y1 - d.y0);
+		.attr("id", (d, i) => "clip" + i)
+		.append("use")
+		.attr("xlink:href", (d, i) => "#path"+i);
 
 	leaves.append("text")
 		.attr("clip-path", (d,i) => "url(#clip" + i + ")")
 		.selectAll("tspan")
 		.data(d => d.data[1].label)
 		.join("tspan")
-		.attr("x", 3)
-		.attr("y", (d, i) => (i+1) * 12) // 12 is the font size, should be automated
+		.attr("text-anchor", "middle")
+		.attr("x", 0)
+		.attr("y", (d, i, n) => (i+1) * 12 - n.length / 2 *12) // 12 is the font size, should be automated
 		.attr("class", (d,i) => i<3? labelStyles[i] : labelStyles[2]) // if there are more than three
 		.text(d => d);
 

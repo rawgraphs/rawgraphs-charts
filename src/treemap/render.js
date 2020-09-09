@@ -65,6 +65,22 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 	const hierarchy = d3.hierarchy(nest)
 		.sum(d => d[1] instanceof Map ? 0 : d[1].size); // since maps have a .size porperty in native javascript, sum only values for leaves, and not for Maps
 
+
+	//@TODO: understand how to handle empty values
+
+		// hierarchy.descendants()
+		// 	.filter(d => d.data[0] === "")
+		// 	.forEach(d => {
+		// 		console.log('parent',d.parent)
+		// 		const index = d.parent.children.indexOf(d)
+		// 		d.parent.children.splice(index, 1);
+		//
+		// 		if (d.parent.children.length == 0) {
+		// 			d.parent.data = d.data;
+		// 			delete d.parent.children
+		// 		}
+		// 	})
+
 	// convert string to d3 functions
   const tileType = {
 		"Binary": d3.treemapBinary,
@@ -125,25 +141,15 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 		.text(d => d.data[0]);
 
 	leaves.append("rect")
-		.attr("id", d => d.data[0])
-		.attr("fill", function(d) {
-			if ('children' in d) {
-				// if not leaf, check if leaves has the same value
-				const childrenColors = [...new Set(d.leaves().map(l => l.data[1].color))]
-				return childrenColors.length == 1 ? colorScale(childrenColors[0]) : 'gray'
-			} else {
-				// otherwise, if it's a leaf use its own color
-				return (colorScale(d.data[1].color))
-			}
-		})
+		.attr("id", (d, i) => "path" + i)
+		.attr("fill", d => colorScale(d.data[1].color))
 		.attr("width", d => d.x1 - d.x0)
 		.attr("height", d => d.y1 - d.y0);
 
 	leaves.append("clipPath")
 		.attr("id", (d,i) => "clip" + i)
-		.append("rect")
-		.attr("width", d => d.x1 - d.x0)
-		.attr("height", d => d.y1 - d.y0);
+		.append("use")
+		.attr("xlink:href", (d, i) => "#path"+i);
 
 	leaves.append("text")
 		.attr("clip-path", (d,i) => "url(#clip" + i + ")")

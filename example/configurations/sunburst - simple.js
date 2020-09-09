@@ -1,5 +1,5 @@
 import sunburst from "rawcharts/sunburst"
-import data from "../datasets/simple-hierachy.tsv"
+import data from "../datasets/simple-hierarchy.tsv"
 
 export default {
   chart: sunburst,

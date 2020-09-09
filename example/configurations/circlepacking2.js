@@ -1,28 +1,26 @@
 import circlepacking from "rawcharts/circlepacking"
-import data from "../datasets/WineTasting.tsv"
+import data from "../datasets/simple-hierarchy.tsv"
 
 export default {
   chart: circlepacking,
   data,
   dataTypes: {
-	  "Root": "string",
 	  "Level1": "string",
 	  "Level2": "string",
-	  "Level3": "string",
-	  "results": "number"
+	  "Size": "number"
 	},
   mapping: {
-    hierarchy: { value: ["Root", "Level1", "Level2", "Level3"] },
+    hierarchy: { value: ["Level1", "Level2"] },
 		color: {
-			value: ["Root"],
+			value: ["Level1"],
 			config: {"aggregation": ["csvDistinct"]}
 		},
     label: {
-			value: ["Level1", "results", "Root"],
+			value: ["Level2", "Size"],
 			config: {"aggregation": ["csvDistinct","sum","csvDistinct"]}
 		},
     size: {
-			value: ["results"],
+			value: ["Size"],
 			config: {"aggregation": ["sum"]}
 		},
   },

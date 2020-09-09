@@ -27,14 +27,14 @@ export const visualOptions = {
     default: 10,
     group: 'artboard',
   },
-
-	tiling: {
-    type: "text",
-    label: "Tiling method",
-    group: "chart",
-    options: ["Binary", "Dice", "Slice", "Slice and dice", "Squarify"],
-    default: "Squarify"
-  },
+	// 
+	// tiling: {
+  //   type: "text",
+  //   label: "Tiling method",
+  //   group: "chart",
+  //   options: ["Binary", "Dice", "Slice", "Slice and dice", "Squarify"],
+  //   default: "Squarify"
+  // },
 
 	padding : {
     type: 'number',
@@ -43,18 +43,12 @@ export const visualOptions = {
     group: 'chart',
   },
 
-	rounding : {
-    type: 'boolean',
-    label: 'Snap to pixel',
-    default: true,
-    group: 'chart',
-  },
-
-	drawHierarchy: {
-    type: 'boolean',
-    label: 'Draw hierarchy structure',
-    default: false,
-    group: 'chart',
+	sortCirclesBy: {
+    type: "text",
+    label: "Sort series by",
+    group: "series",
+    options: ["Size (descending)", "Size (ascending)", "Original"],
+    default: "Size (descending)"
   },
 
   colorScale : {
@@ -65,7 +59,7 @@ export const visualOptions = {
       scaleType: 'ordinal',
       interpolator: 'interpolateSpectral'
     },
-    group: 'chart'
+    group: 'colors'
   },
 
 	label1Style: {
