@@ -12,7 +12,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 		marginRight,
 		marginBottom,
 		marginLeft,
-		colorScale
+		colorScale,
+		maxRadius,
+		layout,
+		separationStress,
 	} = visualOptions;
 
 	const margin = {
@@ -25,16 +28,18 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 	// define style
 	d3.select(svgNode).append('style')
 		.text(`
-      svg#viz {
+      #viz text {
         font-family: Helvetica, Arial, sans-serif;
         font-size: 12px;
       }
+			#viz #links {
+				fill: none;
+				stroke: gray;
+			}
       `)
 
 	const chartWidth = width - margin.left - margin.right;
 	const chartHeight = height - margin.top - margin.bottom;
-
-	const radius = chartWidth > chartHeight ? chartHeight / 2 : chartWidth / 2;
 
 	// create the hierarchical structure
 	const nest = d3.rollup(data, v => v[0], ...mapping.hierarchy.value.map(level => (d => d.hierarchy.get(level))))
@@ -42,22 +47,42 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 	const hierarchy = d3.hierarchy(nest)
 		.sum(d => d[1] instanceof Map ? 0 : d[1].size); // since maps have also a .size porperty, sum only values for leaves, and not for Maps
 
-	const partition = nest => d3.partition() // copied from example of d3v6, not clear the meaning
-		.size([2 * Math.PI, radius])
-		(hierarchy)
+	// filter nodes with empty values in the hierarchy
+	hierarchy.descendants()
+		.filter(d => d.data[0] === "") // select nodes with empty key
+		.forEach(d => {
+			const index = d.parent.children.indexOf(d) // get its index in parent's children array
+			d.parent.children.splice(index, 1); // remove it
 
-	const root = partition(nest);
+			if (d.parent.children.length == 0) { // if it was the only children
+				d.parent.data[1] = d.data[1]; // move its values to parent
+				delete d.parent.children // and remove the empty children array
+			}
+		})
 
-	const arc = d3.arc()
-		.startAngle(d => d.x0)
-		.endAngle(d => d.x1)
-		.padAngle(d => Math.min((d.x1 - d.x0) / 2, 0.005))
-		.padRadius(radius / 2)
-		.innerRadius(d => d.y0)
-		.outerRadius(d => d.y1 - 1)
+	// size scale
+	const sizeScale = d3.scaleSqrt()
+		.domain([0, d3.max(data, d => d.size)])
+		.rangeRound([0, maxRadius]);
 
-	const svg = d3
-		.select(svgNode)
+	const layouts = {
+		"Cluster Dendogram": d3.cluster(),
+		"Tree": d3.tree()
+	}
+
+	// create a scale to compute separation distance among leaves
+	const sepScale = d3.scaleSqrt()
+		.domain([0, d3.max(data, d => d.size)])
+		.rangeRound([0.5, separationStress]);
+
+	const tree = nest => {
+		return layouts[layout] // compute according to the options
+			.size([chartHeight, chartWidth])
+			.separation((a, b) => mapping.size.value ? sepScale(a.value) + sepScale(b.value) : a.parent == b.parent ? 1 : 2)
+			(hierarchy);
+	}
+
+	const root = tree(data);
 
 	// add background
 	d3.select(svgNode)
@@ -69,13 +94,30 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 		.attr("fill", background)
 		.attr("id", "backgorund");
 
-	svg.append("g")
-		.attr("transform", `translate(${width / 2},${width / 2})`)
+	const svg = d3
+		.select(svgNode)
+		.append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 		.attr("id", "viz")
-		// .attr("fill-opacity", 0.6)
+
+	svg.append("g")
+		.attr("id", "links")
 		.selectAll("path")
-		.data(root.descendants().filter(d => d.depth))
+		.data(root.links())
 		.join("path")
+		.attr("d", d3.linkHorizontal()
+			.x(d => d.y)
+			.y(d => d.x));
+
+	const node = svg.append("g")
+		.attr("id", "nodes")
+		.selectAll("g")
+		.data(root.descendants())
+		.join("g")
+		.attr("id", d => d.data[0])
+		.attr("transform", d => `translate(${d.y},${d.x})`);
+
+	node.append("circle")
 		.attr("fill", function(d) {
 			if ('children' in d) {
 				// if not leaf, check if leaves has the same value
@@ -86,26 +128,14 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 				return (colorScale(d.data[1].color))
 			}
 		})
-		.attr("display", d => d.data[0] != "" ? '' : 'none')
-		.attr("d", arc)
-		.append("title")
-		.text(d => d.data[0])
+		.attr("r", d => d.children ? 5 : mapping.size.value ? sizeScale(d.value) : maxRadius);
 
-	svg.append("g")
-		.attr("transform", `translate(${width / 2},${width / 2})`)
-		.attr("pointer-events", "none")
-		.attr("text-anchor", "middle")
-		.attr("font-size", 10)
-		.attr("font-family", "sans-serif")
-		.selectAll("text")
-		.data(root.descendants().filter(d => d.depth && (d.y0 + d.y1) / 2 * (d.x1 - d.x0) > 10)) // TODO: expose minimum text size filter
-		.join("text")
-		.attr("transform", function(d) {
-			const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
-			const y = (d.y0 + d.y1) / 2;
-			return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
-		})
-		.attr("dy", "0.35em")
-		.text(d => d.data[0]) // TODO: expose labels mapping
+	node.append("text")
+		.attr("dy", "0.31em")
+		.attr("x", d => d.children ? -6 : mapping.size.value ? sizeScale(d.value) : maxRadius)
+		.attr("text-anchor", d => d.children ? "end" : "start")
+		.text(d => d.data[0])
+	// .clone(true).lower()
+	// .attr("stroke", "white");
 
 }

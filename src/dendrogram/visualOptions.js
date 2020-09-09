@@ -39,4 +39,26 @@ export const visualOptions = {
     group: 'chart'
   },
 
+	maxRadius: {
+		type: 'number',
+		label: 'Maximum radius',
+		default: 20,
+		group: 'chart'
+	},
+
+	layout: {
+    type: "text",
+    label: "Layout algorythm",
+    group: "chart",
+    options: ["Cluster Dendogram", "Tree"],
+    default: "Tree"
+  },
+
+	separationStress: {
+		type: 'number',
+		label: 'Separation multiplier',
+		default: 2,
+		group: 'chart'
+	},
+
 }
