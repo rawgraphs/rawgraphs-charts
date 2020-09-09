@@ -24,7 +24,9 @@ export default {
   },
   visualOptions: {
     width: 500,
-    height: 500,
-		marginRight: 50
+    height: 1000,
+		marginRight: 50,
+		layout: 'Cluster Dendogram',
+		maxRadius: 15
   },
 }

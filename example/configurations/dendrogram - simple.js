@@ -22,6 +22,7 @@ export default {
   },
   visualOptions: {
     width: 500,
-    height: 500
+    height: 500,
+		// layout: 'Cluster Dendogram',
   },
 }

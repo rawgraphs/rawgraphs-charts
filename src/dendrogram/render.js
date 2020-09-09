@@ -60,10 +60,13 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 			}
 		})
 
+	// get total value. We sum the hypothetic radius (the square root of the value)
+	const totalValue = d3.sum(hierarchy.leaves(), d => Math.sqrt(d.value) * 2);
+
 	// size scale
-	const sizeScale = d3.scaleSqrt()
-		.domain([0, d3.max(data, d => d.size)])
-		.rangeRound([0, maxRadius]);
+	const sizeScale = d3.scaleLinear()
+		.domain([0, d3.max(hierarchy.leaves(), d => Math.sqrt(d.value))])
+		.range([0, maxRadius]);
 
 	const layouts = {
 		"Cluster Dendogram": d3.cluster(),
@@ -71,14 +74,16 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 	}
 
 	// create a scale to compute separation distance among leaves
-	const sepScale = d3.scaleSqrt()
-		.domain([0, d3.max(data, d => d.size)])
-		.rangeRound([0.5, separationStress]);
+	const sepScale = d3.scaleLinear()
+		.domain([0, totalValue])
+		.range([0, chartHeight - hierarchy.leaves().length])
+
+	console.log('best max', sepScale(d3.max(hierarchy.leaves(), d => Math.sqrt(d.value))) )
 
 	const tree = nest => {
 		return layouts[layout] // compute according to the options
 			.size([chartHeight, chartWidth])
-			.separation((a, b) => mapping.size.value ? sepScale(a.value) + sepScale(b.value) : a.parent == b.parent ? 1 : 2)
+			.separation((a, b) => mapping.size.value ? sepScale(Math.sqrt(a.value)) + sepScale(Math.sqrt(b.value)) + 1 : 1)
 			(hierarchy);
 	}
 
@@ -128,13 +133,13 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 				return (colorScale(d.data[1].color))
 			}
 		})
-		.attr("r", d => d.children ? 5 : mapping.size.value ? sizeScale(d.value) : maxRadius);
+		.attr("r", d => sizeScale(Math.sqrt(d.value)));
 
 	node.append("text")
 		.attr("dy", "0.31em")
-		.attr("x", d => d.children ? -6 : mapping.size.value ? sizeScale(d.value) : maxRadius)
+		.attr("x", d => d.children ? -6 : mapping.size.value ? sepScale(d.value) : maxRadius)
 		.attr("text-anchor", d => d.children ? "end" : "start")
-		.text(d => d.data[0])
+		.text(d => d.value)
 	// .clone(true).lower()
 	// .attr("stroke", "white");
 
