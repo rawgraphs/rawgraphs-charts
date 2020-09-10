@@ -17,10 +17,15 @@ export default {
 			value: ["Level1"],
 			config: {"aggregation": ["csvDistinct"]}
 		},
+		label: {
+			value: ["Level2", "results"],
+			config: {"aggregation": ["csvDistinct","sum"]}
+		},
 		// size: {
 		// 	value: ["results"],
 		// 	config: {"aggregation": ["sum"]}
 		// },
+
   },
   visualOptions: {
     width: 500,

@@ -47,8 +47,32 @@ export const visualOptions = {
     type: "boolean",
     label: "Size only leaf nodes",
     default: true,
-    group: "artboard",
+    group: "chart",
   },
+
+	label1Style: {
+		type: "text",
+		label: "Labels 1 style",
+		group: "labels",
+		options: ["Primary", "Secondary", "Tertiary"],
+		default: "Primary"
+	},
+
+	label2Style: {
+		type: "text",
+		label: "Labels 1 style",
+		group: "labels",
+		options: ["Primary", "Secondary", "Tertiary"],
+		default: "Secondary"
+	},
+
+	label3Style: {
+		type: "text",
+		label: "Labels 1 style",
+		group: "labels",
+		options: ["Primary", "Secondary", "Tertiary"],
+		default: "Tertiary"
+	},
 
 	colorScale : {
     type: 'colorScale',

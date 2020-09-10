@@ -16,6 +16,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 		maxRadius,
 		layout,
 		sizeOnlyLeaves,
+		label1Style,
+		label2Style,
+		label3Style,
 	} = visualOptions;
 
 	const margin = {
@@ -25,6 +28,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 		left: marginLeft
 	}
 
+	const labelStyles = [label1Style, label2Style, label3Style];
+
 	// define style
 	d3.select(svgNode).append('style')
 		.text(`
@@ -32,9 +37,19 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         font-family: Helvetica, Arial, sans-serif;
         font-size: 12px;
       }
+
 			#viz #links {
 				fill: none;
 				stroke: gray;
+			}
+
+			#viz .Primary {
+				font-weight: bold;
+			}
+
+			#viz .Tertiary {
+				font-weight: lighter;
+				font-style: oblique;
 			}
       `)
 
@@ -141,9 +156,27 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 		});
 
 	node.append("text")
-		.attr("dy", 4)
-		.attr("x", d => d.children ? -5 : sizeScale(d.value))
+		// .attr("x", d => d.children ? -10 : sizeScale(d.value))
 		.attr("text-anchor", d => d.children ? "end" : "start")
-		.text(d => d.value)
+		// .attr("dy", 4)
+		// .attr("x", d => d.children ? -5 : sizeScale(d.value))
+		// .text(d => d.data[0])
+		.selectAll("tspan")
+		.data(d => {
+			 // d.children ? [{string: d.data[0], x: -6}] : ([d.data[0]].concat(d.data[1].label)).map(d => ({label: d, x: sizeScale(d.value)}))
+			 if(d.children) {
+				 return [{string: d.data[0], x: -6}]
+			 } else {
+				 const xpos = sizeScale(d.value)
+				 return ([d.data[0]].concat(d.data[1].label))
+						.map(d => ({"string": d, "x": xpos}))
+			 }
+
+		}) // add the node name
+		.join("tspan")
+		.attr("x", d => d.x)
+		.attr("y", (d, i, n) => (i+1) * 12 - (n.length / 2 * 12) -2) // 12 is the font size, should be automated
+		.attr("class", (d,i) => i<3? labelStyles[i] : labelStyles[2]) // if there are more than three
+		.text(d => d.string)
 
 }
