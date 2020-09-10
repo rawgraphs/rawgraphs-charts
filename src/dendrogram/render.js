@@ -19,6 +19,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 		label1Style,
 		label2Style,
 		label3Style,
+		sortBy,
 	} = visualOptions;
 
 	const margin = {
@@ -56,11 +57,29 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 	const chartWidth = width - margin.left - margin.right;
 	const chartHeight = height - margin.top - margin.bottom;
 
+	//sort data
+
+	data.sort((a,b) => d3.descending(a.size, b.size))
+
 	// create the hierarchical structure
 	const nest = d3.rollup(data, v => v[0], ...mapping.hierarchy.value.map(level => (d => d.hierarchy.get(level))))
 
 	const hierarchy = d3.hierarchy(nest)
-		.sum(d => d[1] instanceof Map ? 0 : d[1].size); // since maps have also a .size porperty, sum only values for leaves, and not for Maps
+		.sum(d => d[1] instanceof Map ? 0 : d[1].size)
+		.sort((a,b) => {
+				console.log(a,b)
+				switch(sortBy) {
+					case "Size (descending)":
+						return d3.descending(a.value, b.value)
+					case "Size (ascending)":
+						return d3.ascending(a.value, b.value)
+					case "Name":
+						return d3.ascending(a.data[0], b.data[0])
+					default:
+						return 0
+				}
+		})
+		; // since maps have also a .size porperty, sum only values for leaves, and not for Maps
 
 	// filter nodes with empty values in the hierarchy
 	hierarchy.descendants()

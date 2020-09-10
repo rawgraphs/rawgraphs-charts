@@ -21,17 +21,18 @@ export default {
 			value: ["Level2", "results"],
 			config: {"aggregation": ["csvDistinct","sum"]}
 		},
-		// size: {
-		// 	value: ["results"],
-		// 	config: {"aggregation": ["sum"]}
-		// },
+		size: {
+			value: ["results"],
+			config: {"aggregation": ["sum"]}
+		},
 
   },
   visualOptions: {
     width: 500,
-    height: 1000,
+    height: 1500,
 		marginRight: 50,
 		layout: 'Cluster Dendogram',
-		maxRadius: 15
+		maxRadius: 15,
+		sortBy: "Size (ascending)"
   },
 }

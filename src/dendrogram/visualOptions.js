@@ -43,6 +43,14 @@ export const visualOptions = {
     default: "Tree"
   },
 
+	sortBy: {
+    type: "text",
+    label: "Sort nodes by",
+    group: "chart",
+    options: ["Size (descending)", "Size (ascending)", "Name", "Original"],
+    default: "Size (descending)"
+  },
+
 	sizeOnlyLeaves: {
     type: "boolean",
     label: "Size only leaf nodes",
