@@ -21,7 +21,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     showLabels,
     label1Style,
     label2Style,
-    label3Style, // TODO: add labels styles
+    label3Style,
     colorScale,
   } = visualOptions;
 

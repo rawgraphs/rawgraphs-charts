@@ -98,7 +98,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 		.attr("font-size", 10)
 		.attr("font-family", "sans-serif")
 		.selectAll("text")
-		.data(root.descendants().filter(d => d.depth && (d.y0 + d.y1) / 2 * (d.x1 - d.x0) > 10)) // TODO: expose minimum text size filter
+		.data(root.descendants().filter(d => d.depth && (d.y0 + d.y1) / 2 * (d.x1 - d.x0) > 10)) // @TODO: expose minimum text size filter
 		.join("text")
 		.attr("transform", function(d) {
 			const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
@@ -106,6 +106,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 			return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
 		})
 		.attr("dy", "0.35em")
-		.text(d => d.data[0]) // TODO: expose labels mapping
+		.text(d => d.data[0]) // @TODO: expose labels mapping
 
 }

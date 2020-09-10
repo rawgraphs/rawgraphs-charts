@@ -68,19 +68,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
 	//@TODO: understand how to handle empty values
 
-		// hierarchy.descendants()
-		// 	.filter(d => d.data[0] === "")
-		// 	.forEach(d => {
-		// 		console.log('parent',d.parent)
-		// 		const index = d.parent.children.indexOf(d)
-		// 		d.parent.children.splice(index, 1);
-		//
-		// 		if (d.parent.children.length == 0) {
-		// 			d.parent.data = d.data;
-		// 			delete d.parent.children
-		// 		}
-		// 	})
-
 	// convert string to d3 functions
   const tileType = {
 		"Binary": d3.treemapBinary,
@@ -115,8 +102,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 		.attr("id", "viz")
 
-	console.log('groups', root.descendants())
-
+	// if selected, draw a rectangle for each level in the hierarchy
+	// @TODO: understand if we want to add hierarchy names
 	if(drawHierarchy){
 		const ancestors = svg.append("g")
 		.attr("id", "ancestors")

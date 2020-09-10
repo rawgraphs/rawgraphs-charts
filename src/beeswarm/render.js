@@ -45,7 +45,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 	const chartWidth = width - margin.left - margin.right;
 	const chartHeight = height - margin.top - margin.bottom;
 
-	// @TODO: add sorting
+	// sort series
 	switch (sortSeriesBy) {
 		case "Total value (descending)":
 			grouped.sort((a, b) => d3.descending(reduced[a[0]], reduced[b[0]]))

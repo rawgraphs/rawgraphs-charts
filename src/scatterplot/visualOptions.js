@@ -78,7 +78,7 @@ export const visualOptions = {
     label: "Points radius (px)",
     default: 5,
     group: "chart",
-    //#TODO: not implemented in lib/frontend
+    //@TODO: not implemented in lib/frontend
     disabled: {
       showPoints: false,
     },
