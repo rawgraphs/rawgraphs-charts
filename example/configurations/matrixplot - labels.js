@@ -21,8 +21,8 @@ export default {
       config: {"aggregation": ["csvDistinct"]}
     },
     label: {
-      value: ["Units"],
-      config: {"aggregation": ["sum"]}
+      value: ["Category","Units"],
+      config: {"aggregation": ["csvDistinct","sum"]}
     },
     size: {
       value: ["Revenues-Adjusted"],
@@ -31,7 +31,7 @@ export default {
   },
   visualOptions: {
     width: 1000,
-    height: 800,
+    height: 1500,
     marginTop: 100,
     marginLeft: 100,
     sortXAxisBy: "Total value (ascending)",
