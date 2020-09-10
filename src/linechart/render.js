@@ -47,7 +47,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   //
   d3.select(svgNode).append('style')
   .text(`
-    svg#viz {
+    svg #viz {
       font-family: Helvetica, Arial, sans-serif;
       font-size: 12px;
     }
@@ -202,12 +202,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     })
     .curve(curveType[interpolation]);
 
-  const svg = d3
-    .select(svgNode)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-    .attr("id", "viz")
-
 	// add background
 	d3.select(svgNode)
 		.append("rect")
@@ -217,6 +211,12 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 		.attr("y", 0)
 		.attr("fill", background)
 		.attr("id", "backgorund");
+
+  const svg = d3
+    .select(svgNode)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+    .attr("id", "viz")
 
   const vizLayer = svg
     .append("g")

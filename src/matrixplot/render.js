@@ -133,12 +133,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .domain([0, d3.max(data, d => d.size)])
     .range([0, cellSize]);
 
-  const svg = d3
-    .select(svgNode)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-    .attr("id", "viz")
-
 	// add background
 	d3.select(svgNode)
 		.append("rect")
@@ -148,6 +142,12 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 		.attr("y", 0)
 		.attr("fill", background)
 		.attr("id", "backgorund");
+
+  const svg = d3
+    .select(svgNode)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+    .attr("id", "viz")
 
   if(showGrid){
   // add the X gridlines

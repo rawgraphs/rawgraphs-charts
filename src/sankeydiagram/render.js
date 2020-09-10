@@ -62,10 +62,6 @@ console.log(alignments[alignment])
     links
   })
 
-  const svg = d3.select(svgNode).append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-    .attr("id", "viz")
-
 	// add background
 	d3.select(svgNode)
 		.append("rect")
@@ -75,6 +71,10 @@ console.log(alignments[alignment])
 		.attr("y", 0)
 		.attr("fill", background)
 		.attr("id", "backgorund");
+
+  const svg = d3.select(svgNode).append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+    .attr("id", "viz")
 
   svg.append("g")
     .selectAll("rect")
