@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-// import { rawgraphsLegend } from "@raw-temp/rawgraphs-core";
+import { rawgraphsLegend } from "@raw-temp/rawgraphs-core";
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
   const {
@@ -98,7 +98,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr("x", 0)
     .attr("y", 0)
     .attr("fill", background)
-    .attr("id", "backgorund");
+    .attr("id", "background");
 
   const svg = d3
     .select(svgNode)
@@ -151,32 +151,30 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr("text-anchor", "middle")
     .text((d) => (Array.isArray(d.label) ? d.label.join(", ") : d.label));
 
-  // if (showLegend) {
-  //   d3.select(svgNode).attr("width", width + legendWidth);
-	//
-  //   const legendLayer = d3
-  //     .select(svgNode)
-  //     .append("g")
-  //     .attr("id", "legend")
-  //     .attr("transform", `translate(${width},${marginTop})`);
-	//
-  //   const legend = rawgraphsLegend().legendWidth(legendWidth);
-	//
-  //   if (mapping.color.value) {
-  //     legend.addColor(mapping.color.value, colorScale);
-  //   }
-	//
-  //   if (mapping.size.value) {
-  //     const legendSizeScale = size.copy();
-  //     legendSizeScale
-  //       .domain(d3.extent(data, (d) => d.size))
-  //       .rangeRound([size(d3.min(data, (d) => d.size)), maxRadius]);
-	//
-  //     legend.addSize(mapping.size.value, legendSizeScale, "circle");
-  //   }
-	//
-  //   setTimeout(function () {
-  //     legendLayer.call(legend);
-  //   }, 0);
-  // }
+  if (showLegend) {
+    d3.select(svgNode).attr("width", width + legendWidth);
+	
+    const legendLayer = d3
+      .select(svgNode)
+      .append("g")
+      .attr("id", "legend")
+      .attr("transform", `translate(${width},${marginTop})`);
+	
+    const legend = rawgraphsLegend().legendWidth(legendWidth);
+	
+    if (mapping.color.value) {
+      legend.addColor(mapping.color.value, colorScale);
+    }
+	
+    if (mapping.size.value) {
+      const legendSizeScale = size.copy();
+      legendSizeScale
+        .domain(d3.extent(data, (d) => d.size))
+        .rangeRound([size(d3.min(data, (d) => d.size)), maxRadius]);
+	
+      legend.addSize(mapping.size.value, legendSizeScale, "circle");
+    }
+
+    legendLayer.call(legend);
+  }
 }
