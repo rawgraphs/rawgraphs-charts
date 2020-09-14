@@ -42,6 +42,7 @@ export const visualOptions = {
     disabled: {
       showLegend: false,
     },
+    container: "width",
   },
 
   xOrigin: {

@@ -152,7 +152,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .text((d) => (Array.isArray(d.label) ? d.label.join(", ") : d.label));
 
   if (showLegend) {
-    d3.select(svgNode).attr("width", width + legendWidth);
+    // svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option
 	
     const legendLayer = d3
       .select(svgNode)
