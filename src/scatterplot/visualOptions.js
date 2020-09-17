@@ -43,6 +43,9 @@ export const visualOptions = {
       showLegend: false,
     },
     container: "width",
+    containerCondition: {
+      showLegend: true,
+    }
   },
 
   xOrigin: {
