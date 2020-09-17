@@ -5,6 +5,6 @@ export const metadata =  {
   // icon,
   category: 'Hierarchy',
   description: '',
-  // code:'https://github.com/rawgraphs/raw',
+  code:'https://observablehq.com/@d3/radial-dendrogram',
   // tutorial:'https://rawgraphs.io/learning/'
 }
