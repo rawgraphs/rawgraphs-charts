@@ -75,7 +75,7 @@ export const visualOptions = {
   label1Style: {
     type: "text",
     label: "Labels 1 style",
-    group: "series",
+    group: "labels",
     options: ["Primary", "Secondary", "Tertiary"],
     default: "Primary"
   },
@@ -83,7 +83,7 @@ export const visualOptions = {
 	label2Style: {
     type: "text",
     label: "Labels 1 style",
-    group: "series",
+    group: "labels",
     options: ["Primary", "Secondary", "Tertiary"],
     default: "Secondary"
   },
@@ -91,7 +91,7 @@ export const visualOptions = {
 	label3Style: {
     type: "text",
     label: "Labels 1 style",
-    group: "series",
+    group: "labels",
     options: ["Primary", "Secondary", "Tertiary"],
     default: "Tertiary"
   },
@@ -104,7 +104,7 @@ export const visualOptions = {
       scaleType: 'ordinal',
       interpolator: 'interpolateSpectral'
     },
-    group: 'chart'
+    group: 'colors'
   },
 
 }

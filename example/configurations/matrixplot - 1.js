@@ -20,10 +20,6 @@ export default {
       value: ["Format"],
       config: {"aggregation": ["csvDistinct"]}
     },
-    label: {
-      value: ["Format","Units"],
-      config: {"aggregation": ["csvDistinct","sum"]}
-    },
     size: {
       value: ["Revenues-Adjusted"],
       config: {"aggregation": ["sum"]}

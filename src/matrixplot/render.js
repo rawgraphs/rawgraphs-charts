@@ -21,7 +21,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     showLabels,
     label1Style,
     label2Style,
-    label3Style, // TODO: add labels styles
+    label3Style,
     colorScale,
   } = visualOptions;
 
@@ -40,7 +40,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   // define style
   d3.select(svgNode).append('style')
     .text(`
-      svg#viz {
+      #viz {
         font-family: Helvetica, Arial, sans-serif;
         font-size: 12px;
       }
@@ -59,20 +59,18 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         fill: #161616;
       }
 
-      #viz tspan.Primary {
-        font-size: 8px;
-        fill:red;
-      }
+			#viz .labels {
+				font-size: 8px;
+			}
 
-      #viz tspan.Secondary {
-        font-size: 8px;
-        fill:blue;
-      }
+			#viz .Primary {
+				font-weight: bold;
+			}
 
-      #viz tspan.Tertiary {
-        font-size: 8px;
-        fill:green;
-      }
+			#viz .Tertiary {
+				font-weight: lighter;
+				font-style: oblique;
+			}
       `)
 
   let chartWidth = width - margin.left - margin.right;
@@ -217,22 +215,22 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr("height", d => sizeScale(d.size))
       .style("fill", d => colorScale(d.color))
 
-  if(showLabels) {
+
     let texts = svg.append("g")
       .attr("class", "labels")
       .selectAll("text")
       .data(data)
       .enter()
       .append("text")
-        .attr("x", d => x(d.x) + (cellSize - sizeScale(d.size) )/2)
-        .attr("y", d => y(d.y) + (cellSize - sizeScale(d.size) )/2)
+        .attr("y", d => y(d.y) + cellSize/2)
 
 
     texts.selectAll("tspan")
-        .data(d => d.label)
-        .enter()
-        .append("tspan")
-        .attr("class", (d,i) => i<3? labelStyles[i] : labelStyles[2]) // if there are more than three
-        .text(d => d)
-  }
+			.data(d => d.label.map(e => ({'string':e, 'x': x(d.x) + cellSize/2})))
+			.join("tspan")
+			.attr("text-anchor", "middle")
+			.attr("x", d => d.x)
+			.attr("dy", (d, i, n) => (i+1) * 8 - n.length / 2 * 8) // 12 is the font size, should be automated
+			.attr("class", (d,i) => i<3? labelStyles[i] : labelStyles[2]) // if there are more than three
+			.text(d => d.string);
 }
