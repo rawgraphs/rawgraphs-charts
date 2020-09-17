@@ -1,8 +1,8 @@
-import sunburst from "rawcharts/sunburst"
+import dendrogram from "rawcharts/dendrogram"
 import data from "../datasets/simple-hierarchy.tsv"
 
 export default {
-  chart: sunburst,
+  chart: dendrogram,
   data,
   dataTypes: {
 	  "Level1": "string",
@@ -22,6 +22,7 @@ export default {
   },
   visualOptions: {
     width: 500,
-    height: 500
+    height: 500,
+		// layout: 'Cluster Dendogram',
   },
 }

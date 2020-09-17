@@ -44,8 +44,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     'Justify': 'sankeyJustify'
 }
 
-console.log(alignments[alignment])
-
   const sankey = d3Sankey.sankey()
     .nodeId(d => d.id)
     .nodeAlign(d3Sankey[alignments[alignment]])

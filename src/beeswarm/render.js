@@ -45,7 +45,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 	const chartWidth = width - margin.left - margin.right;
 	const chartHeight = height - margin.top - margin.bottom;
 
-	// @TODO: add sorting
+	// sort series
 	switch (sortSeriesBy) {
 		case "Total value (descending)":
 			grouped.sort((a, b) => d3.descending(reduced[a[0]], reduced[b[0]]))
@@ -97,13 +97,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 		.force("y", d3.forceY(d => yScale(d.series) + yScale.bandwidth() / 2))
 		.force('collision', d3.forceCollide().radius(d => sizeScale(d.size) + nodePadding))
 
-	// get svg node
-	const svg = d3
-		.select(svgNode)
-		.append("g")
-		.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-		.attr("id", "visualization")
-
 	// add background
 	d3.select(svgNode)
 		.append("rect")
@@ -113,6 +106,13 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 		.attr("y", 0)
 		.attr("fill", background)
 		.attr("id", "backgorund");
+
+	// get svg node
+	const svg = d3
+		.select(svgNode)
+		.append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+		.attr("id", "visualization")
 
 	// draw the scale and axes
 	const axisLayer = svg

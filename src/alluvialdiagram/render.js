@@ -85,7 +85,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 	}
 
 	// compute x positions of groups
-	// @TODO remove iterations in the sankey
 	// get the first node for each category
 	const xScale = d3.scaleBand()
 		.rangeRound([0, chartWidth])

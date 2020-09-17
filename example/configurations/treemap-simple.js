@@ -1,27 +1,32 @@
-import sunburst from "rawcharts/sunburst"
+import treemap from "rawcharts/treemap"
 import data from "../datasets/simple-hierarchy.tsv"
 
 export default {
-  chart: sunburst,
+  chart: treemap,
   data,
-  dataTypes: {
+	dataTypes: {
 	  "Level1": "string",
 	  "Level2": "string",
 	  "Size": "number"
 	},
   mapping: {
     hierarchy: { value: ["Level1", "Level2"] },
-    color: {
+		color: {
 			value: ["Level1"],
 			config: {"aggregation": ["csvDistinct"]}
 		},
-		size: {
+    label: {
+			value: ["Level2", "Size"],
+			config: {"aggregation": ["csvDistinct","sum","csvDistinct"]}
+		},
+    size: {
 			value: ["Size"],
 			config: {"aggregation": ["sum"]}
 		},
   },
   visualOptions: {
     width: 500,
-    height: 500
+    height: 500,
+		drawHierarchy: true
   },
 }

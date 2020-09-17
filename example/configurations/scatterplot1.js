@@ -1,8 +1,6 @@
 import scatterplot from "rawcharts/scatterplot"
 import data from "../datasets/Titanic.tsv"
 
-console.log(data)
-
 export default {
   chart: scatterplot,
   data,

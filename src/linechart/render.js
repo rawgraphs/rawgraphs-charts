@@ -22,7 +22,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     strokeWidth,
     // series options
     columnsNumber,
-    useSameScale = false, // TODO: add
+    useSameScale = false, // @TODO: add
     sortSeriesBy,
     gutterX,
 		gutterY,
@@ -33,8 +33,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     labelsPosition,
     labelsShorten,
     labelsChars,
+		// color options
     colorScale
-    //TODO add labels legends and colors
   } = visualOptions;
 
   const margin = {
