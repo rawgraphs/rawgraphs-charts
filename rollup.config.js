@@ -2,6 +2,7 @@ import babel from '@rollup/plugin-babel'
 import localResolve from 'rollup-plugin-local-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import resolve from '@rollup/plugin-node-resolve'
+import image from '@rollup/plugin-image'
 import pkg from './package.json'
 
 const vendors = []
@@ -29,6 +30,11 @@ export default ['esm', 'cjs', 'umd'].map(format => ({
     localResolve(),
     resolve(),
     commonjs(),
-    babel({ exclude: 'node_modules/**' }),
+    image(),
+    babel({
+      exclude: 'node_modules/**',
+      // TODO: Maybe check this
+      babelHelpers: 'bundled',
+    }),
   ],
 }))

@@ -1,25 +1,25 @@
 import * as d3 from 'd3'
-import { color } from 'd3';
+// import { color } from 'd3';
 // import { categoryLegend } from 'rawgraphs-core'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
 
-  const { 
+  const {
     width = 500,
     height = 500,
     background='#ffffff',
     colorScale
   } = visualOptions;
 
-   
-  
+
+
   const samples = colorScale.ticks ? colorScale.ticks() : colorScale.domain();
 
   const sampleHeight = height / samples.length
 
   const svg = d3.select(svgNode)
   const vizLayer = svg.append("g").attr("id", "viz")
-  
+
   vizLayer
     .selectAll("rect")
     .data(samples)
@@ -32,5 +32,5 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       const col = colorScale(d)
       return col
     })
-  
+
 }
