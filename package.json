@@ -34,6 +34,7 @@
     "babel-plugin-preval": "^5.0.0",
     "css-loader": "^3.6.0",
     "dsv-loader": "^2.0.0",
+    "file-loader": "^6.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
