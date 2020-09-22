@@ -6,5 +6,5 @@ export const metadata =  {
   thumbnail,
   icon,
   category: 'Multi categorical',
-  description: "the most abused visual model ever"
+  description: "It shows correlations between categorical dimensions representing them as flows, visually linking categories with shared items. Each rectangle represents a unique value in the selected dimension, its height is proportional to its value. Correlations are represented with curved lines whose width is proportional to their value."
 }

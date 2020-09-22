@@ -7,7 +7,7 @@ export const metadata = {
   icon,
   category: "Series",
   description:
-    "A line chart (or line plot, line graph, curve chart) is a chart which displays information as a series of data points connected by segments.",
+    "It displays a quantitative dimension over a continuous interval or time period. Colour can be optionally used to encode an additional quantitative or categorical dimension.",
   // code: "https://github.com/rawgraphs/raw",
   // tutorial: "https://rawgraphs.io/learning/",
 };

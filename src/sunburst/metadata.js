@@ -6,7 +6,7 @@ export const metadata =  {
   thumbnail,
   icon,
   category: 'Weighted Hierarchy',
-  description: 'A radial visualization of a hierarchy.',
-  // code:'https://github.com/rawgraphs/raw',
+  description: 'It displays hierarchically structured data and a related quantitative dimension using concentric circles. The circle in the center represents the root node, with the hierarchies moving outward from the center. The angle of each arc corresponds to the qualitative dimension.',
+  code:'https://observablehq.com/@d3/sunburst',
   // tutorial:'https://rawgraphs.io/learning/'
 }

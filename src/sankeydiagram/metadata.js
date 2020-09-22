@@ -6,5 +6,6 @@ export const metadata =  {
   thumbnail,
   icon,
   category: 'Network',
-  description: "Ol' good sankey"
+  description: "It represents flows among nodes of a network. Nodes are represented as rectangles, the height represents their value. Flows are represented with curved lines whose width is proportional to their value.",
+  code: 'https://observablehq.com/@d3/sankey-diagram'
 }
