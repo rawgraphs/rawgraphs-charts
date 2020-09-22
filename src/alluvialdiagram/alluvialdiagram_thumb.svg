@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="160" viewBox="0 0 320 160">
+  <defs>
+    <style>
+      .cls-1, .cls-15, .cls-16, .cls-17 {
+        isolation: isolate;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        fill: #666;
+      }
+
+      .cls-4 {
+        mix-blend-mode: multiply;
+      }
+
+      .cls-10, .cls-11, .cls-12, .cls-13, .cls-14, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9 {
+        fill: none;
+        stroke: #ccc;
+      }
+
+      .cls-5 {
+        stroke-width: 9.2219px;
+      }
+
+      .cls-6 {
+        stroke-width: 5.6715px;
+      }
+
+      .cls-7 {
+        stroke-width: 14.5706px;
+      }
+
+      .cls-8 {
+        stroke-width: 10.9741px;
+      }
+
+      .cls-9 {
+        stroke-width: 73.0374px;
+      }
+
+      .cls-10 {
+        stroke-width: 25.0374px;
+      }
+
+      .cls-11 {
+        stroke-width: 29.7406px;
+      }
+
+      .cls-12 {
+        stroke-width: 15.4928px;
+      }
+
+      .cls-13 {
+        stroke-width: 16.5533px;
+      }
+
+      .cls-14 {
+        stroke-width: 76.7261px;
+      }
+
+      .cls-15, .cls-16 {
+        font-size: 9.4872px;
+        font-family: Helvetica;
+      }
+
+      .cls-16 {
+        letter-spacing: -0.0547em;
+      }
+
+      .cls-17 {
+        font-size: 10px;
+        font-family: Helvetica-Bold, Helvetica;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <g class="cls-1">
+    <g id="Layer_1" data-name="Layer 1">
+      <rect class="cls-2" x="0.5" y="0.5" width="320" height="160"/>
+      <g>
+        <rect class="cls-3" x="308" y="14.3718" width="10" height="46.2939"/>
+        <rect class="cls-3" x="308" y="65.4093" width="10" height="92.2189"/>
+      </g>
+      <g>
+        <rect class="cls-3" x="155" y="14.3718" width="10" height="45.2334"/>
+        <rect class="cls-3" x="155" y="64.3488" width="10" height="93.2794"/>
+      </g>
+      <g>
+        <rect class="cls-3" x="2" y="10" width="10" height="14.8934"/>
+        <rect class="cls-3" x="2" y="29.6369" width="10" height="25.5446"/>
+        <rect class="cls-3" x="2" y="59.9252" width="10" height="98.0748"/>
+      </g>
+      <g class="cls-4">
+        <path class="cls-5" d="M12,14.6109c71.5,0,71.5,4.3718,143,4.3718"/>
+      </g>
+      <g class="cls-4">
+        <path class="cls-6" d="M12,22.0576c71.5,0,71.5,45.1269,143,45.1269"/>
+      </g>
+      <g class="cls-4">
+        <path class="cls-7" d="M12,36.9222c71.5,0,71.5,40.3833,143,40.3833"/>
+      </g>
+      <g class="cls-4">
+        <path class="cls-8" d="M12,49.6946c71.5,0,71.5-20.6139,143-20.6139"/>
+      </g>
+      <path class="cls-9" d="M12,96.4439c71.5,0,71.5,24.6656,143,24.6656"/>
+      <g class="cls-4">
+        <path class="cls-10" d="M12,145.4813c71.5,0,71.5-98.3948,143-98.3948"/>
+      </g>
+      <g class="cls-4">
+        <path class="cls-11" d="M165,29.2421H308"/>
+      </g>
+      <g class="cls-4">
+        <path class="cls-12" d="M165,51.8588c71.5,0,71.5,21.2969,143,21.2969"/>
+      </g>
+      <g class="cls-4">
+        <path class="cls-13" d="M165,72.6254c71.5,0,71.5-20.2364,143-20.2364"/>
+      </g>
+      <g class="cls-4">
+        <path class="cls-14" d="M165,119.2651H308"/>
+      </g>
+      <g>
+        <text class="cls-15" transform="translate(298.8916 40.8394) scale(1.0541 1)">F</text>
+        <text class="cls-15" transform="translate(297.2217 114.8389) scale(1.0541 1)">G</text>
+      </g>
+      <g>
+        <text class="cls-15" transform="translate(168 40.3091) scale(1.0541 1)">D</text>
+        <text class="cls-15" transform="translate(168 114.3086) scale(1.0541 1)">E</text>
+      </g>
+      <g>
+        <text class="cls-16" transform="translate(15 20.7671) scale(1.0541 1)">A</text>
+        <text class="cls-15" transform="translate(15 45.73) scale(1.0541 1)">B</text>
+        <text class="cls-15" transform="translate(15 112.2832) scale(1.0541 1)">C</text>
+      </g>
+      <text class="cls-17" transform="translate(3.9409 8)">α</text>
+      <text class="cls-17" transform="translate(156.98 8)">β</text>
+      <text class="cls-17" transform="translate(310.2192 8)">γ</text>
+    </g>
+  </g>
+</svg>

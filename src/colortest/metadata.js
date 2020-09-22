@@ -1,7 +1,7 @@
 export const metadata =  {
   name: 'Color test',
 
-  //thumbnail:"https://via.placeholder.com/320x200/4bc06a/999999.png?text=Scatter%20Plot%20Thumb",
+  // thumbnail,
   // icon,
   category: 'Test and Debugging',
   description: 'A test for color scales',

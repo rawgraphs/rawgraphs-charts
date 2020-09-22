@@ -1,8 +1,10 @@
+import icon from './dendrogram.svg'
+import thumbnail from './dendrogram_thumb.svg'
+
 export const metadata =  {
   name: 'Linear dendrogram',
-
-  //thumbnail:"https://via.placeholder.com/320x200/4bc06a/999999.png?text=Scatter%20Plot%20Thumb",
-  // icon,
+  thumbnail,
+  icon,
   category: 'Hierarchy',
   description: '',
   // code:'https://github.com/rawgraphs/raw',

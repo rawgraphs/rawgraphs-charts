@@ -1,0 +1,132 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="320" height="160" viewBox="0 0 320 160">
+  <defs>
+    <style>
+      .cls-1, .cls-4 {
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-4 {
+        stroke: #ccc;
+      }
+
+      .cls-5 {
+        fill: #e1524a;
+      }
+
+      .cls-6 {
+        fill: #fba35e;
+      }
+
+      .cls-7 {
+        fill: #9e0142;
+      }
+
+      .cls-8 {
+        fill: #4ba0b1;
+      }
+
+      .cls-9 {
+        fill: #a0d9a3;
+      }
+
+      .cls-10 {
+        fill: #5e4fa2;
+      }
+
+      .cls-11 {
+        fill: #ebf7a6;
+      }
+
+      .cls-12 {
+        fill: #fee89a;
+      }
+    </style>
+    <clipPath id="clip-path">
+      <rect class="cls-1" width="320" height="160"/>
+    </clipPath>
+  </defs>
+  <rect id="backgorund" class="cls-2" width="320" height="160"/>
+  <g class="cls-3">
+    <g id="viz">
+      <g id="nodes">
+        <circle class="cls-4" cx="160" cy="80" r="98"/>
+        <g id="B">
+          <circle class="cls-4" cx="119.8768" cy="53.5941" r="48.3404"/>
+        </g>
+        <g id="A">
+          <circle class="cls-4" cx="209.8263" cy="53.5941" r="39.9823"/>
+        </g>
+        <g id="C">
+          <circle class="cls-4" cx="173.1827" cy="130.8209" r="43.8703"/>
+        </g>
+        <g id="E">
+          <circle class="cls-4" cx="99.9155" cy="51.8186" r="26.6734"/>
+        </g>
+        <g id="F">
+          <circle class="cls-4" cx="147.3744" cy="51.8186" r="19.1587"/>
+        </g>
+        <g id="D">
+          <circle class="cls-4" cx="129.9488" cy="83.3822" r="15.2688"/>
+        </g>
+        <g id="L">
+          <circle class="cls-4" cx="197.544" cy="37.8428" r="18.3815"/>
+        </g>
+        <g id="I">
+          <circle class="cls-4" cx="228.3828" cy="37.8428" r="10.8305"/>
+        </g>
+        <g id="M">
+          <circle class="cls-4" cx="221.6296" cy="68.731" r="19.1605"/>
+        </g>
+        <g id="H">
+          <circle class="cls-4" cx="151.5217" cy="130.8209" r="20.5825"/>
+        </g>
+        <g id="G">
+          <circle class="cls-4" cx="194.5786" cy="130.8209" r="20.8476"/>
+        </g>
+        <circle id="path0" class="cls-5" cx="89.8984" cy="51.8186" r="15.0295"/>
+        <g id="O">
+          <circle id="path1" class="cls-5" cx="115.7584" cy="51.8186" r="9.2037"/>
+        </g>
+        <circle id="path2" class="cls-6" cx="139.0462" cy="51.8186" r="9.2037"/>
+        <g id="P">
+          <circle id="path3" class="cls-6" cx="157.3915" cy="51.8186" r="7.5148"/>
+        </g>
+        <circle id="path4" class="cls-7" cx="123.8217" cy="83.3822" r="7.5148"/>
+        <g id="N">
+          <circle id="path5" class="cls-7" cx="138.277" cy="83.3822" r="5.3137"/>
+        </g>
+        <circle id="path6" class="cls-8" cx="191.4168" cy="37.8428" r="10.6275"/>
+        <g id="F-2" data-name="F">
+          <circle id="path7" class="cls-8" cx="208.9849" cy="37.8428" r="5.3137"/>
+        </g>
+        <circle id="path8" class="cls-9" cx="228.3828" cy="37.8428" r="9.2037"/>
+        <circle id="path9" class="cls-10" cx="213.3016" cy="68.5482" r="9.2037"/>
+        <g id="U">
+          <circle id="path10" class="cls-10" cx="231.6468" cy="68.5482" r="7.5148"/>
+        </g>
+        <g id="V">
+          <circle id="path11" class="cls-10" cx="223.8827" cy="80.7414" r="5.3137"/>
+        </g>
+        <circle id="path12" class="cls-11" cx="143.1935" cy="130.8209" r="10.6275"/>
+        <g id="S">
+          <circle id="path13" class="cls-11" cx="162.9626" cy="130.8209" r="7.5148"/>
+        </g>
+        <g id="R">
+          <circle id="path14" class="cls-11" cx="155.5991" cy="143.2602" r="5.3137"/>
+        </g>
+        <g id="Q">
+          <circle id="path15" class="cls-12" cx="184.5615" cy="130.8209" r="9.2037"/>
+        </g>
+        <circle id="path16" class="cls-12" cx="204.5957" cy="130.8209" r="9.2037"/>
+      </g>
+    </g>
+  </g>
+</svg>

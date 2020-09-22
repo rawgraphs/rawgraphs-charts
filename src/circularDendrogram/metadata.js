@@ -1,8 +1,11 @@
+import icon from './circulardendrogram.svg'
+import thumbnail from './circulardendrogram_thumb.svg'
+
 export const metadata =  {
   name: 'Circular dendrogram',
 
-  //thumbnail:"https://via.placeholder.com/320x200/4bc06a/999999.png?text=Scatter%20Plot%20Thumb",
-  // icon,
+  thumbnail,
+  icon,
   category: 'Hierarchy',
   description: '',
   code:'https://observablehq.com/@d3/radial-dendrogram',

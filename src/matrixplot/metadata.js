@@ -1,8 +1,10 @@
+import icon from './matrixplot.svg'
+import thumbnail from './heatmap_thumb.svg'
+
 export const metadata =  {
   name: 'Matrix Plot',
-
-  //thumbnail:"https://via.placeholder.com/320x200/4bc06a/999999.png?text=Scatter%20Plot%20Thumb",
-  // icon,
+  thumbnail,
+  icon,
   category: 'Network',
   description: 'A matrix plot',
   // code:'https://github.com/rawgraphs/raw',

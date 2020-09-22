@@ -1,0 +1,78 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="320" height="160" viewBox="0 0 320 160">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: #666;
+      }
+
+      .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8 {
+        fill: none;
+        stroke: #ccc;
+        stroke-opacity: 0.5;
+      }
+
+      .cls-3 {
+        stroke-width: 67.1111px;
+      }
+
+      .cls-4 {
+        stroke-width: 41.9444px;
+      }
+
+      .cls-5 {
+        stroke-width: 16.7778px;
+      }
+
+      .cls-6 {
+        stroke-width: 25.1667px;
+      }
+
+      .cls-7 {
+        stroke-width: 58.7222px;
+      }
+
+      .cls-8 {
+        stroke-width: 83.8889px;
+      }
+
+      .cls-10, .cls-9 {
+        isolation: isolate;
+        font-size: 10px;
+        font-family: Helvetica;
+      }
+
+      .cls-9 {
+        letter-spacing: -0.0547em;
+      }
+    </style>
+  </defs>
+  <rect id="backgorund" class="cls-1" width="320" height="160"/>
+  <g id="viz">
+    <g>
+      <rect class="cls-2" x="2" y="2" width="10" height="109.0556"/>
+      <rect class="cls-2" x="308" y="2" width="10" height="151"/>
+      <rect class="cls-2" x="104" y="71.4903" width="10" height="58.7222"/>
+      <rect class="cls-2" x="2" y="116.0556" width="10" height="41.9444"/>
+      <rect class="cls-2" x="206" y="73.7409" width="10" height="83.8889"/>
+    </g>
+    <g>
+      <path class="cls-3" d="M12,35.5556H308"/>
+      <path class="cls-4" d="M12,90.0833c46,0,46,2.3792,92,2.3792"/>
+      <path class="cls-5" d="M12,124.4444c46,0,46-2.6208,92-2.6208"/>
+      <path class="cls-6" d="M12,145.4167c97,0,97-.37,194-.37"/>
+      <path class="cls-7" d="M114,100.8514c46,0,46,2.2506,92,2.2506"/>
+      <path class="cls-8" d="M216,115.6853c46,0,46-4.63,92-4.63"/>
+    </g>
+    <g>
+      <text class="cls-9" transform="translate(18 60.0278)">A</text>
+      <text class="cls-10" transform="translate(295.3301 81)">E</text>
+      <text class="cls-10" transform="translate(120 104.3514)">C</text>
+      <text class="cls-10" transform="translate(18 140.5278)">B</text>
+      <text class="cls-10" transform="translate(192.7783 119.1853)">D</text>
+    </g>
+  </g>
+</svg>

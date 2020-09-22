@@ -1,5 +1,5 @@
-import icon from './example_icon.png'
-import thumbnail from './example_thumbnail.png'
+import icon from './linechart.svg'
+import thumbnail from './linechart_thumb.svg'
 
 export const metadata = {
   name: "Linechart",

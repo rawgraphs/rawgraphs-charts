@@ -1,0 +1,147 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="320" height="160" viewBox="0 0 320 160">
+  <defs>
+    <style>
+      .cls-1, .cls-4 {
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-4 {
+        stroke: #ccc;
+      }
+
+      .cls-5 {
+        fill: #ccc;
+      }
+
+      .cls-6 {
+        fill: #e1524a;
+      }
+
+      .cls-7 {
+        fill: #fba35e;
+      }
+
+      .cls-8 {
+        fill: #9e0142;
+      }
+
+      .cls-9 {
+        fill: #4ba0b1;
+      }
+
+      .cls-10 {
+        fill: #5e4fa2;
+      }
+
+      .cls-11 {
+        fill: #a0d9a3;
+      }
+
+      .cls-12 {
+        fill: #ebf7a6;
+      }
+
+      .cls-13 {
+        fill: #fee89a;
+      }
+
+      .cls-14, .cls-15, .cls-16, .cls-17 {
+        isolation: isolate;
+        font-size: 12px;
+        font-family: Helvetica;
+      }
+
+      .cls-15 {
+        letter-spacing: -0.0547em;
+      }
+
+      .cls-16 {
+        letter-spacing: -0.0366em;
+      }
+
+      .cls-17 {
+        letter-spacing: -0.0176em;
+      }
+    </style>
+    <clipPath id="clip-path">
+      <rect class="cls-1" width="320" height="160"/>
+    </clipPath>
+  </defs>
+  <rect class="cls-2" width="320" height="160"/>
+  <g class="cls-3">
+    <g id="viz">
+      <g id="links">
+        <path class="cls-4" d="M160.6626,79.527c-2.0278,12.3344,11.7336-4.31,23.4672-8.6193"/>
+        <path class="cls-4" d="M160.6626,79.527c-2.0278,12.3344-3.76,11.9213-7.519,23.8425"/>
+        <path class="cls-4" d="M160.6626,79.527c-2.0278,12.3344-9.7362-7.8393-19.4725-15.6787"/>
+        <path class="cls-4" d="M184.13,70.9077c11.7336-4.31-7.21-25.1733-1.79-36.4375"/>
+        <path class="cls-4" d="M184.13,70.9077c11.7336-4.31,12.8965-.5422,25.0177-3.5961"/>
+        <path class="cls-4" d="M184.13,70.9077c11.7336-4.31,10.7982,23.8553,22.22,28.934"/>
+        <path class="cls-4" d="M153.1436,103.37c-3.76,11.9213,24.5,9.5923,30.1607,20.7373"/>
+        <path class="cls-4" d="M153.1436,103.37c-3.76,11.9213-6.5889,10.9025-11.2915,22.4842"/>
+        <path class="cls-4" d="M153.1436,103.37c-3.76,11.9213-25.5707-6.1981-36.6006-.3167"/>
+        <path class="cls-4" d="M141.19,63.8483c-9.7362-7.8393-17.0108,7.0059-29.1719,4.1149"/>
+        <path class="cls-4" d="M141.19,63.8483c-9.7362-7.8393,3.2149-18.1139-2.2043-29.3781"/>
+        <path class="cls-4" d="M182.3394,34.47l10.8384-22.5284"/>
+        <path class="cls-4" d="M209.1475,67.3116,233.39,61.2039"/>
+        <path class="cls-4" d="M206.35,99.8417l22.8435,10.1574"/>
+        <path class="cls-4" d="M183.3043,124.1068l11.3208,22.29"/>
+        <path class="cls-4" d="M141.8521,125.8537c-4.7027,11.5817,12.54,15.858,11.2865,28.295"/>
+        <path class="cls-4" d="M141.8521,125.8537c-4.7027,11.5817-20.0461,2.6265-27.8174,12.4172"/>
+        <path class="cls-4" d="M112.0182,67.9632c-12.1611-2.8909-13.7717,14.8015-26.2549,15.449"/>
+        <path class="cls-4" d="M112.0182,67.9632c-12.1611-2.8909-5.6376-19.4154-16.494-25.6113"/>
+        <path class="cls-4" d="M138.9858,34.47c-5.4191-11.2642-5.4191-11.2642-10.8383-22.5284"/>
+      </g>
+      <g>
+        <circle class="cls-5" cx="160.6626" cy="79.527" r="5"/>
+        <circle class="cls-5" cx="184.1298" cy="70.9077" r="5"/>
+        <circle class="cls-5" cx="153.1436" cy="103.3695" r="5"/>
+        <circle class="cls-5" cx="141.1901" cy="63.8483" r="5"/>
+        <circle class="cls-6" cx="182.3394" cy="34.4702" r="5"/>
+        <circle class="cls-7" cx="209.1475" cy="67.3116" r="5"/>
+        <circle class="cls-8" cx="206.3498" cy="99.8417" r="5"/>
+        <circle class="cls-9" cx="183.3043" cy="124.1068" r="5"/>
+        <circle class="cls-10" cx="141.8521" cy="125.8537" r="5"/>
+        <circle class="cls-11" cx="116.543" cy="103.0528" r="20"/>
+        <circle class="cls-12" cx="112.0182" cy="67.9632" r="5"/>
+        <circle class="cls-13" cx="138.9858" cy="34.4702" r="5"/>
+        <circle class="cls-6" cx="193.1778" cy="11.9418" r="20"/>
+        <circle class="cls-7" cx="233.39" cy="61.2039" r="13.3333"/>
+        <circle class="cls-8" cx="229.1933" cy="109.9991" r="6.6667"/>
+        <circle class="cls-9" cx="194.6251" cy="146.3967" r="6.6667"/>
+        <circle class="cls-10" cx="153.1386" cy="154.1487" r="13.3333"/>
+        <circle class="cls-10" cx="114.0347" cy="138.2709" r="6.6667"/>
+        <circle class="cls-12" cx="85.7633" cy="83.4122" r="13.3333"/>
+        <circle class="cls-12" cx="95.5242" cy="42.352" r="6.6667"/>
+        <circle class="cls-13" cx="128.1474" cy="11.9418" r="20"/>
+      </g>
+      <g>
+        <text class="cls-14" transform="translate(172.3809 79.5233) rotate(-20.1677)">B</text>
+        <text class="cls-15" transform="matrix(0.3008, -0.9537, 0.9537, 0.3008, 158.7581, 98.8386)">A</text>
+        <text class="cls-14" transform="matrix(0.7789, 0.6272, -0.6272, 0.7789, 143.3358, 70.7422)">C</text>
+        <text class="cls-14" transform="translate(179.9372 48.8317) rotate(-64.3077)">E</text>
+        <text class="cls-14" transform="translate(197.2319 74.452) rotate(-14.141)">F</text>
+        <text class="cls-14" transform="matrix(0.9137, 0.4063, -0.4063, 0.9137, 191.3355, 97.4866)">D</text>
+        <text class="cls-16" transform="translate(173.9365 114.6304) rotate(63.0747)">L</text>
+        <text class="cls-14" transform="translate(147.7733 121.8223) rotate(-67.9008)">M</text>
+        <text class="cls-14" transform="matrix(0.8824, -0.4705, 0.4705, 0.8824, 93.446, 119.8627)">I</text>
+        <text class="cls-14" transform="translate(116.9062 73.2923) rotate(13.3724)">H</text>
+        <text class="cls-14" transform="translate(137.9879 41.6753) rotate(64.3077)">G</text>
+        <text class="cls-17" transform="translate(252.1783 60.6085) rotate(-14.141)">P</text>
+        <text class="cls-14" transform="matrix(0.9137, 0.4063, -0.4063, 0.9137, 238.2403, 118.3428)">N</text>
+        <text class="cls-14" transform="translate(196.2792 158.6221) rotate(63.0747)">F</text>
+        <text class="cls-14" transform="matrix(0.6217, -0.7833, 0.7833, 0.6217, 104.9654, 156.2111)">V</text>
+        <text class="cls-14" transform="matrix(0.9987, -0.0518, 0.0518, 0.9987, 59.6675, 88.8149)">S</text>
+        <text class="cls-14" transform="matrix(0.8685, 0.4957, -0.4957, 0.8685, 75.843, 35.7488)">R</text>
+      </g>
+    </g>
+  </g>
+</svg>

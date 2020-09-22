@@ -1,8 +1,10 @@
+import icon from './sankeydiagram.svg'
+import thumbnail from './sankeydiagram_thumb.svg'
+
 export const metadata =  {
   name: 'Sankey Diagram',
-
-  //thumbnail:"https://via.placeholder.com/320x200/4bc06a/999999.png?text=Scatter%20Plot%20Thumb",
-  // icon,
+  thumbnail,
+  icon,
   category: 'Network',
   description: "Ol' good sankey"
 }

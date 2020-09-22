@@ -1,0 +1,219 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="320" height="160" viewBox="0 0 320 160">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #ccc;
+      }
+
+      .cls-3 {
+        fill: #ccc;
+      }
+
+      .cls-11, .cls-16, .cls-4, .cls-5, .cls-6 {
+        isolation: isolate;
+      }
+
+      .cls-11, .cls-16, .cls-5, .cls-6 {
+        font-size: 12px;
+        font-family: Helvetica;
+      }
+
+      .cls-6 {
+        letter-spacing: -0.0547em;
+      }
+
+      .cls-7 {
+        fill: #fee89a;
+      }
+
+      .cls-8 {
+        fill: #ebf7a6;
+      }
+
+      .cls-9 {
+        fill: #a0d9a3;
+      }
+
+      .cls-10 {
+        fill: #4ba0b1;
+      }
+
+      .cls-11 {
+        letter-spacing: -0.0366em;
+      }
+
+      .cls-12 {
+        fill: #5e4fa2;
+      }
+
+      .cls-13 {
+        fill: #9e0142;
+      }
+
+      .cls-14 {
+        fill: #fba35e;
+      }
+
+      .cls-15 {
+        fill: #e1524a;
+      }
+
+      .cls-16 {
+        letter-spacing: -0.0176em;
+      }
+    </style>
+  </defs>
+  <rect id="backgorund" class="cls-1" width="320" height="160"/>
+  <g id="viz">
+    <g id="links">
+      <path class="cls-2" d="M5,77.1025c48.6667,0,48.6667-55.1349,97.3333-55.1349"/>
+      <path class="cls-2" d="M5,77.1025c48.6667,0,48.6667-.2946,97.3333-.2946"/>
+      <path class="cls-2" d="M5,77.1025c48.6667,0,48.6667,55.43,97.3333,55.43"/>
+      <path class="cls-2" d="M102.3333,21.9676c48.6667,0,48.6667-11.734,97.3334-11.734"/>
+      <path class="cls-2" d="M102.3333,21.9676C151,21.9676,151,33.7015,199.6667,33.7015"/>
+      <path class="cls-2" d="M102.3333,76.8079C151,76.8079,151,59.5528,199.6667,59.5528"/>
+      <path class="cls-2" d="M102.3333,76.8079c48.6667,0,48.6667-1,97.3334-1"/>
+      <path class="cls-2" d="M102.3333,76.8079C151,76.8079,151,95.0631,199.6667,95.0631"/>
+      <path class="cls-2" d="M102.3333,132.5322c48.6667,0,48.6667-15.83,97.3334-15.83"/>
+      <path class="cls-2" d="M102.3333,132.5322c48.6667,0,48.6667-1.4042,97.3334-1.4042"/>
+      <path class="cls-2" d="M102.3333,132.5322c48.6667,0,48.6667,17.2342,97.3334,17.2342"/>
+      <path class="cls-2" d="M199.6667,10.2336H297"/>
+      <path class="cls-2" d="M199.6667,33.7015c48.6666,0,48.6666-7.213,97.3333-7.213"/>
+      <path class="cls-2" d="M199.6667,33.7015c48.6666,0,48.6666,7.213,97.3333,7.213"/>
+      <path class="cls-2" d="M199.6667,75.8077H297"/>
+      <path class="cls-2" d="M199.6667,95.0631c48.6666,0,48.6666-7.2129,97.3333-7.2129"/>
+      <path class="cls-2" d="M199.6667,95.0631c48.6666,0,48.6666,7.213,97.3333,7.213"/>
+      <path class="cls-2" d="M199.6667,116.7021H297"/>
+      <path class="cls-2" d="M199.6667,131.128H297"/>
+      <path class="cls-2" d="M199.6667,149.7664H297"/>
+    </g>
+    <g id="nodes">
+      <circle class="cls-3" cx="5" cy="77.1025" r="5"/>
+      <g id="C">
+        <circle class="cls-3" cx="102.3333" cy="21.9676" r="5"/>
+        <g class="cls-4">
+          <text class="cls-5" transform="translate(85.3344 25.9676)">C</text>
+        </g>
+      </g>
+      <g id="A">
+        <circle class="cls-3" cx="102.3333" cy="76.8079" r="5"/>
+        <g class="cls-4">
+          <text class="cls-6" transform="translate(85.9935 80.8079)">A</text>
+        </g>
+      </g>
+      <g id="B">
+        <circle class="cls-3" cx="102.3333" cy="132.5322" r="5"/>
+        <g class="cls-4">
+          <text class="cls-5" transform="translate(85.6654 136.5322)">B</text>
+        </g>
+      </g>
+      <g id="G">
+        <circle class="cls-7" cx="199.6667" cy="10.2336" r="5"/>
+        <g class="cls-4">
+          <text class="cls-5" transform="translate(182.1656 14.2336)">G</text>
+        </g>
+      </g>
+      <g id="H">
+        <circle class="cls-8" cx="199.6667" cy="33.7015" r="5"/>
+        <g class="cls-4">
+          <text class="cls-5" transform="translate(182.4996 37.7015)">H</text>
+        </g>
+      </g>
+      <g id="I">
+        <circle class="cls-9" cx="199.6667" cy="59.5528" r="10"/>
+        <g class="cls-4">
+          <text class="cls-5" transform="translate(212.6664 63.5528)">I</text>
+        </g>
+      </g>
+      <g id="L">
+        <circle class="cls-10" cx="199.6667" cy="75.8077" r="5"/>
+        <g class="cls-4">
+          <text class="cls-11" transform="translate(183.7155 79.8077)">L</text>
+        </g>
+      </g>
+      <g id="M">
+        <circle class="cls-12" cx="199.6667" cy="95.0631" r="5"/>
+        <g class="cls-4">
+          <text class="cls-5" transform="translate(181.8346 99.0631)">M</text>
+        </g>
+      </g>
+      <g id="D">
+        <circle class="cls-13" cx="199.6667" cy="116.7021" r="5"/>
+        <g class="cls-4">
+          <text class="cls-5" transform="translate(182.4996 120.7021)">D</text>
+        </g>
+      </g>
+      <g id="F">
+        <circle class="cls-14" cx="199.6667" cy="131.128" r="5"/>
+        <g class="cls-4">
+          <text class="cls-5" transform="translate(183.1676 135.128)">F</text>
+        </g>
+      </g>
+      <g id="E">
+        <circle class="cls-15" cx="199.6667" cy="149.7664" r="5"/>
+        <g class="cls-4">
+          <text class="cls-5" transform="translate(182.8307 153.7664)">E</text>
+        </g>
+      </g>
+      <g id="Q">
+        <circle class="cls-7" cx="297" cy="10.2336" r="10"/>
+        <g class="cls-4">
+          <text class="cls-5" transform="translate(308.333 14.2336)">Q</text>
+        </g>
+      </g>
+      <g id="R">
+        <circle class="cls-8" cx="297" cy="26.4885" r="5.7735"/>
+        <g class="cls-4">
+          <text class="cls-5" transform="translate(308.667 30.4885)">R</text>
+        </g>
+      </g>
+      <g id="S">
+        <circle class="cls-8" cx="297" cy="40.9145" r="8.165"/>
+        <g class="cls-4">
+          <text class="cls-5" transform="translate(308.998 44.9145)">S</text>
+        </g>
+      </g>
+      <g id="F-2" data-name="F">
+        <circle class="cls-10" cx="297" cy="75.8077" r="5.7735"/>
+        <g class="cls-4">
+          <text class="cls-5" transform="translate(309.335 79.8077)">F</text>
+        </g>
+      </g>
+      <g id="V">
+        <circle class="cls-12" cx="297" cy="87.8502" r="5.7735"/>
+        <g class="cls-4">
+          <text class="cls-5" transform="translate(308.998 91.8502)">V</text>
+        </g>
+      </g>
+      <g id="U">
+        <circle class="cls-12" cx="297" cy="102.2761" r="8.165"/>
+        <g class="cls-4">
+          <text class="cls-5" transform="translate(308.667 106.2761)">U</text>
+        </g>
+      </g>
+      <g id="N">
+        <circle class="cls-13" cx="297" cy="116.7021" r="5.7735"/>
+        <g class="cls-4">
+          <text class="cls-5" transform="translate(308.667 120.7021)">N</text>
+        </g>
+      </g>
+      <g id="P">
+        <circle class="cls-14" cx="297" cy="131.128" r="8.165"/>
+        <g class="cls-4">
+          <text class="cls-16" transform="translate(309.1035 135.128)">P</text>
+        </g>
+      </g>
+      <g id="O">
+        <circle class="cls-15" cx="297" cy="149.7664" r="10"/>
+        <g class="cls-4">
+          <text class="cls-5" transform="translate(308.333 153.7664)">O</text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

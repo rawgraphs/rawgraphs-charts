@@ -3,7 +3,7 @@ import { dimensions }  from './dimensions'
 import { mapData } from './mapping'
 import { render } from './render'
 import { visualOptions } from './visualOptions'
-import icon from './alluvialdiagram.svg'
+
 
 export default {
   metadata,
@@ -11,6 +11,4 @@ export default {
   mapData,
   render,
   visualOptions,
-	icon,
-
 }

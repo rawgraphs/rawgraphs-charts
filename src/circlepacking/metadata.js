@@ -1,8 +1,11 @@
+import icon from './circlepacking.svg'
+import thumbnail from './circlepacking_thumb.svg'
+
 export const metadata =  {
   name: 'Circle Packing',
 
-  //thumbnail:"https://via.placeholder.com/320x200/4bc06a/999999.png?text=Scatter%20Plot%20Thumb",
-  // icon,
+  thumbnail,
+  icon,
   category: 'Weighted Hierarchy',
   description: 'bubble trouble',
   // code:'https://github.com/rawgraphs/raw',

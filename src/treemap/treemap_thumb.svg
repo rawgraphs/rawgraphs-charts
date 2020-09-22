@@ -1,0 +1,319 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="320" height="160" viewBox="0 0 320 160">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        fill: #a0d9a3;
+      }
+
+      .cls-4 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-5, .cls-6, .cls-9 {
+        isolation: isolate;
+      }
+
+      .cls-6, .cls-9 {
+        font-size: 12px;
+        font-family: Helvetica;
+      }
+
+      .cls-7 {
+        fill: #4ba0b1;
+      }
+
+      .cls-8 {
+        clip-path: url(#clip-path-2);
+      }
+
+      .cls-9 {
+        letter-spacing: -0.0366em;
+      }
+
+      .cls-10 {
+        fill: #5e4fa2;
+      }
+
+      .cls-11 {
+        clip-path: url(#clip-path-3);
+      }
+
+      .cls-12 {
+        clip-path: url(#clip-path-4);
+      }
+
+      .cls-13 {
+        clip-path: url(#clip-path-5);
+      }
+
+      .cls-14 {
+        clip-path: url(#clip-path-6);
+      }
+
+      .cls-15 {
+        fill: #9e0142;
+      }
+
+      .cls-16 {
+        clip-path: url(#clip-path-7);
+      }
+
+      .cls-17 {
+        clip-path: url(#clip-path-8);
+      }
+
+      .cls-18 {
+        fill: #e1524a;
+      }
+
+      .cls-19 {
+        clip-path: url(#clip-path-9);
+      }
+
+      .cls-20 {
+        fill: #fba35e;
+      }
+
+      .cls-21 {
+        clip-path: url(#clip-path-10);
+      }
+
+      .cls-22 {
+        clip-path: url(#clip-path-11);
+      }
+
+      .cls-23 {
+        clip-path: url(#clip-path-12);
+      }
+
+      .cls-24 {
+        fill: #fee89a;
+      }
+
+      .cls-25 {
+        clip-path: url(#clip-path-13);
+      }
+
+      .cls-26 {
+        clip-path: url(#clip-path-14);
+      }
+
+      .cls-27 {
+        fill: #ebf7a6;
+      }
+
+      .cls-28 {
+        clip-path: url(#clip-path-15);
+      }
+
+      .cls-29 {
+        clip-path: url(#clip-path-16);
+      }
+
+      .cls-30 {
+        clip-path: url(#clip-path-17);
+      }
+    </style>
+    <clipPath id="clip-path">
+      <rect class="cls-1" x="5" y="5" width="38" height="74"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <rect class="cls-1" x="44" y="5" width="52" height="74"/>
+    </clipPath>
+    <clipPath id="clip-path-3">
+      <rect class="cls-1" x="5" y="80" width="91" height="31"/>
+    </clipPath>
+    <clipPath id="clip-path-4">
+      <rect class="cls-1" x="5" y="114" width="20" height="41"/>
+    </clipPath>
+    <clipPath id="clip-path-5">
+      <rect class="cls-1" x="28" y="114" width="44" height="41"/>
+    </clipPath>
+    <clipPath id="clip-path-6">
+      <rect class="cls-1" x="75" y="114" width="21" height="41"/>
+    </clipPath>
+    <clipPath id="clip-path-7">
+      <rect class="cls-1" x="101" y="5" width="6" height="110"/>
+    </clipPath>
+    <clipPath id="clip-path-8">
+      <rect class="cls-1" x="110" y="5" width="89" height="21"/>
+    </clipPath>
+    <clipPath id="clip-path-9">
+      <rect class="cls-1" x="110" y="27" width="89" height="88"/>
+    </clipPath>
+    <clipPath id="clip-path-10">
+      <rect class="cls-1" x="200" y="5" width="26" height="110"/>
+    </clipPath>
+    <clipPath id="clip-path-11">
+      <rect class="cls-1" x="101" y="118" width="74" height="37"/>
+    </clipPath>
+    <clipPath id="clip-path-12">
+      <rect class="cls-1" x="178" y="118" width="48" height="37"/>
+    </clipPath>
+    <clipPath id="clip-path-13">
+      <rect class="cls-1" x="231" y="5" width="84" height="32"/>
+    </clipPath>
+    <clipPath id="clip-path-14">
+      <rect class="cls-1" x="231" y="40" width="35" height="80"/>
+    </clipPath>
+    <clipPath id="clip-path-15">
+      <rect class="cls-1" x="267" y="40" width="48" height="80"/>
+    </clipPath>
+    <clipPath id="clip-path-16">
+      <rect class="cls-1" x="231" y="123" width="26" height="32"/>
+    </clipPath>
+    <clipPath id="clip-path-17">
+      <rect class="cls-1" x="260" y="123" width="55" height="32"/>
+    </clipPath>
+  </defs>
+  <rect id="backgorund" class="cls-2" width="320" height="160"/>
+  <rect id="backgorund-2" data-name="backgorund" class="cls-2" width="320" height="160"/>
+  <g id="viz">
+    <g id="leaves">
+      <g>
+        <rect id="path0" class="cls-3" x="5" y="5" width="38" height="74"/>
+        <g class="cls-4">
+          <g class="cls-5">
+            <text class="cls-6" transform="translate(8 17)">I</text>
+          </g>
+        </g>
+      </g>
+      <g>
+        <rect id="path1" class="cls-7" x="44" y="5" width="52" height="74"/>
+        <g class="cls-8">
+          <g class="cls-5">
+            <text class="cls-9" transform="translate(47 17)">L</text>
+          </g>
+        </g>
+      </g>
+      <g>
+        <rect id="path2" class="cls-10" x="5" y="80" width="91" height="31"/>
+        <g class="cls-11">
+          <g class="cls-5">
+            <text class="cls-6" transform="translate(8 92)">M</text>
+          </g>
+        </g>
+      </g>
+      <g>
+        <rect id="path3" class="cls-7" x="5" y="114" width="20" height="41"/>
+        <g class="cls-12">
+          <g class="cls-5">
+            <text class="cls-9" transform="translate(8 126)">L</text>
+          </g>
+        </g>
+      </g>
+      <g>
+        <rect id="path4" class="cls-10" x="28" y="114" width="44" height="41"/>
+        <g class="cls-13">
+          <g class="cls-5">
+            <text class="cls-6" transform="translate(31 126)">M</text>
+          </g>
+        </g>
+      </g>
+      <g>
+        <rect id="path5" class="cls-10" x="75" y="114" width="21" height="41"/>
+        <g class="cls-14">
+          <g class="cls-5">
+            <text class="cls-6" transform="translate(78 126)">M</text>
+          </g>
+        </g>
+      </g>
+      <g>
+        <rect id="path6" class="cls-15" x="101" y="5" width="6" height="110"/>
+        <g class="cls-16">
+          <g class="cls-5">
+            <text class="cls-6" transform="translate(104 17)">D</text>
+          </g>
+        </g>
+      </g>
+      <g>
+        <rect id="path7" class="cls-15" x="110" y="5" width="89" height="21"/>
+        <g class="cls-17">
+          <g class="cls-5">
+            <text class="cls-6" transform="translate(113 17)">D</text>
+          </g>
+        </g>
+      </g>
+      <g>
+        <rect id="path8" class="cls-18" x="110" y="27" width="89" height="88"/>
+        <g class="cls-19">
+          <g class="cls-5">
+            <text class="cls-6" transform="translate(113 39)">E</text>
+          </g>
+        </g>
+      </g>
+      <g>
+        <rect id="path9" class="cls-20" x="200" y="5" width="26" height="110"/>
+        <g class="cls-21">
+          <g class="cls-5">
+            <text class="cls-6" transform="translate(203 17)">F</text>
+          </g>
+        </g>
+      </g>
+      <g>
+        <rect id="path10" class="cls-18" x="101" y="118" width="74" height="37"/>
+        <g class="cls-22">
+          <g class="cls-5">
+            <text class="cls-6" transform="translate(104 130)">E</text>
+          </g>
+        </g>
+      </g>
+      <g>
+        <rect id="path11" class="cls-20" x="178" y="118" width="48" height="37"/>
+        <g class="cls-23">
+          <g class="cls-5">
+            <text class="cls-6" transform="translate(181 130)">F</text>
+          </g>
+        </g>
+      </g>
+      <g>
+        <rect id="path12" class="cls-24" x="231" y="5" width="84" height="32"/>
+        <g class="cls-25">
+          <g class="cls-5">
+            <text class="cls-6" transform="translate(234 17)">G</text>
+          </g>
+        </g>
+      </g>
+      <g>
+        <rect id="path13" class="cls-24" x="231" y="40" width="35" height="80"/>
+        <g class="cls-26">
+          <g class="cls-5">
+            <text class="cls-6" transform="translate(234 52)">G</text>
+          </g>
+        </g>
+      </g>
+      <g>
+        <rect id="path14" class="cls-27" x="267" y="40" width="48" height="80"/>
+        <g class="cls-28">
+          <g class="cls-5">
+            <text class="cls-6" transform="translate(270 52)">H</text>
+          </g>
+        </g>
+      </g>
+      <g>
+        <rect id="path15" class="cls-27" x="231" y="123" width="26" height="32"/>
+        <g class="cls-29">
+          <g class="cls-5">
+            <text class="cls-6" transform="translate(234 135)">H</text>
+          </g>
+        </g>
+      </g>
+      <g>
+        <rect id="path16" class="cls-27" x="260" y="123" width="55" height="32"/>
+        <g class="cls-30">
+          <g class="cls-5">
+            <text class="cls-6" transform="translate(263 135)">H</text>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
