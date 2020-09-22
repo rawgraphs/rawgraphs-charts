@@ -1,8 +1,8 @@
-import scatterplot from "rawcharts/scatterplot";
+import bubblechart from "rawcharts/bubblechart";
 import data from "../datasets/Movies.tsv";
 
 export default {
-  chart: scatterplot,
+  chart: bubblechart,
   data,
   dataTypes: {
     Year: {

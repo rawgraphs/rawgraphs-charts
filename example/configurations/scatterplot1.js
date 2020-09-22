@@ -1,8 +1,8 @@
-import scatterplot from "rawcharts/scatterplot"
+import bubblechart from "rawcharts/bubblechart"
 import data from "../datasets/Titanic.tsv"
 
 export default {
-  chart: scatterplot,
+  chart: bubblechart,
   data,
   dataTypes: {
     Age: "number",

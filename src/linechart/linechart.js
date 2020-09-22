@@ -3,7 +3,7 @@ import { dimensions }  from './dimensions'
 import { mapData } from './mapping'
 import { render } from './render'
 import { visualOptions } from './visualOptions'
-import icon from './example_icon.png'
+import icon from './linechart.svg'
 import thumbnail from './example_thumbnail.png'
 
 export default {
@@ -12,6 +12,6 @@ export default {
   mapData,
   render,
   visualOptions,
-  icon,
+   icon,
   thumbnail,
 }
