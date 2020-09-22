@@ -3,8 +3,6 @@ import { dimensions }  from './dimensions'
 import { mapData } from './mapping'
 import { render } from './render'
 import { visualOptions } from './visualOptions'
-import icon from './linechart.svg'
-import thumbnail from './example_thumbnail.png'
 
 export default {
   metadata,
@@ -12,6 +10,4 @@ export default {
   mapData,
   render,
   visualOptions,
-   icon,
-  thumbnail,
 }

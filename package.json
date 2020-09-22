@@ -1,6 +1,6 @@
 {
   "name": "@raw-temp/rawgraphs-charts",
-  "version": "0.0.22",
+  "version": "0.0.24",
   "description": "",
   "jsdelivr": "lib/index.umd.js",
   "unpkg": "lib/index.umd.js",
@@ -34,6 +34,7 @@
     "babel-plugin-preval": "^5.0.0",
     "css-loader": "^3.6.0",
     "dsv-loader": "^2.0.0",
+    "file-loader": "^6.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
