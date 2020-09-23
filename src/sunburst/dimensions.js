@@ -36,7 +36,7 @@ export const dimensions = [
       "date": "csvDistinct"
     },
   },
-  {
+	{
     "id": "label",
     "name": "label",
     "validTypes": [
@@ -47,6 +47,10 @@ export const dimensions = [
     "required": false,
     "multiple": true,
     "aggregation": true,
-    "aggregationDefault": "csvDistinct",
+		"aggregationDefault": {
+      "number": "sum",
+      "string": "csvDistinct",
+      "date": "csvDistinct"
+    },
   }
 ]

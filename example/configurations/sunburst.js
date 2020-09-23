@@ -12,14 +12,14 @@ export default {
 	  "results": "number"
 	},
   mapping: {
-    hierarchy: { value: ["Root"] },
+    hierarchy: { value: ["Root", "Level1"] },
 		color: {
 			value: ["Level1"],
 			config: {"aggregation": ["csvDistinct"]}
 		},
-    label: {
-			value: ["Level3"],
-			config: {"aggregation": ["csvDistinct"]}
+		label: {
+			value: ["Level1", "results"],
+			config: {"aggregation": ["csvDistinct","sum"]}
 		},
     size: {
 			value: ["results"],

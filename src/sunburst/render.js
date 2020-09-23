@@ -1,10 +1,12 @@
 import * as d3 from 'd3'
+import { rawgraphsLegend } from "@raw-temp/rawgraphs-core";
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
 
 	console.log('- render')
 
 	const {
+		// artboard
 		width,
 		height,
 		background,
@@ -12,11 +14,17 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 		marginRight,
 		marginBottom,
 		marginLeft,
-		colorScale,
-		padding,
 		// legend
 		showLegend,
     legendWidth,
+		// chart
+		padding,
+		// labels
+		label1Style,
+		label2Style,
+		label3Style,
+		// colors
+		colorScale,
 	} = visualOptions;
 
 	const margin = {
@@ -26,13 +34,24 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 		left: marginLeft
 	}
 
+	const labelStyles = [label1Style, label2Style, label3Style];
+
 	// define style
 	d3.select(svgNode).append('style')
 		.text(`
-      svg#viz {
+      #viz text {
         font-family: Helvetica, Arial, sans-serif;
         font-size: 12px;
       }
+
+			#labels .Primary {
+				font-weight: bold;
+			}
+
+			#labels .Tertiary {
+				font-weight: lighter;
+				font-style: oblique;
+			}
       `)
 
 	const chartWidth = width - margin.left - margin.right;
@@ -83,7 +102,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 			if ('children' in d) {
 				// if not leaf, check if leaves has the same value
 				const childrenColors = [...new Set(d.leaves().map(l => l.data[1].color))]
-				return childrenColors.length == 1 ? colorScale(childrenColors[0]) : 'gray'
+				return childrenColors.length == 1 ? colorScale(childrenColors[0]) : '#cccccc'
 			} else {
 				// otherwise, if it's a leaf use its own color
 				return (colorScale(d.data[1].color))
@@ -94,26 +113,35 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 		.append("title")
 		.text(d => d.data[0])
 
-	svg.append("g")
+	const textGroups = svg.append("g")
+		.attr('id', 'labels')
 		.attr("transform", `translate(${width / 2},${width / 2})`)
 		.attr("pointer-events", "none")
 		.attr("text-anchor", "middle")
 		.attr("font-size", 10)
 		.attr("font-family", "sans-serif")
 		.selectAll("text")
-		.data(root.descendants().filter(d => d.depth && (d.y0 + d.y1) / 2 * (d.x1 - d.x0) > 10)) // @TODO: expose minimum text size filter
+		// .data(root.descendants().filter(d => d.depth && (d.y0 + d.y1) / 2 * (d.x1 - d.x0) > 10)) // @TODO: expose minimum text size filter
+		.data(root.descendants())
 		.join("text")
 		.attr("transform", function(d) {
 			const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
 			const y = (d.y0 + d.y1) / 2;
 			return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
 		})
-		.attr("dy", "0.35em")
-		.text(d => d.data[0]) // @TODO: expose labels mapping
+
+	textGroups.selectAll('tspan')
+		// if node not a leaf, show just its name.
+		// if leaf, use all the mapped labels.
+		.data(d => d.children ? [d.data[0]] : d.data[1].label)
+		.join('tspan')
+		.attr('x', 0)
+		.attr("y", (d, i, n) => (i+1) * 12 - (n.length / 2 * 12) -2) // @TODO: 12 is the font size. we should expose this
+		.text(d => d)
+		.attr("class", (d,i) => i<3? labelStyles[i] : labelStyles[2])
 
 		if (showLegend) {
 			// svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option
-
 			const legendLayer = d3
 				.select(svgNode)
 				.append("g")

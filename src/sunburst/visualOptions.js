@@ -56,6 +56,30 @@ export const visualOptions = {
 		group: 'chart'
 	},
 
+	label1Style: {
+		type: "text",
+		label: "Labels 1 style",
+		group: "labels",
+		options: ["Primary", "Secondary", "Tertiary"],
+		default: "Primary"
+	},
+
+	label2Style: {
+		type: "text",
+		label: "Labels 1 style",
+		group: "labels",
+		options: ["Primary", "Secondary", "Tertiary"],
+		default: "Secondary"
+	},
+
+	label3Style: {
+		type: "text",
+		label: "Labels 1 style",
+		group: "labels",
+		options: ["Primary", "Secondary", "Tertiary"],
+		default: "Tertiary"
+	},
+
   colorScale: {
     type: 'colorScale',
     label: 'Color scale',
