@@ -66,7 +66,7 @@ export const visualOptions = {
 
 	label2Style: {
 		type: "text",
-		label: "Labels 1 style",
+		label: "Labels 2 style",
 		group: "labels",
 		options: ["Primary", "Secondary", "Tertiary"],
 		default: "Secondary"
@@ -74,7 +74,7 @@ export const visualOptions = {
 
 	label3Style: {
 		type: "text",
-		label: "Labels 1 style",
+		label: "Labels 3 style",
 		group: "labels",
 		options: ["Primary", "Secondary", "Tertiary"],
 		default: "Tertiary"
