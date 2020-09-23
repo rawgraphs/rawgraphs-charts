@@ -28,15 +28,43 @@ export const visualOptions = {
     group: 'artboard',
   },
 
-  colorScale : {
+	showLegend: {
+		type: "boolean",
+		label: "Show legend",
+		default: false,
+		group: "artboard",
+	},
+
+	legendWidth: {
+		type: "number",
+		label: "Legend width",
+		default: 200,
+		group: "artboard",
+		disabled: {
+			showLegend: false,
+		},
+		container: "width",
+		containerCondition: {
+			showLegend: true,
+		}
+	},
+
+	padding: {
+		type: 'number',
+		label: 'Padding (px)',
+		default: 2,
+		group: 'chart'
+	},
+
+  colorScale: {
     type: 'colorScale',
-    label: 'The color scale',
+    label: 'Color scale',
     dimension: 'color',
     default: {
       scaleType: 'ordinal',
       interpolator: 'interpolateSpectral'
     },
-    group: 'chart'
+    group: 'colors'
   },
 
 }

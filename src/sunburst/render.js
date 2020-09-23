@@ -12,7 +12,11 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 		marginRight,
 		marginBottom,
 		marginLeft,
-		colorScale
+		colorScale,
+		padding,
+		// legend
+		showLegend,
+    legendWidth,
 	} = visualOptions;
 
 	const margin = {
@@ -51,10 +55,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 	const arc = d3.arc()
 		.startAngle(d => d.x0)
 		.endAngle(d => d.x1)
-		.padAngle(d => Math.min((d.x1 - d.x0) / 2, 0.005))
+		.padAngle(padding / (radius / 2) ) // convert padding in radians
 		.padRadius(radius / 2)
 		.innerRadius(d => d.y0)
-		.outerRadius(d => d.y1 - 1)
+		.outerRadius(d => d.y1 - padding)
 
 	const svg = d3
 		.select(svgNode)
@@ -72,7 +76,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 	svg.append("g")
 		.attr("transform", `translate(${width / 2},${width / 2})`)
 		.attr("id", "viz")
-		// .attr("fill-opacity", 0.6)
 		.selectAll("path")
 		.data(root.descendants().filter(d => d.depth))
 		.join("path")
@@ -108,4 +111,21 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 		.attr("dy", "0.35em")
 		.text(d => d.data[0]) // @TODO: expose labels mapping
 
+		if (showLegend) {
+			// svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option
+
+			const legendLayer = d3
+				.select(svgNode)
+				.append("g")
+				.attr("id", "legend")
+				.attr("transform", `translate(${width},${marginTop})`);
+
+			const legend = rawgraphsLegend().legendWidth(legendWidth);
+
+			if (mapping.color.value) {
+				legend.addColor(mapping.color.value, colorScale);
+			}
+
+			legendLayer.call(legend);
+		}
 }
