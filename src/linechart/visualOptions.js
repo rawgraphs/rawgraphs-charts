@@ -17,15 +17,36 @@ export const visualOptions = {
   marginBottom : {
     type: 'number',
     label: 'Margin (bottom)',
-    default: 10,
+    default: 20,
     group: 'artboard',
   },
 
   marginLeft : {
     type: 'number',
     label: 'Margin (left)',
-    default: 10,
+    default: 40,
     group: 'artboard',
+  },
+
+	showLegend: {
+    type: "boolean",
+    label: "Show legend",
+    default: false,
+    group: "artboard",
+  },
+
+  legendWidth: {
+    type: "number",
+    label: "Legend width",
+    default: 200,
+    group: "artboard",
+    disabled: {
+      showLegend: false,
+    },
+    container: "width",
+    containerCondition: {
+      showLegend: true,
+    }
   },
 
   showPoints : {
@@ -40,7 +61,6 @@ export const visualOptions = {
     label: 'Points radius (px)',
     default: 3,
     group: 'chart',
-    //#TODO: not implemented in lib/frontend
     disabled: {
       showPoints: false
     }
@@ -151,13 +171,13 @@ export const visualOptions = {
 
 	colorScale : {
 		type: 'colorScale',
-		label: 'The color scale',
+		label: 'Color scale',
 		dimension: 'color',
 		default: {
 			scaleType: 'ordinal',
 			interpolator: 'interpolateSpectral'
 		},
-		group: 'chart'
+		group: 'colors'
 	},
 
 }

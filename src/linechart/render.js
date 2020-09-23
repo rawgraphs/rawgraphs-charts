@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import * as d3Array from 'd3-array'
-// import { categoryLegend } from 'rawgraphs-core'
+import { rawgraphsLegend } from "@raw-temp/rawgraphs-core";
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
 
@@ -34,7 +34,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     labelsShorten,
     labelsChars,
 		// color options
-    colorScale
+    colorScale,
+		// legend
+		showLegend,
+    legendWidth,
   } = visualOptions;
 
   const margin = {
@@ -299,4 +302,22 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         .attr("text-anchor", "middle")
     }
   }
+
+	if (showLegend) {
+		// svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option
+
+		const legendLayer = d3
+			.select(svgNode)
+			.append("g")
+			.attr("id", "legend")
+			.attr("transform", `translate(${width},${marginTop})`);
+
+		const legend = rawgraphsLegend().legendWidth(legendWidth);
+
+		if (mapping.color.value) {
+			legend.addColor(mapping.color.value, colorScale);
+		}
+
+		legendLayer.call(legend);
+	}
 }
