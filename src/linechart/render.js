@@ -1,10 +1,8 @@
 import * as d3 from "d3";
-import * as d3Array from 'd3-array'
 import { rawgraphsLegend } from "@raw-temp/rawgraphs-core";
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
-
-	console.log('- render')
+  console.log("- render");
 
   const {
     // artboard options
@@ -25,7 +23,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     useSameScale = false, // @TODO: add
     sortSeriesBy,
     gutterX,
-		gutterY,
+    gutterY,
     showSeriesLabels,
     repeatAxesLabels,
     // labels options
@@ -33,10 +31,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     labelsPosition,
     labelsShorten,
     labelsChars,
-		// color options
+    // color options
     colorScale,
-		// legend
-		showLegend,
+    // legend
+    showLegend,
     legendWidth,
   } = visualOptions;
 
@@ -48,8 +46,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   };
 
   //
-  d3.select(svgNode).append('style')
-  .text(`
+  d3.select(svgNode).append("style").text(`
     svg #viz {
       font-family: Helvetica, Arial, sans-serif;
       font-size: 12px;
@@ -93,56 +90,68 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     `);
 
   // create nest structure
-	const nestedData = d3.rollups(data, v => v.sort((a,b) => d3.ascending(a.x, b.x)), d => d.series, d => d.lines)
+  const nestedData = d3.rollups(
+    data,
+    (v) => v.sort((a, b) => d3.ascending(a.x, b.x)),
+    (d) => d.series,
+    (d) => d.lines
+  );
 
   margin.top += showSeriesLabels ? 24 : 0;
   // compute the series grid according to amount of series and user optionss
-  const rowsNumber = Math.ceil(nestedData.length/columnsNumber)
+  const rowsNumber = Math.ceil(nestedData.length / columnsNumber);
 
-  const chartWidth = ((width - margin.left - margin.right) - (columnsNumber - 1) * gutterX) / columnsNumber;
-  const chartHeight = ((height - margin.top - margin.bottom) - (rowsNumber - 1) * gutterY) / rowsNumber;
+  const chartWidth =
+    (width - margin.left - margin.right - (columnsNumber - 1) * gutterX) /
+    columnsNumber;
+  const chartHeight =
+    (height - margin.top - margin.bottom - (rowsNumber - 1) * gutterY) /
+    rowsNumber;
 
   // create the grid
-  let grid = nestedData.map(function(d,i){
-
-    const xpos = i%columnsNumber;
-    const ypos =  Math.floor(i/columnsNumber);
+  let grid = nestedData.map(function (d, i) {
+    const xpos = i % columnsNumber;
+    const ypos = Math.floor(i / columnsNumber);
 
     return {
       x: xpos * (chartWidth + gutterX),
       y: ypos * (chartHeight + gutterY),
       width: chartWidth,
-      height: chartHeight
-    }
-  })
+      height: chartHeight,
+    };
+  });
 
   // comupte max values for series
   // will add it as property to each series.
 
-  nestedData.forEach(function(serie){
-    serie.totalValue = data.filter(item => item.series == serie[0]).reduce((result, item) => result + item.y, 0)
-  })
+  nestedData.forEach(function (serie) {
+    serie.totalValue = data
+      .filter((item) => item.series == serie[0])
+      .reduce((result, item) => result + item.y, 0);
+  });
 
   // sort the dataset according to sortSeriesBy option
 
-  if(sortSeriesBy == "Total value (descending)"){
-    nestedData.sort((a,b) => d3.descending(a.totalValue, b.totalValue))
-  } else if(sortSeriesBy == "Total value (ascending)") {
-    nestedData.sort((a,b) => d3.ascending(a.totalValue, b.totalValue))
-  } else if(sortSeriesBy == "Name"){
-    nestedData.sort((a,b) => d3.ascending(a[0], b[0]))
+  if (sortSeriesBy == "Total value (descending)") {
+    nestedData.sort((a, b) => d3.descending(a.totalValue, b.totalValue));
+  } else if (sortSeriesBy == "Total value (ascending)") {
+    nestedData.sort((a, b) => d3.ascending(a.totalValue, b.totalValue));
+  } else if (sortSeriesBy == "Name") {
+    nestedData.sort((a, b) => d3.ascending(a[0], b[0]));
   }
 
   // get domains
-  const xDomain = d3.extent(data, d => d.x)
-  const yDomain = d3.extent(data, d => d.y)
+  const xDomain = d3.extent(data, (d) => d.x);
+  const yDomain = d3.extent(data, (d) => d.y);
 
   // define the x scale
   let x;
 
-	mapping.x.dataType === "number" ? mapping.x.dataType = {"type":"number"} : null // @TODO it should be better to have always the same kind of object in mapping
+  mapping.x.dataType === "number"
+    ? (mapping.x.dataType = { type: "number" })
+    : null; // @TODO it should be better to have always the same kind of object in mapping
 
-  switch(mapping.x.dataType.type) {
+  switch (mapping.x.dataType.type) {
     case "number":
       x = d3.scaleLinear().domain(xDomain).nice().range([0, chartWidth]);
       break;
@@ -158,39 +167,43 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr("transform", `translate(0,${chartHeight})`)
       .call(d3.axisBottom(x).ticks(width / 80))
       .call((g) =>
-        g.attr("class", "xAxis")
+        g
+          .attr("class", "xAxis")
           .append("text")
           .attr("x", chartWidth)
           .attr("dy", -5)
-          .attr('display',(d,i)=>{return i == 0 || repeatAxesLabels ? '' : 'none'}) // display according to options
-          .attr("class","axisTitle")
+          .attr("display", (d, i) => {
+            return i == 0 || repeatAxesLabels ? "" : "none";
+          }) // display according to options
+          .attr("class", "axisTitle")
           .text(mapping["x"][1])
       );
   };
 
   const yAxis = (g) => {
-    return g
-      .call(d3.axisLeft(y))
-      .call((g) =>
-        g.attr("class", "yAxis")
-          .select(".tick:last-of-type text")
-          .clone()
-          .attr('display',(d,i)=>{return i == 0 || repeatAxesLabels ? '' : 'none'}) // display according to options
-          .attr("class","axisTitle")
-          .text(mapping["y"][1])
-      );
+    return g.call(d3.axisLeft(y)).call((g) =>
+      g
+        .attr("class", "yAxis")
+        .select(".tick:last-of-type text")
+        .clone()
+        .attr("display", (d, i) => {
+          return i == 0 || repeatAxesLabels ? "" : "none";
+        }) // display according to options
+        .attr("class", "axisTitle")
+        .text(mapping["y"][1])
+    );
   };
 
   // convert string to d3 functions
   const curveType = {
-    "Basis": d3.curveBasis,
-    "Bundle": d3.curveBundle,
-    "Cardinal": d3.curveCardinal,
+    Basis: d3.curveBasis,
+    Bundle: d3.curveBundle,
+    Cardinal: d3.curveCardinal,
     "Catmull–Rom": d3.curveCatmullRom,
-    "Linear": d3.curveLinear,
+    Linear: d3.curveLinear,
     "Monotone X": d3.curveMonotoneX,
-    "Natural": d3.curveNatural,
-    "Step": d3.curveStep,
+    Natural: d3.curveNatural,
+    Step: d3.curveStep,
     "Step After": d3.curveStepAfter,
     "Step Before": d3.curveStepBefore,
   };
@@ -205,119 +218,121 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     })
     .curve(curveType[interpolation]);
 
-	// add background
-	d3.select(svgNode)
-		.append("rect")
-		.attr("width", width)
-		.attr("height", height)
-		.attr("x", 0)
-		.attr("y", 0)
-		.attr("fill", background)
-		.attr("id", "backgorund");
+  // add background
+  d3.select(svgNode)
+    .append("rect")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("fill", background)
+    .attr("id", "backgorund");
 
   const svg = d3
     .select(svgNode)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-    .attr("id", "viz")
+    .attr("id", "viz");
 
   const vizLayer = svg
     .append("g")
     .selectAll("g")
     .data(nestedData)
     .join("g")
-    .attr("id", d => d[0])
-    .attr("transform", (d,i) => "translate(" + grid[i].x + "," + grid[i].y + ")") // translate each serie according to the grid object
+    .attr("id", (d) => d[0])
+    .attr(
+      "transform",
+      (d, i) => "translate(" + grid[i].x + "," + grid[i].y + ")"
+    ) // translate each serie according to the grid object
     .attr("fill", "none")
     .attr("stroke-width", strokeWidth)
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round");
 
   // add the series title
-  if(showSeriesLabels){
-    vizLayer.append('text')
-    .attr("x", -margin.left)
+  if (showSeriesLabels) {
+    vizLayer
+      .append("text")
+      .attr("x", -margin.left)
       .attr("class", "title")
-      .text(d =>d[0])
+      .text((d) => d[0]);
   }
 
-  const axisLayer = vizLayer.append("g").attr("id", "axes")
-    axisLayer.append("g").call(xAxis);
-    axisLayer.append("g").call(yAxis);
+  const axisLayer = vizLayer.append("g").attr("id", "axes");
+  axisLayer.append("g").call(xAxis);
+  axisLayer.append("g").call(yAxis);
 
   const groups = vizLayer
     .append("g")
     .attr("id", "viz")
     .selectAll("g")
-    .data(d => d[1]) // pass the single line
+    .data((d) => d[1]) // pass the single line
     .join("g")
-    .attr('id', d => d[0])
+    .attr("id", (d) => d[0]);
 
   groups
     .append("path")
-    .attr("d", d => line(d[1]))
-    .attr("stroke", d => colorScale(d[1][0].color))
+    .attr("d", (d) => line(d[1]))
+    .attr("stroke", (d) => colorScale(d[1][0].color))
     .attr("fill", "none");
 
   if (showPoints) {
     groups
       .append("g")
       .selectAll("circle")
-      .data(d => d[1])
+      .data((d) => d[1])
       .join("circle")
       .attr("class", "dot")
-      .attr("cx", d => x(d.x))
-      .attr("cy", d => y(d.y))
+      .attr("cx", (d) => x(d.x))
+      .attr("cy", (d) => y(d.y))
       .attr("r", pointsRadius)
-      .attr("fill", d => colorScale(d.color))
+      .attr("fill", (d) => colorScale(d.color));
   }
 
-  if(showLabels){
-
+  if (showLabels) {
     let labels = groups
       .append("text")
-      .attr("class","labels")
-      .text(d => labelsShorten ? d[0].slice(0, labelsChars) : d[0])
+      .attr("class", "labels")
+      .text((d) => (labelsShorten ? d[0].slice(0, labelsChars) : d[0]));
 
-    if(labelsPosition == "side"){
+    if (labelsPosition == "side") {
       labels
-        .attr("x", d => x(d[1].slice(-1)[0].x)) // get last x
-        .attr("y", d => y(d[1].slice(-1)[0].y)) // get last x
+        .attr("x", (d) => x(d[1].slice(-1)[0].x)) // get last x
+        .attr("y", (d) => y(d[1].slice(-1)[0].y)) // get last x
         .attr("dx", 5)
         .attr("dy", 4)
-        .attr("text-anchor", "start")
-
-    } else if(labelsPosition == "inline"){
+        .attr("text-anchor", "start");
+    } else if (labelsPosition == "inline") {
       labels
-        .attr("x", d => {
-          const maxPos = d3Array.greatest(d[1], e => e.y)
-          return x(maxPos.x)
+        .attr("x", (d) => {
+          const maxPos = d3.greatest(d[1], (e) => e.y);
+          return x(maxPos.x);
         })
-        .attr("y", d => {
-          const maxPos = d3Array.greatest(d[1], e=> e.y)
-          return y(maxPos.y)
+        .attr("y", (d) => {
+          const maxPos = d3.greatest(d[1], (e) => e.y);
+          return y(maxPos.y);
         })
         .attr("dx", 0)
         .attr("dy", -6)
-        .attr("text-anchor", "middle")
+        .attr("text-anchor", "middle");
     }
   }
 
-	if (showLegend) {
-		// svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option
+  if (showLegend) {
+    // svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option
 
-		const legendLayer = d3
-			.select(svgNode)
-			.append("g")
-			.attr("id", "legend")
-			.attr("transform", `translate(${width},${marginTop})`);
+    const legendLayer = d3
+      .select(svgNode)
+      .append("g")
+      .attr("id", "legend")
+      .attr("transform", `translate(${width},${marginTop})`);
 
-		const legend = rawgraphsLegend().legendWidth(legendWidth);
+    const legend = rawgraphsLegend().legendWidth(legendWidth);
 
-		if (mapping.color.value) {
-			legend.addColor(mapping.color.value, colorScale);
-		}
+    if (mapping.color.value) {
+      legend.addColor(mapping.color.value, colorScale);
+    }
 
-		legendLayer.call(legend);
-	}
+    legendLayer.call(legend);
+  }
 }
