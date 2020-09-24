@@ -2,28 +2,28 @@ export const visualOptions = {
   marginTop: {
     type: "number",
     label: "Margin (top)",
-    default: 10,
+    default: 30,
     group: "artboard",
   },
 
   marginRight: {
     type: "number",
     label: "Margin (right)",
-    default: 10,
+    default: 30,
     group: "artboard",
   },
 
   marginBottom: {
     type: "number",
     label: "Margin (bottom)",
-    default: 10,
+    default: 30,
     group: "artboard",
   },
 
   marginLeft: {
     type: "number",
     label: "Margin (left)",
-    default: 10,
+    default: 30,
     group: "artboard",
   },
 
@@ -45,7 +45,7 @@ export const visualOptions = {
     container: "width",
     containerCondition: {
       showLegend: true,
-    }
+    },
   },
 
   xOrigin: {
@@ -65,7 +65,7 @@ export const visualOptions = {
   maxRadius: {
     type: "number",
     label: "Max radius (px)",
-    default: 10,
+    default: 15,
     step: "any",
     group: "chart",
   },
@@ -80,7 +80,7 @@ export const visualOptions = {
   pointsRadius: {
     type: "number",
     label: "Points radius (px)",
-    default: 5,
+    default: 1,
     group: "chart",
     //@TODO: not implemented in lib/frontend
     disabled: {
