@@ -144,6 +144,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .domain([0, d3.max(data, (d) => d.size)])
     .range([0, cellSize]);
 
+  const roundingScale = d3.scaleLinear().domain([0, 100]).rangeRound([0, 50]);
+
   // add background
   d3.select(svgNode)
     .append("rect")
@@ -230,8 +232,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .append("rect")
     .attr("x", (d) => x(d.x) + (cellSize - sizeScale(d.size)) / 2)
     .attr("y", (d) => y(d.y) + (cellSize - sizeScale(d.size)) / 2)
-    .attr("rx", rounding)
-    .attr("ry", rounding)
+    .attr("rx", (d) => (roundingScale(rounding) * sizeScale(d.size)) / 100)
+    .attr("ry", (d) => (roundingScale(rounding) * sizeScale(d.size)) / 100)
     .attr("width", (d) => sizeScale(d.size))
     .attr("height", (d) => sizeScale(d.size))
     .style("fill", (d) => colorScale(d.color));
@@ -276,10 +278,14 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         sizeScale(d3.max(data, (d) => d.size)) > legendWidth * 0.66
           ? legendWidth * 0.66
           : sizeScale(d3.max(data, (d) => d.size));
-      const shape = rounding * 2 >= cellSize ? "circle" : "square";
+      const shape = rounding >= 100 ? "circle" : "square";
       legendSizeScale
         .domain(d3.extent(data, (d) => d.size))
         .rangeRound([sizeScale(d3.min(data, (d) => d.size)), maxSize]);
+
+      if (shape === "circle") {
+        legendSizeScale.rangeRound(legendSizeScale.range().map((d) => d / 2));
+      }
 
       legend.addSize(mapping.size.value, legendSizeScale, shape);
     }

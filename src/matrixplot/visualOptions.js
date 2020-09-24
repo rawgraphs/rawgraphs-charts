@@ -51,6 +51,9 @@ export const visualOptions = {
     type: "number",
     label: "Rounding radius",
     default: 0,
+    min: 0,
+    max: 100,
+    step: 1,
     group: "chart",
   },
 
