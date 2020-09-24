@@ -1,34 +1,53 @@
 export const visualOptions = {
-
-  marginTop : {
-    type: 'number',
-    label: 'Margin (top)',
-    default: 10,
-    group: 'artboard',
+  marginTop: {
+    type: "number",
+    label: "Margin (top)",
+    default: 50,
+    group: "artboard",
   },
 
-  marginRight : {
-    type: 'number',
-    label: 'Margin (right)',
-    default: 10,
-    group: 'artboard',
+  marginRight: {
+    type: "number",
+    label: "Margin (right)",
+    default: 50,
+    group: "artboard",
   },
 
-  marginBottom : {
-    type: 'number',
-    label: 'Margin (bottom)',
-    default: 10,
-    group: 'artboard',
+  marginBottom: {
+    type: "number",
+    label: "Margin (bottom)",
+    default: 50,
+    group: "artboard",
   },
 
-  marginLeft : {
-    type: 'number',
-    label: 'Margin (left)',
-    default: 10,
-    group: 'artboard',
+  marginLeft: {
+    type: "number",
+    label: "Margin (left)",
+    default: 50,
+    group: "artboard",
+  },
+  showLegend: {
+    type: "boolean",
+    label: "Show legend",
+    default: false,
+    group: "artboard",
   },
 
-	rounding: {
+  legendWidth: {
+    type: "number",
+    label: "Legend width",
+    default: 200,
+    group: "artboard",
+    disabled: {
+      showLegend: false,
+    },
+    container: "width",
+    containerCondition: {
+      showLegend: true,
+    },
+  },
+
+  rounding: {
     type: "number",
     label: "Rounding radius",
     default: 0,
@@ -46,30 +65,40 @@ export const visualOptions = {
     type: "text",
     label: "Sort X axis by",
     group: "chart",
-    options: ["Total value (descending)", "Total value (ascending)", "Name", "Original"],
-    default: "Original"
+    options: [
+      "Total value (descending)",
+      "Total value (ascending)",
+      "Name",
+      "Original",
+    ],
+    default: "Original",
   },
 
   sortYAxisBy: {
     type: "text",
     label: "Sort Y axis by",
     group: "chart",
-    options: ["Total value (descending)", "Total value (ascending)", "Name", "Original"],
-    default: "Original"
+    options: [
+      "Total value (descending)",
+      "Total value (ascending)",
+      "Name",
+      "Original",
+    ],
+    default: "Original",
   },
 
-	showGrid: {
-    type: 'boolean',
-    label: 'Show grid',
+  showGrid: {
+    type: "boolean",
+    label: "Show grid",
     default: false,
-    group: 'chart'
+    group: "chart",
   },
 
   showLabels: {
-    type: 'boolean',
-    label: 'Show labels',
+    type: "boolean",
+    label: "Show labels",
     default: false,
-    group: 'labels'
+    group: "labels",
   },
 
   label1Style: {
@@ -77,34 +106,33 @@ export const visualOptions = {
     label: "Labels 1 style",
     group: "labels",
     options: ["Primary", "Secondary", "Tertiary"],
-    default: "Primary"
+    default: "Primary",
   },
 
-	label2Style: {
+  label2Style: {
     type: "text",
     label: "Labels 1 style",
     group: "labels",
     options: ["Primary", "Secondary", "Tertiary"],
-    default: "Secondary"
+    default: "Secondary",
   },
 
-	label3Style: {
+  label3Style: {
     type: "text",
     label: "Labels 1 style",
     group: "labels",
     options: ["Primary", "Secondary", "Tertiary"],
-    default: "Tertiary"
+    default: "Tertiary",
   },
 
-  colorScale : {
-    type: 'colorScale',
-    label: 'The color scale',
-    dimension: 'color',
+  colorScale: {
+    type: "colorScale",
+    label: "The color scale",
+    dimension: "color",
     default: {
-      scaleType: 'ordinal',
-      interpolator: 'interpolateSpectral'
+      scaleType: "ordinal",
+      interpolator: "interpolateSpectral",
     },
-    group: 'colors'
+    group: "colors",
   },
-
-}
+};
