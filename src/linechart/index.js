@@ -1,1 +1,1 @@
-export { default } from "./linechart";
+export { default } from './linechart'

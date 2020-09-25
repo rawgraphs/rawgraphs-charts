@@ -1,34 +1,33 @@
 export const visualOptions = {
-
-  marginTop : {
+  marginTop: {
     type: 'number',
     label: 'Margin (top)',
     default: 10,
     group: 'artboard',
   },
 
-  marginRight : {
+  marginRight: {
     type: 'number',
     label: 'Margin (right)',
     default: 10,
     group: 'artboard',
   },
 
-  marginBottom : {
+  marginBottom: {
     type: 'number',
     label: 'Margin (bottom)',
     default: 10,
     group: 'artboard',
   },
 
-  marginLeft : {
+  marginLeft: {
     type: 'number',
     label: 'Margin (left)',
     default: 10,
     group: 'artboard',
   },
-	// 
-	// tiling: {
+  //
+  // tiling: {
   //   type: "text",
   //   label: "Tiling method",
   //   group: "chart",
@@ -36,54 +35,53 @@ export const visualOptions = {
   //   default: "Squarify"
   // },
 
-	padding : {
+  padding: {
     type: 'number',
     label: 'Padding between treemap levels',
     default: 2,
     group: 'chart',
   },
 
-	sortCirclesBy: {
-    type: "text",
-    label: "Sort series by",
-    group: "series",
-    options: ["Size (descending)", "Size (ascending)", "Original"],
-    default: "Size (descending)"
+  sortCirclesBy: {
+    type: 'text',
+    label: 'Sort series by',
+    group: 'series',
+    options: ['Size (descending)', 'Size (ascending)', 'Original'],
+    default: 'Size (descending)',
   },
 
-  colorScale : {
+  colorScale: {
     type: 'colorScale',
-    label: 'The color scale',
+    label: 'Color scale',
     dimension: 'color',
     default: {
       scaleType: 'ordinal',
-      interpolator: 'interpolateSpectral'
+      interpolator: 'interpolateSpectral',
     },
-    group: 'colors'
+    group: 'colors',
   },
 
-	label1Style: {
-		type: "text",
-		label: "Labels 1 style",
-		group: "labels",
-		options: ["Primary", "Secondary", "Tertiary"],
-		default: "Primary"
-	},
+  label1Style: {
+    type: 'text',
+    label: 'Labels 1 style',
+    group: 'labels',
+    options: ['Primary', 'Secondary', 'Tertiary'],
+    default: 'Primary',
+  },
 
-	label2Style: {
-		type: "text",
-		label: "Labels 1 style",
-		group: "labels",
-		options: ["Primary", "Secondary", "Tertiary"],
-		default: "Secondary"
-	},
+  label2Style: {
+    type: 'text',
+    label: 'Labels 2 style',
+    group: 'labels',
+    options: ['Primary', 'Secondary', 'Tertiary'],
+    default: 'Secondary',
+  },
 
-	label3Style: {
-		type: "text",
-		label: "Labels 1 style",
-		group: "labels",
-		options: ["Primary", "Secondary", "Tertiary"],
-		default: "Tertiary"
-	},
-
+  label3Style: {
+    type: 'text',
+    label: 'Labels 3 style',
+    group: 'labels',
+    options: ['Primary', 'Secondary', 'Tertiary'],
+    default: 'Tertiary',
+  },
 }

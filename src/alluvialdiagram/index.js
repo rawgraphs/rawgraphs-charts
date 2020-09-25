@@ -1,1 +1,1 @@
-export { default } from './alluvialdiagram'
+export { default } from './alluvialdiagram'

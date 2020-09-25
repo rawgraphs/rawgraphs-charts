@@ -1,1 +1,1 @@
-export { default } from './dendrogram'
+export { default } from './dendrogram'

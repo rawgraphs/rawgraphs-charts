@@ -1,84 +1,83 @@
 export const visualOptions = {
-
-  marginTop : {
+  marginTop: {
     type: 'number',
     label: 'Margin (top)',
     default: 10,
     group: 'artboard',
   },
 
-  marginRight : {
+  marginRight: {
     type: 'number',
     label: 'Margin (right)',
     default: 10,
     group: 'artboard',
   },
 
-  marginBottom : {
+  marginBottom: {
     type: 'number',
     label: 'Margin (bottom)',
     default: 10,
     group: 'artboard',
   },
 
-  marginLeft : {
+  marginLeft: {
     type: 'number',
     label: 'Margin (left)',
     default: 10,
     group: 'artboard',
   },
 
-	showLegend: {
-		type: "boolean",
-		label: "Show legend",
-		default: false,
-		group: "artboard",
-	},
+  showLegend: {
+    type: 'boolean',
+    label: 'Show legend',
+    default: false,
+    group: 'artboard',
+  },
 
-	legendWidth: {
-		type: "number",
-		label: "Legend width",
-		default: 200,
-		group: "artboard",
-		disabled: {
-			showLegend: false,
-		},
-		container: "width",
-		containerCondition: {
-			showLegend: true,
-		}
-	},
+  legendWidth: {
+    type: 'number',
+    label: 'Legend width',
+    default: 200,
+    group: 'artboard',
+    disabled: {
+      showLegend: false,
+    },
+    container: 'width',
+    containerCondition: {
+      showLegend: true,
+    },
+  },
 
-	padding: {
-		type: 'number',
-		label: 'Padding (px)',
-		default: 2,
-		group: 'chart'
-	},
+  padding: {
+    type: 'number',
+    label: 'Padding (px)',
+    default: 2,
+    group: 'chart',
+  },
 
-	label1Style: {
-		type: "text",
-		label: "Labels 1 style",
-		group: "labels",
-		options: ["Primary", "Secondary", "Tertiary"],
-		default: "Primary"
-	},
+  label1Style: {
+    type: 'text',
+    label: 'Labels 1 style',
+    group: 'labels',
+    options: ['Primary', 'Secondary', 'Tertiary'],
+    default: 'Primary',
+  },
 
-	label2Style: {
-		type: "text",
-		label: "Labels 2 style",
-		group: "labels",
-		options: ["Primary", "Secondary", "Tertiary"],
-		default: "Secondary"
-	},
+  label2Style: {
+    type: 'text',
+    label: 'Labels 2 style',
+    group: 'labels',
+    options: ['Primary', 'Secondary', 'Tertiary'],
+    default: 'Secondary',
+  },
 
-	label3Style: {
-		type: "text",
-		label: "Labels 3 style",
-		group: "labels",
-		options: ["Primary", "Secondary", "Tertiary"],
-		default: "Tertiary"
-	},
+  label3Style: {
+    type: 'text',
+    label: 'Labels 3 style',
+    group: 'labels',
+    options: ['Primary', 'Secondary', 'Tertiary'],
+    default: 'Tertiary',
+  },
 
   colorScale: {
     type: 'colorScale',
@@ -86,9 +85,8 @@ export const visualOptions = {
     dimension: 'color',
     default: {
       scaleType: 'ordinal',
-      interpolator: 'interpolateSpectral'
+      interpolator: 'interpolateSpectral',
     },
-    group: 'colors'
+    group: 'colors',
   },
-
 }

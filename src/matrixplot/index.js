@@ -1,1 +1,1 @@
-export { default } from './matrixplot'
+export { default } from './matrixplot'

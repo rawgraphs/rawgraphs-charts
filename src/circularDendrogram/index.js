@@ -1,1 +1,1 @@
-export { default } from './circularDendrogram'
+export { default } from './circularDendrogram'

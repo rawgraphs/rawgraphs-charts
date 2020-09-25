@@ -1,1 +1,1 @@
-export { default } from "./beeswarm";
+export { default } from './beeswarm'

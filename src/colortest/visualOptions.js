@@ -1,15 +1,12 @@
 export const visualOptions = {
-  
-  colorScale : {
+  colorScale: {
     type: 'colorScale',
-    label: 'The color scale',
+    label: 'Color scale',
     dimension: 'color',
     default: {
       scaleType: 'ordinal',
-      interpolator: 'schemeCategory10'
+      interpolator: 'schemeCategory10',
     },
-    group: 'chart'
+    group: 'chart',
   },
-  
-
 }

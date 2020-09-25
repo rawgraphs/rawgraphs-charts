@@ -1,87 +1,87 @@
 export const visualOptions = {
   marginTop: {
-    type: "number",
-    label: "Margin (top)",
+    type: 'number',
+    label: 'Margin (top)',
     default: 30,
-    group: "artboard",
+    group: 'artboard',
   },
 
   marginRight: {
-    type: "number",
-    label: "Margin (right)",
+    type: 'number',
+    label: 'Margin (right)',
     default: 30,
-    group: "artboard",
+    group: 'artboard',
   },
 
   marginBottom: {
-    type: "number",
-    label: "Margin (bottom)",
+    type: 'number',
+    label: 'Margin (bottom)',
     default: 30,
-    group: "artboard",
+    group: 'artboard',
   },
 
   marginLeft: {
-    type: "number",
-    label: "Margin (left)",
+    type: 'number',
+    label: 'Margin (left)',
     default: 30,
-    group: "artboard",
+    group: 'artboard',
   },
 
   showLegend: {
-    type: "boolean",
-    label: "Show legend",
+    type: 'boolean',
+    label: 'Show legend',
     default: false,
-    group: "artboard",
+    group: 'artboard',
   },
 
   legendWidth: {
-    type: "number",
-    label: "Legend width",
+    type: 'number',
+    label: 'Legend width',
     default: 200,
-    group: "artboard",
+    group: 'artboard',
     disabled: {
       showLegend: false,
     },
-    container: "width",
+    container: 'width',
     containerCondition: {
       showLegend: true,
     },
   },
 
   xOrigin: {
-    type: "boolean",
-    label: "Set x origin to 0",
+    type: 'boolean',
+    label: 'Set x origin to 0',
     default: false,
-    group: "chart",
+    group: 'chart',
   },
 
   yOrigin: {
-    type: "boolean",
-    label: "Set y origin to 0",
+    type: 'boolean',
+    label: 'Set y origin to 0',
     default: false,
-    group: "chart",
+    group: 'chart',
   },
 
   maxRadius: {
-    type: "number",
-    label: "Max radius (px)",
+    type: 'number',
+    label: 'Max radius (px)',
     default: 15,
-    step: "any",
-    group: "chart",
+    step: 'any',
+    group: 'chart',
   },
 
   showPoints: {
-    type: "boolean",
-    label: "Show points",
+    type: 'boolean',
+    label: 'Show points',
     default: false,
-    group: "chart",
+    group: 'chart',
   },
 
   pointsRadius: {
-    type: "number",
-    label: "Points radius (px)",
+    type: 'number',
+    label: 'Points radius (px)',
     default: 1,
-    group: "chart",
+    group: 'chart',
     //@TODO: not implemented in lib/frontend
     disabled: {
       showPoints: false,
@@ -89,13 +89,13 @@ export const visualOptions = {
   },
 
   colorScale: {
-    type: "colorScale",
-    label: "The color scale",
-    dimension: "color",
+    type: 'colorScale',
+    label: 'Color scale',
+    dimension: 'color',
     default: {
-      scaleType: "ordinal",
-      interpolator: "interpolateSpectral",
+      scaleType: 'ordinal',
+      interpolator: 'interpolateSpectral',
     },
-    group: "chart",
+    group: 'chart',
   },
-};
+}
