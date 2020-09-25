@@ -1,12 +1,13 @@
 import icon from './dendrogram.svg'
 import thumbnail from './dendrogram_thumb.svg'
 
-export const metadata =  {
+export const metadata = {
   name: 'Linear dendrogram',
   thumbnail,
   icon,
   category: 'Hierarchy',
-  description: 'It displays hierarchically structured data with a tree structure, where the root node is on the left and leaves are on the right. The size of nodes can be used to encode a further quantitative dimension with size and a quantitative or categorical dimension with color.',
+  description:
+    'It displays hierarchically structured data with a tree structure, where the root node is on the left and leaves are on the right. The size of nodes can be used to encode a further quantitative dimension with size and a quantitative or categorical dimension with color.',
   // code:'https://github.com/rawgraphs/raw',
   // tutorial:'https://rawgraphs.io/learning/'
 }

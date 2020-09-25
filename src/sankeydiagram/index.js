@@ -1,1 +1,1 @@
-export { default } from './sankeydiagram'
+export { default } from './sankeydiagram'

@@ -3,198 +3,214 @@ import * as d3Sankey from 'd3-sankey'
 // import { categoryLegend } from 'rawgraphs-core'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
+  console.log('- render')
+  const {
+    width,
+    height,
+    background,
+    marginTop,
+    marginRight,
+    marginBottom,
+    marginLeft,
+    nodesWidth,
+    nodesPadding,
+    linksOpacity,
+    sortNodesBy,
+    verticalAlignment,
+  } = visualOptions
 
-	console.log('- render')
-	const {
-		width,
-		height,
-		background,
-		marginTop,
-		marginRight,
-		marginBottom,
-		marginLeft,
-		nodesWidth,
-		nodesPadding,
-		linksOpacity,
-		sortNodesBy,
-		verticalAlignment,
-	} = visualOptions;
+  const margin = {
+    top: marginTop,
+    right: marginRight,
+    bottom: marginBottom,
+    left: marginLeft,
+  }
 
-	const margin = {
-		top: marginTop,
-		right: marginRight,
-		bottom: marginBottom,
-		left: marginLeft
-	}
+  const chartWidth = width - margin.left - margin.right
+  const chartHeight = height - margin.top - margin.bottom
 
-	const chartWidth = width - margin.left - margin.right;
-	const chartHeight = height - margin.top - margin.bottom;
+  const links = data
 
-	const links = data;
+  //get unique nodes from links. @TODO: probably it could be improved
+  let nodes = links
+    .flatMap((l) => [
+      {
+        id: l.source,
+        step: l.sourceStep,
+      },
+      {
+        id: l.target,
+        step: l.targetStep,
+      },
+    ])
+    .reduce((map, obj) => {
+      map.set(obj.id, obj)
+      return map
+    }, new Map())
 
-	//get unique nodes from links. @TODO: probably it could be improved
-	let nodes = links.flatMap(l => [{
-			id: l.source,
-			step: l.sourceStep
-		}, {
-			id: l.target,
-			step: l.targetStep
-		}])
-		.reduce((map, obj) => {
-			map.set(obj.id, obj)
-			return map;
-		}, new Map())
+  nodes = Array.from(nodes).map((d) => d[1])
 
-	nodes = Array.from(nodes).map(d => d[1])
+  // convert option with alignment function names
+  const alignments = {
+    Left: 'sankeyLeft',
+    Right: 'sankeyRight',
+    Center: 'sankeyCenter',
+    Justify: 'sankeyJustify',
+  }
 
-	// convert option with alignment function names
-	const alignments = {
-		'Left': 'sankeyLeft',
-		'Right': 'sankeyRight',
-		'Center': 'sankeyCenter',
-		'Justify': 'sankeyJustify'
-	}
+  const sankey = d3Sankey
+    .sankey()
+    .nodeId((d) => d.id)
+    .nodeWidth(nodesWidth)
+    .nodePadding(nodesPadding)
+    .extent([
+      [0, 0],
+      [chartWidth, chartHeight],
+    ])
+    .iterations(0) // no iterations since we compute all the positions
 
-	const sankey = d3Sankey.sankey()
-		.nodeId(d => d.id)
-		.nodeWidth(nodesWidth)
-		.nodePadding(nodesPadding)
-		.extent([
-			[0, 0],
-			[chartWidth, chartHeight]
-		])
-		.iterations(0) // no iterations since we compute all the positions
+  // compute the sankey network (calculate size, define x and y positions.)
+  const network = sankey({
+    nodes,
+    links,
+  })
 
-	// compute the sankey network (calculate size, define x and y positions.)
-	const network = sankey({
-		nodes,
-		links
-	})
+  // sort nodes according to options
+  switch (sortNodesBy) {
+    case 'Total value (descending)':
+      network.nodes.sort((a, b) => d3.descending(a.value, b.value))
+      break
+    case 'Total value (ascending)':
+      network.nodes.sort((a, b) => d3.ascending(a.value, b.value))
+      break
+    case 'Name':
+      network.nodes.sort((a, b) => d3.ascending(a.id, b.id))
+      break
+  }
 
-	// sort nodes according to options
-	switch (sortNodesBy) {
-		case "Total value (descending)":
-			network.nodes.sort((a, b) => d3.descending(a.value, b.value));
-			break;
-		case "Total value (ascending)":
-			network.nodes.sort((a, b) => d3.ascending(a.value, b.value));
-			break;
-		case "Name":
-			network.nodes.sort((a, b) => d3.ascending(a.id, b.id));
-			break;
-	}
+  // compute x positions of groups
+  // get the first node for each category
+  const xScale = d3
+    .scaleBand()
+    .rangeRound([0, chartWidth])
+    .domain(mapping.steps.value)
+    .align(0)
+    .paddingOuter(0) // no outer padding
+    // inner padding is the chart size minus the node widths, divided by the spaces among steps
+    .paddingInner(
+      (chartWidth - mapping.steps.value.length) /
+        (mapping.steps.value.length - 1)
+    )
 
-	// compute x positions of groups
-	// get the first node for each category
-	const xScale = d3.scaleBand()
-		.rangeRound([0, chartWidth])
-		.domain(mapping.steps.value)
-		.align(0)
-		.paddingOuter(0) // no outer padding
-		// inner padding is the chart size minus the node widths, divided by the spaces among steps
-		.paddingInner((chartWidth-mapping.steps.value.length)/(mapping.steps.value.length-1));
+  // update nodes position
+  d3.groups(network.nodes, (d) => d.step)
+    // for each group, compute position
+    .forEach((group) => {
+      // compute the starting point.
+      let yPos0 = 0
+      const totalSize =
+        d3.sum(group[1], (d) => d.y1 - d.y0) +
+        (group[1].length - 1) * nodesPadding
+      // if top, do nothing.
+      // if bottom, sum the size of nodes and required padding.
+      // if center, the hal of the previous
+      switch (verticalAlignment) {
+        case 'Bottom':
+          yPos0 = chartHeight - totalSize
+          break
+        case 'Center':
+          yPos0 = (chartHeight - totalSize) / 2
+          break
+      }
 
-	// update nodes position
-	d3.groups(network.nodes, d => d.step)
-		// for each group, compute position
-		.forEach(group => {
-			// compute the starting point.
-			let yPos0 = 0;
-			const totalSize = d3.sum(group[1], d => d.y1 - d.y0) + (group[1].length - 1) * nodesPadding
-			// if top, do nothing.
-			// if bottom, sum the size of nodes and required padding.
-			// if center, the hal of the previous
-			switch (verticalAlignment) {
-				case 'Bottom':
-					yPos0 = chartHeight - totalSize;
-					break;
-				case "Center":
-					yPos0 = (chartHeight - totalSize) / 2;
-					break;
-			}
+      // take the list of nodes in the group, and recompute positions
+      group[1].reduce((ypos, node) => {
+        const nodeSize = node.y1 - node.y0
+        node.y0 = ypos
+        node.y1 = ypos + nodeSize
+        node.x0 = xScale(node.step)
+        node.x1 = node.x0 + nodesWidth
+        return ypos + nodeSize + nodesPadding
+      }, yPos0)
+    })
 
-			// take the list of nodes in the group, and recompute positions
-			group[1].reduce((ypos, node) => {
-				const nodeSize = node.y1 - node.y0;
-				node.y0 = ypos;
-				node.y1 = ypos + nodeSize;
-				node.x0 = xScale(node.step);
-				node.x1 = node.x0 + nodesWidth
-				return ypos + nodeSize + nodesPadding
-			}, yPos0)
+  // updates link position
+  sankey.update(network)
 
-		});
+  // draw background
+  d3.select(svgNode)
+    .append('rect')
+    .attr('width', width)
+    .attr('height', height)
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr('fill', background)
+    .attr('id', 'backgorund')
 
-	// updates link position
-	sankey.update(network);
+  const svg = d3
+    .select(svgNode)
+    .append('g')
+    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+    .attr('id', 'visualization')
 
-	// draw background
-	d3.select(svgNode)
-    .append("rect")
-    .attr("width", width)
-    .attr("height", height)
-    .attr("x", 0)
-    .attr("y", 0)
-    .attr("fill", background)
-    .attr("id", "backgorund");
+  svg
+    .append('g')
+    .selectAll('rect')
+    .data(network.nodes)
+    .join('rect')
+    .attr('x', (d) => d.x0)
+    .attr('y', (d) => d.y0)
+    .attr('height', (d) => d.y1 - d.y0)
+    .attr('width', (d) => d.x1 - d.x0)
+    .attr('fill', 'black')
+    .append('title')
+    .text((d) => `${d.id}: ${d.value}`)
 
-	const svg = d3.select(svgNode).append("g")
-		.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-		.attr("id", "visualization")
+  const link = svg
+    .append('g')
+    .attr('fill', 'none')
+    .attr('stroke-opacity', linksOpacity)
+    .selectAll('g')
+    .data(network.links)
+    .join('g')
+    .style('mix-blend-mode', 'multiply')
 
-	svg.append("g")
-		.selectAll("rect")
-		.data(network.nodes)
-		.join("rect")
-		.attr("x", d => d.x0)
-		.attr("y", d => d.y0)
-		.attr("height", d => d.y1 - d.y0)
-		.attr("width", d => d.x1 - d.x0)
-		.attr("fill", 'black')
-		.append("title")
-		.text(d => `${d.id}: ${d.value}`);
+  link
+    .append('path')
+    .attr('d', d3Sankey.sankeyLinkHorizontal())
+    .attr('stroke', 'gray')
+    .attr('stroke-width', (d) => Math.max(1, d.width))
 
-	const link = svg.append("g")
-		.attr("fill", "none")
-		.attr("stroke-opacity", linksOpacity)
-		.selectAll("g")
-		.data(network.links)
-		.join("g")
-		.style("mix-blend-mode", "multiply");
+  link
+    .append('title')
+    .text((d) => `${d.source.name} → ${d.target.name}: ${d.value}`)
 
-	link.append("path")
-		.attr("d", d3Sankey.sankeyLinkHorizontal())
-		.attr("stroke", 'gray')
-		.attr("stroke-width", d => Math.max(1, d.width));
+  svg
+    .append('g')
+    .attr('font-family', 'sans-serif')
+    .attr('font-size', 10)
+    .selectAll('text')
+    .data(network.nodes)
+    .join('text')
+    .attr('x', (d) => (d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6))
+    .attr('y', (d) => (d.y1 + d.y0) / 2)
+    .attr('dy', '0.35em')
+    .attr('text-anchor', (d) => (d.x0 < width / 2 ? 'start' : 'end'))
+    .text((d) => d.id)
 
-	link.append("title")
-		.text(d => `${d.source.name} → ${d.target.name}: ${d.value}`);
+  // add steps titles
+  const firstNodes = d3.groups(network.nodes, (d) => d.step).map((d) => d[1][0])
 
-	svg.append("g")
-		.attr("font-family", "sans-serif")
-		.attr("font-size", 10)
-		.selectAll("text")
-		.data(network.nodes)
-		.join("text")
-		.attr("x", d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
-		.attr("y", d => (d.y1 + d.y0) / 2)
-		.attr("dy", "0.35em")
-		.attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
-		.text(d => d.id);
-
-	// add steps titles
-	const firstNodes = d3.groups(network.nodes, d => d.step).map(d => d[1][0])
-
-	svg.append("g")
-		.attr("font-family", "sans-serif")
-		.attr("font-size", 10)
-		.attr("font-weight", "bold")
-		.selectAll("text")
-		.data(firstNodes)
-		.join("text")
-		.attr("x", d => d.x0 + nodesPadding / 2)
-		.attr("y", d => d.y0 - 6)
-		.attr("text-anchor", "middle")
-		.text(d => d.step)
-
+  svg
+    .append('g')
+    .attr('font-family', 'sans-serif')
+    .attr('font-size', 10)
+    .attr('font-weight', 'bold')
+    .selectAll('text')
+    .data(firstNodes)
+    .join('text')
+    .attr('x', (d) => d.x0 + nodesPadding / 2)
+    .attr('y', (d) => d.y0 - 6)
+    .attr('text-anchor', 'middle')
+    .text((d) => d.step)
 }

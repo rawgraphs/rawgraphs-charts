@@ -1,44 +1,42 @@
 import * as d3 from 'd3'
-import { rawgraphsLegend } from "@raw-temp/rawgraphs-core";
+import { rawgraphsLegend } from '@raw-temp/rawgraphs-core'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
+  console.log('- render')
 
-	console.log('- render')
-
-	const {
-		// artboard
-		width,
-		height,
-		background,
-		marginTop,
-		marginRight,
-		marginBottom,
-		marginLeft,
-		// legend
-		showLegend,
+  const {
+    // artboard
+    width,
+    height,
+    background,
+    marginTop,
+    marginRight,
+    marginBottom,
+    marginLeft,
+    // legend
+    showLegend,
     legendWidth,
-		// chart
-		padding,
-		// labels
-		label1Style,
-		label2Style,
-		label3Style,
-		// colors
-		colorScale,
-	} = visualOptions;
+    // chart
+    padding,
+    // labels
+    label1Style,
+    label2Style,
+    label3Style,
+    // colors
+    colorScale,
+  } = visualOptions
 
-	const margin = {
-		top: marginTop,
-		right: marginRight,
-		bottom: marginBottom,
-		left: marginLeft
-	}
+  const margin = {
+    top: marginTop,
+    right: marginRight,
+    bottom: marginBottom,
+    left: marginLeft,
+  }
 
-	const labelStyles = [label1Style, label2Style, label3Style];
+  const labelStyles = [label1Style, label2Style, label3Style]
 
-	// define style
-	d3.select(svgNode).append('style')
-		.text(`
+  // define style
+  d3.select(svgNode).append('style').text(`
       #viz text {
         font-family: Helvetica, Arial, sans-serif;
         font-size: 12px;
@@ -54,106 +52,119 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 			}
       `)
 
-	const chartWidth = width - margin.left - margin.right;
-	const chartHeight = height - margin.top - margin.bottom;
+  const chartWidth = width - margin.left - margin.right
+  const chartHeight = height - margin.top - margin.bottom
 
-	const radius = chartWidth > chartHeight ? chartHeight / 2 : chartWidth / 2;
+  const radius = chartWidth > chartHeight ? chartHeight / 2 : chartWidth / 2
 
-	// create the hierarchical structure
-	const nest = d3.rollup(data, v => v[0], ...mapping.hierarchy.value.map(level => (d => d.hierarchy.get(level))))
+  // create the hierarchical structure
+  const nest = d3.rollup(
+    data,
+    (v) => v[0],
+    ...mapping.hierarchy.value.map((level) => (d) => d.hierarchy.get(level))
+  )
 
-	const hierarchy = d3.hierarchy(nest)
-		.sum(d => d[1] instanceof Map ? 0 : d[1].size); // since maps have also a .size porperty, sum only values for leaves, and not for Maps
+  const hierarchy = d3
+    .hierarchy(nest)
+    .sum((d) => (d[1] instanceof Map ? 0 : d[1].size)) // since maps have also a .size porperty, sum only values for leaves, and not for Maps
 
-	const partition = nest => d3.partition() // copied from example of d3v6, not clear the meaning
-		.size([2 * Math.PI, radius])
-		(hierarchy)
+  const partition = (nest) =>
+    d3
+      .partition() // copied from example of d3v6, not clear the meaning
+      .size([2 * Math.PI, radius])(hierarchy)
 
-	const root = partition(nest);
+  const root = partition(nest)
 
-	const arc = d3.arc()
-		.startAngle(d => d.x0)
-		.endAngle(d => d.x1)
-		.padAngle(padding / (radius / 2) ) // convert padding in radians
-		.padRadius(radius / 2)
-		.innerRadius(d => d.y0)
-		.outerRadius(d => d.y1 - padding)
+  const arc = d3
+    .arc()
+    .startAngle((d) => d.x0)
+    .endAngle((d) => d.x1)
+    .padAngle(padding / (radius / 2)) // convert padding in radians
+    .padRadius(radius / 2)
+    .innerRadius((d) => d.y0)
+    .outerRadius((d) => d.y1 - padding)
 
-	const svg = d3
-		.select(svgNode)
+  const svg = d3.select(svgNode)
 
-	// add background
-	d3.select(svgNode)
-		.append("rect")
-		.attr("width", width)
-		.attr("height", height)
-		.attr("x", 0)
-		.attr("y", 0)
-		.attr("fill", background)
-		.attr("id", "backgorund");
+  // add background
+  d3.select(svgNode)
+    .append('rect')
+    .attr('width', width)
+    .attr('height', height)
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr('fill', background)
+    .attr('id', 'backgorund')
 
-	svg.append("g")
-		.attr("transform", `translate(${width / 2},${width / 2})`)
-		.attr("id", "viz")
-		.selectAll("path")
-		.data(root.descendants().filter(d => d.depth))
-		.join("path")
-		.attr("fill", function(d) {
-			if ('children' in d) {
-				// if not leaf, check if leaves has the same value
-				const childrenColors = [...new Set(d.leaves().map(l => l.data[1].color))]
-				return childrenColors.length == 1 ? colorScale(childrenColors[0]) : '#cccccc'
-			} else {
-				// otherwise, if it's a leaf use its own color
-				return (colorScale(d.data[1].color))
-			}
-		})
-		.attr("display", d => d.data[0] != "" ? '' : 'none')
-		.attr("d", arc)
-		.append("title")
-		.text(d => d.data[0])
+  svg
+    .append('g')
+    .attr('transform', `translate(${width / 2},${width / 2})`)
+    .attr('id', 'viz')
+    .selectAll('path')
+    .data(root.descendants().filter((d) => d.depth))
+    .join('path')
+    .attr('fill', function (d) {
+      if ('children' in d) {
+        // if not leaf, check if leaves has the same value
+        const childrenColors = [
+          ...new Set(d.leaves().map((l) => l.data[1].color)),
+        ]
+        return childrenColors.length == 1
+          ? colorScale(childrenColors[0])
+          : '#cccccc'
+      } else {
+        // otherwise, if it's a leaf use its own color
+        return colorScale(d.data[1].color)
+      }
+    })
+    .attr('display', (d) => (d.data[0] != '' ? '' : 'none'))
+    .attr('d', arc)
+    .append('title')
+    .text((d) => d.data[0])
 
-	const textGroups = svg.append("g")
-		.attr('id', 'labels')
-		.attr("transform", `translate(${width / 2},${width / 2})`)
-		.attr("pointer-events", "none")
-		.attr("text-anchor", "middle")
-		.attr("font-size", 10)
-		.attr("font-family", "sans-serif")
-		.selectAll("text")
-		// .data(root.descendants().filter(d => d.depth && (d.y0 + d.y1) / 2 * (d.x1 - d.x0) > 10)) // @TODO: expose minimum text size filter
-		.data(root.descendants())
-		.join("text")
-		.attr("transform", function(d) {
-			const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
-			const y = (d.y0 + d.y1) / 2;
-			return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
-		})
+  const textGroups = svg
+    .append('g')
+    .attr('id', 'labels')
+    .attr('transform', `translate(${width / 2},${width / 2})`)
+    .attr('pointer-events', 'none')
+    .attr('text-anchor', 'middle')
+    .attr('font-size', 10)
+    .attr('font-family', 'sans-serif')
+    .selectAll('text')
+    // .data(root.descendants().filter(d => d.depth && (d.y0 + d.y1) / 2 * (d.x1 - d.x0) > 10)) // @TODO: expose minimum text size filter
+    .data(root.descendants())
+    .join('text')
+    .attr('transform', function (d) {
+      const x = (((d.x0 + d.x1) / 2) * 180) / Math.PI
+      const y = (d.y0 + d.y1) / 2
+      return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`
+    })
 
-	textGroups.selectAll('tspan')
-		// if node not a leaf, show just its name.
-		// if leaf, use all the mapped labels.
-		.data(d => d.children ? [d.data[0]] : d.data[1].label)
-		.join('tspan')
-		.attr('x', 0)
-		.attr("y", (d, i, n) => (i+1) * 12 - (n.length / 2 * 12) -2) // @TODO: 12 is the font size. we should expose this
-		.text(d => d)
-		.attr("class", (d,i) => i<3? labelStyles[i] : labelStyles[2])
+  textGroups
+    .selectAll('tspan')
+    // if node not a leaf, show just its name.
+    // if leaf, use all the mapped labels.
+    .data((d) => (d.children ? [d.data[0]] : d.data[1].label))
+    .join('tspan')
+    .attr('x', 0)
+    .attr('y', (d, i, n) => (i + 1) * 12 - (n.length / 2) * 12 - 2) // @TODO: 12 is the font size. we should expose this
+    .text((d) => d)
+    .attr('class', (d, i) => (i < 3 ? labelStyles[i] : labelStyles[2]))
 
-		if (showLegend) {
-			// svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option
-			const legendLayer = d3
-				.select(svgNode)
-				.append("g")
-				.attr("id", "legend")
-				.attr("transform", `translate(${width},${marginTop})`);
+  if (showLegend) {
+    // svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option
+    const legendLayer = d3
+      .select(svgNode)
+      .append('g')
+      .attr('id', 'legend')
+      .attr('transform', `translate(${width},${marginTop})`)
 
-			const legend = rawgraphsLegend().legendWidth(legendWidth);
+    const legend = rawgraphsLegend().legendWidth(legendWidth)
 
-			if (mapping.color.value) {
-				legend.addColor(mapping.color.value, colorScale);
-			}
+    if (mapping.color.value) {
+      legend.addColor(mapping.color.value, colorScale)
+    }
 
-			legendLayer.call(legend);
-		}
+    legendLayer.call(legend)
+  }
 }

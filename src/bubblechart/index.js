@@ -1,1 +1,1 @@
-export { default } from './bubblechart'
+export { default } from './bubblechart'

@@ -1,1 +1,1 @@
-export { default } from './sunburst'
+export { default } from './sunburst'

@@ -1,27 +1,26 @@
 export const visualOptions = {
-
-  marginTop : {
+  marginTop: {
     type: 'number',
     label: 'Margin (top)',
     default: 10,
     group: 'artboard',
   },
 
-  marginRight : {
+  marginRight: {
     type: 'number',
     label: 'Margin (right)',
     default: 10,
     group: 'artboard',
   },
 
-  marginBottom : {
+  marginBottom: {
     type: 'number',
     label: 'Margin (bottom)',
     default: 10,
     group: 'artboard',
   },
 
-  marginLeft : {
+  marginLeft: {
     type: 'number',
     label: 'Margin (left)',
     default: 10,
@@ -29,32 +28,31 @@ export const visualOptions = {
   },
 
   nodesWidth: {
-    type: "number",
-    label: "Nodes width",
+    type: 'number',
+    label: 'Nodes width',
     default: 5,
-    group: "chart",
+    group: 'chart',
   },
 
   nodesPadding: {
-    type: "number",
-    label: "Nodes padding",
+    type: 'number',
+    label: 'Nodes padding',
     default: 5,
-    group: "chart",
+    group: 'chart',
   },
 
   alignment: {
-    type: "text",
-    label: "Nodes alignment",
-    group: "chart",
-    options: ["Left", "Right", "Center", "Justify"],
-    default: "Left"
+    type: 'text',
+    label: 'Nodes alignment',
+    group: 'chart',
+    options: ['Left', 'Right', 'Center', 'Justify'],
+    default: 'Left',
   },
 
   iterations: {
-    type: "number",
-    label: "Amount of iterations (higher values can require long time)",
+    type: 'number',
+    label: 'Amount of iterations (higher values can require long time)',
     default: 6,
-    group: "chart",
-  }
-
+    group: 'chart',
+  },
 }

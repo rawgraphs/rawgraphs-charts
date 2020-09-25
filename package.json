@@ -8,6 +8,7 @@
   "module": "lib/index.es.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write src",
     "sandbox": "webpack-dev-server",
     "prebuild": "rimraf lib",
     "build": "rollup -c"
@@ -34,6 +35,7 @@
     "css-loader": "^3.6.0",
     "dsv-loader": "^2.0.0",
     "file-loader": "^6.1.0",
+    "prettier": "^2.1.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",

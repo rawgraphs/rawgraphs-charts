@@ -1,1 +1,1 @@
-export { default } from './colortest'
+export { default } from './colortest'

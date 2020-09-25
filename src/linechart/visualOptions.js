@@ -1,187 +1,189 @@
 export const visualOptions = {
-
-  marginTop : {
+  marginTop: {
     type: 'number',
     label: 'Margin (top)',
     default: 10,
     group: 'artboard',
   },
 
-  marginRight : {
+  marginRight: {
     type: 'number',
     label: 'Margin (right)',
     default: 10,
     group: 'artboard',
   },
 
-  marginBottom : {
+  marginBottom: {
     type: 'number',
     label: 'Margin (bottom)',
     default: 20,
     group: 'artboard',
   },
 
-  marginLeft : {
+  marginLeft: {
     type: 'number',
     label: 'Margin (left)',
     default: 40,
     group: 'artboard',
   },
 
-	showLegend: {
-    type: "boolean",
-    label: "Show legend",
+  showLegend: {
+    type: 'boolean',
+    label: 'Show legend',
     default: false,
-    group: "artboard",
+    group: 'artboard',
   },
 
   legendWidth: {
-    type: "number",
-    label: "Legend width",
+    type: 'number',
+    label: 'Legend width',
     default: 200,
-    group: "artboard",
+    group: 'artboard',
     disabled: {
       showLegend: false,
     },
-    container: "width",
+    container: 'width',
     containerCondition: {
       showLegend: true,
-    }
+    },
   },
 
-  showPoints : {
+  showPoints: {
     type: 'boolean',
     label: 'Show points',
     default: false,
-    group: 'chart'
+    group: 'chart',
   },
 
-  pointsRadius : {
+  pointsRadius: {
     type: 'number',
     label: 'Points radius (px)',
     default: 3,
     group: 'chart',
     disabled: {
-      showPoints: false
-    }
+      showPoints: false,
+    },
   },
 
   interpolation: {
-    type: "text",
-    label: "Interpolation",
-    default: "Cardinal",
+    type: 'text',
+    label: 'Interpolation',
+    default: 'Cardinal',
     options: [
-      "Basis",
-      "Bundle",
-      "Cardinal",
-      "Catmull–Rom",
-      "Linear",
-      "Monotone X",
-      "Natural",
-      "Step",
-      "Step After",
-      "Step Before",
+      'Basis',
+      'Bundle',
+      'Cardinal',
+      'Catmull–Rom',
+      'Linear',
+      'Monotone X',
+      'Natural',
+      'Step',
+      'Step After',
+      'Step Before',
     ],
-    group: "chart",
+    group: 'chart',
   },
 
   strokeWidth: {
-    type: "number",
-    label: "Stroke width",
+    type: 'number',
+    label: 'Stroke width',
     default: 1.5,
     options: [
       { label: 'light', value: 1 },
       { label: 'medium', value: 1.5 },
       { label: 'bold', value: 3 },
     ],
-    group: "chart",
+    group: 'chart',
   },
 
   columnsNumber: {
-    type: "number",
-    label: "Number of columns",
+    type: 'number',
+    label: 'Number of columns',
     default: 1,
-    group: "series",
+    group: 'series',
   },
 
   gutterX: {
-    type: "number",
-    label: "Horizontal space between series",
+    type: 'number',
+    label: 'Horizontal space between series',
     default: 25,
-    group: "series",
+    group: 'series',
   },
 
-	gutterY: {
-		type: "number",
-		label: "Vertical space between series",
-		default: 50,
-		group: "series",
-	},
+  gutterY: {
+    type: 'number',
+    label: 'Vertical space between series',
+    default: 50,
+    group: 'series',
+  },
 
   sortSeriesBy: {
-    type: "text",
-    label: "Sort series by",
-    group: "series",
-    options: ["Total value (descending)", "Total value (ascending)", "Name", "Original"],
-    default: "Total value (descending)"
+    type: 'text',
+    label: 'Sort series by',
+    group: 'series',
+    options: [
+      'Total value (descending)',
+      'Total value (ascending)',
+      'Name',
+      'Original',
+    ],
+    default: 'Total value (descending)',
   },
 
   showSeriesLabels: {
     type: 'boolean',
     label: 'Show series labels',
     default: true,
-    group: 'series'
+    group: 'series',
   },
 
   repeatAxesLabels: {
     type: 'boolean',
     label: 'Repeat axis labels for each series',
     default: false,
-    group: 'series'
+    group: 'series',
   },
 
   showLabels: {
     type: 'boolean',
     label: 'Show Labels',
     default: true,
-    group: 'labels'
+    group: 'labels',
   },
 
   labelsPosition: {
-    type: "text",
-    label: "Labels position",
-    group: "series",
-    options: ["inline", "side"],
-    default: "inline"
+    type: 'text',
+    label: 'Labels position',
+    group: 'series',
+    options: ['inline', 'side'],
+    default: 'inline',
   },
 
   labelsShorten: {
     type: 'boolean',
     label: 'Shorten Labels',
     default: false,
-    group: 'labels'
+    group: 'labels',
   },
 
   labelsChars: {
-    type: "number",
-    label: "Max number of charachters",
+    type: 'number',
+    label: 'Max number of charachters',
     default: 1,
-    group: "labels",
+    group: 'labels',
   },
 
-	colorScale : {
-		type: 'colorScale',
-		label: 'Color scale',
-		dimension: 'color',
-		default: {
-			scaleType: 'ordinal',
-			interpolator: 'interpolateSpectral'
-		},
-		group: 'colors'
-	},
-
+  colorScale: {
+    type: 'colorScale',
+    label: 'Color scale',
+    dimension: 'color',
+    default: {
+      scaleType: 'ordinal',
+      interpolator: 'interpolateSpectral',
+    },
+    group: 'colors',
+  },
 }
-
 
 // showLegend,
 // legendWidth,
