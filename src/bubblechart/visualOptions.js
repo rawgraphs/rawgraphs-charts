@@ -90,7 +90,7 @@ export const visualOptions = {
 
   colorScale: {
     type: 'colorScale',
-    label: 'The color scale',
+    label: 'Color scale',
     dimension: 'color',
     default: {
       scaleType: 'ordinal',
