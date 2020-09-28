@@ -98,7 +98,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
   svg
     .append('g')
-    .attr('transform', `translate(${width / 2},${width / 2})`)
+    .attr('transform', `translate(${width / 2},${height / 2})`)
     .attr('id', 'viz')
     .selectAll('path')
     .data(root.descendants().filter((d) => d.depth))
@@ -125,7 +125,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   const textGroups = svg
     .append('g')
     .attr('id', 'labels')
-    .attr('transform', `translate(${width / 2},${width / 2})`)
+    .attr('transform', `translate(${width / 2},${height / 2})`)
     .attr('pointer-events', 'none')
     .attr('text-anchor', 'middle')
     .attr('font-size', 10)
