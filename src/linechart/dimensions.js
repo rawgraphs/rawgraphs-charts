@@ -1,25 +1,12 @@
 export const dimensions = [
   {
-    id: 'series',
-    name: 'series',
-    validTypes: ['number', 'string', 'date'],
-    required: false,
-    operation: 'get',
-  },
-  {
-    id: 'lines',
-    name: 'lines',
-    validTypes: ['number', 'string', 'date'],
-    required: false,
-    operation: 'get',
-  },
-  {
     id: 'x',
     name: 'x',
     operation: 'get',
     validTypes: ['number', 'date'],
     required: true,
   },
+
   {
     id: 'y',
     name: 'y',
@@ -29,6 +16,15 @@ export const dimensions = [
     aggregation: true,
     aggregationDefault: 'sum',
   },
+
+  {
+    id: 'lines',
+    name: 'lines',
+    validTypes: ['number', 'string', 'date'],
+    required: false,
+    operation: 'get',
+  },
+
   {
     id: 'color',
     name: 'color',
@@ -41,5 +37,13 @@ export const dimensions = [
       string: 'csvDistinct',
       date: 'csvDistinct',
     },
+  },
+
+  {
+    id: 'series',
+    name: 'series',
+    validTypes: ['number', 'string', 'date'],
+    required: false,
+    operation: 'get',
   },
 ]
