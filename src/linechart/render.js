@@ -56,7 +56,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       font-weight: bold;
       fill: black;
       text-anchor: start;
-      transform: translate(0px, -18px)
+      transform: translate(0px, -10px)
     }
 
     #viz .tick > text {
@@ -69,7 +69,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
     #viz .axisTitle {
       fill: #161616;
-      font-weight: bold;
+      font-style: italic;
       font-size: 12px;
     }
 
@@ -166,32 +166,11 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     return g
       .attr('transform', `translate(0,${chartHeight})`)
       .call(d3.axisBottom(x).ticks(width / 80))
-      .call((g) =>
-        g
-          .attr('class', 'xAxis')
-          .append('text')
-          .attr('x', chartWidth)
-          .attr('dy', -5)
-          .attr('display', (d, i) => {
-            return i == 0 || repeatAxesLabels ? '' : 'none'
-          }) // display according to options
-          .attr('class', 'axisTitle')
-          .text(mapping['x'][1])
-      )
+      .call((g) => g.attr('class', 'xAxis'))
   }
 
   const yAxis = (g) => {
-    return g.call(d3.axisLeft(y)).call((g) =>
-      g
-        .attr('class', 'yAxis')
-        .select('.tick:last-of-type text')
-        .clone()
-        .attr('display', (d, i) => {
-          return i == 0 || repeatAxesLabels ? '' : 'none'
-        }) // display according to options
-        .attr('class', 'axisTitle')
-        .text(mapping['y'][1])
-    )
+    return g.call(d3.axisLeft(y)).call((g) => g.attr('class', 'yAxis'))
   }
 
   // convert string to d3 functions
@@ -248,15 +227,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('stroke-width', strokeWidth)
     .attr('stroke-linejoin', 'round')
     .attr('stroke-linecap', 'round')
-
-  // add the series title
-  if (showSeriesLabels) {
-    vizLayer
-      .append('text')
-      .attr('x', -margin.left)
-      .attr('class', 'title')
-      .text((d) => d[0])
-  }
 
   const axisLayer = vizLayer.append('g').attr('id', 'axes')
   axisLayer.append('g').call(xAxis)
@@ -317,6 +287,38 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         .attr('text-anchor', 'middle')
     }
   }
+
+  // add the series title
+  if (showSeriesLabels) {
+    vizLayer
+      .append('text')
+      // .attr('y', 10)
+      .attr('class', 'title')
+      .text((d) => d[0])
+  }
+
+  // add the x axis titles
+  vizLayer
+    .append('text')
+    .attr('y', chartHeight - 5)
+    .attr('x', chartWidth)
+    .attr('class', 'axisTitle')
+    .attr('text-anchor', 'end')
+    .attr('display', (d, i) => {
+      return i == 0 || repeatAxesLabels ? '' : 'none'
+    })
+    .text(mapping.x.value)
+  // add the y axis titles
+  vizLayer
+    .append('text')
+    .attr('y', 12)
+    .attr('x', 5)
+    .attr('class', 'axisTitle')
+    .attr('text-anchor', 'start')
+    .attr('display', (d, i) => {
+      return i == 0 || repeatAxesLabels ? '' : 'none'
+    })
+    .text(mapping.y.value)
 
   if (showLegend) {
     // svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option

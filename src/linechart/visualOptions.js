@@ -68,7 +68,7 @@ export const visualOptions = {
   interpolation: {
     type: 'text',
     label: 'Interpolation',
-    default: 'Cardinal',
+    default: 'Natural',
     options: [
       'Basis',
       'Bundle',
@@ -154,9 +154,9 @@ export const visualOptions = {
   labelsPosition: {
     type: 'text',
     label: 'Labels position',
-    group: 'series',
     options: ['inline', 'side'],
     default: 'inline',
+    group: 'labels',
   },
 
   labelsShorten: {
