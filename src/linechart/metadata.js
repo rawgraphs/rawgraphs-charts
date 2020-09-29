@@ -2,7 +2,7 @@ import icon from './linechart.svg'
 import thumbnail from './linechart_thumb.svg'
 
 export const metadata = {
-  name: 'Linechart',
+  name: 'Line chart',
   thumbnail,
   icon,
   category: 'Series',
