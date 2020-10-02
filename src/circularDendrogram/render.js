@@ -1,4 +1,5 @@
 import * as d3 from 'd3'
+import { rawgraphsLegend } from '@raw-temp/rawgraphs-core'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
   console.log('- render')
@@ -7,10 +8,15 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     width,
     height,
     background,
+    // margins
     marginTop,
     marginRight,
     marginBottom,
     marginLeft,
+    // legend
+    showLegend,
+    legendWidth,
+    // colors
     colorScale,
     maxRadius,
     layout,
@@ -228,13 +234,11 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       // else pass the mapped labels
       else {
         const xpos = sizeScale(d.value) + 5
-        return [d.data[0]]
-          .concat(d.data[1].label)
-          .map((e) => ({
-            string: e,
-            x: d.x < Math.PI === !d.children ? xpos : -xpos,
-            align: d.x < Math.PI === !d.children ? 'start' : 'end',
-          }))
+        return [d.data[0]].concat(d.data[1].label).map((e) => ({
+          string: e,
+          x: d.x < Math.PI === !d.children ? xpos : -xpos,
+          align: d.x < Math.PI === !d.children ? 'start' : 'end',
+        }))
       }
     })
     .join('text')
@@ -243,4 +247,28 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('text-anchor', (d) => d.align)
     .attr('class', (d, i) => (i < 3 ? labelStyles[i] : labelStyles[2]))
     .text((d) => d.string)
+
+  if (showLegend) {
+    // svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option
+
+    const legendLayer = d3
+      .select(svgNode)
+      .append('g')
+      .attr('id', 'legend')
+      .attr('transform', `translate(${width},${marginTop})`)
+
+    const legend = rawgraphsLegend().legendWidth(legendWidth)
+
+    if (mapping.color.value) {
+      legend.addColor(mapping.color.value, colorScale)
+    }
+
+    legend.addSize(
+      mapping.size.value ? mapping.size.value : 'Number of records',
+      sizeScale,
+      'circle'
+    )
+
+    legendLayer.call(legend)
+  }
 }
