@@ -1,24 +1,33 @@
 import * as d3 from 'd3'
+import { rawgraphsLegend } from '@raw-temp/rawgraphs-core'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
   console.log('- render')
 
   const {
+    // artboard
     width,
     height,
     background,
+    // margins
     marginTop,
     marginRight,
     marginBottom,
     marginLeft,
+    // legend
+    showLegend,
+    legendWidth,
+    // colors
     colorScale,
+    // chart options
     tiling,
-    label1Style,
-    label2Style,
-    label3Style,
     padding,
     rounding,
     drawHierarchy,
+    // labels
+    label1Style,
+    label2Style,
+    label3Style,
   } = visualOptions
 
   const margin = {
@@ -154,4 +163,21 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('y', (d, i) => (i + 1) * 12) // 12 is the font size, should be automated
     .attr('class', (d, i) => (i < 3 ? labelStyles[i] : labelStyles[2])) // if there are more than three
     .text((d) => d)
+
+  if (showLegend) {
+    // svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option
+    const legendLayer = d3
+      .select(svgNode)
+      .append('g')
+      .attr('id', 'legend')
+      .attr('transform', `translate(${width},${marginTop})`)
+
+    const legend = rawgraphsLegend().legendWidth(legendWidth)
+
+    if (mapping.color.value) {
+      legend.addColor(mapping.color.value, colorScale)
+    }
+
+    legendLayer.call(legend)
+  }
 }
