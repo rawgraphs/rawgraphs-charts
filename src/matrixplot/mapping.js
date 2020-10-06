@@ -47,7 +47,7 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
           : undefined, // create array of strings
       }
     },
-    (d) => d[mapping.x.value] + d[mapping.y.value] // crossgrup functions
+    (d) => d[mapping.x.value] + '_' + d[mapping.y.value] // crossgrup functions
   )
 
   return result.map((d) => d[1])

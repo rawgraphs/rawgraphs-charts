@@ -68,7 +68,7 @@ export const visualOptions = {
   interpolation: {
     type: 'text',
     label: 'Interpolation',
-    default: 'Natural',
+    default: 'Linear',
     options: [
       'Basis',
       'Bundle',
