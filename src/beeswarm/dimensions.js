@@ -1,12 +1,5 @@
 export const dimensions = [
   {
-    id: 'series',
-    name: 'series',
-    validTypes: ['number', 'string', 'date'],
-    required: false,
-    operation: 'get',
-  },
-  {
     id: 'xValue',
     name: 'x axis',
     operation: 'get',
@@ -32,6 +25,13 @@ export const dimensions = [
     name: 'label',
     validTypes: ['number', 'date', 'string'],
     required: false,
-    multiple: true,
+    multiple: false,
+  },
+  {
+    id: 'series',
+    name: 'series',
+    validTypes: ['number', 'string', 'date'],
+    required: false,
+    operation: 'get',
   },
 ]

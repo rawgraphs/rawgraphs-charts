@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-// import { categoryLegend } from 'rawgraphs-core'
+import { rawgraphsLegend } from '@raw-temp/rawgraphs-core'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
   console.log('- render')
@@ -9,10 +9,14 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     width,
     height,
     background,
+    // margins
     marginTop,
     marginRight,
     marginBottom,
     marginLeft,
+    // legends
+    showLegend,
+    legendWidth,
     // chart options
     minDiameter,
     maxDiameter,
@@ -30,6 +34,22 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     bottom: marginBottom,
     left: marginLeft,
   }
+
+  d3.select(svgNode).append('style').text(`
+
+    #viz{
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 12px;
+    }
+    #viz .tick > line {
+      stroke: #ccc
+    }
+    #viz .label {
+      fill: black;
+      text-anchor: middle;
+      font-size: 10px;
+    }
+      `)
 
   // create nest structure
   const grouped = d3.groups(data, (d) => d.series)
@@ -123,7 +143,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .select(svgNode)
     .append('g')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-    .attr('id', 'visualization')
+    .attr('id', 'viz')
 
   // draw the scale and axes
   const axisLayer = svg.append('g').attr('id', 'axis')
@@ -168,9 +188,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   //console.log("---------------end of simulation---------------")
 
   //add all the circles
-  let circles = vizLayer
+  vizLayer
     .append('g')
-    .attr('id', 'viz')
+    .attr('id', 'cicles')
     .selectAll('circle')
     .data((d) => d[1])
     .join('circle')
@@ -178,4 +198,40 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('cy', (d) => d.y)
     .attr('r', (d) => sizeScale(d.size))
     .style('fill', (d) => colorScale(d.color))
+
+  //add all the texts @TODO: add styling
+  vizLayer
+    .append('g')
+    .attr('id', 'labels')
+    .selectAll('text')
+    .data((d) => d[1])
+    .join('text')
+    .attr('x', (d) => d.x)
+    .attr('y', (d) => d.y)
+    .text((d) => d.label)
+    .attr('class', 'label')
+
+  if (showLegend) {
+    // svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option
+
+    const legendLayer = d3
+      .select(svgNode)
+      .append('g')
+      .attr('id', 'legend')
+      .attr('transform', `translate(${width},${marginTop})`)
+
+    const legend = rawgraphsLegend().legendWidth(legendWidth)
+
+    if (mapping.color.value) {
+      legend.addColor(mapping.color.value, colorScale)
+    }
+
+    legend.addSize(
+      mapping.size.value ? mapping.size.value : 'Number of records',
+      sizeScale,
+      'circle'
+    )
+
+    legendLayer.call(legend)
+  }
 }
