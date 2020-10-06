@@ -1,22 +1,31 @@
 import * as d3 from 'd3'
+import { rawgraphsLegend } from '@raw-temp/rawgraphs-core'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
   console.log('- render')
 
   const {
+    // artboard
     width,
     height,
     background,
+    // margin
     marginTop,
     marginRight,
     marginBottom,
     marginLeft,
+    // legend
+    showLegend,
+    legendWidth,
+    // chart options
+    padding,
+    sortCirclesBy,
+    // color
     colorScale,
+    // labels
     label1Style,
     label2Style,
     label3Style,
-    padding,
-    sortCirclesBy = 'Size (descending)',
   } = visualOptions
 
   const margin = {
@@ -137,4 +146,45 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('y', (d, i, n) => (i + 1) * 12 - (n.length / 2) * 12) // 12 is the font size, should be automated
     .attr('class', (d, i) => (i < 3 ? labelStyles[i] : labelStyles[2])) // if there are more than three
     .text((d) => d)
+
+  if (showLegend) {
+    // svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option
+
+    const legendLayer = d3
+      .select(svgNode)
+      .append('g')
+      .attr('id', 'legend')
+      .attr('transform', `translate(${width},${marginTop})`)
+
+    const legend = rawgraphsLegend().legendWidth(legendWidth)
+
+    if (mapping.color.value) {
+      legend.addColor(mapping.color.value, colorScale)
+    }
+    // calculate the scale
+    let sizeScale = d3
+      .scaleSqrt()
+      .domain(d3.extent(hierarchy.leaves(), (d) => d.value))
+      .rangeRound(d3.extent(hierarchy.leaves(), (d) => d.r))
+
+    // if the maximum radius is bigger than a quarter of the legend width,
+    // we must rescale it to fit in it. In this way, the maximum diameter in the legend
+    // will be the half of legend width
+    if (sizeScale.range()[1] > legendWidth / 4) {
+      sizeScale
+        .domain([
+          sizeScale.invert(legendWidth / 8),
+          sizeScale.invert(legendWidth / 4),
+        ])
+        .rangeRound([legendWidth / 8, legendWidth / 4])
+    }
+
+    legend.addSize(
+      mapping.size.value ? mapping.size.value : 'Number of records',
+      sizeScale,
+      'circle'
+    )
+
+    legendLayer.call(legend)
+  }
 }

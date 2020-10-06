@@ -1,31 +1,33 @@
-import circlepacking from "rawcharts/circlepacking"
-import data from "../datasets/simple-hierarchy.tsv"
+import circlepacking from 'rawcharts/circlepacking'
+import data from '../datasets/simple-hierarchy.tsv'
 
 export default {
   chart: circlepacking,
   data,
   dataTypes: {
-	  "Level1": "string",
-	  "Level2": "string",
-	  "Size": "number"
-	},
+    Level1: 'string',
+    Level2: 'string',
+    Size: 'number',
+  },
   mapping: {
-    hierarchy: { value: ["Level1", "Level2"] },
-		color: {
-			value: ["Level1"],
-			config: {"aggregation": ["csvDistinct"]}
-		},
+    hierarchy: { value: ['Level1', 'Level2'] },
+    color: {
+      value: ['Level1'],
+      config: { aggregation: ['csvDistinct'] },
+    },
     label: {
-			value: ["Level2", "Size"],
-			config: {"aggregation": ["csvDistinct","sum","csvDistinct"]}
-		},
+      value: ['Level2', 'Size'],
+      config: { aggregation: ['csvDistinct', 'sum', 'csvDistinct'] },
+    },
     size: {
-			value: ["Size"],
-			config: {"aggregation": ["sum"]}
-		},
+      value: ['Size'],
+      config: { aggregation: ['sum'] },
+    },
   },
   visualOptions: {
-    width: 500,
-    height: 500
+    width: 2500,
+    height: 2500,
+    showLegend: true,
+    legendWidth: 200,
   },
 }

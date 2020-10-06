@@ -26,14 +26,27 @@ export const visualOptions = {
     default: 10,
     group: 'artboard',
   },
-  //
-  // tiling: {
-  //   type: "text",
-  //   label: "Tiling method",
-  //   group: "chart",
-  //   options: ["Binary", "Dice", "Slice", "Slice and dice", "Squarify"],
-  //   default: "Squarify"
-  // },
+
+  showLegend: {
+    type: 'boolean',
+    label: 'Show legend',
+    default: false,
+    group: 'artboard',
+  },
+
+  legendWidth: {
+    type: 'number',
+    label: 'Legend width',
+    default: 200,
+    group: 'artboard',
+    disabled: {
+      showLegend: false,
+    },
+    container: 'width',
+    containerCondition: {
+      showLegend: true,
+    },
+  },
 
   padding: {
     type: 'number',
