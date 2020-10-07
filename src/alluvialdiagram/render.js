@@ -1,22 +1,26 @@
 import * as d3 from 'd3'
 import * as d3Sankey from 'd3-sankey'
-// import { categoryLegend } from 'rawgraphs-core'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
   console.log('- render')
+
   const {
+    // artboard
     width,
     height,
     background,
+    // margins
     marginTop,
     marginRight,
     marginBottom,
     marginLeft,
+    // chart options
     nodesWidth,
     nodesPadding,
     linksOpacity,
     sortNodesBy,
     verticalAlignment,
+    // @TODO labels
   } = visualOptions
 
   const margin = {
@@ -29,17 +33,20 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   const chartWidth = width - margin.left - margin.right
   const chartHeight = height - margin.top - margin.bottom
 
-  const links = data
+  // links are a deep copy of the dataset, to avoid modification of origina data variable
+  const links = data.map((d) => Object.assign({}, d))
 
   //get unique nodes from links. @TODO: probably it could be improved
   let nodes = links
     .flatMap((l) => [
       {
         id: l.source,
+        name: l.sourceName,
         step: l.sourceStep,
       },
       {
         id: l.target,
+        name: l.targetName,
         step: l.targetStep,
       },
     ])
@@ -164,7 +171,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('width', (d) => d.x1 - d.x0)
     .attr('fill', 'black')
     .append('title')
-    .text((d) => `${d.id}: ${d.value}`)
+    .text((d) => `${d.name}: ${d.value}`)
 
   const link = svg
     .append('g')
@@ -196,7 +203,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('y', (d) => (d.y1 + d.y0) / 2)
     .attr('dy', '0.35em')
     .attr('text-anchor', (d) => (d.x0 < width / 2 ? 'start' : 'end'))
-    .text((d) => d.id)
+    .text((d) => d.name)
 
   // add steps titles
   const firstNodes = d3.groups(network.nodes, (d) => d.step).map((d) => d[1][0])

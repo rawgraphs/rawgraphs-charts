@@ -22,10 +22,12 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
       data,
       (v) => {
         const item = {
-          source: v[0][step1],
+          sourceName: v[0][step1],
           sourceStep: step1,
-          target: v[0][step2],
+          source: step1 + ' - ' + v[0][step1],
+          targetName: v[0][step2],
           targetStep: step2,
+          target: step2 + ' - ' + v[0][step2],
           value: mapping.size
             ? sizeAggregator(v.map((d) => d[mapping.size.value]))
             : v.length,

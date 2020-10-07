@@ -1,6 +1,5 @@
 import * as d3 from 'd3'
 import * as d3Sankey from 'd3-sankey'
-// import { categoryLegend } from 'rawgraphs-core'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
   console.log('- render')
@@ -29,7 +28,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   const chartWidth = width - margin.left - margin.right
   const chartHeight = height - margin.top - margin.bottom
 
-  const links = data
+  // links are a deep copy of the dataset, to avoid modification of origina data variable
+  const links = data.map((d) => Object.assign({}, d))
+
   //get nodes from links
   const nodes = Array.from(
     new Set(links.flatMap((l) => [l.source, l.target])),
