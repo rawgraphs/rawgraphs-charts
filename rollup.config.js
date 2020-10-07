@@ -8,13 +8,14 @@ import pkg from './package.json'
 const vendors = []
   // Make all external dependencies to be exclude from rollup
   .concat(
-    Object.keys(pkg.dependencies || {}),
+    Object.keys(pkg.dependencies || {}), // TODO: keep or not?
     Object.keys(pkg.peerDependencies || {}),
+    Object.keys(pkg.devDependencies || {})
   )
 
-export default ['esm', 'cjs', 'umd'].map(format => ({
+export default ['esm', 'cjs', 'umd'].map((format) => ({
   input: {
-    'index': 'src/index.js'
+    index: 'src/index.js',
   },
   output: [
     {
@@ -23,9 +24,9 @@ export default ['esm', 'cjs', 'umd'].map(format => ({
       exports: 'named',
       name: 'rawcharts',
       format,
-    }
+    },
   ],
-  external: format !== "umd" ? vendors : undefined,
+  external: format !== 'umd' ? vendors : undefined,
   plugins: [
     localResolve(),
     resolve(),
