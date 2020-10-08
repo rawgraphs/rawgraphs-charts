@@ -69,17 +69,10 @@ export const visualOptions = {
     group: 'series',
   },
 
-  gutterX: {
+  gutter: {
     type: 'number',
-    label: 'Horizontal space between series',
+    label: 'Space between series',
     default: 25,
-    group: 'series',
-  },
-
-  gutterY: {
-    type: 'number',
-    label: 'Vertical space between series',
-    default: 50,
     group: 'series',
   },
 
@@ -94,13 +87,6 @@ export const visualOptions = {
       'Original',
     ],
     default: 'Total value (descending)',
-  },
-
-  showSeriesLabels: {
-    type: 'boolean',
-    label: 'Show series labels',
-    default: true,
-    group: 'series',
   },
 
   colorScale: {

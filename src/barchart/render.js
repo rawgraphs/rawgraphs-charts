@@ -18,10 +18,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     padding,
     // series options
     columnsNumber,
-    useSameScale = false,
+    useSameScale,
     sortSeriesBy,
-    gutterX,
-    gutterY,
+    gutter,
     showSeriesLabels,
     repeatAxesLabels,
     // color options
@@ -55,8 +54,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .gridding()
     .size([activeWidth, activeHeight])
     .mode('grid')
-    .padding(10)
-    .cols(2)
+    .padding(gutter)
+    .cols(columnsNumber)
 
   const griddingData = gridding(nestedData)
 
@@ -78,7 +77,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   const barsDomain = [...new Set(data.map((d) => d.bars))]
 
   series.each(function (d) {
-    // console.log('each', d3.select(this))
+    // make a local selection for each serie
     const selection = d3.select(this)
 
     // scales
@@ -95,8 +94,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .domain(useSameScale ? sizeDomain : d3.extent(d.data[1], (e) => e.size))
       .nice()
       .range([griddingData[0].height, 0])
-
-    console.log(d3.extent(d.data[1], (e) => e.size))
 
     const bars = selection
       .append('g')
@@ -121,5 +118,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .append('g')
       .attr('id', 'yAxis')
       .call(d3.axisLeft(sizeScale).tickSizeOuter(0))
+
+    const titles = selection
+      .append('text')
+      .attr('class', 'title')
+      .text((d) => d.data[0])
   })
 }
