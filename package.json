@@ -17,6 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "d3": "^6.2.0",
+    "d3-gridding": "^0.2.0",
     "d3-sankey": "^0.12.3"
   },
   "devDependencies": {
