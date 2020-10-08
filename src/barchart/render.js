@@ -18,7 +18,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     padding,
     // series options
     columnsNumber,
-    useSameScale,
+    useSameScale = false,
     sortSeriesBy,
     gutterX,
     gutterY,
@@ -39,11 +39,14 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   }
 
   // create nest structure
-  const nestedData = d3.rollups(
-    data,
-    (v) => v.sort((a, b) => d3.ascending(a.bars, b.bars)),
-    (d) => d.series
-  )
+  const nestedData = d3
+    .rollups(
+      data,
+      (v) => v.sort((a, b) => d3.ascending(a.bars, b.bars)),
+      (d) => d.series
+    )
+    .map((d) => ({ data: d }))
+
   const activeWidth = width - margin.right - margin.left
   const activeHeight = height - margin.top - margin.bottom
 
@@ -53,6 +56,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .size([activeWidth, activeHeight])
     .mode('grid')
     .padding(10)
+    .cols(2)
 
   const griddingData = gridding(nestedData)
 
@@ -70,43 +74,52 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('transform', (d) => 'translate(' + d.x + ',' + d.y + ')')
 
   // domains
-  const sizeDomain = d3.extent(data, (d) => d.size)
+  let sizeDomain = d3.extent(data, (d) => d.size)
   const barsDomain = [...new Set(data.map((d) => d.bars))]
 
-  // scales
-  const barScale = d3
-    .scaleBand()
-    .range([0, griddingData[0].width])
-    .domain(barsDomain)
-    .padding(padding / (griddingData[0].width / griddingData[0][1].length)) //@TODO: expose variable
+  series.each(function (d) {
+    // console.log('each', d3.select(this))
+    const selection = d3.select(this)
 
-  const sizeScale = d3
-    .scaleLinear()
-    .domain(sizeDomain)
-    .nice()
-    .range([griddingData[0].height, 0])
+    // scales
+    const barScale = d3
+      .scaleBand()
+      .range([0, griddingData[0].width])
+      .domain(barsDomain)
+      .padding(
+        padding / (griddingData[0].width / griddingData[0].data[1].length)
+      )
 
-  const bars = series
-    .append('g')
-    .attr('class', 'bars')
-    .selectAll('rect')
-    .data((d) => d[1])
-    .join('rect')
-    .attr('id', (d) => d.series + ' - ' + d.bars)
-    .attr('x', (d, i) => barScale(d.bars))
-    .attr('y', (d) => sizeScale(d.size))
-    .attr('height', (d) => sizeScale(0) - sizeScale(d.size))
-    .attr('width', barScale.bandwidth())
-    .attr('fill', (d) => colorScale(d.color))
+    const sizeScale = d3
+      .scaleLinear()
+      .domain(useSameScale ? sizeDomain : d3.extent(d.data[1], (e) => e.size))
+      .nice()
+      .range([griddingData[0].height, 0])
 
-  const xAxis = series
-    .append('g')
-    .attr('id', 'xAxis')
-    .attr('transform', (d) => 'translate(0,' + d.height + ')')
-    .call(d3.axisBottom(barScale).tickSizeOuter(0))
+    console.log(d3.extent(d.data[1], (e) => e.size))
 
-  const yAxis = series
-    .append('g')
-    .attr('id', 'yAxis')
-    .call(d3.axisLeft(sizeScale).tickSizeOuter(0))
+    const bars = selection
+      .append('g')
+      .attr('class', 'bars')
+      .selectAll('rect')
+      .data((d) => d.data[1])
+      .join('rect')
+      .attr('id', (d) => d.series + ' - ' + d.bars)
+      .attr('x', (d, i) => barScale(d.bars))
+      .attr('y', (d) => sizeScale(d.size))
+      .attr('height', (d) => sizeScale(0) - sizeScale(d.size))
+      .attr('width', barScale.bandwidth())
+      .attr('fill', (d) => colorScale(d.color))
+
+    const xAxis = selection
+      .append('g')
+      .attr('id', 'xAxis')
+      .attr('transform', (d) => 'translate(0,' + d.height + ')')
+      .call(d3.axisBottom(barScale).tickSizeOuter(0))
+
+    const yAxis = selection
+      .append('g')
+      .attr('id', 'yAxis')
+      .call(d3.axisLeft(sizeScale).tickSizeOuter(0))
+  })
 }
