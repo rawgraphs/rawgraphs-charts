@@ -4,4 +4,5 @@ export const mapData = {
   size: 'get',
   color: 'get',
   label: 'get',
+  connectedBy: 'get',
 }

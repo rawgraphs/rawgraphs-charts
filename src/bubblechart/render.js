@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-import { rawgraphsLegend } from '@raw-temp/rawgraphs-core'
+import { rawgraphsLegend, dateFormats } from '@raw-temp/rawgraphs-core'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
   const {
@@ -9,6 +9,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     xOrigin,
     yOrigin,
     maxRadius,
+    showStroke,
     showPoints,
     pointsRadius,
     showLegend,
@@ -18,6 +19,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     marginBottom,
     marginLeft,
     colorScale,
+    showLabelsOutline,
   } = visualOptions
 
   const margin = {
@@ -113,10 +115,43 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
   const vizLayer = svg.append('g').attr('id', 'viz')
 
-  vizLayer
-    .selectAll('circle')
-    .data(data)
-    .join('circle')
+  if (mapping.connectedBy.value) {
+    const line = d3
+      .line()
+      .x(function (d) {
+        return x(d.x)
+      })
+      .y(function (d) {
+        return y(d.y)
+      })
+
+    vizLayer
+      .append('path')
+      .attr('d', () =>
+        line(
+          data.sort((a, b) => {
+            return d3.ascending(a.connectedBy, b.connectedBy)
+          })
+        )
+      )
+      .attr('stroke', 'grey')
+      .attr('stroke-width', 0.5)
+      .attr('fill', 'none')
+  }
+
+  const bubbles = vizLayer
+    .selectAll('g')
+    .data(
+      data.sort((a, b) => {
+        const sortValueA = mapping.size.value ? size(a.size) : maxRadius
+        const sortValueB = mapping.size.value ? size(b.size) : maxRadius
+        return sortValueB - sortValueA
+      })
+    )
+    .join('g')
+
+  bubbles
+    .append('circle')
     .attr('cx', (d) => x(d.x))
     .attr('cy', (d) => y(d.y))
     .attr('fill', (d) => {
@@ -125,35 +160,59 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('r', (d) => {
       return mapping.size.value ? size(d.size) : maxRadius
     })
+    .attr('stroke', showStroke ? 'white' : 'none')
 
-  const pointsLayer = svg.append('g').attr('id', 'points')
-
-  pointsLayer
-    .selectAll('circle')
-    .data(showPoints ? data : [])
-    .join('circle')
-    .attr('cx', (d) => x(d.x))
-    .attr('cy', (d) => y(d.y))
-    .attr('fill', 'black')
-    .attr('r', pointsRadius)
+  if (showPoints) {
+    bubbles
+      .append('circle')
+      .attr('cx', (d) => x(d.x))
+      .attr('cy', (d) => y(d.y))
+      .attr('fill', 'black')
+      .attr('r', pointsRadius)
+  }
 
   const labelsLayer = svg.append('g').attr('id', 'labels')
 
   labelsLayer
-    .selectAll('text')
+    .selectAll('g')
     .data(mapping.label.value ? data : [])
-    .join('text')
-    .attr('dy', '0.35em')
-    .attr('x', (d) => x(d.x))
-    .attr('y', (d) => y(d.y))
+    .join('g')
+    .attr('transform', (d) => `translate(${x(d.x)},${y(d.y)})`)
+    .append('text')
+    .attr('x', 0)
+    .attr('y', 0)
     .attr('font-family', 'Arial, sans-serif')
     .attr('font-size', 10)
     .attr('text-anchor', 'middle')
-    .text((d) => (Array.isArray(d.label) ? d.label.join(', ') : d.label))
+    .attr('dominant-baseline', 'middle')
+    .selectAll('tspan')
+    .data((d) => (Array.isArray(d.label) ? d.label : [d.label]))
+    .join('tspan')
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr('dy', (d, i) => i * 12)
+    .text((d, i) => {
+      if (mapping.label.dataType[i].type === 'date') {
+        return d3.timeFormat(dateFormats[mapping.label.dataType[i].dateFormat])(
+          d
+        )
+      } else {
+        return d
+      }
+    })
+
+  if (showLabelsOutline) {
+    // NOTE: Adobe Illustrator does not support paint-order attr
+    labelsLayer
+      .selectAll('text')
+      .attr('stroke-width', 2)
+      .attr('paint-order', 'stroke')
+      .attr('stroke', 'white')
+      .attr('stroke-linecap', 'round')
+      .attr('stroke-linejoin', 'round')
+  }
 
   if (showLegend) {
-    // svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option
-
     const legendLayer = d3
       .select(svgNode)
       .append('g')

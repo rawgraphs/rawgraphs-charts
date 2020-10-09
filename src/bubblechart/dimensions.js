@@ -24,6 +24,12 @@ export const dimensions = [
     required: false,
   },
   {
+    id: 'connectedBy',
+    name: 'Connection by',
+    validTypes: ['number', 'date'],
+    required: false,
+  },
+  {
     id: 'label',
     name: 'label',
     validTypes: ['number', 'date', 'string'],

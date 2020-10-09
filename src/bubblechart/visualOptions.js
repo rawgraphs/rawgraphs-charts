@@ -70,6 +70,13 @@ export const visualOptions = {
     group: 'chart',
   },
 
+  showStroke: {
+    type: 'boolean',
+    label: 'Show bubbles stroke',
+    default: false,
+    group: 'chart',
+  },
+
   showPoints: {
     type: 'boolean',
     label: 'Show points',
@@ -82,7 +89,6 @@ export const visualOptions = {
     label: 'Points radius (px)',
     default: 1,
     group: 'chart',
-    //@TODO: not implemented in lib/frontend
     disabled: {
       showPoints: false,
     },
@@ -96,6 +102,13 @@ export const visualOptions = {
       scaleType: 'ordinal',
       interpolator: 'interpolateSpectral',
     },
-    group: 'chart',
+    group: 'colors',
+  },
+
+  showLabelsOutline: {
+    type: 'boolean',
+    label: 'Show outline',
+    default: false,
+    group: 'labels',
   },
 }
