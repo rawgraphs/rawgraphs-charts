@@ -20,6 +20,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     marginLeft,
     colorScale,
     showLabelsOutline,
+    autoHideLabels,
   } = visualOptions
 
   const margin = {
@@ -185,6 +186,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('font-size', 10)
     .attr('text-anchor', 'middle')
     .attr('dominant-baseline', 'middle')
+    .attr('data-priority', (d) => (d.size ? d.size : 1))
     .selectAll('tspan')
     .data((d) => (Array.isArray(d.label) ? d.label : [d.label]))
     .join('tspan')
@@ -192,7 +194,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('y', 0)
     .attr('dy', (d, i) => i * 12)
     .text((d, i) => {
-      if (mapping.label.dataType[i].type === 'date') {
+      if (d && mapping.label.dataType[i].type === 'date') {
         return d3.timeFormat(dateFormats[mapping.label.dataType[i].dateFormat])(
           d
         )
@@ -210,6 +212,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr('stroke', 'white')
       .attr('stroke-linecap', 'round')
       .attr('stroke-linejoin', 'round')
+  }
+
+  if (autoHideLabels) {
+    occlusion(labelsLayer.selectAll('text'))
   }
 
   if (showLegend) {
@@ -236,4 +242,44 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
     legendLayer.call(legend)
   }
+}
+
+// adapted from https://observablehq.com/@fil/occlusion
+
+function occlusion(labels) {
+  const texts = []
+  labels.each((d, i, e) => {
+    const bbox = e[i].getBoundingClientRect()
+    texts.push({
+      priority: +e[i].getAttribute('data-priority'),
+      node: e[i],
+      text: d,
+      bbox,
+      x: bbox.x,
+      y: bbox.y,
+      width: bbox.width,
+      height: bbox.height,
+    })
+  })
+
+  texts.sort((a, b) => d3.descending(a.priority, b.priority))
+
+  const filled = []
+
+  texts.forEach((d) => {
+    const isOccluded = filled.some((e) => intersect(d, e))
+    d3.select(d.node).attr('opacity', isOccluded ? 0 : 1)
+    if (!isOccluded) filled.push(d)
+  })
+
+  return filled
+}
+
+function intersect(a, b) {
+  return !(
+    a.x + a.width < b.x ||
+    b.x + b.width < a.x ||
+    a.y + a.height < b.y ||
+    b.y + b.height < a.y
+  )
 }
