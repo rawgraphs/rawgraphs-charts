@@ -192,7 +192,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('y', 0)
     .attr('dy', (d, i) => i * 12)
     .text((d, i) => {
-      if (mapping.label.dataType[i].type === 'date') {
+      if (d && mapping.label.dataType[i].type === 'date') {
         return d3.timeFormat(dateFormats[mapping.label.dataType[i].dateFormat])(
           d
         )
