@@ -35,23 +35,21 @@ module.exports = {
       },
       {
         test: /\.tsv$/,
-        use: ['dsv-loader?delimiter=\t']
+        use: ['dsv-loader?delimiter=\t'],
       },
       {
         test: /\.csv$/,
-        use: ['dsv-loader?delimiter=,']
+        use: ['dsv-loader?delimiter=,'],
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
-        use: [
-          'file-loader',
-        ],
+        use: ['file-loader'],
       },
     ],
   },
   resolve: {
     alias: {
-      'rawcharts': path.resolve(__dirname, 'src'),
+      rawcharts: path.resolve(__dirname, 'src'),
     },
   },
 }

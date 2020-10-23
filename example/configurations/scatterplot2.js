@@ -19,7 +19,7 @@ export default {
     x: { value: ['Budget (Millions, adjusted for inflation)'] },
     y: { value: ['Year'] },
     color: { value: ['Box Office (Millions, adjusted for inflation)'] },
-    label: { value: ['Year'] },
+    label: { value: ['Year', 'Title', 'Rating'] },
     size: { value: ['Rating'] },
     connectedBy: { value: ['Year'] },
   },
@@ -31,5 +31,6 @@ export default {
     marginBottom: 50,
     marginLeft: 50,
     showLegend: true,
+    showLabelsOutline: true,
   },
 }
