@@ -69,14 +69,16 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     return g
       .attr('transform', `translate(0,${chartHeight})`)
       .call(d3.axisBottom(x))
-      .call((g) =>
-        g
-          .append('text')
-          .attr('x', chartWidth)
-          .attr('dy', -5)
-          .attr('text-anchor', 'end')
-          .text(mapping['x'].value)
-          .call(multiStyles(axisLabel))
+      .call(
+        (g) =>
+          g
+            .append('text')
+            .attr('x', chartWidth)
+            .attr('dy', -5)
+            .attr('text-anchor', 'end')
+            .text(mapping['x'].value)
+            .styles(axisLabel)
+        //.call(multiStyles(axisLabel))
       )
   }
 
@@ -90,7 +92,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
           .attr('text-anchor', 'start')
           .attr('dominant-baseline', 'hanging')
           .text(mapping['y'].value)
-          .call(multiStyles(axisLabel))
+          .styles(axisLabel)
       )
   }
 
@@ -200,21 +202,21 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         return d
       }
     })
-    .each(function (d, i) {
+    .styles(function (d, i) {
       if (i === 0) {
-        d3.select(this).call(multiStyles(labelPrimary))
+        return labelPrimary
       } else if (i === 1) {
-        d3.select(this).call(multiStyles(labelSecondary))
+        return labelSecondary
       } else if (i === 2) {
-        d3.select(this).call(multiStyles(labelItalic))
+        return labelItalic
       } else {
-        d3.select(this).call(multiStyles(labelSecondary))
+        return labelPrimary
       }
     })
 
   if (showLabelsOutline) {
     // NOTE: Adobe Illustrator does not support paint-order attr
-    labelsLayer.selectAll('text').call(multiStyles(labelOutline))
+    labelsLayer.selectAll('text').styles(labelOutline)
   }
 
   if (showLegend) {
