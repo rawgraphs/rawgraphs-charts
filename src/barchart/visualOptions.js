@@ -55,14 +55,6 @@ export const visualOptions = {
     group: 'chart',
   },
 
-  sortBarsBy: {
-    type: 'text',
-    label: 'Sort bars by',
-    group: 'series',
-    options: ['Value (descending)', 'Value (ascending)', 'Name', 'Original'],
-    default: 'Total value (descending)',
-  },
-
   useSameScale: {
     type: 'boolean',
     label: 'Use same scale',
@@ -88,6 +80,13 @@ export const visualOptions = {
       'Original',
     ],
     default: 'Total value (descending)',
+  },
+
+  showSeriesLabels: {
+    type: 'boolean',
+    label: 'Show series titles',
+    default: true,
+    group: 'series',
   },
 
   colorScale: {

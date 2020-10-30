@@ -16,12 +16,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     marginLeft,
     // chart options
     padding,
-    sortBarsBy,
     // series options
     columnsNumber,
     useSameScale,
     sortSeriesBy,
-    gutter,
     showSeriesLabels,
     repeatAxesLabels,
     // color options
@@ -38,28 +36,11 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     left: marginLeft,
   }
 
-  // prepare sorting function
-  const barSorting = {
-    'Value (descending)': function (a, b) {
-      console.log('sorting descending')
-      return d3.descending(a.size, b.size)
-    },
-    'Value (ascending)': function (a, b) {
-      return d3.ascending(a.size, b.size)
-    },
-    Name: function (a, b) {
-      return d3.ascending(a.bars, b.bars)
-    },
-    Original: function (a, b) {
-      return 0
-    },
-  }
-
   // create nest structure
   const nestedData = d3
     .rollups(
       data,
-      (v) => v.sort(barSorting['Value (descending)']),
+      (v) => v,
       (d) => d.series
     )
     .map((d) => ({ data: d }))
@@ -73,14 +54,30 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     )
   })
 
-  // sort the dataset according to sortSeriesBy option
-  if (sortSeriesBy == 'Total value (descending)') {
-    nestedData.sort((a, b) => d3.descending(a.totalValue, b.totalValue))
-  } else if (sortSeriesBy == 'Total value (ascending)') {
-    nestedData.sort((a, b) => d3.ascending(a.totalValue, b.totalValue))
-  } else if (sortSeriesBy == 'Name') {
-    nestedData.sort((a, b) => d3.ascending(a[0], b[0]))
+  // series sorting functions
+  const seriesSortings = {
+    'Total value (descending)': function (a, b) {
+      return d3.descending(a.totalValue, b.totalValue)
+    },
+    'Total value (ascending)': function (a, b) {
+      return d3.ascending(a.totalValue, b.totalValue)
+    },
+    Name: function (a, b) {
+      return d3.ascending(a[0], b[0])
+    },
   }
+  // sort series
+  nestedData.sort(seriesSortings[sortSeriesBy])
+
+  // add background
+  d3.select(svgNode)
+    .append('rect')
+    .attr('width', width)
+    .attr('height', height)
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr('fill', background)
+    .attr('id', 'backgorund')
 
   // set up grid
   const gridding = d3Gridding
@@ -159,14 +156,16 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr('id', 'yAxis')
       .call(d3.axisLeft(sizeScale).tickSizeOuter(0))
 
-    const titles = selection
-      .append('text')
-      .attr('class', 'title')
-      .text((d) => d.data[0])
-      .attr('y', -4)
-      .attr('font-family', 'sans-serif')
-      .attr('font-size', 12)
-      .attr('font-weight', 'bold')
+    if (showSeriesLabels) {
+      selection
+        .append('text')
+        .attr('class', 'title')
+        .text((d) => d.data[0])
+        .attr('y', -4)
+        .attr('font-family', 'sans-serif')
+        .attr('font-size', 12)
+        .attr('font-weight', 'bold')
+    }
 
     // add the x axis titles
     selection
