@@ -3,28 +3,28 @@ export const visualOptions = {
     type: 'number',
     label: 'Margin (top)',
     default: 10,
-    group: 'artboard',
+    group: 'margins',
   },
 
   marginRight: {
     type: 'number',
     label: 'Margin (right)',
     default: 15,
-    group: 'artboard',
+    group: 'margins',
   },
 
   marginBottom: {
     type: 'number',
     label: 'Margin (bottom)',
     default: 20,
-    group: 'artboard',
+    group: 'margins',
   },
 
   marginLeft: {
     type: 'number',
     label: 'Margin (left)',
     default: 50,
-    group: 'artboard',
+    group: 'margins',
   },
 
   showLegend: {
@@ -87,7 +87,7 @@ export const visualOptions = {
   columnsNumber: {
     type: 'number',
     label: 'Number of columns',
-    default: 1,
+    default: 0,
     group: 'series',
   },
 

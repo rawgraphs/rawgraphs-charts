@@ -5,7 +5,7 @@ export const metadata = {
   name: 'Bar chart',
   thumbnail,
   icon,
-  category: 'Series',
+  categories: ['Series'],
   description: 'A bar chart.',
   // code: "https://github.com/rawgraphs/raw",
   // tutorial: "https://rawgraphs.io/learning/",

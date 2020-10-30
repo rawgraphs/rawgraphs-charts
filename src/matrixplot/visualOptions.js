@@ -97,13 +97,6 @@ export const visualOptions = {
     group: 'chart',
   },
 
-  showLabels: {
-    type: 'boolean',
-    label: 'Show labels',
-    default: false,
-    group: 'labels',
-  },
-
   label1Style: {
     type: 'text',
     label: 'Labels 1 style',
