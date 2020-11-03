@@ -196,10 +196,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         .rangeRound([legendWidth / 8, legendWidth / 4])
     }
 
-    const aggregation = mapping.size.config?.aggregation
     legend.addSize(
       mapping.size.value
-        ? mapping.size.value + ` [${aggregation}]`
+        ? mapping.size.value + ` [${mapping.size.config.aggregation}]`
         : 'Number of records',
       sizeScale,
       'circle'
