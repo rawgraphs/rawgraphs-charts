@@ -1,0 +1,123 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="320" height="160" viewBox="0 0 320 160">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: #4696b3;
+      }
+
+      .cls-3 {
+        fill: #f88e53;
+      }
+
+      .cls-4 {
+        fill: #d5ee9f;
+      }
+
+      .cls-5 {
+        fill: none;
+        stroke: #000;
+      }
+
+      .cls-6 {
+        isolation: isolate;
+        font-size: 10px;
+        font-family: Helvetica;
+      }
+
+      .cls-7 {
+        letter-spacing: -0.0737em;
+      }
+    </style>
+  </defs>
+  <rect id="backgorund" class="cls-1" width="320" height="160"/>
+  <g id="viz">
+    <g>
+      <g>
+        <rect id="undefined_-_Czech" data-name="undefined - Czech" class="cls-2" x="25.9251" y="53.6185" width="13.6608" height="89.3815"/>
+        <rect id="undefined_-_English" data-name="undefined - English" class="cls-3" x="40.5641" y="56.2723" width="13.6608" height="86.7277"/>
+        <rect id="undefined_-_Italian" data-name="undefined - Italian" class="cls-4" x="55.2031" y="18.2692" width="13.6608" height="124.7308"/>
+        <rect id="undefined_-_Czech-2" data-name="undefined - Czech" class="cls-2" x="74.7672" y="62.7477" width="13.6608" height="80.2523"/>
+        <rect id="undefined_-_English-2" data-name="undefined - English" class="cls-3" x="89.4063" y="8.1846" width="13.6608" height="134.8154"/>
+        <rect id="undefined_-_Italian-2" data-name="undefined - Italian" class="cls-4" x="104.0453" y="17.8446" width="13.6608" height="125.1554"/>
+        <rect id="undefined_-_Czech-3" data-name="undefined - Czech" class="cls-2" x="123.6094" y="106.0585" width="13.6608" height="36.9415"/>
+        <rect id="undefined_-_English-3" data-name="undefined - English" class="cls-3" x="138.2485" y="97.8846" width="13.6608" height="45.1154"/>
+        <rect id="undefined_-_Italian-3" data-name="undefined - Italian" class="cls-4" x="152.8875" y="103.2985" width="13.6608" height="39.7015"/>
+        <rect id="undefined_-_Czech-4" data-name="undefined - Czech" class="cls-2" x="172.4516" y="134.2954" width="13.6608" height="8.7046"/>
+        <rect id="undefined_-_English-4" data-name="undefined - English" class="cls-3" x="187.0907" y="127.1831" width="13.6608" height="15.8169"/>
+        <rect id="undefined_-_Italian-4" data-name="undefined - Italian" class="cls-4" x="201.7297" y="133.1277" width="13.6608" height="9.8723"/>
+        <rect id="undefined_-_Czech-5" data-name="undefined - Czech" class="cls-2" x="221.2938" y="135.1446" width="13.6608" height="7.8554"/>
+        <rect id="undefined_-_English-5" data-name="undefined - English" class="cls-3" x="235.9329" y="113.4892" width="13.6608" height="29.5108"/>
+        <rect id="undefined_-_Italian-5" data-name="undefined - Italian" class="cls-4" x="250.5719" y="95.2308" width="13.6608" height="47.7692"/>
+        <rect id="undefined_-_Czech-6" data-name="undefined - Czech" class="cls-2" x="270.136" y="142.1508" width="13.6608" height="0.8492"/>
+        <rect id="undefined_-_English-6" data-name="undefined - English" class="cls-3" x="284.7751" y="119.3277" width="13.6608" height="23.6723"/>
+        <rect id="undefined_-_Italian-6" data-name="undefined - Italian" class="cls-4" x="299.4141" y="130.7923" width="13.6608" height="12.2077"/>
+      </g>
+      <g id="xAxis">
+        <path class="cls-5" d="M21.5,143.5h297"/>
+        <g>
+          <line class="cls-5" x1="47.3945" y1="143" x2="47.3945" y2="149"/>
+          <text class="cls-6" transform="translate(44.6138 159.1)">a</text>
+        </g>
+        <g>
+          <line class="cls-5" x1="96.2367" y1="143" x2="96.2367" y2="149"/>
+          <text class="cls-6" transform="translate(93.4559 159.1)">e</text>
+        </g>
+        <g>
+          <line class="cls-5" x1="145.0789" y1="143" x2="145.0789" y2="149"/>
+          <text class="cls-6" transform="translate(142.2982 159.1)">d</text>
+        </g>
+        <g>
+          <line class="cls-5" x1="193.9211" y1="143" x2="193.9211" y2="149"/>
+          <text class="cls-6" transform="translate(191.1403 159.1)">b</text>
+        </g>
+        <g>
+          <line class="cls-5" x1="242.7633" y1="143" x2="242.7633" y2="149"/>
+          <text class="cls-6" transform="translate(240.2633 159.1)">c</text>
+        </g>
+        <g>
+          <line class="cls-5" x1="291.6055" y1="143" x2="291.6055" y2="149"/>
+          <text class="cls-6" transform="translate(290.2163 159.1)">f</text>
+        </g>
+      </g>
+      <g id="yAxis">
+        <path class="cls-5" d="M21.5,143.5V5.5"/>
+        <g>
+          <line class="cls-5" x1="21" y1="143.5" x2="15" y2="143.5"/>
+          <text class="cls-6" transform="translate(6.4385 146.7)">0</text>
+        </g>
+        <g>
+          <line class="cls-5" x1="21" y1="132.8846" x2="15" y2="132.8846"/>
+          <text class="cls-6" transform="translate(6.4385 136.0846)">1</text>
+        </g>
+        <g>
+          <line class="cls-5" x1="21" y1="111.6538" x2="15" y2="111.6538"/>
+          <text class="cls-6" transform="translate(6.4385 114.8539)">3</text>
+        </g>
+        <g>
+          <line class="cls-5" x1="21" y1="90.4231" x2="15" y2="90.4231"/>
+          <text class="cls-6" transform="translate(6.4385 93.6231)">5</text>
+        </g>
+        <g>
+          <line class="cls-5" x1="21" y1="69.1923" x2="15" y2="69.1923"/>
+          <text class="cls-6" transform="translate(6.4385 72.3923)">7</text>
+        </g>
+        <g>
+          <line class="cls-5" x1="21" y1="47.9615" x2="15" y2="47.9615"/>
+          <text class="cls-6" transform="translate(6.4385 51.1615)">9</text>
+        </g>
+        <g>
+          <line class="cls-5" x1="21" y1="26.7308" x2="15" y2="26.7308"/>
+          <text class="cls-6" transform="translate(1.6143 29.9308)"><tspan class="cls-7">1</tspan><tspan x="4.8242" y="0">1</tspan></text>
+        </g>
+        <g>
+          <line class="cls-5" x1="21" y1="5.5" x2="15" y2="5.5"/>
+          <text class="cls-6" transform="translate(0.877 8.7)">13</text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

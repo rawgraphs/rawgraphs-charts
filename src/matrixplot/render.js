@@ -17,7 +17,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     sortXAxisBy,
     sortYAxisBy,
     showGrid,
-    showLabels,
     label1Style,
     label2Style,
     label3Style,

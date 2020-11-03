@@ -62,15 +62,20 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .reduce((result, item) => result + item.y, 0)
   })
 
-  // sort the dataset according to sortSeriesBy option
-
-  if (sortSeriesBy == 'Total value (descending)') {
-    nestedData.sort((a, b) => d3.descending(a.totalValue, b.totalValue))
-  } else if (sortSeriesBy == 'Total value (ascending)') {
-    nestedData.sort((a, b) => d3.ascending(a.totalValue, b.totalValue))
-  } else if (sortSeriesBy == 'Name') {
-    nestedData.sort((a, b) => d3.ascending(a[0], b[0]))
+  // series sorting functions
+  const seriesSortings = {
+    'Total value (descending)': function (a, b) {
+      return d3.descending(a.totalValue, b.totalValue)
+    },
+    'Total value (ascending)': function (a, b) {
+      return d3.ascending(a.totalValue, b.totalValue)
+    },
+    Name: function (a, b) {
+      return d3.ascending(a[0], b[0])
+    },
   }
+  // sort series
+  nestedData.sort(seriesSortings[sortSeriesBy])
 
   // add background
   d3.select(svgNode)
@@ -100,7 +105,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('id', 'serieClipPath')
     .append('rect')
     .attr('x', -margin.left)
-    .attr('y', -margin.top - (showSeriesLabels ? serieTitleHeight : 0))
+    .attr('y', -margin.top)
     .attr('width', griddingData[0].width)
     .attr('height', griddingData[0].height)
 
@@ -111,12 +116,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('id', (d) => d[0])
     .attr(
       'transform',
-      (d) =>
-        'translate(' +
-        (d.x + margin.left) +
-        ',' +
-        (d.y + margin.top + (showSeriesLabels ? serieTitleHeight : 0)) +
-        ')'
+      (d) => 'translate(' + (d.x + margin.left) + ',' + (d.y + margin.top) + ')'
     )
 
   mapping.x.dataType === 'number'
@@ -148,11 +148,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
     // compute each serie width and height
     const serieWidth = d.width - margin.right - margin.left
-    const serieHeight =
-      d.height -
-      margin.top -
-      margin.bottom -
-      (showSeriesLabels ? serieTitleHeight : 0)
+    const serieHeight = d.height - margin.top - margin.bottom
 
     // get domains
     const xDomain = d3.extent(data, (e) => e.x)
@@ -192,17 +188,27 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       })
       .curve(curveType[interpolation])
 
+    console.log(yDomain)
+
     // add x axis
     const xAxis = selection
       .append('g')
       .attr('id', 'xAxis')
-      .attr('transform', (d) => 'translate(0,' + serieHeight + ')')
+      .attr(
+        'transform',
+        (d) =>
+          'translate(0,' + (yDomain[0] >= 0 ? serieHeight : yScale(0)) + ')'
+      )
       .call(d3.axisBottom(xScale).tickSizeOuter(0))
 
     // add y axis
     const yAxis = selection
       .append('g')
       .attr('id', 'yAxis')
+      .attr(
+        'transform',
+        (d) => 'translate(' + (xDomain[0] >= 0 ? 0 : xScale(0)) + ',0)'
+      )
       .call(d3.axisLeft(yScale).tickSizeOuter(0))
 
     // create a group for each line.
@@ -242,7 +248,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         .attr('font-family', 'sans-serif')
         .attr('font-size', 10)
         .attr('class', 'labels')
-        .text((d) => (labelsShorten ? d[0].slice(0, labelsChars) : d[0]))
+        .text((d) => d[0])
 
       if (labelsPosition == 'side') {
         labels
@@ -269,19 +275,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
     // add series titles
     if (showSeriesLabels) {
-      // selection
-      //   .append('rect')
-      //   .attr('x', 0)
-      //   .attr('y', -serieTitleHeight)
-      //   .attr('width', serieWidth)
-      //   .attr('height', serieTitleHeight)
-      //   .attr('fill', 'white')
-      //   .attr('stroke', 'red')
-
       selection
         .append('text')
-        .attr('y', -serieTitleHeight / 2)
-        .attr('dominant-baseline', 'middle')
+        .attr('y', -4)
         .attr('font-family', 'sans-serif')
         .attr('font-size', 12)
         .attr('font-weight', 'bold')

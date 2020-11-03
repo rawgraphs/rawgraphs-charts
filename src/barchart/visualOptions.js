@@ -2,29 +2,29 @@ export const visualOptions = {
   marginTop: {
     type: 'number',
     label: 'Margin (top)',
-    default: 10,
-    group: 'artboard',
+    default: 20,
+    group: 'margins',
   },
 
   marginRight: {
     type: 'number',
     label: 'Margin (right)',
     default: 10,
-    group: 'artboard',
+    group: 'margins',
   },
 
   marginBottom: {
     type: 'number',
     label: 'Margin (bottom)',
     default: 20,
-    group: 'artboard',
+    group: 'margins',
   },
 
   marginLeft: {
     type: 'number',
     label: 'Margin (left)',
     default: 40,
-    group: 'artboard',
+    group: 'margins',
   },
 
   showLegend: {
@@ -50,29 +50,22 @@ export const visualOptions = {
 
   padding: {
     type: 'number',
-    label: 'Padding between bars',
-    default: 0.1,
+    label: 'Padding between bars (px)',
+    default: 1,
     group: 'chart',
   },
 
   useSameScale: {
     type: 'boolean',
     label: 'Use same scale',
-    default: false,
+    default: true,
     group: 'series',
   },
 
   columnsNumber: {
     type: 'number',
     label: 'Number of columns',
-    default: 1,
-    group: 'series',
-  },
-
-  gutter: {
-    type: 'number',
-    label: 'Space between series',
-    default: 25,
+    default: 0,
     group: 'series',
   },
 
@@ -87,6 +80,13 @@ export const visualOptions = {
       'Original',
     ],
     default: 'Total value (descending)',
+  },
+
+  showSeriesLabels: {
+    type: 'boolean',
+    label: 'Show series titles',
+    default: true,
+    group: 'series',
   },
 
   colorScale: {

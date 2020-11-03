@@ -1,0 +1,126 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="320" height="160" viewBox="0 0 320 160">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: #bee5a0;
+      }
+
+      .cls-3 {
+        fill: #5e4fa2;
+      }
+
+      .cls-4 {
+        fill: #fdbe70;
+      }
+
+      .cls-5 {
+        fill: #9e0142;
+      }
+
+      .cls-6 {
+        fill: none;
+        stroke: #000;
+      }
+
+      .cls-7, .cls-8 {
+        isolation: isolate;
+        font-family: Helvetica;
+      }
+
+      .cls-7 {
+        font-size: 12px;
+      }
+
+      .cls-8 {
+        font-size: 10px;
+      }
+    </style>
+  </defs>
+  <rect id="backgorund" class="cls-1" width="320" height="160"/>
+  <g id="viz">
+    <g>
+      <g>
+        <rect id="undefined_-_a" data-name="undefined - a" class="cls-2" x="28.9863" y="18.3333" width="46.1826" height="70"/>
+        <rect id="undefined_-_b" data-name="undefined - b" class="cls-3" x="77.1553" y="78.3333" width="46.1826" height="10"/>
+        <rect id="undefined_-_c" data-name="undefined - c" class="cls-4" x="125.3242" y="88.3333" width="46.1826" height="10"/>
+        <rect id="undefined_-_d" data-name="undefined - d" class="cls-5" x="173.4932" y="88.3333" width="46.1826" height="56.6667"/>
+        <rect id="undefined_-_e" data-name="undefined - e" class="cls-4" x="221.6621" y="88.3333" width="46.1826" height="40"/>
+        <rect id="undefined_-_f" data-name="undefined - f" class="cls-3" x="269.8311" y="58.3333" width="46.1826" height="30"/>
+      </g>
+      <g id="xAxis">
+        <path class="cls-6" d="M27.5,88.8333h291"/>
+        <g>
+          <line class="cls-6" x1="52.0776" y1="88.3333" x2="52.0776" y2="94.3333"/>
+          <text class="cls-7" transform="translate(49.2969 104.4333)">a</text>
+        </g>
+        <g>
+          <line class="cls-6" x1="100.2466" y1="88.3333" x2="100.2466" y2="94.3333"/>
+          <text class="cls-7" transform="translate(97.4658 104.4333)">b</text>
+        </g>
+        <g>
+          <line class="cls-6" x1="148.4155" y1="88.3333" x2="148.4155" y2="94.3333"/>
+          <text class="cls-7" transform="translate(145.9155 104.4333)">c</text>
+        </g>
+        <g>
+          <line class="cls-6" x1="196.5845" y1="88.3333" x2="196.5845" y2="94.3333"/>
+          <text class="cls-7" transform="translate(193.8037 104.4333)">d</text>
+        </g>
+        <g>
+          <line class="cls-6" x1="244.7534" y1="88.3333" x2="244.7534" y2="94.3333"/>
+          <text class="cls-7" transform="translate(241.9727 104.4333)">e</text>
+        </g>
+        <g>
+          <line class="cls-6" x1="292.9224" y1="88.3333" x2="292.9224" y2="94.3333"/>
+          <text class="cls-7" transform="translate(291.5332 104.4333)">f</text>
+        </g>
+      </g>
+      <g id="yAxis">
+        <path class="cls-6" d="M27.5,155.5V5.5"/>
+        <g>
+          <line class="cls-6" x1="27" y1="155.5" x2="21" y2="155.5"/>
+          <text class="cls-8" transform="translate(1.0371 158.7)">−20</text>
+        </g>
+        <g>
+          <line class="cls-6" x1="27" y1="138.8333" x2="21" y2="138.8333"/>
+          <text class="cls-8" transform="translate(1.0371 142.0333)">−15</text>
+        </g>
+        <g>
+          <line class="cls-6" x1="27" y1="122.1667" x2="21" y2="122.1667"/>
+          <text class="cls-8" transform="translate(1.0371 125.3667)">−10</text>
+        </g>
+        <g>
+          <line class="cls-6" x1="27" y1="105.5" x2="21" y2="105.5"/>
+          <text class="cls-8" transform="translate(6.5986 108.7)">−5</text>
+        </g>
+        <g>
+          <line class="cls-6" x1="27" y1="88.8333" x2="21" y2="88.8333"/>
+          <text class="cls-8" transform="translate(12.4385 92.0333)">0</text>
+        </g>
+        <g>
+          <line class="cls-6" x1="27" y1="72.1667" x2="21" y2="72.1667"/>
+          <text class="cls-8" transform="translate(12.4385 75.3667)">5</text>
+        </g>
+        <g>
+          <line class="cls-6" x1="27" y1="55.5" x2="21" y2="55.5"/>
+          <text class="cls-8" transform="translate(6.877 58.7)">10</text>
+        </g>
+        <g>
+          <line class="cls-6" x1="27" y1="38.8333" x2="21" y2="38.8333"/>
+          <text class="cls-8" transform="translate(6.877 42.0333)">15</text>
+        </g>
+        <g>
+          <line class="cls-6" x1="27" y1="22.1667" x2="21" y2="22.1667"/>
+          <text class="cls-8" transform="translate(6.877 25.3666)">20</text>
+        </g>
+        <g>
+          <line class="cls-6" x1="27" y1="5.5" x2="21" y2="5.5"/>
+          <text class="cls-8" transform="translate(6.877 8.7)">25</text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

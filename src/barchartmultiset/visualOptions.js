@@ -2,14 +2,14 @@ export const visualOptions = {
   marginTop: {
     type: 'number',
     label: 'Margin (top)',
-    default: 10,
+    default: 20,
     group: 'margins',
   },
 
   marginRight: {
     type: 'number',
     label: 'Margin (right)',
-    default: 15,
+    default: 10,
     group: 'margins',
   },
 
@@ -23,7 +23,7 @@ export const visualOptions = {
   marginLeft: {
     type: 'number',
     label: 'Margin (left)',
-    default: 50,
+    default: 40,
     group: 'margins',
   },
 
@@ -48,40 +48,25 @@ export const visualOptions = {
     },
   },
 
-  showPoints: {
-    type: 'boolean',
-    label: 'Show points',
-    default: false,
-    group: 'chart',
-  },
-
-  pointsRadius: {
+  setsPadding: {
     type: 'number',
-    label: 'Points radius (px)',
-    default: 3,
+    label: 'Padding between sets (px)',
+    default: 4,
     group: 'chart',
-    disabled: {
-      showPoints: false,
-    },
   },
 
-  interpolation: {
-    type: 'text',
-    label: 'Interpolation',
-    default: 'Linear',
-    options: [
-      'Basis',
-      'Bundle',
-      'Cardinal',
-      'Catmull–Rom',
-      'Linear',
-      'Monotone X',
-      'Natural',
-      'Step',
-      'Step After',
-      'Step Before',
-    ],
+  barsPadding: {
+    type: 'number',
+    label: 'Padding between bars in the same set (px)',
+    default: 1,
     group: 'chart',
+  },
+
+  useSameScale: {
+    type: 'boolean',
+    label: 'Use same scale',
+    default: true,
+    group: 'series',
   },
 
   columnsNumber: {
@@ -104,43 +89,11 @@ export const visualOptions = {
     default: 'Total value (descending)',
   },
 
-  useSameScale: {
-    type: 'boolean',
-    label: 'Use same vertical scale',
-    default: true,
-    group: 'series',
-  },
-
   showSeriesLabels: {
     type: 'boolean',
     label: 'Show series titles',
     default: true,
     group: 'series',
-  },
-
-  repeatAxesLabels: {
-    type: 'boolean',
-    label: 'Repeat axis labels for each series',
-    default: false,
-    group: 'series',
-  },
-
-  showLabels: {
-    type: 'boolean',
-    label: 'Show Labels',
-    default: true,
-    group: 'labels',
-  },
-
-  labelsPosition: {
-    type: 'text',
-    label: 'Labels position',
-    options: ['inline', 'side'],
-    default: 'inline',
-    group: 'labels',
-    disabled: {
-      showLabels: false,
-    },
   },
 
   colorScale: {
