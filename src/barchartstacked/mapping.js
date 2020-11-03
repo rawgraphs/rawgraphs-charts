@@ -4,15 +4,6 @@ import { getDimensionAggregator } from '@raw-temp/rawgraphs-core'
 export const mapData = function (data, mapping, dataTypes, dimensions) {
   console.log('- mapping')
 
-  // define aggregators
-
-  const colorAggregator = getDimensionAggregator(
-    'color',
-    mapping,
-    dataTypes,
-    dimensions
-  )
-
   const sizeAggregator = getDimensionAggregator(
     'size',
     mapping,
@@ -21,7 +12,6 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
   )
 
   // add the non-compulsory dimensions.
-  'color' in mapping ? null : (mapping.color = { value: undefined })
   'series' in mapping ? null : (mapping.series = { value: undefined })
   'size' in mapping ? null : (mapping.size = { value: undefined })
 
@@ -37,9 +27,6 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
         size: mapping.size.value
           ? sizeAggregator(v.map((d) => d[mapping.size.value]))
           : v.length, // aggregate. If not mapped, give 1 as size
-        color: mapping.color.value
-          ? colorAggregator(v.map((d) => d[mapping.color.value]))
-          : 'default', // aggregate, by default single color.
       }
       results.push(item)
       return item

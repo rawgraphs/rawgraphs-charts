@@ -1,7 +1,7 @@
 export const dimensions = [
   {
     id: 'bars',
-    name: 'bars',
+    name: 'Groups',
     validTypes: ['number', 'string', 'date'],
     required: true,
     operation: 'get',
@@ -9,7 +9,7 @@ export const dimensions = [
 
   {
     id: 'stacks',
-    name: 'stacks',
+    name: 'X Axis',
     validTypes: ['number', 'string', 'date'],
     required: true,
     operation: 'get',
@@ -23,20 +23,6 @@ export const dimensions = [
     required: false,
     aggregation: true,
     aggregationDefault: 'sum',
-  },
-
-  {
-    id: 'color',
-    name: 'color',
-    operation: 'get',
-    validTypes: ['number', 'string', 'date'],
-    required: false,
-    aggregation: true,
-    aggregationDefault: {
-      number: 'sum',
-      string: 'csvDistinct',
-      date: 'csvDistinct',
-    },
   },
 
   {

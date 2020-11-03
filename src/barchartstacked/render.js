@@ -15,8 +15,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     marginBottom,
     marginLeft,
     // chart options
-    barsPadding,
-    setsPadding,
+    stacksOrder,
+    stacksPadding,
     // series options
     columnsNumber,
     useSameScale,
@@ -103,7 +103,16 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     )
 
   // domains
-  let sizeDomain = [0, d3.max(data, (d) => d.size)]
+  // sum all values for each serie / stack
+  const scaleRollup = d3
+    .rollups(
+      data,
+      (v) => d3.sum(v, (d) => d.size),
+      (d) => d.stacks + '_' + d.series
+    )
+    .map((d) => d[1])
+
+  let sizeDomain = [0, d3.max(scaleRollup)]
 
   const stacksDomain = [...new Set(data.map((d) => d.stacks))]
 
@@ -117,32 +126,59 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     const serieWidth = d.width - margin.right - margin.left
     const serieHeight = d.height - margin.top - margin.bottom
 
-    console.log(d)
-    //local domain
-    let localNest = d3.rollups(
-      d.data[1],
-      (v) => {
-        console.log(v)
-        return [...v.map((d) => ({ [d.bars]: d.size }))]
-      },
-      (d) => d.stacks
+    //prepare data for stack
+    let localStack = Array.from(
+      d3.rollup(
+        d.data[1],
+        ([e]) => e,
+        (e) => e.stacks,
+        (e) => e.bars
+      )
     )
 
-    // create the stack
-    let stack = d3.stack().keys(stacksDomain)
+    // creaet an object with ordering methods
+    const orderings = {
+      Earliest: 'stackOrderAppearance',
+      Ascending: 'stackOrderAscending',
+      Descending: 'stackOrderDescending',
+      'Inside out': 'stackOrderInsideOut',
+      None: 'stackOrderNone',
+      Reverse: 'stackOrderReverse',
+    }
 
-    // let stackedData = stack(d.data[1])
-    console.log(localNest)
+    // create the stack
+    // define the funciton to retrieve the value
+    // inspired by https://observablehq.com/@stevndegwa/stack-chart
+    let stack = d3
+      .stack()
+      .keys(barsDomain)
+      .value((data, key) => (data[1].has(key) ? data[1].get(key).size : 0))
+      .order(d3[orderings[stacksOrder]])
+    // .offset(d3.stackOffsetNone)
+
+    let stackedData = stack(localStack)
+    console.log(stackedData)
     // scales
     const stacksScale = d3
       .scaleBand()
       .range([0, serieWidth])
       .domain(stacksDomain)
       .padding(
-        setsPadding / (serieWidth / stacksDomain.length) //convert padding from px to percentage
+        stacksPadding / (serieWidth / stacksDomain.length) //convert padding from px to percentage
       )
 
-    const localDomain = d3.extent(d.data[1], (e) => e.size)
+    let localDomain = [
+      0,
+      d3.max(
+        d3
+          .rollups(
+            d.data[1],
+            (v) => d3.sum(v, (d) => d.size),
+            (d) => d.stacks
+          )
+          .map((d) => d[1])
+      ),
+    ]
 
     const sizeScale = d3
       .scaleLinear()
@@ -151,17 +187,18 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .range([serieHeight, 0])
 
     const bars = selection
-      .append('g')
-      .attr('class', 'bars')
+      .selectAll('g')
+      .data(stackedData)
+      .join('g')
+      .attr('id', (d) => d.key)
+      .attr('fill', (d) => colorScale(d.key))
       .selectAll('rect')
-      .data((d) => d.data[1])
+      .data((d) => d)
       .join('rect')
-      .attr('id', (d) => d.series + ' - ' + d.bars)
-      .attr('x', (d) => stacksScale(d.stacks))
-      .attr('y', (d) => sizeScale(Math.max(0, d.size)))
-      .attr('height', (d) => sizeScale(0) - sizeScale(d.size))
+      .attr('x', (d) => stacksScale(d.data[0]))
+      .attr('y', (d) => sizeScale(d[1]))
       .attr('width', stacksScale.bandwidth())
-      .attr('fill', (d) => colorScale(d.color))
+      .attr('height', (d) => serieHeight - sizeScale(d[1] - d[0]))
 
     const xAxis = selection
       .append('g')
@@ -224,7 +261,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     const legend = rawgraphsLegend().legendWidth(legendWidth)
 
     if (mapping.color.value) {
-      legend.addColor(mapping.color.value, colorScale)
+      legend.addColor(mapping.bars.value, colorScale)
     }
 
     legendLayer.call(legend)

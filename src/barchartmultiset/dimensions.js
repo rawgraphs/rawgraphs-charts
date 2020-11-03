@@ -1,7 +1,7 @@
 export const dimensions = [
   {
     id: 'bars',
-    name: 'bars',
+    name: 'Groups',
     validTypes: ['number', 'string', 'date'],
     required: true,
     operation: 'get',
@@ -9,7 +9,7 @@ export const dimensions = [
 
   {
     id: 'sets',
-    name: 'sets',
+    name: 'X Axis',
     validTypes: ['number', 'string', 'date'],
     required: true,
     operation: 'get',

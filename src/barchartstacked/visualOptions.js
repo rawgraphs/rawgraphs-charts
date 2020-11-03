@@ -48,18 +48,26 @@ export const visualOptions = {
     },
   },
 
-  setsPadding: {
+  stacksPadding: {
     type: 'number',
-    label: 'Padding between sets (px)',
-    default: 4,
+    label: 'Padding between stacks (px)',
+    default: 1,
     group: 'chart',
   },
 
-  barsPadding: {
-    type: 'number',
-    label: 'Padding between bars in the same set (px)',
-    default: 1,
+  stacksOrder: {
+    type: 'text',
+    label: 'Sort stacks by',
     group: 'chart',
+    options: [
+      'Earliest',
+      'Ascending',
+      'Descending',
+      'Inside out',
+      'None',
+      'Reverse',
+    ],
+    default: 'None',
   },
 
   useSameScale: {
@@ -99,7 +107,7 @@ export const visualOptions = {
   colorScale: {
     type: 'colorScale',
     label: 'Color scale',
-    dimension: 'color',
+    dimension: 'bars',
     default: {
       scaleType: 'ordinal',
       interpolator: 'interpolateSpectral',
