@@ -15,7 +15,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     marginBottom,
     marginLeft,
     // chart options
-    padding,
+    barsPadding,
+    setsPadding,
     // series options
     columnsNumber,
     useSameScale,
@@ -103,8 +104,12 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
   // domains
   let originalDomain = d3.extent(data, (d) => d.size)
+
   let sizeDomain =
     originalDomain[0] > 0 ? [0, originalDomain[1]] : originalDomain
+
+  const setsDomain = [...new Set(data.map((d) => d.sets))]
+
   const barsDomain = [...new Set(data.map((d) => d.bars))]
 
   series.each(function (d, serieIndex) {
@@ -116,12 +121,20 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     const serieHeight = d.height - margin.top - margin.bottom
 
     // scales
-    const barScale = d3
+    const setScale = d3
       .scaleBand()
       .range([0, serieWidth])
+      .domain(setsDomain)
+      .padding(
+        setsPadding / (serieWidth / setsDomain.length) //convert padding from px to percentage
+      )
+
+    const barScale = d3
+      .scaleBand()
+      .range([0, setScale.bandwidth()])
       .domain(barsDomain)
       .padding(
-        padding / (serieWidth / griddingData[0].data[1].length) //convert padding from px to percentage
+        barsPadding / (setScale.bandwidth() / barsDomain.length) //convert padding from px to percentage
       )
 
     const localDomain = d3.extent(d.data[1], (e) => e.size)
@@ -139,7 +152,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .data((d) => d.data[1])
       .join('rect')
       .attr('id', (d) => d.series + ' - ' + d.bars)
-      .attr('x', (d) => barScale(d.bars))
+      .attr('x', (d) => setScale(d.sets) + barScale(d.bars))
       .attr('y', (d) => sizeScale(Math.max(0, d.size)))
       .attr('height', (d) => Math.abs(sizeScale(d.size) - sizeScale(0)))
       .attr('width', barScale.bandwidth())
@@ -149,7 +162,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .append('g')
       .attr('id', 'xAxis')
       .attr('transform', 'translate(0,' + sizeScale(0) + ')')
-      .call(d3.axisBottom(barScale).tickSizeOuter(0))
+      .call(d3.axisBottom(setScale).tickSizeOuter(0))
 
     const yAxis = selection
       .append('g')

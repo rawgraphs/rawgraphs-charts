@@ -46,6 +46,7 @@ export const visualOptions = {
     label: 'Links opacity (0-1)',
     default: 1,
     group: 'chart',
+    step: 0.1,
   },
 
   sortNodesBy: {

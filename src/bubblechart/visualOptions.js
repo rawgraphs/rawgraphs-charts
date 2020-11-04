@@ -66,7 +66,7 @@ export const visualOptions = {
     type: 'number',
     label: 'Max radius (px)',
     default: 15,
-    step: 'any',
+    step: 1,
     group: 'chart',
   },
 

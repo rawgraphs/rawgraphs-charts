@@ -23,9 +23,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     // color
     colorScale,
     // labels
-    label1Style,
-    label2Style,
-    label3Style,
+    showLabelsOutline,
+    showHierarchyLabels,
   } = visualOptions
 
   const margin = {
@@ -35,45 +34,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     left: marginLeft,
   }
 
-  const labelStyles = [label1Style, label2Style, label3Style]
-
-  // define style
-  d3.select(svgNode).append('style').text(`
-      #viz {
-        font-family: Helvetica, Arial, sans-serif;
-        font-size: 12px;
-      }
-
-			#viz .Primary {
-				font-weight: bold;
-			}
-
-			#viz .Tertiary {
-				font-weight: lighter;
-				font-style: oblique;
-			}
-
-			#viz .ancestors {
-				fill: none;
-				stroke: gray;
-			}
-
-      `)
-
   const chartWidth = width - margin.left - margin.right
   const chartHeight = height - margin.top - margin.bottom
-
-  switch (sortCirclesBy) {
-    case 'Size (descending)':
-      data.sort((a, b) => d3.descending(a.size, b.size))
-      break
-    case 'Size (ascending)':
-      data.sort((a, b) => d3.ascending(a.size, b.size))
-      break
-    case 'Original':
-      //do nothing
-      break
-  }
 
   // create the hierarchical structure
   const nest = d3.rollup(
@@ -85,11 +47,26 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   const hierarchy = d3
     .hierarchy(nest)
     .sum((d) => (d[1] instanceof Map ? 0 : d[1].size)) // since maps have a .size porperty in native javascript, sum only values for leaves, and not for Maps
+    .sort((a, b) => {
+      if (sortCirclesBy !== 'original') {
+        return d3[sortCirclesBy](a.value, b.value)
+      }
+    })
 
   const pack = (data) =>
-    d3.pack().size([chartWidth, chartHeight]).padding(padding)(hierarchy)
+    d3
+      .pack()
+      .size([chartWidth, chartHeight])
+      .padding(showHierarchyLabels ? padding + 4 : padding)(hierarchy)
 
   const root = pack(nest)
+
+  const circle = d3
+    .arc()
+    .innerRadius(0)
+    .outerRadius((d) => d)
+    .startAngle(-Math.PI)
+    .endAngle(Math.PI)
 
   // add background
   d3.select(svgNode)
@@ -117,35 +94,72 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('id', (d) => d.data[0])
 
   node
-    .append('circle')
-    .attr('r', (d) => d.r)
-    .attr('class', 'ancestors')
-    .attr('fill', (d) => colorScale(d.data[1].color))
+    .append('path')
+    .attr('id', (d) => 'p_' + (d.x + d.y + d.r + d.depth + d.height))
+    .attr('d', (d) => circle(d.r))
+    .attr('fill', (d) => (d.children ? 'none' : colorScale(d.data[1].color)))
+    .attr('stroke', (d) => (d.children ? '#ccc' : 'none'))
 
-  const leaves = node.filter((d) => !d.children) // filter nodes that are not leaves
+  const leaves = node.filter((d) => !d.children)
 
-  leaves
-    .select('circle')
-    .attr('id', (d, i) => 'path' + i)
-    .attr('class', 'leaves')
+  if (showHierarchyLabels) {
+    const parents = node.filter((d) => d.children)
+    parents
+      .append('text')
+      .attr('fill', 'black')
+      .attr('text-anchor', 'middle')
+      .attr('font-family', "'Arial', sans-serif")
+      .attr('font-size', 8)
+      .attr('dominant-baseline', 'middle')
+      .append('textPath')
+      .attr('href', (d) => '#p_' + (d.x + d.y + d.r + d.depth + d.height))
+      .attr('startOffset', '50%')
+      .text((d) => d.data[0])
+  }
 
-  leaves
-    .append('clipPath')
-    .attr('id', (d, i) => 'clip' + i)
-    .append('use')
-    .attr('xlink:href', (d, i) => '#path' + i)
-
-  leaves
+  const texts = leaves
     .append('text')
-    .attr('clip-path', (d, i) => 'url(#clip' + i + ')')
-    .selectAll('tspan')
-    .data((d) => d.data[1].label)
-    .join('tspan')
+    .attr('font-family', 'Arial, sans-serif')
+    .attr('font-size', 10)
     .attr('text-anchor', 'middle')
+    .attr('dominant-baseline', 'text-before-edge')
+
+  texts
+    .selectAll('tspan')
+    .data((d, i, a) => {
+      return Array.isArray(d.data[1].label)
+        ? d.data[1].label
+        : [d.data[1].label]
+    })
+    .join('tspan')
     .attr('x', 0)
-    .attr('y', (d, i, n) => (i + 1) * 12 - (n.length / 2) * 12) // 12 is the font size, should be automated
-    .attr('class', (d, i) => (i < 3 ? labelStyles[i] : labelStyles[2])) // if there are more than three
-    .text((d) => d)
+    .attr('y', (d, i) => i * 1.1 + 'em')
+    .text((d, i) => {
+      if (d && mapping.label.dataType[i].type === 'date') {
+        return d3.timeFormat(dateFormats[mapping.label.dataType[i].dateFormat])(
+          d
+        )
+      } else {
+        return d
+      }
+    })
+
+  texts.call((sel) => {
+    return sel.attr('transform', function (d) {
+      const height = sel.node().getBBox().height
+      return `translate(0,${-height / 2})`
+    })
+  })
+
+  if (showLabelsOutline) {
+    // NOTE: Adobe Illustrator does not support paint-order attr
+    texts
+      .attr('stroke-width', 2)
+      .attr('paint-order', 'stroke')
+      .attr('stroke', 'white')
+      .attr('stroke-linecap', 'round')
+      .attr('stroke-linejoin', 'round')
+  }
 
   if (showLegend) {
     // svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option
@@ -159,7 +173,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     const legend = rawgraphsLegend().legendWidth(legendWidth)
 
     if (mapping.color.value) {
-      legend.addColor(mapping.color.value, colorScale)
+      legend.addColor(
+        mapping.color.value + ` [${mapping.size.config.aggregation}]`,
+        colorScale
+      )
     }
     // calculate the scale
     let sizeScale = d3
@@ -180,7 +197,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     }
 
     legend.addSize(
-      mapping.size.value ? mapping.size.value : 'Number of records',
+      mapping.size.value
+        ? mapping.size.value + ` [${mapping.size.config.aggregation}]`
+        : 'Number of records',
       sizeScale,
       'circle'
     )
