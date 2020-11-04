@@ -1,5 +1,9 @@
 import * as d3 from 'd3'
-import { rawgraphsLegend, dateFormats } from '@raw-temp/rawgraphs-core'
+import {
+  rawgraphsLegend,
+  dateFormats,
+  labelsOcclusion,
+} from '@raw-temp/rawgraphs-core'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
   const {
@@ -215,7 +219,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   }
 
   if (autoHideLabels) {
-    occlusion(labelsLayer.selectAll('text'))
+    //occlusion(labelsLayer.selectAll('text'))
+    labelsOcclusion(labelsLayer.selectAll('text'))
   }
 
   if (showLegend) {
