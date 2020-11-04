@@ -219,8 +219,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   }
 
   if (autoHideLabels) {
-    //occlusion(labelsLayer.selectAll('text'))
-    labelsOcclusion(labelsLayer.selectAll('text'))
+    labelsOcclusion(labelsLayer.selectAll('text'), (d) => d.size)
   }
 
   if (showLegend) {
@@ -251,40 +250,40 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
 // adapted from https://observablehq.com/@fil/occlusion
 
-function occlusion(labels) {
-  const texts = []
-  labels.each((d, i, e) => {
-    const bbox = e[i].getBoundingClientRect()
-    texts.push({
-      priority: +e[i].getAttribute('data-priority'),
-      node: e[i],
-      text: d,
-      bbox,
-      x: bbox.x,
-      y: bbox.y,
-      width: bbox.width,
-      height: bbox.height,
-    })
-  })
-
-  texts.sort((a, b) => d3.descending(a.priority, b.priority))
-
-  const filled = []
-
-  texts.forEach((d) => {
-    const isOccluded = filled.some((e) => intersect(d, e))
-    d3.select(d.node).attr('opacity', isOccluded ? 0 : 1)
-    if (!isOccluded) filled.push(d)
-  })
-
-  return filled
-}
-
-function intersect(a, b) {
-  return !(
-    a.x + a.width < b.x ||
-    b.x + b.width < a.x ||
-    a.y + a.height < b.y ||
-    b.y + b.height < a.y
-  )
-}
+// function occlusion(labels) {
+//   const texts = []
+//   labels.each((d, i, e) => {
+//     const bbox = e[i].getBoundingClientRect()
+//     texts.push({
+//       priority: +e[i].getAttribute('data-priority'),
+//       node: e[i],
+//       text: d,
+//       bbox,
+//       x: bbox.x,
+//       y: bbox.y,
+//       width: bbox.width,
+//       height: bbox.height,
+//     })
+//   })
+//
+//   texts.sort((a, b) => d3.descending(a.priority, b.priority))
+//
+//   const filled = []
+//
+//   texts.forEach((d) => {
+//     const isOccluded = filled.some((e) => intersect(d, e))
+//     d3.select(d.node).attr('opacity', isOccluded ? 0 : 1)
+//     if (!isOccluded) filled.push(d)
+//   })
+//
+//   return filled
+// }
+//
+// function intersect(a, b) {
+//   return !(
+//     a.x + a.width < b.x ||
+//     b.x + b.width < a.x ||
+//     a.y + a.height < b.y ||
+//     b.y + b.height < a.y
+//   )
+// }

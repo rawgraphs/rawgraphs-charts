@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-import { rawgraphsLegend } from '@raw-temp/rawgraphs-core'
+import { rawgraphsLegend, labelsOcclusion } from '@raw-temp/rawgraphs-core'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
   console.log('- render')
@@ -25,6 +25,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     // labels
     showLabelsOutline,
     showHierarchyLabels,
+    autoHideLabels,
   } = visualOptions
 
   const margin = {
@@ -159,6 +160,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr('stroke', 'white')
       .attr('stroke-linecap', 'round')
       .attr('stroke-linejoin', 'round')
+  }
+
+  if (autoHideLabels) {
+    labelsOcclusion(texts, (d) => d.r)
   }
 
   if (showLegend) {
