@@ -174,7 +174,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
     if (mapping.color.value) {
       legend.addColor(
-        mapping.color.value + ` [${mapping.size.config.aggregation}]`,
+        mapping.color.value + ` [${mapping.color.config.aggregation}]`,
         colorScale
       )
     }
