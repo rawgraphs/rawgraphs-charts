@@ -2,7 +2,7 @@ export const visualOptions = {
   marginTop: {
     type: 'number',
     label: 'Margin (top)',
-    default: 50,
+    default: 100,
     group: 'artboard',
   },
 
@@ -23,7 +23,7 @@ export const visualOptions = {
   marginLeft: {
     type: 'number',
     label: 'Margin (left)',
-    default: 50,
+    default: 100,
     group: 'artboard',
   },
   showLegend: {
