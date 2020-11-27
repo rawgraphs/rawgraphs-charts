@@ -1,6 +1,6 @@
 {
   "name": "@raw-temp/rawgraphs-charts",
-  "version": "0.0.38",
+  "version": "0.0.39",
   "description": "",
   "jsdelivr": "lib/index.umd.js",
   "unpkg": "lib/index.umd.js",
