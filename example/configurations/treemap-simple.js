@@ -27,6 +27,9 @@ export default {
   visualOptions: {
     width: 500,
     height: 500,
-		drawHierarchy: true
+	drawHierarchy: true,
+	showLabelsOutline:true,
+	showHierarchyLabels:true,
+	padding:10
   },
 }
