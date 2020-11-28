@@ -17,16 +17,12 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     sortXAxisBy,
     sortYAxisBy,
     showGrid,
-    label1Style,
-    label2Style,
-    label3Style,
     colorScale,
+    labelStyles,
     // legend
     showLegend,
     legendWidth,
   } = visualOptions
-
-  const labelStyles = [label1Style, label2Style, label3Style]
 
   const margin = {
     top: marginTop,

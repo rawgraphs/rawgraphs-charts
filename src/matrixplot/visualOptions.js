@@ -97,28 +97,13 @@ export const visualOptions = {
     group: 'chart',
   },
 
-  label1Style: {
+  labelStyles: {
     type: 'text',
-    label: 'Labels 1 style',
+    label: 'Label',
     group: 'labels',
     options: ['Primary', 'Secondary', 'Tertiary'],
     default: 'Primary',
-  },
-
-  label2Style: {
-    type: 'text',
-    label: 'Labels 2 style',
-    group: 'labels',
-    options: ['Primary', 'Secondary', 'Tertiary'],
-    default: 'Secondary',
-  },
-
-  label3Style: {
-    type: 'text',
-    label: 'Labels 3 style',
-    group: 'labels',
-    options: ['Primary', 'Secondary', 'Tertiary'],
-    default: 'Tertiary',
+    repeatFor: 'label'
   },
 
   colorScale: {
@@ -131,4 +116,5 @@ export const visualOptions = {
     },
     group: 'colors',
   },
+
 }
