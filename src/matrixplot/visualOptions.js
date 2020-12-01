@@ -103,7 +103,8 @@ export const visualOptions = {
     group: 'labels',
     options: ['Primary', 'Secondary', 'Tertiary'],
     default: 'Primary',
-    repeatFor: 'label'
+    repeatFor: 'label',
+    repeatDefault: ['Primary', 'Secondary', 'Tertiary'],
   },
 
   colorScale: {
