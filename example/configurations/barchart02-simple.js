@@ -24,5 +24,6 @@ export default {
     marginRight: 0,
     marginLeft: 0,
     sortSeriesBy: 'Value (descending)',
+    horizontalBars: false,
   },
 }

@@ -1,3 +1,9 @@
+## v1.0.0-beta.3
+#### 15 Dec 2020
+
+- Bugfixing bar chart
+- Added horizontal bar chart
+
 ## v1.0.0-beta.2
 #### 01 Dec 2020
 
