@@ -55,6 +55,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     )
   })
 
+  console.log(mapping)
+
+  console.log(colorScale.domain())
+
   // series sorting functions
   const seriesSortings = {
     'Total value (descending)': function (a, b) {
@@ -157,7 +161,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     // .offset(d3.stackOffsetNone)
 
     let stackedData = stack(localStack)
-    console.log(stackedData)
+
     // scales
     const stacksScale = d3
       .scaleBand()
@@ -198,7 +202,12 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr('x', (d) => stacksScale(d.data[0]))
       .attr('y', (d) => sizeScale(d[1]))
       .attr('width', stacksScale.bandwidth())
-      .attr('height', (d) => serieHeight - sizeScale(d[1] - d[0]))
+      .attr('height', (d) => {
+        if (d[1] - d[0] < 0) {
+          console.log('Values cannot be negative', d) // @TODO: provide error if a value is negative
+        }
+        return serieHeight - sizeScale(d[1] - d[0])
+      })
 
     const xAxis = selection
       .append('g')
@@ -233,21 +242,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr('font-style', 'italic')
       .attr('text-anchor', 'end')
       .attr('display', serieIndex == 0 || repeatAxesLabels ? null : 'none')
-      .text(mapping.bars.value)
-
-    // add the y axis titles
-    selection
-      .append('text')
-      .attr('y', 0)
-      .attr('x', 4)
-      .attr('dominant-baseline', 'hanging')
-      .attr('class', 'axisTitle')
-      .attr('font-family', 'sans-serif')
-      .attr('font-size', 12)
-      .attr('font-style', 'italic')
-      .attr('text-anchor', 'start')
-      .attr('display', serieIndex == 0 || repeatAxesLabels ? null : 'none')
-      .text(mapping.size.value + ' (' + mapping.size.config.aggregation + ')')
+      .text(mapping.stacks.value)
   })
 
   // add legend
