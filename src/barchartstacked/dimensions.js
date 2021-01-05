@@ -9,7 +9,7 @@ export const dimensions = [
 
   {
     id: 'bars',
-    name: 'bars',
+    name: 'Sizes',
     validTypes: ['number'],
     required: true,
     multiple: true,

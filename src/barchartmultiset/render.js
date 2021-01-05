@@ -24,7 +24,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     showSeriesLabels,
     repeatAxesLabels,
     // color options
-    colorScale,
+    //colorScale,
     // legend
     showLegend,
     legendWidth,
@@ -44,16 +44,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       (v) => v,
       (d) => d.series
     )
-    .map((d) => ({ data: d }))
-
-  // comupte max values for series
-  // will add it as property to each series.
-  nestedData.forEach(function (serie) {
-    serie.totalValue = serie.data[1].reduce(
-      (result, item) => result + item.size,
-      0
-    )
-  })
+    .map((d) => ({ data: d, totalSize: d3.sum(d[1], (d) => d.size) }))
 
   // series sorting functions
   const seriesSortings = {
@@ -108,9 +99,22 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   let sizeDomain =
     originalDomain[0] > 0 ? [0, originalDomain[1]] : originalDomain
 
-  const setsDomain = [...new Set(data.map((d) => d.sets))]
+  const setsDomain = [...new Set(data.map((d) => d.groups))]
 
   const barsDomain = [...new Set(data.map((d) => d.bars))]
+
+  // @TODO: allow color mapping even if it's not a dimension
+  // the following function is only temporary to test colors on the chart
+  //create one color for each bar
+
+  // create a scale
+  let colorScale = d3
+    .scaleOrdinal()
+    .domain(barsDomain)
+    .range(
+      barsDomain.map((d, i) => d3.interpolateSpectral(i / barsDomain.length))
+    )
+  // @TODO end of temporary function
 
   series.each(function (d, serieIndex) {
     // make a local selection for each serie
@@ -152,7 +156,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .data((d) => d.data[1])
       .join('rect')
       .attr('id', (d) => d.series + ' - ' + d.bars)
-      .attr('x', (d) => setScale(d.sets) + barScale(d.bars))
+      .attr('x', (d) => setScale(d.groups) + barScale(d.bars))
       .attr('y', (d) => sizeScale(Math.max(0, d.size)))
       .attr('height', (d) => Math.abs(sizeScale(d.size) - sizeScale(0)))
       .attr('width', barScale.bandwidth())
@@ -205,7 +209,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr('font-style', 'italic')
       .attr('text-anchor', 'start')
       .attr('display', serieIndex == 0 || repeatAxesLabels ? null : 'none')
-      .text(mapping.size.value + ' (' + mapping.size.config.aggregation + ')')
+      .text('y axis') //mapping.size.value + ' (' + mapping.size.config.aggregation + ')')
   })
 
   // add legend
@@ -219,7 +223,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     const legend = rawgraphsLegend().legendWidth(legendWidth)
 
     if (mapping.color.value) {
-      legend.addColor(mapping.color.value, colorScale)
+      legend.addColor('Sets', colors)
     }
 
     legendLayer.call(legend)

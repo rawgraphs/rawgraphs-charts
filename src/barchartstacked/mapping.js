@@ -19,34 +19,22 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
   const result = d3.rollups(
     data,
     (v) => {
-      // create the item
-      const item = {
-        series: v[0][mapping.series.value], // get the first one since it's grouped
-        stacks: v[0][mapping.stacks.value], // get the first one since it's grouped
-      }
-      // for every value mapped as bar, aggregate the value
-      mapping.bars.value.forEach((barName) => {
-        item[barName] = v.reduce(
-          (accumulator, value) => accumulator + value[barName],
-          0
-        ) //@TODO: allow aggreagtion on multiple values. For now, by default is a sum
-      })
-
+      // for every dimension in the bars field, create an item
       mapping.bars.value.forEach((barName) => {
         // create the item
         const item = {
           series: v[0][mapping.series.value], // get the first one since it's grouped
           stacks: v[0][mapping.stacks.value], // get the first one since it's grouped
           bars: barName,
-          size: v.reduce((result, elm) => result + elm[barName], 0), //@TODO: allow aggregation on multiple values
+          size: v.reduce((result, elm) => result + elm[barName], 0),
           color: barName,
         }
         results.push(item)
       })
     },
     (d) => d[mapping.series.value], // series grouping
-    (d) => d[mapping.stacks.value] // stacks grouping
+    (d) => d[mapping.stacks.value].toString() // stacks grouping. toString() to enable grouping on dates
   )
-
+  console.log(results)
   return results
 }
