@@ -12,6 +12,13 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
     dimensions
   )
 
+  // const axesAggregator = getDimensionAggregator(
+  //   'axes',
+  //   mapping,
+  //   dataTypes,
+  //   dimensions
+  // )
+
   // add the non-compulsory dimensions.
   //'dimensionName' in mapping ? null : (mapping.dimensionName = { value: undefined })
   'color' in mapping ? null : (mapping.color = { value: undefined })
@@ -22,23 +29,29 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
 
   const result = d3.rollups(
     data,
-    (v) => {
+    (v, index) => {
+      //@TODO: allow aggreagtion on multiple values. For now, each line will create a radar
       return v.map((d) => {
-        let item = {
-          color: d[mapping.color.value],
-          series: d[mapping.color.value],
-        }
-
         mapping.axes.value.forEach((axisName) => {
-          item[axisName] = d[axisName]
+          let item = {
+            name: d[mapping.name.value], //name: d[mapping.name.value], @TODO: allow aggreagtion on multiple values. For now, each line will create a radar
+            label: d[mapping.name.value], // @TODO: expose as dimension
+            color: d[mapping.color.value],
+            series: d[mapping.series.value],
+            axes: axisName,
+            value: d[axisName],
+          }
+
+          results.push(item)
         })
 
-        return item
+        return 'done'
       })
     },
-    (d) => d[mapping.series.value] // series grouping
+    (d) => d[mapping.series.value], // series grouping
+    (d) => d[mapping.name.value] // name grouping
+    // (d) => d[mapping.axes.value] // axes grouping
   )
-  console.log(results)
 
   return results
 }

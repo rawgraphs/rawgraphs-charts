@@ -2,9 +2,22 @@ export const dimensions = [
   {
     id: 'axes',
     name: 'spokes',
-    validTypes: ['number', 'date'],
+    validTypes: ['number'],
     required: true,
     multiple: true,
+    aggregation: true,
+    aggregationDefault: {
+      number: 'sum',
+      string: 'csvDistinct',
+      date: 'csvDistinct',
+    },
+  },
+
+  {
+    id: 'name',
+    name: 'name',
+    validTypes: ['number', 'string', 'date'],
+    required: false,
   },
 
   {
