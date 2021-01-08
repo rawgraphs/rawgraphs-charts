@@ -36,12 +36,10 @@ export default {
       ],
     },
     color: { value: ['Club'] },
-    // series: { value: ['Club'] },
+    series: { value: ['Club'] },
   },
   visualOptions: {
     width: 1000,
     height: 700,
-    padding: 1,
-    horizontalBars: true,
   },
 }

@@ -2,40 +2,29 @@ export const visualOptions = {
   marginTop: {
     type: 'number',
     label: 'Margin (top)',
-    default: 20,
+    default: 30,
     group: 'margins',
   },
 
   marginRight: {
     type: 'number',
     label: 'Margin (right)',
-    default: 10,
+    default: 20,
     group: 'margins',
   },
 
   marginBottom: {
     type: 'number',
     label: 'Margin (bottom)',
-    default: 20,
+    default: 0,
     group: 'margins',
   },
 
   marginLeft: {
     type: 'number',
     label: 'Margin (left)',
-    default: 40,
+    default: 20,
     group: 'margins',
-  },
-
-  colorScale: {
-    type: 'colorScale',
-    label: 'Color scale',
-    dimension: 'color',
-    default: {
-      scaleType: 'ordinal',
-      interpolator: 'schemeCategory10',
-    },
-    group: 'chart',
   },
 
   showDots: {
@@ -67,17 +56,42 @@ export const visualOptions = {
     group: 'chart',
   },
 
+  fillOpacity: {
+    type: 'number',
+    label: 'Fill opacity',
+    default: 0.5,
+    group: 'chart',
+  },
+
   labelsPadding: {
     type: 'number',
     label: 'Axis labels padding',
-    default: 20,
+    default: 10,
     group: 'labels',
+  },
+
+  colorScale: {
+    type: 'colorScale',
+    label: 'Color scale',
+    dimension: 'color',
+    default: {
+      scaleType: 'ordinal',
+      interpolator: 'schemeCategory10',
+    },
+    group: 'colors',
   },
 
   columnsNumber: {
     type: 'number',
     label: 'Number of columns',
     default: 0,
+    group: 'series',
+  },
+
+  showSeriesLabels: {
+    type: 'boolean',
+    label: 'Show series labels',
+    default: true,
     group: 'series',
   },
 }

@@ -17,10 +17,12 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     dotsRadius,
     interpolation,
     innerRadius,
+    fillOpacity,
     //labels
     labelsPadding,
     //series options
     columnsNumber,
+    showSeriesLabels,
     // color dimension option, defined in visualOptions.js
     colorScale,
   } = visualOptions
@@ -49,6 +51,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     (d) => d.name
   )
 
+  // select the SVG element
+  const svg = d3.select(svgNode)
+
   // set up grid
   const gridding = d3Gridding
     .gridding()
@@ -59,18 +64,23 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
   const griddingData = gridding(nestedData)
 
-  // select the SVG element
-  const svg = d3.select(svgNode)
+  // create the clip path
+  svg
+    .append('clipPath')
+    .attr('id', 'serieClipPath')
+    .append('rect')
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr('width', griddingData[0].width)
+    .attr('height', griddingData[0].height)
+
   // create the grid
   const series = svg
     .selectAll('g')
     .data(griddingData)
     .join('g')
     .attr('id', (d) => d[0])
-    .attr(
-      'transform',
-      (d) => 'translate(' + (d.x + margin.left) + ',' + (d.y + margin.top) + ')'
-    )
+    .attr('transform', (d) => 'translate(' + d.x + ',' + d.y + ')')
 
   /*
     CODE FOR ALL THE SERIES
@@ -102,6 +112,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   series.each(function (d, seriesIndex) {
     // make a local selection for each serie
     const selection = d3.select(this)
+    // apply clipPath
+    selection.attr('clip-path', 'url(#serieClipPath)')
 
     // compute each serie width and height
     const seriesWidth = d.width - margin.right - margin.left
@@ -115,7 +127,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     let viz = selection
       .append('g')
       .attr('id', d[0])
-      .attr('transform', `translate(${outerRadius}, ${outerRadius})`)
+      .attr(
+        'transform',
+        `translate(${outerRadius + margin.left}, ${outerRadius + margin.top})`
+      )
 
     let axesLayer = viz.append('g').attr('id', 'axes')
 
@@ -125,12 +140,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .data(d3.axisLeft(axesScale).scale().ticks())
       .enter()
       .append('circle')
-      .attr('r', (d) => {
-        console.log(d, axesScale(d))
-        return axesScale(valuesDomain[0] - d)
-      })
+      .attr('r', (d) => axesScale(valuesDomain[0] - d))
       .attr('fill', 'none')
-      .attr('stroke', 'gray')
+      .attr('stroke', 'LightGray')
       .attr('class', 'grid')
       .attr('id', (d) => d)
 
@@ -156,7 +168,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr('y2', (d) => {
         return Math.sin(radialScale(d)) * outerRadius
       })
-      .attr('stroke', 'gray')
+      .attr('stroke', 'black')
 
     //add a label for each axis
     axesGroups
@@ -198,24 +210,36 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
     plots
       .append('path')
-      .attr('test', (d) => {
-        console.log(d[1])
-      })
       .attr('d', (d) => radarLine(d[1]))
       .attr('stroke', (d) => colorScale(d[1][0].color)) //first item of the data list
-      .attr('fill', 'none')
+      .attr('fill', (d) => colorScale(d[1][0].color))
+      .attr('opacity', fillOpacity)
 
-    plots
-      .append('g')
-      .attr('id', 'dots')
-      .selectAll('circle')
-      .data((d) => d[1])
-      .enter()
-      .append('circle')
-      .attr('cx', (d) => Math.cos(radialScale(d.axes)) * axesScale(d.value))
-      .attr('cy', (d) => Math.sin(radialScale(d.axes)) * axesScale(d.value))
-      .attr('r', dotsRadius)
-      .attr('stroke', 'none')
-      .attr('fill', (d) => colorScale(d.color))
+    if (showDots) {
+      plots
+        .append('g')
+        .attr('id', 'dots')
+        .selectAll('circle')
+        .data((d) => d[1])
+        .enter()
+        .append('circle')
+        .attr('cx', (d) => Math.cos(radialScale(d.axes)) * axesScale(d.value))
+        .attr('cy', (d) => Math.sin(radialScale(d.axes)) * axesScale(d.value))
+        .attr('r', dotsRadius)
+        .attr('stroke', 'none')
+        .attr('fill', (d) => colorScale(d.color))
+    }
+
+    // add series titles
+    if (showSeriesLabels) {
+      selection
+        .append('text')
+        .attr('y', 12)
+        .attr('font-family', 'sans-serif')
+        .attr('font-size', 12)
+        .attr('font-weight', 'bold')
+        .attr('class', 'title')
+        .text((d) => d[0])
+    }
   })
 }

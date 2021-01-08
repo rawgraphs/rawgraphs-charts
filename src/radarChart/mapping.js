@@ -26,15 +26,16 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
   // we will use rollup to populate a flat array of objects
   // that will be passed to the render
   let results = []
+  let index = 0
 
   const result = d3.rollups(
     data,
-    (v, index) => {
+    (v) => {
       //@TODO: allow aggreagtion on multiple values. For now, each line will create a radar
       return v.map((d) => {
         mapping.axes.value.forEach((axisName) => {
           let item = {
-            name: d[mapping.name.value], //name: d[mapping.name.value], @TODO: allow aggreagtion on multiple values. For now, each line will create a radar
+            name: index, //name: d[mapping.name.value], @TODO: allow aggreagtion on multiple values. For now, each line will create a radar
             label: d[mapping.name.value], // @TODO: expose as dimension
             color: d[mapping.color.value],
             series: d[mapping.series.value],
@@ -44,6 +45,8 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
 
           results.push(item)
         })
+
+        index++
 
         return 'done'
       })
