@@ -213,7 +213,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr('d', (d) => radarLine(d[1]))
       .attr('stroke', (d) => colorScale(d[1][0].color)) //first item of the data list
       .attr('fill', (d) => colorScale(d[1][0].color))
-      .attr('opacity', fillOpacity)
+      .attr('fill-opacity', fillOpacity)
 
     if (showDots) {
       plots
