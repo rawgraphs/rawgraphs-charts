@@ -25,6 +25,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     showSeriesLabels,
     // color dimension option, defined in visualOptions.js
     colorScale,
+    // legend
+    showLegend,
+    legendWidth,
   } = visualOptions
 
   // Margin convention
@@ -95,7 +98,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .align(0) // put all the apdding at the end
     .round(false)
 
-  const valuesDomain = [d3.max(data, (d) => d.value), 0]
+  const maxValue = d3.max(data, (d) => d.value)
 
   const outerRadius = d3.min([
     (griddingData[0].width - margin.right - margin.left) / 2,
@@ -104,7 +107,12 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
   const axesScale = d3
     .scaleLinear()
-    .domain(valuesDomain)
+    .domain([0, maxValue])
+    .rangeRound([innerRadius, outerRadius])
+
+  const axesGrid = d3
+    .scaleLinear()
+    .domain([maxValue, 0])
     .rangeRound([innerRadius, outerRadius])
   /*
     CODE FOR EACH SERIE
@@ -134,13 +142,15 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
     let axesLayer = viz.append('g').attr('id', 'axes')
 
+    let axisFunction = d3.axisLeft(axesGrid)
+
     // add a circle for each tick on the axis
     axesLayer
       .selectAll('.grid')
-      .data(d3.axisLeft(axesScale).scale().ticks())
+      .data(axisFunction.scale().ticks())
       .enter()
       .append('circle')
-      .attr('r', (d) => axesScale(valuesDomain[0] - d))
+      .attr('r', (d) => axesScale(d))
       .attr('fill', 'none')
       .attr('stroke', 'LightGray')
       .attr('class', 'grid')
@@ -189,7 +199,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     axesLayer
       .append('g')
       .attr('id', 'y axis')
-      .call(d3.axisLeft(axesScale))
+      .call(axisFunction)
       .attr('transform', `translate(${0}, ${-outerRadius - innerRadius})`)
 
     // draw each radar chart
@@ -242,4 +252,23 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         .text((d) => d[0])
     }
   })
+
+  // show legends
+  if (showLegend) {
+    // svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option
+
+    const legendLayer = d3
+      .select(svgNode)
+      .append('g')
+      .attr('id', 'legend')
+      .attr('transform', `translate(${width},${marginTop})`)
+
+    const legend = rawgraphsLegend().legendWidth(legendWidth)
+
+    if (mapping.color.value) {
+      legend.addColor(mapping.color.value, colorScale)
+    }
+
+    legendLayer.call(legend)
+  }
 }

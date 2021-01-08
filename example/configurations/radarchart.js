@@ -36,10 +36,10 @@ export default {
       ],
     },
     color: { value: ['Club'] },
-    series: { value: ['Club'] },
+    series: { value: ['Name'] },
   },
   visualOptions: {
-    width: 1000,
-    height: 700,
+    width: 1500,
+    height: 1500,
   },
 }
