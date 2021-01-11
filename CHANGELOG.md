@@ -1,5 +1,9 @@
 ## Upcoming
 
+#### 11 jan 2020
+
+- added radar chart
+
 #### 5 Jan 2020
 
 - added empty chart to bootstrap new charts
