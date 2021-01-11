@@ -117,7 +117,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('d', (d) => {
       const r = Math.abs(d.source.x - d.target.x) / 2
 
-      const sweep = sameSide ? (d.source.x < d.target.x ? 1 : 0) : 0
+      const sweep = sameSide ? (d.source.x < d.target.x ? 1 : 0) : 1
 
       return `M${d.source.x},${d.source.y}A${r},${r} 0,0,${sweep} ${d.target.x},${d.target.y}`
     })
