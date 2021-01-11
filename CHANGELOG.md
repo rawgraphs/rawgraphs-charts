@@ -1,4 +1,4 @@
-## Upcoming
+## v1.0.0-beta.4
 
 #### 11 jan 2020
 
