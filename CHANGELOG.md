@@ -1,10 +1,18 @@
-## upcoming
-
-#### 5 Jan 2020
+## v1.0.0-beta.5
 
 - _bar charts_ now accepts dates in `bar` dimension
 - added _bar chart multiset_
 - added _stacked bar chart_
+
+## v1.0.0-beta.4
+
+#### 11 jan 2020
+
+- added radar chart
+
+#### 5 Jan 2020
+
+- added empty chart to bootstrap new charts
 
 ## v1.0.0-beta.3
 

@@ -1,6 +1,6 @@
 {
   "name": "@raw-temp/rawgraphs-charts",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0-beta.4",
   "description": "",
   "jsdelivr": "lib/index.umd.js",
   "unpkg": "lib/index.umd.js",
@@ -18,7 +18,8 @@
   "dependencies": {
     "d3": "^6.2.0",
     "d3-gridding": "^0.2.0",
-    "d3-sankey": "^0.12.3"
+    "d3-sankey": "^0.12.3",
+    "louvain": "^1.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",
