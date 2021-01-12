@@ -1,5 +1,6 @@
 import * as d3 from 'd3'
 import * as d3Sankey from 'd3-sankey'
+import * as louvain from 'louvain'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
   console.log('- render')
@@ -35,6 +36,22 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   // create a graph data file from the incoming data
   let graph = graphFromEdgesTable(data)
 
+  //compute nodes modularity
+  if (orderNodesBy == 'Minimize overlaps') {
+    let community = louvain
+      .jLouvain()
+      .nodes(graph.nodes.map((d) => d.id))
+      .edges(
+        graph.links.map((d) => ({
+          source: d.source.id,
+          target: d.target.id,
+          weight: d.value,
+        }))
+      )
+    let results = community()
+    graph.nodes.forEach((n) => (n.community = results[n.id]))
+  }
+
   // sort nodes
   // 'Name', 'Links count (degree)', 'Total value'
   graph.nodes.sort((a, b) => {
@@ -45,6 +62,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         return d3.ascending(a.degree, b.degree)
       case 'Name':
         return d3.ascending(a.id, b.id)
+      case 'Minimize overlaps':
+        return d3.ascending(a.community, b.community)
       default:
         return 0
     }

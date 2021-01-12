@@ -75,7 +75,12 @@ export const visualOptions = {
     type: 'text',
     label: 'Nodes order',
     group: 'chart',
-    options: ['Name', 'Links count (degree)', 'Total value'],
-    default: 'Total value',
+    options: [
+      'Name',
+      'Links count (degree)',
+      'Total value',
+      'Minimize overlaps',
+    ],
+    default: 'Minimize overlaps',
   },
 }
