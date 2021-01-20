@@ -1,3 +1,10 @@
+## v1.0.0-beta.5
+
+#### 12 jan 2020
+
+- added arc diagram
+- fix: radar chart now asks for at least three dimensions as spokes
+
 ## v1.0.0-beta.4
 
 #### 11 jan 2020
