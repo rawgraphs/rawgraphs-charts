@@ -24,7 +24,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     showSeriesLabels,
     repeatAxesLabels,
     // color options
-    // colorScale,
+    colorScale,
     // legend
     showLegend,
     legendWidth,
@@ -109,19 +109,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
   const barsDomain = [...new Set(data.map((d) => d.bars))]
 
-  // @TODO: allow color mapping even if it's not a dimension
-  // the following function is only temporary to test colors on the chart
-  //create one color for each bar
-
-  // create a scale
-  let colorScale = d3
-    .scaleOrdinal()
-    .domain(barsDomain)
-    .range(
-      barsDomain.map((d, i) => d3.interpolateSpectral(i / barsDomain.length))
-    )
-  // @TODO end of temporary function
-
   series.each(function (d, serieIndex) {
     // make a local selection for each serie
     const selection = d3.select(this)
@@ -190,12 +177,17 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .nice()
       .range([serieHeight, 0])
 
+    console.log('cs', colorScale.domain(), colorScale.range())
+
     const bars = selection
       .selectAll('g')
       .data(stackedData)
       .join('g')
       .attr('id', (d) => d.key)
-      .attr('fill', (d) => colorScale(d.key))
+      .attr('fill', (d) => {
+        console.log(d.key, colorScale(d.key))
+        return colorScale(d.key)
+      })
       .selectAll('rect')
       .data((d) => d)
       .join('rect')
@@ -255,9 +247,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
     const legend = rawgraphsLegend().legendWidth(legendWidth)
 
-    if (mapping.color.value) {
-      legend.addColor(mapping.bars.value, colorScale)
-    }
+    legend.addColor('Sets', colorScale)
 
     legendLayer.call(legend)
   }
