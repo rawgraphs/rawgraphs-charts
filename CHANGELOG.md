@@ -1,3 +1,9 @@
+## v1.0.0-beta.6
+
+#### 23 jan 2020
+
+- added violin plot
+
 ## v1.0.0-beta.5
 
 #### 12 jan 2020
