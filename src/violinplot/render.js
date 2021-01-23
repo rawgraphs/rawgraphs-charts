@@ -1,4 +1,5 @@
 import * as d3 from 'd3'
+import { rawgraphsLegend } from '@raw-temp/rawgraphs-core'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
   const {
@@ -14,6 +15,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     padding,
     binsNumber, // how many 'bins' are available
     interpolation,
+    //legend
+    showLegend,
+    legendWidth,
     // color dimension option, defined in visualOptions.js
     colorScale,
   } = visualOptions
@@ -70,7 +74,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .scaleBand()
     .range([0, chartWidth])
     .domain(groupsDomain)
-    .padding(padding / (chartWidth / groupsDomain.length)) // convert padding from pixel to percentage
+    .padding(padding / (chartWidth / groupsDomain.length)) // convert padding from pixel to percentage @TODO: not working, check
 
   // if series is exposed, recreate the nested structure
   const nestedData = d3.rollups(
@@ -105,18 +109,18 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('transform', 'translate(0,' + chartHeight + ')')
     .call(d3.axisBottom(xScale))
 
-  let violins = svg.append('g').attr('id', 'shapes')
+  let shapes = svg.append('g').attr('id', 'shapes')
 
-  violins
+  shapes
     .selectAll('g')
     .data(nestedData)
     .join('g')
     .attr('id', (d) => d[0])
     .attr('transform', (d) => 'translate(' + xScale(d[0]) + ' ,0)')
+    .style('fill', (d) => colorScale(d[1].color))
     .append('path')
     .datum((d) => d[1].bins) // So now we are working bin per bin
     .style('stroke', 'none')
-    .style('fill', (d) => colorScale(d.color))
     .attr(
       'd',
       d3
@@ -126,4 +130,22 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         .y((d) => yScale(d.x0))
         .curve(curveType[interpolation])
     )
+
+  if (showLegend) {
+    // svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option
+
+    const legendLayer = d3
+      .select(svgNode)
+      .append('g')
+      .attr('id', 'legend')
+      .attr('transform', `translate(${width},${marginTop})`)
+
+    const legend = rawgraphsLegend().legendWidth(legendWidth)
+
+    if (mapping.color.value) {
+      legend.addColor(mapping.color.value, colorScale)
+    }
+
+    legendLayer.call(legend)
+  }
 }

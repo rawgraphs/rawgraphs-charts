@@ -43,7 +43,7 @@ export const visualOptions = {
 
   interpolation: {
     type: 'text',
-    label: 'Interpolation',
+    label: 'curve type',
     default: 'Linear',
     options: [
       'Basis',
@@ -58,6 +58,27 @@ export const visualOptions = {
       'Step Before',
     ],
     group: 'chart',
+  },
+
+  showLegend: {
+    type: 'boolean',
+    label: 'Show legend',
+    default: false,
+    group: 'artboard',
+  },
+
+  legendWidth: {
+    type: 'number',
+    label: 'Legend width',
+    default: 200,
+    group: 'artboard',
+    disabled: {
+      showLegend: false,
+    },
+    container: 'width',
+    containerCondition: {
+      showLegend: true,
+    },
   },
 
   colorScale: {
