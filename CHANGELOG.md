@@ -1,3 +1,9 @@
+## v1.0.0-beta.7
+
+#### 25 jan 2020
+
+- added box plot
+
 ## v1.0.0-beta.6
 
 #### 23 jan 2020

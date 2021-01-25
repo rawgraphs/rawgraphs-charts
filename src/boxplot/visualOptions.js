@@ -30,33 +30,21 @@ export const visualOptions = {
   padding: {
     type: 'number',
     label: 'Padding between shapes',
-    default: 10,
+    default: 20,
     group: 'chart',
   },
 
-  binsNumber: {
+  iqrMultiplier: {
     type: 'number',
-    label: 'Shape resolution', //amount of bins used to compute the histogram
-    default: 10,
+    label: 'interquartile range multiplier',
+    default: 1.5,
     group: 'chart',
   },
 
-  interpolation: {
-    type: 'text',
-    label: 'curve type',
-    default: 'Linear',
-    options: [
-      'Basis',
-      'Bundle',
-      'Cardinal',
-      'Catmull–Rom',
-      'Linear',
-      'Monotone Y',
-      'Natural',
-      'Step',
-      'Step After',
-      'Step Before',
-    ],
+  dotsRadius: {
+    type: 'number',
+    label: 'dots radius',
+    default: 4,
     group: 'chart',
   },
 
