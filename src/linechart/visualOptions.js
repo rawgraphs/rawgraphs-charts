@@ -3,28 +3,28 @@ export const visualOptions = {
     type: 'number',
     label: 'Margin (top)',
     default: 10,
-    group: 'artboard',
+    group: 'margins',
   },
 
   marginRight: {
     type: 'number',
     label: 'Margin (right)',
-    default: 10,
-    group: 'artboard',
+    default: 15,
+    group: 'margins',
   },
 
   marginBottom: {
     type: 'number',
     label: 'Margin (bottom)',
     default: 20,
-    group: 'artboard',
+    group: 'margins',
   },
 
   marginLeft: {
     type: 'number',
     label: 'Margin (left)',
-    default: 40,
-    group: 'artboard',
+    default: 50,
+    group: 'margins',
   },
 
   showLegend: {
@@ -84,36 +84,10 @@ export const visualOptions = {
     group: 'chart',
   },
 
-  strokeWidth: {
-    type: 'number',
-    label: 'Stroke width',
-    default: 1.5,
-    options: [
-      { label: 'light', value: 1 },
-      { label: 'medium', value: 1.5 },
-      { label: 'bold', value: 3 },
-    ],
-    group: 'chart',
-  },
-
   columnsNumber: {
     type: 'number',
     label: 'Number of columns',
-    default: 1,
-    group: 'series',
-  },
-
-  gutterX: {
-    type: 'number',
-    label: 'Horizontal space between series',
-    default: 25,
-    group: 'series',
-  },
-
-  gutterY: {
-    type: 'number',
-    label: 'Vertical space between series',
-    default: 50,
+    default: 0,
     group: 'series',
   },
 
@@ -130,9 +104,16 @@ export const visualOptions = {
     default: 'Total value (descending)',
   },
 
+  useSameScale: {
+    type: 'boolean',
+    label: 'Use same vertical scale',
+    default: true,
+    group: 'series',
+  },
+
   showSeriesLabels: {
     type: 'boolean',
-    label: 'Show series labels',
+    label: 'Show series titles',
     default: true,
     group: 'series',
   },
@@ -157,20 +138,9 @@ export const visualOptions = {
     options: ['inline', 'side'],
     default: 'inline',
     group: 'labels',
-  },
-
-  labelsShorten: {
-    type: 'boolean',
-    label: 'Shorten Labels',
-    default: false,
-    group: 'labels',
-  },
-
-  labelsChars: {
-    type: 'number',
-    label: 'Max number of charachters',
-    default: 1,
-    group: 'labels',
+    disabled: {
+      showLabels: false,
+    },
   },
 
   colorScale: {

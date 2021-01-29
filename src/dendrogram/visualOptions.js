@@ -9,7 +9,7 @@ export const visualOptions = {
   marginRight: {
     type: 'number',
     label: 'Margin (right)',
-    default: 10,
+    default: 150,
     group: 'artboard',
   },
 

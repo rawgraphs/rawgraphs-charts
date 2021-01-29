@@ -9,21 +9,21 @@ export const visualOptions = {
   marginRight: {
     type: 'number',
     label: 'Margin (right)',
-    default: 10,
+    default: 50,
     group: 'artboard',
   },
 
   marginBottom: {
     type: 'number',
     label: 'Margin (bottom)',
-    default: 10,
+    default: 50,
     group: 'artboard',
   },
 
   marginLeft: {
     type: 'number',
     label: 'Margin (left)',
-    default: 10,
+    default: 100,
     group: 'artboard',
   },
 
@@ -97,7 +97,7 @@ export const visualOptions = {
       scaleType: 'ordinal',
       interpolator: 'interpolateSpectral',
     },
-    group: 'chart',
+    group: 'colors',
   },
 }
 

@@ -39,7 +39,7 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
           : v.length, // aggregate. If not mapped, give 1 as size
         color: mapping.color.value
           ? colorAggregator(v.map((d) => d[mapping.color.value]))
-          : 'default', // aggregate, by default single color.
+          : undefined, // aggregate, by default single color.
         label: mapping.label.value
           ? mapping.label.value.map((label, i) => {
               return labelAggregators[i](v.map((d) => d[label]))

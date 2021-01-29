@@ -22,12 +22,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     // chart options
     tiling,
     padding,
-    rounding,
     drawHierarchy,
     // labels
-    label1Style,
-    label2Style,
-    label3Style,
+    showLabelsOutline,
+    showHierarchyLabels
   } = visualOptions
 
   const margin = {
@@ -37,34 +35,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     left: marginLeft,
   }
 
-  const labelStyles = [label1Style, label2Style, label3Style]
-
-  // define style
-  d3.select(svgNode).append('style').text(`
-      #viz {
-        font-family: Helvetica, Arial, sans-serif;
-        font-size: 12px;
-      }
-
-			#viz .Primary {
-				font-weight: bold;
-			}
-
-			#viz .Tertiary {
-				font-weight: lighter;
-				font-style: oblique;
-			}
-
-			#viz .ancestors {
-				fill: none;
-				stroke: gray
-			}
-      `)
-
   const chartWidth = width - margin.left - margin.right
   const chartHeight = height - margin.top - margin.bottom
 
-  const radius = chartWidth > chartHeight ? chartHeight / 2 : chartWidth / 2
 
   // create the hierarchical structure
   const nest = d3.rollup(
@@ -79,24 +52,21 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
   //@TODO: understand how to handle empty values
 
-  // convert string to d3 functions
-  const tileType = {
-    Binary: d3.treemapBinary,
-    Dice: d3.treemapDice,
-    Slice: d3.treemapSlice,
-    'Slice and dice': d3.treemapSliceDice,
-    Squarify: d3.treemapSquarify,
-  }
-
-  const treemap = (nest) =>
-    d3
+  const treemap = d3
       .treemap()
-      .tile(tileType[tiling])
+      .tile(d3[tiling])
       .size([chartWidth, chartHeight])
       .padding(padding)
-      .round(rounding)(hierarchy)
+      .round(true)
+      
+      
+  
+  if(showHierarchyLabels){
+    treemap
+      .paddingTop(12)
+  }
 
-  const root = treemap(nest)
+  const root = treemap(hierarchy)
 
   // add background
   d3.select(svgNode)
@@ -115,19 +85,47 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('id', 'viz')
 
   // if selected, draw a rectangle for each level in the hierarchy
-  // @TODO: understand if we want to add hierarchy names
-  if (drawHierarchy) {
+
+  if (drawHierarchy || showHierarchyLabels) {
+    const ancestorData = root.descendants().filter(d=>d.children)
+    const depthScale = d3.scaleLinear().domain([0,root.leaves()[0].depth+1])
     const ancestors = svg
       .append('g')
       .attr('id', 'ancestors')
       .selectAll('rect')
-      .data(root.descendants())
-      .join('rect')
-      .attr('x', (d) => d.x0)
-      .attr('y', (d) => d.y0)
+      .data(ancestorData)
+      .join('g')
+      .attr('transform', (d) => `translate(${d.x0},${d.y0})`)
+    
+    ancestors.append('rect')
       .attr('width', (d) => d.x1 - d.x0)
       .attr('height', (d) => d.y1 - d.y0)
-      .attr('class', 'ancestors')
+      .attr('id', (d, i) => 'path_ancestor' + i)
+      .attr('fill', "#ccc")
+      .attr('fill-opacity', d=>depthScale(d.depth))
+      .attr('stroke', "#ccc")
+      .attr('stroke-opacity', d=>depthScale(d.depth)+0.1)
+      
+      if(showHierarchyLabels){
+        ancestors
+        .append('clipPath')
+        .attr('id', (d, i) => 'clip_ancestor' + i)
+        .append('use')
+        .attr('xlink:href', (d, i) => '#path_ancestor' + i)
+    
+      ancestors
+        .append('text')
+        .attr('x', padding)
+        .attr('y', 2)
+        .attr('clip-path', (d, i) => 'url(#clip_ancestor' + i + ')')
+        .attr('font-family', 'Arial, sans-serif')
+        .attr('font-size', 8)
+        .attr('dominant-baseline', 'text-before-edge')
+        .attr("class",'txt')
+        .text(d=>{
+          return d.depth===0&&!d.data[0]?'Root':d.data[0]
+        })
+      }
   }
 
   const leaves = svg
@@ -137,8 +135,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .data(root.leaves())
     .join('g')
     .attr('transform', (d) => `translate(${d.x0},${d.y0})`)
-
-  leaves.append('title').text((d) => d.data[0])
 
   leaves
     .append('rect')
@@ -153,19 +149,45 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .append('use')
     .attr('xlink:href', (d, i) => '#path' + i)
 
-  leaves
+  const texts = leaves
     .append('text')
     .attr('clip-path', (d, i) => 'url(#clip' + i + ')')
+    .attr('font-family', 'Arial, sans-serif')
+    .attr('font-size', 10)
+    .attr('dominant-baseline', 'text-before-edge')
+    .attr("class",'txt')
+  
+  texts
     .selectAll('tspan')
-    .data((d) => d.data[1].label)
+    .data((d, i, a) => {
+      return Array.isArray(d.data[1].label)
+        ? d.data[1].label
+        : [d.data[1].label]
+    })
     .join('tspan')
     .attr('x', 3)
-    .attr('y', (d, i) => (i + 1) * 12) // 12 is the font size, should be automated
-    .attr('class', (d, i) => (i < 3 ? labelStyles[i] : labelStyles[2])) // if there are more than three
-    .text((d) => d)
+    .attr('y', (d, i) => i * 1.1 + 0.2 + 'em')
+    .text((d, i) => {
+      if (d && mapping.label.dataType[i].type === 'date') {
+        return d3.timeFormat(dateFormats[mapping.label.dataType[i].dateFormat])(
+          d
+        )
+      } else {
+        return d
+      }
+    })
+
+    if (showLabelsOutline) {
+      // NOTE: Adobe Illustrator does not support paint-order attr
+      d3.selectAll('.txt')
+        .attr('stroke-width', 2)
+        .attr('paint-order', 'stroke')
+        .attr('stroke', 'white')
+        .attr('stroke-linecap', 'round')
+        .attr('stroke-linejoin', 'round')
+    }
 
   if (showLegend) {
-    // svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option
     const legendLayer = d3
       .select(svgNode)
       .append('g')

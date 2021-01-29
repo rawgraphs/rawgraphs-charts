@@ -12,14 +12,14 @@ export default {
 	  "results": "number"
 	},
   mapping: {
-    hierarchy: { value: ["Root", "Level1", "Level2", "Level3"] },
+    hierarchy: { value: ["Root", "Level1", "Level2"] },
 		color: {
 			value: ["Root"],
 			config: {"aggregation": ["csvDistinct"]}
 		},
     label: {
-			value: ["Level3", "results", "Root"],
-			config: {"aggregation": ["csvDistinct","sum","csvDistinct"]}
+			value: ["Level2","results" ],
+			config: {"aggregation": ["csvDistinct","sum"]}
 		},
     size: {
 			value: ["results"],
@@ -27,8 +27,11 @@ export default {
 		},
   },
   visualOptions: {
-    width: 500,
-    height: 500,
-		drawHierarchy: true
+    width: 1000,
+    height: 700,
+	showHierarchyLabels: true,
+	drawHierarchy:false,
+	padding:5,
+	showLabelsOutline:true
   },
 }

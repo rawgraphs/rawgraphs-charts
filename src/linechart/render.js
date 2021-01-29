@@ -1,5 +1,6 @@
 import * as d3 from 'd3'
 import { rawgraphsLegend } from '@raw-temp/rawgraphs-core'
+import * as d3Gridding from 'd3-gridding'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
   console.log('- render')
@@ -17,13 +18,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     interpolation,
     showPoints,
     pointsRadius,
-    strokeWidth,
     // series options
     columnsNumber,
     useSameScale = false, // @TODO: add
     sortSeriesBy,
-    gutterX,
-    gutterY,
     showSeriesLabels,
     repeatAxesLabels,
     // labels options
@@ -36,6 +34,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     // legend
     showLegend,
     legendWidth,
+    // othe non-exposed variables
+    serieTitleHeight = 20,
   } = visualOptions
 
   const margin = {
@@ -45,50 +45,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     left: marginLeft,
   }
 
-  //
-  d3.select(svgNode).append('style').text(`
-    svg #viz {
-      font-family: Helvetica, Arial, sans-serif;
-      font-size: 12px;
-    }
-
-    #viz .title {
-      font-weight: bold;
-      fill: black;
-      text-anchor: start;
-      transform: translate(0px, -10px)
-    }
-
-    #viz .tick > text {
-      fill: #4d4d4d;
-    }
-
-    #viz #axes path, #axes line {
-      stroke:#161616
-    }
-
-    #viz .axisTitle {
-      fill: #161616;
-      font-style: italic;
-      font-size: 12px;
-    }
-
-    #viz .yAxis .axisTitle {
-      text-anchor: start;
-      font-size: 8px;
-      transform: translate(14px, 0px)
-    }
-
-    #viz .xAxis .axisTitle {
-      text-anchor: end;
-    }
-
-    #viz .labels {
-      fill: #161616;
-    }
-
-    `)
-
   // create nest structure
   const nestedData = d3.rollups(
     data,
@@ -96,30 +52,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     (d) => d.series,
     (d) => d.lines
   )
-
-  margin.top += showSeriesLabels ? 24 : 0
-  // compute the series grid according to amount of series and user optionss
-  const rowsNumber = Math.ceil(nestedData.length / columnsNumber)
-
-  const chartWidth =
-    (width - margin.left - margin.right - (columnsNumber - 1) * gutterX) /
-    columnsNumber
-  const chartHeight =
-    (height - margin.top - margin.bottom - (rowsNumber - 1) * gutterY) /
-    rowsNumber
-
-  // create the grid
-  let grid = nestedData.map(function (d, i) {
-    const xpos = i % columnsNumber
-    const ypos = Math.floor(i / columnsNumber)
-
-    return {
-      x: xpos * (chartWidth + gutterX),
-      y: ypos * (chartHeight + gutterY),
-      width: chartWidth,
-      height: chartHeight,
-    }
-  })
 
   // comupte max values for series
   // will add it as property to each series.
@@ -130,48 +62,66 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .reduce((result, item) => result + item.y, 0)
   })
 
-  // sort the dataset according to sortSeriesBy option
-
-  if (sortSeriesBy == 'Total value (descending)') {
-    nestedData.sort((a, b) => d3.descending(a.totalValue, b.totalValue))
-  } else if (sortSeriesBy == 'Total value (ascending)') {
-    nestedData.sort((a, b) => d3.ascending(a.totalValue, b.totalValue))
-  } else if (sortSeriesBy == 'Name') {
-    nestedData.sort((a, b) => d3.ascending(a[0], b[0]))
+  // series sorting functions
+  const seriesSortings = {
+    'Total value (descending)': function (a, b) {
+      return d3.descending(a.totalValue, b.totalValue)
+    },
+    'Total value (ascending)': function (a, b) {
+      return d3.ascending(a.totalValue, b.totalValue)
+    },
+    Name: function (a, b) {
+      return d3.ascending(a[0], b[0])
+    },
   }
+  // sort series
+  nestedData.sort(seriesSortings[sortSeriesBy])
 
-  // get domains
-  const xDomain = d3.extent(data, (d) => d.x)
-  const yDomain = d3.extent(data, (d) => d.y)
+  // add background
+  d3.select(svgNode)
+    .append('rect')
+    .attr('width', width)
+    .attr('height', height)
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr('fill', background)
+    .attr('id', 'backgorund')
 
-  // define the x scale
-  let x
+  // set up grid
+  const gridding = d3Gridding
+    .gridding()
+    .size([width, height])
+    .mode('grid')
+    .padding(0) // no padding, margins will be applied inside
+    .cols(columnsNumber)
+
+  const griddingData = gridding(nestedData)
+
+  const svg = d3.select(svgNode).append('g').attr('id', 'viz')
+
+  // create the clip path
+  svg
+    .append('clipPath')
+    .attr('id', 'serieClipPath')
+    .append('rect')
+    .attr('x', -margin.left)
+    .attr('y', -margin.top)
+    .attr('width', griddingData[0].width)
+    .attr('height', griddingData[0].height)
+
+  const series = svg
+    .selectAll('g')
+    .data(griddingData)
+    .join('g')
+    .attr('id', (d) => d[0])
+    .attr(
+      'transform',
+      (d) => 'translate(' + (d.x + margin.left) + ',' + (d.y + margin.top) + ')'
+    )
 
   mapping.x.dataType === 'number'
     ? (mapping.x.dataType = { type: 'number' })
     : null // @TODO it should be better to have always the same kind of object in mapping
-
-  switch (mapping.x.dataType.type) {
-    case 'number':
-      x = d3.scaleLinear().domain(xDomain).nice().range([0, chartWidth])
-      break
-    case 'date':
-      x = d3.scaleTime().domain(xDomain).nice().range([0, chartWidth])
-      break
-  }
-
-  const y = d3.scaleLinear().domain(yDomain).nice().range([chartHeight, 0])
-
-  const xAxis = (g) => {
-    return g
-      .attr('transform', `translate(0,${chartHeight})`)
-      .call(d3.axisBottom(x).ticks(width / 80))
-      .call((g) => g.attr('class', 'xAxis'))
-  }
-
-  const yAxis = (g) => {
-    return g.call(d3.axisLeft(y)).call((g) => g.attr('class', 'yAxis'))
-  }
 
   // convert string to d3 functions
   const curveType = {
@@ -187,138 +137,181 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     'Step Before': d3.curveStepBefore,
   }
 
-  const line = d3
-    .line()
-    .x(function (d) {
-      return x(d.x)
-    })
-    .y(function (d) {
-      return y(d.y)
-    })
-    .curve(curveType[interpolation])
+  // now add everything to each series
 
-  // add background
-  d3.select(svgNode)
-    .append('rect')
-    .attr('width', width)
-    .attr('height', height)
-    .attr('x', 0)
-    .attr('y', 0)
-    .attr('fill', background)
-    .attr('id', 'backgorund')
+  series.each(function (d, serieIndex) {
+    // load the single selection
+    const selection = d3.select(this)
+    // add the clip path
+    // clip-path: url(#clipPath);
+    selection.attr('clip-path', 'url(#serieClipPath)')
 
-  const svg = d3
-    .select(svgNode)
-    .append('g')
-    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-    .attr('id', 'viz')
+    // compute each serie width and height
+    const serieWidth = d.width - margin.right - margin.left
+    const serieHeight = d.height - margin.top - margin.bottom
 
-  const vizLayer = svg
-    .append('g')
-    .selectAll('g')
-    .data(nestedData)
-    .join('g')
-    .attr('id', (d) => d[0])
-    .attr(
-      'transform',
-      (d, i) => 'translate(' + grid[i].x + ',' + grid[i].y + ')'
-    ) // translate each serie according to the grid object
-    .attr('fill', 'none')
-    .attr('stroke-width', strokeWidth)
-    .attr('stroke-linejoin', 'round')
-    .attr('stroke-linecap', 'round')
+    // get domains
+    const xDomain = d3.extent(data, (e) => e.x)
+    const yDomain = useSameScale
+      ? // compute extent of the whole dataset
+        d3.extent(data, (e) => e.y)
+      : // compute extent of the single serie
+        d3.extent(d[1].map((e) => e[1]).flat(2), (e) => e.y)
 
-  const axisLayer = vizLayer.append('g').attr('id', 'axes')
-  axisLayer.append('g').call(xAxis)
-  axisLayer.append('g').call(yAxis)
+    // define the x scale
+    let xScale
 
-  const groups = vizLayer
-    .append('g')
-    .attr('id', 'viz')
-    .selectAll('g')
-    .data((d) => d[1]) // pass the single line
-    .join('g')
-    .attr('id', (d) => d[0])
-
-  groups
-    .append('path')
-    .attr('d', (d) => line(d[1]))
-    .attr('stroke', (d) => colorScale(d[1][0].color))
-    .attr('fill', 'none')
-
-  if (showPoints) {
-    groups
-      .append('g')
-      .selectAll('circle')
-      .data((d) => d[1])
-      .join('circle')
-      .attr('class', 'dot')
-      .attr('cx', (d) => x(d.x))
-      .attr('cy', (d) => y(d.y))
-      .attr('r', pointsRadius)
-      .attr('fill', (d) => colorScale(d.color))
-  }
-
-  if (showLabels) {
-    let labels = groups
-      .append('text')
-      .attr('class', 'labels')
-      .text((d) => (labelsShorten ? d[0].slice(0, labelsChars) : d[0]))
-
-    if (labelsPosition == 'side') {
-      labels
-        .attr('x', (d) => x(d[1].slice(-1)[0].x)) // get last x
-        .attr('y', (d) => y(d[1].slice(-1)[0].y)) // get last x
-        .attr('dx', 5)
-        .attr('dy', 4)
-        .attr('text-anchor', 'start')
-    } else if (labelsPosition == 'inline') {
-      labels
-        .attr('x', (d) => {
-          const maxPos = d3.greatest(d[1], (e) => e.y)
-          return x(maxPos.x)
-        })
-        .attr('y', (d) => {
-          const maxPos = d3.greatest(d[1], (e) => e.y)
-          return y(maxPos.y)
-        })
-        .attr('dx', 0)
-        .attr('dy', -6)
-        .attr('text-anchor', 'middle')
+    switch (mapping.x.dataType.type) {
+      case 'number':
+        xScale = d3.scaleLinear().domain(xDomain).nice().range([0, serieWidth])
+        break
+      case 'date':
+        xScale = d3.scaleTime().domain(xDomain).nice().range([0, serieWidth])
+        break
     }
-  }
 
-  // add the series title
-  if (showSeriesLabels) {
-    vizLayer
+    // define the y scale
+    const yScale = d3
+      .scaleLinear()
+      .domain(yDomain)
+      .nice()
+      .range([serieHeight, 0])
+
+    // define the line path function
+    const line = d3
+      .line()
+      .x(function (d) {
+        return xScale(d.x)
+      })
+      .y(function (d) {
+        return yScale(d.y)
+      })
+      .curve(curveType[interpolation])
+
+    console.log(yDomain)
+
+    // add x axis
+    const xAxis = selection
+      .append('g')
+      .attr('id', 'xAxis')
+      .attr(
+        'transform',
+        (d) =>
+          'translate(0,' + (yDomain[0] >= 0 ? serieHeight : yScale(0)) + ')'
+      )
+      .call(d3.axisBottom(xScale).tickSizeOuter(0))
+
+    // add y axis
+    const yAxis = selection
+      .append('g')
+      .attr('id', 'yAxis')
+      .attr(
+        'transform',
+        (d) => 'translate(' + (xDomain[0] >= 0 ? 0 : xScale(0)) + ',0)'
+      )
+      .call(d3.axisLeft(yScale).tickSizeOuter(0))
+
+    // create a group for each line.
+    // the group will contain the line and the dots.
+
+    const groups = selection
+      .append('g')
+      .attr('id', 'viz')
+      .selectAll('g')
+      .data((d) => d[1]) // pass the single line
+      .join('g')
+      .attr('id', (d) => d[0])
+
+    groups
+      .append('path')
+      .attr('d', (d) => line(d[1]))
+      .attr('stroke', (d) => colorScale(d[1][0].color))
+      .attr('fill', 'none')
+
+    if (showPoints) {
+      groups
+        .append('g')
+        .selectAll('circle')
+        .data((d) => d[1])
+        .join('circle')
+        .attr('class', 'dot')
+        .attr('cx', (d) => xScale(d.x))
+        .attr('cy', (d) => yScale(d.y))
+        .attr('r', pointsRadius)
+        .attr('fill', (d) => colorScale(d.color))
+    }
+
+    // add lines labels
+    if (showLabels) {
+      let labels = groups
+        .append('text')
+        .attr('font-family', 'sans-serif')
+        .attr('font-size', 10)
+        .attr('class', 'labels')
+        .text((d) => d[0])
+
+      if (labelsPosition == 'side') {
+        labels
+          .attr('x', (d) => xScale(d[1].slice(-1)[0].x)) // get last x
+          .attr('y', (d) => yScale(d[1].slice(-1)[0].y)) // get last y
+          .attr('dx', 5)
+          .attr('dy', 4)
+          .attr('text-anchor', 'start')
+      } else if (labelsPosition == 'inline') {
+        labels
+          .attr('x', (d) => {
+            const maxPos = d3.greatest(d[1], (e) => e.y)
+            return xScale(maxPos.x)
+          })
+          .attr('y', (d) => {
+            const maxPos = d3.greatest(d[1], (e) => e.y)
+            return yScale(maxPos.y)
+          })
+          .attr('dx', 0)
+          .attr('dy', -4)
+          .attr('text-anchor', 'middle')
+      }
+    }
+
+    // add series titles
+    if (showSeriesLabels) {
+      selection
+        .append('text')
+        .attr('y', -4)
+        .attr('font-family', 'sans-serif')
+        .attr('font-size', 12)
+        .attr('font-weight', 'bold')
+        .attr('class', 'title')
+        .text((d) => d[0])
+    }
+
+    // add the x axis titles
+    selection
       .append('text')
-      // .attr('y', 10)
-      .attr('class', 'title')
-      .text((d) => d[0])
-  }
+      .attr('dy', serieHeight - 4)
+      .attr('x', serieWidth)
+      .attr('class', 'axisTitle')
+      .attr('font-family', 'sans-serif')
+      .attr('font-size', 12)
+      .attr('font-style', 'italic')
+      .attr('text-anchor', 'end')
+      .attr('display', serieIndex == 0 || repeatAxesLabels ? null : 'none')
+      .text(mapping.x.value)
 
-  // add the x axis titles
-  vizLayer
-    .append('text')
-    .attr('y', chartHeight - 5)
-    .attr('x', chartWidth)
-    .attr('class', 'axisTitle')
-    .attr('text-anchor', 'end')
-    .attr('display', (d, i) => {
-      return i == 0 || repeatAxesLabels ? '' : 'none'
-    })
-    .text(mapping.x.value)
-  // add the y axis titles
-  vizLayer
-    .append('text')
-    .attr('y', 12)
-    .attr('x', 5)
-    .attr('class', 'axisTitle')
-    .attr('text-anchor', 'start')
-    .attr('display', (d, i) => {
-      return i == 0 || repeatAxesLabels ? '' : 'none'
-    })
-    .text(mapping.y.value)
+    // add the y axis titles
+    selection
+      .append('text')
+      .attr('y', 0)
+      .attr('x', 4)
+      .attr('dominant-baseline', 'hanging')
+      .attr('class', 'axisTitle')
+      .attr('font-family', 'sans-serif')
+      .attr('font-size', 12)
+      .attr('font-style', 'italic')
+      .attr('text-anchor', 'start')
+      .attr('display', serieIndex == 0 || repeatAxesLabels ? null : 'none')
+      .text(mapping.y.value + ' (' + mapping.y.config.aggregation + ')')
+  })
 
   if (showLegend) {
     // svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option
