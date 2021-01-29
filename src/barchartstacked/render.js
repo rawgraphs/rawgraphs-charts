@@ -38,13 +38,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   }
 
   // create nest structure
-  const nestedData = d3
-    .rollups(
-      data,
-      (v) => v,
-      (d) => d.series
-    )
-    .map((d) => ({ data: d }))
+  const nestedData = d3.groups(data, (d) => d.series).map((d) => ({ data: d }))
 
   // comupte max values for series
   // will add it as property to each series.

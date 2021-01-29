@@ -26,13 +26,14 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
   const result = d3.rollups(
     data,
     (v) => {
-      v.forEach((d) => {
+      v.map((d) => {
         const item = {
           group: d[mapping.group.value],
           value: d[mapping.value.value],
           color: colorAggregator(v.map((e) => e[mapping.color.value])),
         }
         results.push(item)
+        return item
       })
 
       return v
