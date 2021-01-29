@@ -1,13 +1,16 @@
 import * as d3 from 'd3'
 import { rawgraphsLegend, dateFormats } from '@raw-temp/rawgraphs-core'
-import {
-  multiStyles,
+import { convertCSS } from 'css-to-cssinjs'
+import rawStyles from '../styles.ass'
+import * as ciao from '../styles.js' //baaaaddd
+const styles = convertCSS(rawStyles, { format: 'object' })
+const {
   axisLabel,
   labelPrimary,
   labelSecondary,
   labelItalic,
   labelOutline,
-} from '../styles.js'
+} = styles
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
   const {

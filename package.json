@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "css-to-cssinjs": "^1.3.6",
     "d3": "^6.2.0",
     "d3-gridding": "^0.2.0",
     "d3-sankey": "^0.12.3"
@@ -37,6 +38,7 @@
     "dsv-loader": "^2.0.0",
     "file-loader": "^6.1.0",
     "prettier": "^2.1.2",
+    "raw-loader": "^4.0.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",

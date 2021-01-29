@@ -30,9 +30,13 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        test: /\.css$/i,
+        use: 'raw-loader',
       },
+      // {
+      //   test: /\.css$/,
+      //   use: ['style-loader', 'css-loader'],
+      // },
       {
         test: /\.tsv$/,
         use: ['dsv-loader?delimiter=\t'],
@@ -51,5 +55,8 @@ module.exports = {
     alias: {
       rawcharts: path.resolve(__dirname, 'src'),
     },
+  },
+  node: {
+    fs: 'empty',
   },
 }
