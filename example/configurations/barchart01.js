@@ -19,12 +19,13 @@ export default {
   mapping: {
     series: { value: ['Category'] },
     bars: { value: ['Year'] },
-    size: { value: ['Revenues-Adjusted'] },
+    size: { value: ['Revenues-Adjusted'], config: { aggregation: ['sum'] } },
     color: { value: ['Category'] },
   },
   visualOptions: {
     width: 1000,
     height: 700,
-    padding: 3,
+    padding: 1,
+    horizontalBars: true,
   },
 }

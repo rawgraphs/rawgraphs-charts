@@ -2,28 +2,28 @@ export const visualOptions = {
   marginTop: {
     type: 'number',
     label: 'Margin (top)',
-    default: 10,
+    default: 20,
     group: 'artboard',
   },
 
   marginRight: {
     type: 'number',
     label: 'Margin (right)',
-    default: 10,
+    default: 20,
     group: 'artboard',
   },
 
   marginBottom: {
     type: 'number',
     label: 'Margin (bottom)',
-    default: 10,
+    default: 20,
     group: 'artboard',
   },
 
   marginLeft: {
     type: 'number',
     label: 'Margin (left)',
-    default: 10,
+    default: 20,
     group: 'artboard',
   },
 
@@ -50,17 +50,21 @@ export const visualOptions = {
 
   padding: {
     type: 'number',
-    label: 'Padding between treemap levels',
+    label: 'Circles padding',
     default: 2,
     group: 'chart',
   },
 
   sortCirclesBy: {
     type: 'text',
-    label: 'Sort series by',
-    group: 'series',
-    options: ['Size (descending)', 'Size (ascending)', 'Original'],
-    default: 'Size (descending)',
+    label: 'Sort circles by',
+    group: 'chart',
+    options: [
+      { label: 'Size (descending)', value: 'descending' },
+      { label: 'Size (ascending)', value: 'ascending' },
+      { label: 'Original', value: 'original' },
+    ],
+    default: 'descending',
   },
 
   colorScale: {
@@ -74,27 +78,25 @@ export const visualOptions = {
     group: 'colors',
   },
 
-  label1Style: {
-    type: 'text',
-    label: 'Labels 1 style',
+  showLabelsOutline: {
+    type: 'boolean',
+    label: 'Show outline',
+    default: false,
     group: 'labels',
-    options: ['Primary', 'Secondary', 'Tertiary'],
-    default: 'Primary',
   },
 
-  label2Style: {
-    type: 'text',
-    label: 'Labels 2 style',
+  showHierarchyLabels: {
+    type: 'boolean',
+    label: 'Show hierarchy labels',
+    default: false,
     group: 'labels',
-    options: ['Primary', 'Secondary', 'Tertiary'],
-    default: 'Secondary',
   },
 
-  label3Style: {
-    type: 'text',
-    label: 'Labels 3 style',
-    group: 'labels',
-    options: ['Primary', 'Secondary', 'Tertiary'],
-    default: 'Tertiary',
-  },
+  // labelStyle: {
+  //   type: 'text',
+  //   label: 'Label style',
+  //   group: 'labels',
+  //   options: ['Primary', 'Secondary', 'Tertiary'],
+  //   default: 'Primary',
+  // },
 }

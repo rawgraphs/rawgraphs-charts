@@ -1,0 +1,25 @@
+<svg id="rawgraphs-icons" xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #06c26c;
+      }
+
+      .cls-2 {
+        fill: #95e5c0;
+      }
+    </style>
+  </defs>
+  <g>
+    <rect class="cls-1" x="7.0029" y="9.1357" width="0.9941" height="38.8643"/>
+    <polygon class="cls-1" points="5.815 11.115 7.5 9.43 9.185 11.115 9.185 9.685 7.5 8 5.815 9.685 5.815 11.115"/>
+  </g>
+  <rect class="cls-1" x="21" y="36" width="7" height="12"/>
+  <rect class="cls-1" x="31" y="38" width="7" height="10"/>
+  <rect class="cls-1" x="41" y="36" width="7" height="12"/>
+  <rect class="cls-1" x="11" y="40" width="7" height="8"/>
+  <rect class="cls-2" x="11" y="34" width="7" height="5"/>
+  <rect class="cls-2" x="21" y="27" width="7" height="8"/>
+  <rect class="cls-2" x="31" y="22" width="7" height="15"/>
+  <rect class="cls-2" x="41" y="32" width="7" height="3"/>
+</svg>

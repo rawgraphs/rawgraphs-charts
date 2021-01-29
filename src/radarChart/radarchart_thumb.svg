@@ -1,0 +1,171 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="320" height="160" viewBox="0 0 320 160">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: none;
+      }
+
+      .cls-1 {
+        stroke: #d3d3d3;
+        stroke-width: 0.5px;
+      }
+
+      .cls-2 {
+        stroke: #000;
+      }
+
+      .cls-3, .cls-4, .cls-5 {
+        isolation: isolate;
+      }
+
+      .cls-3, .cls-4 {
+        font-size: 12px;
+        font-family: ArialMT, Arial;
+      }
+
+      .cls-3 {
+        letter-spacing: -0.05518em;
+      }
+
+      .cls-5 {
+        font-size: 10px;
+        font-family: Helvetica;
+      }
+
+      .cls-6, .cls-7 {
+        fill: #69bda9;
+      }
+
+      .cls-10, .cls-12, .cls-6, .cls-8 {
+        fill-opacity: 0;
+        stroke-width: 2px;
+      }
+
+      .cls-6 {
+        stroke: #69bda9;
+      }
+
+      .cls-8, .cls-9 {
+        fill: #9e0142;
+      }
+
+      .cls-8 {
+        stroke: #9e0142;
+      }
+
+      .cls-10, .cls-11 {
+        fill: #fedd8d;
+      }
+
+      .cls-10 {
+        stroke: #fedd8d;
+      }
+
+      .cls-12, .cls-13 {
+        fill: #5e4fa2;
+      }
+
+      .cls-12 {
+        stroke: #5e4fa2;
+      }
+    </style>
+  </defs>
+  <g>
+    <g id="axes">
+      <circle id="_10" data-name="10" class="cls-1" cx="159.99951" cy="87.59481" r="80"/>
+      <circle id="_8" data-name="8" class="cls-1" cx="159.99951" cy="87.59481" r="64"/>
+      <circle id="_6" data-name="6" class="cls-1" cx="159.99951" cy="87.59481" r="48"/>
+      <circle id="_4" data-name="4" class="cls-1" cx="159.99951" cy="87.59481" r="32"/>
+      <circle id="_2" data-name="2" class="cls-1" cx="159.99951" cy="87.59481" r="16"/>
+      <g>
+        <line class="cls-2" x1="159.99951" y1="87.59481" x2="159.99951" y2="7.59481"/>
+        <text class="cls-3" transform="translate(164.15332 9.54694)">A</text>
+      </g>
+      <g>
+        <line class="cls-2" x1="159.99951" y1="87.59481" x2="236.08403" y2="62.87345"/>
+        <text class="cls-4" transform="translate(241.59277 63.98328)">B</text>
+      </g>
+      <g>
+        <line class="cls-2" x1="159.99951" y1="87.59481" x2="207.02233" y2="152.31617"/>
+        <text class="cls-4" transform="translate(211.25854 159.99991)">C</text>
+      </g>
+      <g>
+        <line class="cls-2" x1="159.99951" y1="87.59481" x2="112.97669" y2="152.31617"/>
+        <text class="cls-4" transform="translate(101.13208 160.09991)">D</text>
+      </g>
+      <g>
+        <line class="cls-2" x1="159.99951" y1="87.59481" x2="83.91499" y2="62.87345"/>
+        <text class="cls-4" transform="translate(70.40259 63.98328)">E</text>
+      </g>
+      <g id="y_axis" data-name="y axis">
+        <path class="cls-2" d="M153.99951,8.09481h6.5v80h-6.5"/>
+        <g>
+          <line class="cls-2" x1="159.99951" y1="8.09481" x2="153.99951" y2="8.09481"/>
+          <text class="cls-5" transform="translate(139.87646 11.2948)">10</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="159.99951" y1="24.09481" x2="153.99951" y2="24.09481"/>
+          <text class="cls-5" transform="translate(145.43799 27.2948)">8</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="159.99951" y1="40.09481" x2="153.99951" y2="40.09481"/>
+          <text class="cls-5" transform="translate(145.43799 43.2948)">6</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="159.99951" y1="56.09481" x2="153.99951" y2="56.09481"/>
+          <text class="cls-5" transform="translate(145.43799 59.2948)">4</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="159.99951" y1="72.09481" x2="153.99951" y2="72.09481"/>
+          <text class="cls-5" transform="translate(145.43799 75.2948)">2</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="159.99951" y1="88.09481" x2="153.99951" y2="88.09481"/>
+          <text class="cls-5" transform="translate(145.43799 91.2948)">0</text>
+        </g>
+      </g>
+    </g>
+    <g id="radars">
+      <g id="_4-2" data-name="4">
+        <path class="cls-6" d="M213.25868,70.28986c6.26971,19.29618-.82122,56.22862-15.64091,69.082-15.76947,13.67717-63.52448,18.39783-79.9388,6.47213S91.53251,88.34569,99.13189,67.81772c7.36046-19.88255,41.58961-45.10552,60.86762-44.22291,18.705.85637,46.98946,27.39887,53.25917,46.69505"/>
+        <g id="dots">
+          <circle class="cls-7" cx="159.99951" cy="23.59481" r="2"/>
+          <circle class="cls-7" cx="213.25868" cy="70.28986" r="2"/>
+          <circle class="cls-7" cx="197.61777" cy="139.3719" r="2"/>
+          <circle class="cls-7" cx="117.67897" cy="145.84403" r="2"/>
+          <circle class="cls-7" cx="99.13189" cy="67.81772" r="2"/>
+        </g>
+      </g>
+      <g id="_0" data-name="0">
+        <path class="cls-8" d="M175.21642,82.65054c4.70228,14.47213,18.807,34.17211,12.99678,43.77709-7.04258,11.64228-57.76716,21.429-65.83194,12.94427-7.69079-8.09128,7.84517-41.72836,14.7929-59.1935,6.06938-15.25715,16.46625-41.13379,22.82535-40.58359,6.2976.54488,10.51462,28.58359,15.21691,43.05573"/>
+        <g id="dots-2" data-name="dots">
+          <circle class="cls-9" cx="159.99951" cy="39.59481" r="2"/>
+          <circle class="cls-9" cx="175.21642" cy="82.65054" r="2"/>
+          <circle class="cls-9" cx="188.2132" cy="126.42763" r="2"/>
+          <circle class="cls-9" cx="122.38126" cy="139.3719" r="2"/>
+          <circle class="cls-9" cx="137.17416" cy="80.1784" r="2"/>
+        </g>
+      </g>
+      <g id="_2-2" data-name="2">
+        <path class="cls-10" d="M228.47558,65.34558c4.86633,6.38693-23.04318,53.14809-40.26238,61.08205-14.53515,6.69725-36.50441,1.90671-51.7251-6.47214-17.73077-9.76063-48.69983-49.12743-44.96465-54.60991,3.7683-5.5311,45.65071,22.24923,68.47606,22.24923s63.64841-28.58541,68.47607-22.24923"/>
+        <g id="dots-3" data-name="dots">
+          <circle class="cls-11" cx="159.99951" cy="87.59481" r="2"/>
+          <circle class="cls-11" cx="228.47558" cy="65.34558" r="2"/>
+          <circle class="cls-11" cx="188.2132" cy="126.42763" r="2"/>
+          <circle class="cls-11" cx="136.4881" cy="119.95549" r="2"/>
+          <circle class="cls-11" cx="91.52345" cy="65.34558" r="2"/>
+        </g>
+      </g>
+      <g id="_5" data-name="5">
+        <path class="cls-12" d="M159.99951,87.59481c5.64274,17.36656,44.27139,56.4683,42.32054,58.24922-1.90646,1.7404-34.82076-32.1427-51.7251-45.305-14.87958-11.58571-45.11623-22.77868-43.8546-30.24922,1.28479-7.6077,45.58707-20.537,53.25916-14.69505,5.83883,4.446-3.76182,20.42229,0,32"/>
+        <g id="dots-4" data-name="dots">
+          <circle class="cls-13" cx="159.99951" cy="55.59481" r="2"/>
+          <circle class="cls-13" cx="159.99951" cy="87.59481" r="2"/>
+          <circle class="cls-13" cx="202.32005" cy="145.84403" r="2"/>
+          <circle class="cls-13" cx="150.59495" cy="100.53908" r="2"/>
+          <circle class="cls-13" cx="106.74035" cy="70.28986" r="2"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

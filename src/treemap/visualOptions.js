@@ -52,21 +52,20 @@ export const visualOptions = {
     type: 'text',
     label: 'Tiling method',
     group: 'chart',
-    options: ['Binary', 'Dice', 'Slice', 'Slice and dice', 'Squarify'],
-    default: 'Squarify',
+    options: [
+      {label:'Binary', value:'treemapBinary'}, 
+      {label:'Dice', value:'treemapDice'},
+      {label:'Slice', value:'treemapSlice'},
+      {label:'Slice and dice', value:'treemapSliceDice'},
+      {label:'Squarify', value:'treemapSquarify'},
+    ],
+    default: 'treemapSquarify',
   },
 
   padding: {
     type: 'number',
     label: 'Padding between treemap levels',
     default: 2,
-    group: 'chart',
-  },
-
-  rounding: {
-    type: 'boolean',
-    label: 'Snap to pixel',
-    default: true,
     group: 'chart',
   },
 
@@ -85,30 +84,20 @@ export const visualOptions = {
       scaleType: 'ordinal',
       interpolator: 'interpolateSpectral',
     },
-    group: 'chart',
+    group: 'colors',
   },
 
-  label1Style: {
-    type: 'text',
-    label: 'Labels 1 style',
+  showLabelsOutline: {
+    type: 'boolean',
+    label: 'Show outline',
+    default: false,
     group: 'labels',
-    options: ['Primary', 'Secondary', 'Tertiary'],
-    default: 'Primary',
   },
 
-  label2Style: {
-    type: 'text',
-    label: 'Labels 2 style',
+  showHierarchyLabels: {
+    type: 'boolean',
+    label: 'Show hierarchy labels',
+    default: false,
     group: 'labels',
-    options: ['Primary', 'Secondary', 'Tertiary'],
-    default: 'Secondary',
-  },
-
-  label3Style: {
-    type: 'text',
-    label: 'Labels 3 style',
-    group: 'labels',
-    options: ['Primary', 'Secondary', 'Tertiary'],
-    default: 'Tertiary',
   },
 }
