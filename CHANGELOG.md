@@ -1,3 +1,8 @@
+## upcoming
+
+- minor fix in barchart, barchart multiset and barchart stacked grouping
+- added option to hide hierarchy in sunburst
+
 ## v1.0.0-beta.7
 
 #### 25 jan 2020

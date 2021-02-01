@@ -69,4 +69,6 @@ export const visualOptions = {
     options: ['Top', 'Center', 'Bottom'],
     default: 'Center',
   },
+
+  //@TODO: add colorscale based on source ID.
 }

@@ -24,6 +24,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     label3Style,
     // colors
     colorScale,
+    // labels
+    showHierarchyLabels,
   } = visualOptions
 
   const margin = {
@@ -134,6 +136,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     // .data(root.descendants().filter(d => d.depth && (d.y0 + d.y1) / 2 * (d.x1 - d.x0) > 10)) // @TODO: expose minimum text size filter
     .data(root.descendants())
     .join('text')
+    .filter((d) => (!showHierarchyLabels ? !d.children : true)) // if showHierarchyLabels is false, don't show them
     .attr('transform', function (d) {
       const x = (((d.x0 + d.x1) / 2) * 180) / Math.PI
       const y = (d.y0 + d.y1) / 2
