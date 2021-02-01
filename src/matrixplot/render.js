@@ -261,10 +261,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr('id', 'legend')
       .attr('transform', `translate(${width},${marginTop})`)
 
-    const legend = legend().legendWidth(legendWidth)
+    const chartLegend = legend().legendWidth(legendWidth)
 
     if (mapping.color.value) {
-      legend.addColor(mapping.color.value, colorScale)
+      chartLegend.addColor(mapping.color.value, colorScale)
     }
 
     if (mapping.size.value) {
@@ -282,9 +282,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         legendSizeScale.rangeRound(legendSizeScale.range().map((d) => d / 2))
       }
 
-      legend.addSize(mapping.size.value, legendSizeScale, shape)
+      chartLegend.addSize(mapping.size.value, legendSizeScale, shape)
     }
 
-    legendLayer.call(legend)
+    legendLayer.call(chartLegend)
   }
 }

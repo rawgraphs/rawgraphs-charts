@@ -252,12 +252,12 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr('id', 'legend')
       .attr('transform', `translate(${width},${marginTop})`)
 
-    const legend = legend().legendWidth(legendWidth)
+    const chartLegend = legend().legendWidth(legendWidth)
 
     if (mapping.color.value) {
-      legend.addColor(mapping.bars.value, colorScale)
+      chartLegend.addColor(mapping.bars.value, colorScale)
     }
 
-    legendLayer.call(legend)
+    legendLayer.call(chartLegend)
   }
 }

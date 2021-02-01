@@ -1,9 +1,15 @@
 import * as d3 from 'd3'
 import { legend, dateFormats } from '@raw-temp/rawgraphs-core'
-import '../d3-styles.js' 
+import '../d3-styles.js'
 
-export function render(svgNode, data, visualOptions, mapping, originalData, styles) {
-
+export function render(
+  svgNode,
+  data,
+  visualOptions,
+  mapping,
+  originalData,
+  styles
+) {
   const {
     axisLabel,
     labelPrimary,
@@ -228,10 +234,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData, styl
       .attr('id', 'legend')
       .attr('transform', `translate(${width},${marginTop})`)
 
-    const legend = legend().legendWidth(legendWidth)
+    const chartLegend = legend().legendWidth(legendWidth)
 
     if (mapping.color.value) {
-      legend.addColor(mapping.color.value, colorScale)
+      chartLegend.addColor(mapping.color.value, colorScale)
     }
 
     if (mapping.size.value) {
@@ -240,9 +246,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData, styl
         .domain(d3.extent(data, (d) => d.size))
         .rangeRound([size(d3.min(data, (d) => d.size)), maxRadius])
 
-      legend.addSize(mapping.size.value, legendSizeScale, 'circle')
+      chartLegend.addSize(mapping.size.value, legendSizeScale, 'circle')
     }
 
-    legendLayer.call(legend)
+    legendLayer.call(chartLegend)
   }
 }
