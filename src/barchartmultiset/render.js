@@ -36,6 +36,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     bottom: marginBottom,
     left: marginLeft,
   }
+  console.log('color test', colorScale.domain())
 
   // create nest structure
   const nestedData = d3
@@ -177,11 +178,11 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr('dy', serieHeight - 4)
       .attr('x', serieWidth)
       .attr('class', 'axisTitle')
-      .attr('font-family', 'sans-serif')
-      .attr('font-size', 12)
-      .attr('font-style', 'italic')
       .attr('text-anchor', 'end')
       .attr('display', serieIndex == 0 || repeatAxesLabels ? null : 'none')
+      .attr('font-family', 'Arial, sans-serif')
+      .attr('font-size', 10)
+      .attr('font-weight', 'bold')
       .text(mapping.bars.value)
 
     // add the y axis titles
@@ -196,7 +197,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr('font-style', 'italic')
       .attr('text-anchor', 'start')
       .attr('display', serieIndex == 0 || repeatAxesLabels ? null : 'none')
-      .text('y axis') //mapping.size.value + ' (' + mapping.size.config.aggregation + ')')
+    console.log(mapping)
   })
 
   // add legend

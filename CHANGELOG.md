@@ -1,7 +1,11 @@
 ## upcoming
 
-- added color in sankey diagram
-- all the axes use `.nice()` function to compute the range
+- fixed size in alluvial diagram
+- added option to hide hierarchy labels in _circular dendrogram_
+- removed injected css in _circular dendrogram_
+- added option to hide hierarchy labels in _linear dendrogram_
+- removed injected css in _linear dendrogram_
+- in _stacked barchart_ the dimension 'stacks' has been renamed 'X Axis'
 
 ## v1.0.0-beta.8
 

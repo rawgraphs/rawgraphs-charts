@@ -20,6 +20,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     colorScale,
   } = visualOptions
 
+  console.log('color test', colorScale.domain())
+
   const margin = {
     top: marginTop,
     right: marginRight,
