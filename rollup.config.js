@@ -3,6 +3,7 @@ import localResolve from 'rollup-plugin-local-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import resolve from '@rollup/plugin-node-resolve'
 import image from '@rollup/plugin-image'
+import { string } from 'rollup-plugin-string'
 import pkg from './package.json'
 
 const vendors = []
@@ -12,6 +13,8 @@ const vendors = []
     Object.keys(pkg.peerDependencies || {}),
     Object.keys(pkg.devDependencies || {})
   )
+  .concat('./styles/base.css')
+  
 
 export default ['esm', 'cjs', 'umd'].map((format) => ({
   input: {
@@ -37,5 +40,8 @@ export default ['esm', 'cjs', 'umd'].map((format) => ({
       // TODO: Maybe check this
       babelHelpers: 'bundled',
     }),
+    string({
+      include: "**/styles/*.css",
+    })
   ],
 }))
