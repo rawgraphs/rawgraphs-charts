@@ -108,6 +108,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   const axesScale = d3
     .scaleLinear()
     .domain([0, maxValue])
+    .nice()
     .rangeRound([innerRadius, outerRadius])
 
   const axesGrid = d3

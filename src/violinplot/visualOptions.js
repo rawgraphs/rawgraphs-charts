@@ -44,7 +44,7 @@ export const visualOptions = {
   interpolation: {
     type: 'text',
     label: 'curve type',
-    default: 'Linear',
+    default: 'Monotone Y',
     options: [
       'Basis',
       'Bundle',

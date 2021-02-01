@@ -6,6 +6,7 @@
 - minor fix in barchart, barchart multiset and barchart stacked grouping
 - added option to hide hierarchy in sunburst
 - added color in sankey diagram
+- all the axes use `.nice()` function to compute the range
 
 ## v1.0.0-beta.7
 
