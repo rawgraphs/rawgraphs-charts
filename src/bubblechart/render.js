@@ -1,7 +1,7 @@
 import * as d3 from 'd3'
 import { rawgraphsLegend, dateFormats } from '@raw-temp/rawgraphs-core'
 import { convertCSS } from 'css-to-cssinjs'
-import rawStyles from '../styles.ass'
+import rawStyles from '../styles.css'
 import * as ciao from '../styles.js' //baaaaddd
 const styles = convertCSS(rawStyles, { format: 'object' })
 const {
