@@ -32,11 +32,17 @@ module.exports = {
       {
         test: /\.css$/i,
         use: 'raw-loader',
+        exclude: [
+          path.resolve(__dirname, "example")
+        ],
       },
-      // {
-      //   test: /\.css$/,
-      //   use: ['style-loader', 'css-loader'],
-      // },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+        include: [
+          path.resolve(__dirname, "example")
+        ],
+      },
       {
         test: /\.tsv$/,
         use: ['dsv-loader?delimiter=\t'],
