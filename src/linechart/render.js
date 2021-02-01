@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-import { rawgraphsLegend } from '@raw-temp/rawgraphs-core'
+import { legend } from '@raw-temp/rawgraphs-core'
 import * as d3Gridding from 'd3-gridding'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
@@ -322,7 +322,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr('id', 'legend')
       .attr('transform', `translate(${width},${marginTop})`)
 
-    const legend = rawgraphsLegend().legendWidth(legendWidth)
+    const legend = legend().legendWidth(legendWidth)
 
     if (mapping.color.value) {
       legend.addColor(mapping.color.value, colorScale)

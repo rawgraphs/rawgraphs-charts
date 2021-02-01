@@ -1,6 +1,5 @@
-import { convertCSS } from 'css-to-cssinjs'
+import convertCSS from './convertCSS'
 import rawStyles from './base.css'
 
-const styles = convertCSS(rawStyles, { format: 'object' })
-
+const styles = convertCSS(rawStyles)
 export default styles

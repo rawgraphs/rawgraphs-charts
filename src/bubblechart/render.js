@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-import { rawgraphsLegend, dateFormats } from '@raw-temp/rawgraphs-core'
+import { legend, dateFormats } from '@raw-temp/rawgraphs-core'
 import '../d3-styles.js' 
 
 export function render(svgNode, data, visualOptions, mapping, originalData, styles) {
@@ -228,7 +228,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData, styl
       .attr('id', 'legend')
       .attr('transform', `translate(${width},${marginTop})`)
 
-    const legend = rawgraphsLegend().legendWidth(legendWidth)
+    const legend = legend().legendWidth(legendWidth)
 
     if (mapping.color.value) {
       legend.addColor(mapping.color.value, colorScale)
