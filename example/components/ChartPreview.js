@@ -11,7 +11,7 @@ const ChartPreview = ({ chart, data, mapping, dataTypes, visualOptions }) => {
       data: dataset,
       mapping,
       dataTypes,
-      visualOptions
+      visualOptions,
     })
     viz.renderToDOM(domRef.current)
   }, [chart, data, mapping, dataTypes, visualOptions])

@@ -1,7 +1,17 @@
 import * as d3 from 'd3'
 import { rawgraphsLegend, dateFormats } from '@raw-temp/rawgraphs-core'
+import '../d3-styles.js' 
 
-export function render(svgNode, data, visualOptions, mapping, originalData) {
+export function render(svgNode, data, visualOptions, mapping, originalData, styles) {
+
+  const {
+    axisLabel,
+    labelPrimary,
+    labelSecondary,
+    labelItalic,
+    labelOutline,
+  } = styles
+
   const {
     width,
     height,
@@ -61,17 +71,16 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     return g
       .attr('transform', `translate(0,${chartHeight})`)
       .call(d3.axisBottom(x))
-      .call((g) =>
-        g
-          .append('text')
-          .attr('font-family', 'Arial, sans-serif')
-          .attr('font-size', 12)
-          .attr('x', chartWidth)
-          .attr('dy', -5)
-          .attr('fill', 'black')
-          .attr('font-weight', 'bold')
-          .attr('text-anchor', 'end')
-          .text(mapping['x'].value)
+      .call(
+        (g) =>
+          g
+            .append('text')
+            .attr('x', chartWidth)
+            .attr('dy', -5)
+            .attr('text-anchor', 'end')
+            .text(mapping['x'].value)
+            .styles(axisLabel)
+        //.call(multiStyles(axisLabel))
       )
   }
 
@@ -81,14 +90,11 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .call((g) =>
         g
           .append('text')
-          .attr('font-family', 'sans-serif')
-          .attr('font-size', 12)
           .attr('x', 4)
-          .attr('fill', 'black')
-          .attr('font-weight', 'bold')
           .attr('text-anchor', 'start')
           .attr('dominant-baseline', 'hanging')
           .text(mapping['y'].value)
+          .styles(axisLabel)
       )
   }
 
@@ -181,8 +187,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .append('text')
     .attr('x', 0)
     .attr('y', 0)
-    .attr('font-family', 'Arial, sans-serif')
-    .attr('font-size', 10)
     .attr('text-anchor', 'middle')
     .attr('dominant-baseline', 'middle')
     .selectAll('tspan')
@@ -200,16 +204,21 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         return d
       }
     })
+    .styles(function (d, i) {
+      if (i === 0) {
+        return labelPrimary
+      } else if (i === 1) {
+        return labelSecondary
+      } else if (i === 2) {
+        return labelItalic
+      } else {
+        return labelPrimary
+      }
+    })
 
   if (showLabelsOutline) {
     // NOTE: Adobe Illustrator does not support paint-order attr
-    labelsLayer
-      .selectAll('text')
-      .attr('stroke-width', 2)
-      .attr('paint-order', 'stroke')
-      .attr('stroke', 'white')
-      .attr('stroke-linecap', 'round')
-      .attr('stroke-linejoin', 'round')
+    labelsLayer.selectAll('text').styles(labelOutline)
   }
 
   if (showLegend) {
