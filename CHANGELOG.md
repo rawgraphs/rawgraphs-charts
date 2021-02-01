@@ -2,6 +2,7 @@
 
 - minor fix in barchart, barchart multiset and barchart stacked grouping
 - added option to hide hierarchy in sunburst
+- added color in sankey diagram
 
 ## v1.0.0-beta.7
 
