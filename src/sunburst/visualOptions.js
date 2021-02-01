@@ -89,4 +89,11 @@ export const visualOptions = {
     },
     group: 'colors',
   },
+
+  showHierarchyLabels: {
+    type: 'boolean',
+    label: 'Show hierarchy labels',
+    default: true,
+    group: 'labels',
+  },
 }

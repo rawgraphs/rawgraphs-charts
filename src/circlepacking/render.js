@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-import { rawgraphsLegend, labelsOcclusion } from '@raw-temp/rawgraphs-core'
+import { legend, labelsOcclusion } from '@raw-temp/rawgraphs-core'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
   console.log('- render')
@@ -175,11 +175,11 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr('id', 'legend')
       .attr('transform', `translate(${width},${marginTop})`)
 
-    const legend = rawgraphsLegend().legendWidth(legendWidth)
+    const chartLegend = legend().legendWidth(legendWidth)
 
     if (mapping.color.value) {
-      legend.addColor(
-        mapping.color.value + ` [${mapping.size.config.aggregation}]`,
+      chartLegend.addColor(
+        mapping.color.value + ` [${mapping.color.config.aggregation}]`,
         colorScale
       )
     }
@@ -201,7 +201,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         .rangeRound([legendWidth / 8, legendWidth / 4])
     }
 
-    legend.addSize(
+    chartLegend.addSize(
       mapping.size.value
         ? mapping.size.value + ` [${mapping.size.config.aggregation}]`
         : 'Number of records',
@@ -209,6 +209,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       'circle'
     )
 
-    legendLayer.call(legend)
+    legendLayer.call(chartLegend)
   }
 }

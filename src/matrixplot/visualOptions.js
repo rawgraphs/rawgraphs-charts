@@ -2,7 +2,7 @@ export const visualOptions = {
   marginTop: {
     type: 'number',
     label: 'Margin (top)',
-    default: 50,
+    default: 100,
     group: 'artboard',
   },
 
@@ -23,7 +23,7 @@ export const visualOptions = {
   marginLeft: {
     type: 'number',
     label: 'Margin (left)',
-    default: 50,
+    default: 100,
     group: 'artboard',
   },
   showLegend: {
@@ -97,28 +97,14 @@ export const visualOptions = {
     group: 'chart',
   },
 
-  label1Style: {
+  labelStyles: {
     type: 'text',
-    label: 'Labels 1 style',
+    label: 'Label',
     group: 'labels',
     options: ['Primary', 'Secondary', 'Tertiary'],
     default: 'Primary',
-  },
-
-  label2Style: {
-    type: 'text',
-    label: 'Labels 2 style',
-    group: 'labels',
-    options: ['Primary', 'Secondary', 'Tertiary'],
-    default: 'Secondary',
-  },
-
-  label3Style: {
-    type: 'text',
-    label: 'Labels 3 style',
-    group: 'labels',
-    options: ['Primary', 'Secondary', 'Tertiary'],
-    default: 'Tertiary',
+    repeatFor: 'label',
+    repeatDefault: ['Primary', 'Secondary', 'Tertiary'],
   },
 
   colorScale: {
@@ -131,4 +117,5 @@ export const visualOptions = {
     },
     group: 'colors',
   },
+
 }

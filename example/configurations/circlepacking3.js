@@ -21,10 +21,10 @@ export default {
       value: ['results'],
       config: { aggregation: ['sum'] },
     },
-    size: {
-      value: ['results'],
-      config: { aggregation: ['sum'] },
-    },
+    // size: {
+    //   value: ['results'],
+    //   config: { aggregation: ['sum'] },
+    // },
   },
   visualOptions: {
     width: 800,

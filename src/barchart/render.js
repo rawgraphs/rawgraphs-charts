@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-import { rawgraphsLegend } from '@raw-temp/rawgraphs-core'
+import { legend } from '@raw-temp/rawgraphs-core'
 import * as d3Gridding from 'd3-gridding'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
@@ -16,6 +16,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     marginLeft,
     // chart options
     padding,
+    horizontalBars,
     // series options
     columnsNumber,
     useSameScale,
@@ -38,32 +39,19 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
   // create nest structure
   const nestedData = d3
-    .rollups(
-      data,
-      (v) => v,
-      (d) => d.series
-    )
-    .map((d) => ({ data: d }))
-
-  // comupte max values for series
-  // will add it as property to each series.
-  nestedData.forEach(function (serie) {
-    serie.totalValue = serie.data[1].reduce(
-      (result, item) => result + item.size,
-      0
-    )
-  })
+    .groups(data, (d) => d.series)
+    .map((d) => ({ data: d, totalSize: d3.sum(d[1], (d) => d.size) }))
 
   // series sorting functions
   const seriesSortings = {
     'Total value (descending)': function (a, b) {
-      return d3.descending(a.totalValue, b.totalValue)
+      return d3.descending(a.totalSize, b.totalSize)
     },
     'Total value (ascending)': function (a, b) {
-      return d3.ascending(a.totalValue, b.totalValue)
+      return d3.ascending(a.totalSize, b.totalSize)
     },
-    Name: function (a, b) {
-      return d3.ascending(a[0], b[0])
+    'Series name': function (a, b) {
+      return d3.ascending(a.data[0], b.data[0])
     },
   }
   // sort series
@@ -85,7 +73,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .size([width, height])
     .mode('grid')
     .padding(0) // no padding, margins will be applied inside
-    .cols(columnsNumber)
+    .cols(mapping.series.value ? columnsNumber : 1)
 
   const griddingData = gridding(nestedData)
 
@@ -95,7 +83,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .selectAll('g')
     .data(griddingData)
     .join('g')
-    .attr('id', (d) => d[0])
+    .attr('id', (d) => d.data[0])
     .attr(
       'transform',
       (d) => 'translate(' + (d.x + margin.left) + ',' + (d.y + margin.top) + ')'
@@ -107,30 +95,31 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     originalDomain[0] > 0 ? [0, originalDomain[1]] : originalDomain
   const barsDomain = [...new Set(data.map((d) => d.bars))]
 
-  series.each(function (d, serieIndex) {
+  series.each(function (d, seriesIndex) {
     // make a local selection for each serie
     const selection = d3.select(this)
 
     // compute each serie width and height
-    const serieWidth = d.width - margin.right - margin.left
-    const serieHeight = d.height - margin.top - margin.bottom
+    const seriesWidth = d.width - margin.right - margin.left
+    const seriesHeight = d.height - margin.top - margin.bottom
 
     // scales
     const barScale = d3
       .scaleBand()
-      .range([0, serieWidth])
+      .range([0, horizontalBars ? seriesHeight : seriesWidth])
       .domain(barsDomain)
       .padding(
-        padding / (serieWidth / griddingData[0].data[1].length) //convert padding from px to percentage
+        padding /
+          (horizontalBars ? seriesHeight : seriesWidth / barsDomain.length) //convert padding from px to percentage
       )
 
-    const localDomain = d3.extent(d.data[1], (e) => e.size)
+    const seriesDomain = d3.extent(d.data[1], (d) => d.size)
 
     const sizeScale = d3
       .scaleLinear()
-      .domain(useSameScale ? sizeDomain : localDomain)
+      .domain(useSameScale ? sizeDomain : seriesDomain)
       .nice()
-      .range([serieHeight, 0])
+      .range(horizontalBars ? [0, seriesWidth] : [seriesHeight, 0])
 
     const bars = selection
       .append('g')
@@ -139,60 +128,138 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .data((d) => d.data[1])
       .join('rect')
       .attr('id', (d) => d.series + ' - ' + d.bars)
-      .attr('x', (d) => barScale(d.bars))
-      .attr('y', (d) => sizeScale(Math.max(0, d.size)))
-      .attr('height', (d) => Math.abs(sizeScale(d.size) - sizeScale(0)))
-      .attr('width', barScale.bandwidth())
+      .attr('x', (d) => {
+        return horizontalBars
+          ? sizeScale(Math.min(0, d.size))
+          : barScale(d.bars)
+      })
+      .attr('y', (d) => {
+        return horizontalBars
+          ? barScale(d.bars)
+          : sizeScale(Math.max(0, d.size))
+      })
+      .attr('height', (d) => {
+        return horizontalBars
+          ? barScale.bandwidth()
+          : Math.abs(sizeScale(d.size) - sizeScale(0))
+      })
+      .attr('width', (d) => {
+        return horizontalBars
+          ? Math.abs(sizeScale(d.size) - sizeScale(0))
+          : barScale.bandwidth()
+      })
       .attr('fill', (d) => colorScale(d.color))
 
-    const xAxis = selection
-      .append('g')
-      .attr('id', 'xAxis')
-      .attr('transform', 'translate(0,' + sizeScale(0) + ')')
-      .call(d3.axisBottom(barScale).tickSizeOuter(0))
+    if (horizontalBars) {
+      const xAxis = selection
+        .append('g')
+        .attr('id', 'xAxis')
+        .attr('transform', 'translate(0,' + seriesHeight + ')')
+        .call(d3.axisBottom(sizeScale))
+        .call((g) =>
+          g
+            .append('text')
+            .attr('font-family', 'Arial, sans-serif')
+            .attr('font-size', 10)
+            .attr('x', seriesWidth)
+            .attr('dy', -5)
+            .attr('fill', 'black')
+            .attr('font-weight', 'bold')
+            .attr('text-anchor', 'end')
+            .attr(
+              'display',
+              seriesIndex === 0 || repeatAxesLabels ? null : 'none'
+            )
+            .text((d) => {
+              return mapping['size'].value
+                ? `${mapping['size'].value} [${mapping.size.config.aggregation}]`
+                : ''
+            })
+        )
 
-    const yAxis = selection
-      .append('g')
-      .attr('id', 'yAxis')
-      .call(d3.axisLeft(sizeScale).tickSizeOuter(0))
+      const yAxis = selection
+        .append('g')
+        .attr('id', 'yAxis')
+        .call(d3.axisLeft(barScale).tickSizeOuter(0))
+        .call((g) =>
+          g
+            .append('text')
+            .attr('font-family', 'Arial, sans-serif')
+            .attr('font-size', 10)
+            .attr('x', 4)
+            .attr('fill', 'black')
+            .attr('font-weight', 'bold')
+            .attr('text-anchor', 'start')
+            .attr('dominant-baseline', 'hanging')
+            .attr(
+              'display',
+              seriesIndex === 0 || repeatAxesLabels ? null : 'none'
+            )
+
+            .text(mapping['bars'].value)
+        )
+    } else {
+      const xAxis = selection
+        .append('g')
+        .attr('id', 'xAxis')
+        .attr('transform', 'translate(0,' + seriesHeight + ')')
+        .call(d3.axisBottom(barScale).tickSizeOuter(0))
+        .call((g) =>
+          g
+            .append('text')
+            .attr('font-family', 'Arial, sans-serif')
+            .attr('font-size', 10)
+            .attr('x', seriesWidth)
+            .attr('dy', -5)
+            .attr('fill', 'black')
+            .attr('font-weight', 'bold')
+            .attr('text-anchor', 'end')
+            .attr(
+              'display',
+              seriesIndex === 0 || repeatAxesLabels ? null : 'none'
+            )
+            .text(mapping['bars'].value)
+        )
+
+      const yAxis = selection
+        .append('g')
+        .attr('id', 'yAxis')
+        .call(d3.axisLeft(sizeScale))
+        .call((g) =>
+          g
+            .append('text')
+            .attr('font-family', 'Arial, sans-serif')
+            .attr('font-size', 10)
+            .attr('x', 4)
+            .attr('fill', 'black')
+            .attr('font-weight', 'bold')
+            .attr('text-anchor', 'start')
+            .attr('dominant-baseline', 'hanging')
+            .attr(
+              'display',
+              seriesIndex === 0 || repeatAxesLabels ? null : 'none'
+            )
+            .text((d) => {
+              return mapping['size'].value
+                ? `${mapping['size'].value} [${mapping.size.config.aggregation}]`
+                : ''
+            })
+        )
+    }
 
     if (showSeriesLabels) {
       selection
         .append('text')
         .attr('class', 'title')
-        .text((d) => d.data[0])
         .attr('y', -4)
-        .attr('font-family', 'sans-serif')
+        .attr('x', seriesWidth / 2)
+        .attr('font-family', 'Arial, sans-serif')
         .attr('font-size', 12)
+        .attr('fill', 'black')
         .attr('font-weight', 'bold')
+        .attr('text-anchor', 'middle')
+        .text((d) => d.data[0])
     }
-
-    // add the x axis titles
-    selection
-      .append('text')
-      .attr('dy', serieHeight - 4)
-      .attr('x', serieWidth)
-      .attr('class', 'axisTitle')
-      .attr('font-family', 'sans-serif')
-      .attr('font-size', 12)
-      .attr('font-style', 'italic')
-      .attr('text-anchor', 'end')
-      .attr('display', serieIndex == 0 || repeatAxesLabels ? null : 'none')
-      .text(mapping.bars.value)
-
-    // add the y axis titles
-    selection
-      .append('text')
-      .attr('y', 0)
-      .attr('x', 4)
-      .attr('dominant-baseline', 'hanging')
-      .attr('class', 'axisTitle')
-      .attr('font-family', 'sans-serif')
-      .attr('font-size', 12)
-      .attr('font-style', 'italic')
-      .attr('text-anchor', 'start')
-      .attr('display', serieIndex == 0 || repeatAxesLabels ? null : 'none')
-      .text(mapping.size.value + ' (' + mapping.size.config.aggregation + ')')
   })
 
   // add legend
@@ -203,12 +270,12 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr('id', 'legend')
       .attr('transform', `translate(${width},${marginTop})`)
 
-    const legend = rawgraphsLegend().legendWidth(legendWidth)
+    const chartLegend = legend().legendWidth(legendWidth)
 
     if (mapping.color.value) {
-      legend.addColor(mapping.color.value, colorScale)
+      chartLegend.addColor(mapping.color.value, colorScale)
     }
 
-    legendLayer.call(legend)
+    legendLayer.call(chartLegend)
   }
 }

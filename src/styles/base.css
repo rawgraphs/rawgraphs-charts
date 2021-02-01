@@ -1,0 +1,36 @@
+.axisLabel{
+    font-family: 'Arial, sans-serif';
+    font-size: 12px;
+    fill: black;
+    font-weight: bold;
+  }
+  
+.labelPrimary{
+    font-family: 'Arial, sans-serif';
+    font-size: 10px;
+    fill: black;
+    font-weight: bold;
+  }
+  
+.labelSecondary{
+    font-family: 'Arial, sans-serif';
+    font-size: 10px;
+    fill: black;
+    font-weight: normal;
+  }
+  
+.labelItalic{
+    font-family: 'Arial, sans-serif';
+    font-size: 10px;
+    fill: black;
+    font-weight: normal;
+    font-style: italic;
+  }
+  
+.labelOutline{
+    stroke-width: 2px;
+    paint-order: stroke;
+    stroke: white;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }

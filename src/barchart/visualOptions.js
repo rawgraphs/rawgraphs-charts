@@ -55,6 +55,13 @@ export const visualOptions = {
     group: 'chart',
   },
 
+  horizontalBars: {
+    type: 'boolean',
+    label: 'Show bars horizontally ',
+    default: false,
+    group: 'chart',
+  },
+
   useSameScale: {
     type: 'boolean',
     label: 'Use same scale',
@@ -65,7 +72,7 @@ export const visualOptions = {
   columnsNumber: {
     type: 'number',
     label: 'Number of columns',
-    default: 0,
+    default: 2,
     group: 'series',
   },
 

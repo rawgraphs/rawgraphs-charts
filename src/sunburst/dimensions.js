@@ -28,7 +28,7 @@ export const dimensions = [
   },
   {
     id: 'label',
-    name: 'label',
+    name: 'leaf label',
     validTypes: ['number', 'date', 'string'],
     required: false,
     multiple: true,

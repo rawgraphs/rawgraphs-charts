@@ -1,0 +1,119 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="320" height="160" viewBox="0 0 320 160">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-4, .cls-5 {
+        fill: none;
+      }
+
+      .cls-1 {
+        stroke: #000;
+      }
+
+      .cls-2, .cls-5 {
+        stroke: #ccc;
+      }
+
+      .cls-2 {
+        stroke-dasharray: 3 3;
+      }
+
+      .cls-3 {
+        fill: #9e0142;
+      }
+
+      .cls-4 {
+        stroke: #fff;
+      }
+
+      .cls-6 {
+        fill: #5e4fa2;
+      }
+
+      .cls-7 {
+        fill: #69bda9;
+      }
+
+      .cls-8 {
+        fill: #e0f3a1;
+      }
+
+      .cls-9 {
+        fill: #fedd8d;
+      }
+
+      .cls-10, .cls-11 {
+        font-size: 12px;
+        font-family: Helvetica;
+      }
+
+      .cls-11 {
+        letter-spacing: -0.05469em;
+      }
+    </style>
+  </defs>
+  <g>
+    <path class="cls-1" d="M21.70371,144.46069v-6.13431H318.5039v6.13431"/>
+    <line class="cls-1" x1="51.38372" y1="137.76872" x2="51.38372" y2="144.46069"/>
+    <line class="cls-1" x1="110.74376" y1="137.76872" x2="110.74376" y2="144.46069"/>
+    <line class="cls-1" x1="170.1038" y1="137.76872" x2="170.1038" y2="144.46069"/>
+    <line class="cls-1" x1="229.46384" y1="137.76872" x2="229.46384" y2="144.46069"/>
+    <line class="cls-1" x1="288.82388" y1="137.76872" x2="288.82388" y2="144.46069"/>
+    <path class="cls-1" d="M14.8137,138.32638h6.89V6.00177h-6.89"/>
+    <line class="cls-1" x1="21.17371" y1="135.77482" x2="14.8137" y2="135.77482"/>
+    <line class="cls-1" x1="21.17371" y1="123.97727" x2="14.8137" y2="123.97727"/>
+    <line class="cls-1" x1="21.17371" y1="112.17972" x2="14.8137" y2="112.17972"/>
+    <line class="cls-1" x1="21.17371" y1="100.38217" x2="14.8137" y2="100.38217"/>
+    <line class="cls-1" x1="21.17371" y1="88.58462" x2="14.8137" y2="88.58462"/>
+    <line class="cls-1" x1="21.17371" y1="76.78707" x2="14.8137" y2="76.78707"/>
+    <line class="cls-1" x1="21.17371" y1="64.98952" x2="14.8137" y2="64.98952"/>
+    <line class="cls-1" x1="21.17371" y1="53.19197" x2="14.8137" y2="53.19197"/>
+    <line class="cls-1" x1="21.17371" y1="41.39442" x2="14.8137" y2="41.39442"/>
+    <line class="cls-1" x1="21.17371" y1="29.59687" x2="14.8137" y2="29.59687"/>
+    <line class="cls-1" x1="21.17371" y1="17.79932" x2="14.8137" y2="17.79932"/>
+    <line class="cls-2" x1="50.85372" y1="125.3662" x2="50.85372" y2="82.12228"/>
+    <rect class="cls-3" x="40.25372" y="98.92789" width="21.20001" height="22.30825"/>
+    <line class="cls-4" x1="40.25372" y1="117.686" x2="61.45373" y2="117.686"/>
+    <line class="cls-5" x1="40.25372" y1="125.3662" x2="61.45373" y2="125.3662"/>
+    <line class="cls-5" x1="40.25372" y1="82.12228" x2="61.45373" y2="82.12228"/>
+    <line class="cls-2" x1="110.21376" y1="87.58272" x2="110.21376" y2="3.9293"/>
+    <rect class="cls-6" x="99.61376" y="27.0691" width="21.20001" height="45.6098"/>
+    <line class="cls-4" x1="99.61376" y1="62.32678" x2="120.81377" y2="62.32678"/>
+    <line class="cls-5" x1="99.61376" y1="87.58272" x2="120.81377" y2="87.58272"/>
+    <line class="cls-5" x1="99.61376" y1="3.9293" x2="120.81377" y2="3.9293"/>
+    <line class="cls-2" x1="169.5738" y1="135.51563" x2="169.5738" y2="64.28058"/>
+    <rect class="cls-7" x="158.9738" y="100.93521" width="21.20001" height="29.07392"/>
+    <line class="cls-4" x1="158.9738" y1="127.173" x2="180.17381" y2="127.173"/>
+    <line class="cls-5" x1="158.9738" y1="135.51563" x2="180.17381" y2="135.51563"/>
+    <line class="cls-5" x1="158.9738" y1="64.28058" x2="180.17381" y2="64.28058"/>
+    <line class="cls-2" x1="228.93384" y1="135.76859" x2="228.93384" y2="121.58534"/>
+    <rect class="cls-8" x="218.33383" y="123.27443" width="21.20001" height="10.86174"/>
+    <line class="cls-4" x1="218.33383" y1="130.21818" x2="239.53385" y2="130.21818"/>
+    <line class="cls-5" x1="218.33383" y1="135.76859" x2="239.53385" y2="135.76859"/>
+    <line class="cls-5" x1="218.33383" y1="121.58534" x2="239.53385" y2="121.58534"/>
+    <line class="cls-2" x1="288.29388" y1="131.72987" x2="288.29388" y2="76.4192"/>
+    <rect class="cls-9" x="277.69387" y="102.68031" width="21.20001" height="26.90716"/>
+    <line class="cls-4" x1="277.69387" y1="121.06845" x2="298.89389" y2="121.06845"/>
+    <line class="cls-5" x1="277.69387" y1="131.72987" x2="298.89389" y2="131.72987"/>
+    <line class="cls-5" x1="277.69387" y1="76.4192" x2="298.89389" y2="76.4192"/>
+    <text class="cls-10" transform="translate(6.67382 139.31954)">2</text>
+    <text class="cls-10" transform="translate(6.67382 127.52169)">4</text>
+    <text class="cls-10" transform="translate(6.67382 115.72384)">6</text>
+    <text class="cls-10" transform="translate(6.67382 103.92696)">8</text>
+    <text class="cls-10" transform="translate(0 92.12911)">10</text>
+    <text class="cls-10" transform="translate(0 80.33223)">12</text>
+    <text class="cls-10" transform="translate(0 68.53438)">14</text>
+    <text class="cls-10" transform="translate(0 56.73653)">16</text>
+    <text class="cls-10" transform="translate(0 44.93966)">18</text>
+    <text class="cls-10" transform="translate(0 33.1418)">20</text>
+    <text class="cls-10" transform="translate(0 21.34395)">22</text>
+    <text class="cls-10" transform="translate(0 9.54708)">24</text>
+    <text class="cls-11" transform="translate(47.70996 155.70137)">A</text>
+    <text class="cls-10" transform="translate(106.74219 155.7004)">B</text>
+    <text class="cls-10" transform="translate(165.77051 155.7004)">C</text>
+    <text class="cls-10" transform="translate(225.13086 155.7004)">D</text>
+    <text class="cls-10" transform="translate(284.82227 155.7004)">E</text>
+  </g>
+  <circle class="cls-5" cx="50.85371" cy="43.32604" r="5"/>
+  <circle class="cls-5" cx="228.9338" cy="96.57779" r="5"/>
+  <circle class="cls-5" cx="228.9338" cy="94.40557" r="5"/>
+</svg>

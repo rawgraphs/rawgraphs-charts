@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-import { rawgraphsLegend } from '@raw-temp/rawgraphs-core'
+import { legend } from '@raw-temp/rawgraphs-core'
 import * as d3Gridding from 'd3-gridding'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
@@ -38,13 +38,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   }
 
   // create nest structure
-  const nestedData = d3
-    .rollups(
-      data,
-      (v) => v,
-      (d) => d.series
-    )
-    .map((d) => ({ data: d }))
+  const nestedData = d3.groups(data, (d) => d.series).map((d) => ({ data: d }))
 
   // comupte max values for series
   // will add it as property to each series.
@@ -258,12 +252,12 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr('id', 'legend')
       .attr('transform', `translate(${width},${marginTop})`)
 
-    const legend = rawgraphsLegend().legendWidth(legendWidth)
+    const chartLegend = legend().legendWidth(legendWidth)
 
     if (mapping.color.value) {
-      legend.addColor(mapping.bars.value, colorScale)
+      chartLegend.addColor(mapping.bars.value, colorScale)
     }
 
-    legendLayer.call(legend)
+    legendLayer.call(chartLegend)
   }
 }

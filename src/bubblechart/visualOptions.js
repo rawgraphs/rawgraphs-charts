@@ -2,28 +2,28 @@ export const visualOptions = {
   marginTop: {
     type: 'number',
     label: 'Margin (top)',
-    default: 30,
+    default: 50,
     group: 'artboard',
   },
 
   marginRight: {
     type: 'number',
     label: 'Margin (right)',
-    default: 30,
+    default: 50,
     group: 'artboard',
   },
 
   marginBottom: {
     type: 'number',
     label: 'Margin (bottom)',
-    default: 30,
+    default: 50,
     group: 'artboard',
   },
 
   marginLeft: {
     type: 'number',
     label: 'Margin (left)',
-    default: 30,
+    default: 100,
     group: 'artboard',
   },
 

@@ -1,6 +1,6 @@
 {
   "name": "@raw-temp/rawgraphs-charts",
-  "version": "0.0.37",
+  "version": "1.0.0-beta.8",
   "description": "",
   "jsdelivr": "lib/index.umd.js",
   "unpkg": "lib/index.umd.js",
@@ -16,16 +16,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "css": "^3.0.0",
     "d3": "^6.2.0",
     "d3-gridding": "^0.2.0",
-    "d3-sankey": "^0.12.3"
+    "d3-sankey": "^0.12.3",
+    "louvain": "^1.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
-    "@raw-temp/rawgraphs-core": "0.1.40",
+    "@raw-temp/rawgraphs-core": "1.0.0-beta.4",
     "@rollup/plugin-babel": "^5.1.0",
     "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-image": "^2.0.5",
@@ -37,12 +39,14 @@
     "dsv-loader": "^2.0.0",
     "file-loader": "^6.1.0",
     "prettier": "^2.1.2",
+    "raw-loader": "^4.0.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.21.0",
     "rollup-plugin-local-resolve": "^1.0.7",
+    "rollup-plugin-string": "^3.0.0",
     "style-loader": "^1.2.1",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12",
