@@ -1,5 +1,8 @@
 ## upcoming
 
+- _bar charts_ now accepts dates in `bar` dimension
+- added _bar chart multiset_
+- added _stacked bar chart_
 - minor fix in barchart, barchart multiset and barchart stacked grouping
 - added option to hide hierarchy in sunburst
 - added color in sankey diagram

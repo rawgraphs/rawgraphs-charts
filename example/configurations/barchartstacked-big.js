@@ -1,0 +1,57 @@
+import barchartstacked from 'rawcharts/barchartstacked'
+import data from '../datasets/covid-ita.csv'
+
+export default {
+  chart: barchartstacked,
+  data,
+  dataTypes: {
+    data: 'string',
+    stato: 'string',
+    codice_regione: 'number',
+    denominazione_regione: 'string',
+    lat: 'number',
+    long: 'number',
+    ricoverati_con_sintomi: 'number',
+    terapia_intensiva: 'number',
+    totale_ospedalizzati: 'number',
+    isolamento_domiciliare: 'number',
+    totale_positivi: 'number',
+    variazione_totale_positivi: 'number',
+    nuovi_positivi: 'number',
+    dimessi_guariti: 'number',
+    deceduti: 'number',
+    casi_da_sospetto_diagnostico: 'number',
+    casi_da_screening: 'number',
+    totale_casi: 'number',
+    tamponi: 'number',
+    casi_testati: 'number',
+    note: 'string',
+    ingressi_terapia_intensiva: 'string',
+    note_test: 'string',
+    note_casi: 'string',
+  },
+  mapping: {
+    stacks: { value: ['data'] },
+    bars: {
+      value: [
+        'totale_positivi',
+        'ricoverati_con_sintomi',
+        'terapia_intensiva',
+        'deceduti',
+      ],
+    },
+    series: { value: ['denominazione_regione'] },
+  },
+  visualOptions: {
+    width: 1000,
+    height: 700,
+    padding: 3,
+    // stacksPadding: 0,
+    marginTop: 50,
+    marginBottom: 50,
+    marginRight: 50,
+    marginLeft: 50,
+    sortSeriesBy: 'Value (descending)',
+    useSameScale: false,
+  },
+}

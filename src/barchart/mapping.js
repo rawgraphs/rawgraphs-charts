@@ -44,7 +44,7 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
       return item
     },
     (d) => d[mapping.series.value], // series grouping
-    (d) => d[mapping.bars.value] // group functions
+    (d) => d[mapping.bars.value].toString() // bars grouping. toString() to enable grouping on dates
   )
 
   return results
