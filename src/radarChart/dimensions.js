@@ -5,6 +5,7 @@ export const dimensions = [
     validTypes: ['number'],
     required: true,
     multiple: true,
+    minValues: 3,
     aggregation: true,
     aggregationDefault: {
       number: 'sum',

@@ -16,15 +16,48 @@ export const visualOptions = {
   marginBottom: {
     type: 'number',
     label: 'Margin (bottom)',
-    default: 10,
+    default: 30,
     group: 'artboard',
   },
 
   marginLeft: {
     type: 'number',
     label: 'Margin (left)',
-    default: 10,
+    default: 40,
     group: 'artboard',
+  },
+
+  padding: {
+    type: 'number',
+    label: 'Padding between shapes',
+    default: 10,
+    group: 'chart',
+  },
+
+  binsNumber: {
+    type: 'number',
+    label: 'Shape resolution', //amount of bins used to compute the histogram
+    default: 10,
+    group: 'chart',
+  },
+
+  interpolation: {
+    type: 'text',
+    label: 'curve type',
+    default: 'Linear',
+    options: [
+      'Basis',
+      'Bundle',
+      'Cardinal',
+      'Catmull–Rom',
+      'Linear',
+      'Monotone Y',
+      'Natural',
+      'Step',
+      'Step After',
+      'Step Before',
+    ],
+    group: 'chart',
   },
 
   showLegend: {
@@ -48,52 +81,14 @@ export const visualOptions = {
     },
   },
 
-  padding: {
-    type: 'number',
-    label: 'Padding (px)',
-    default: 2,
-    group: 'chart',
-  },
-
-  label1Style: {
-    type: 'text',
-    label: 'Labels 1 style',
-    group: 'labels',
-    options: ['Primary', 'Secondary', 'Tertiary'],
-    default: 'Primary',
-  },
-
-  label2Style: {
-    type: 'text',
-    label: 'Labels 2 style',
-    group: 'labels',
-    options: ['Primary', 'Secondary', 'Tertiary'],
-    default: 'Secondary',
-  },
-
-  label3Style: {
-    type: 'text',
-    label: 'Labels 3 style',
-    group: 'labels',
-    options: ['Primary', 'Secondary', 'Tertiary'],
-    default: 'Tertiary',
-  },
-
   colorScale: {
     type: 'colorScale',
     label: 'Color scale',
     dimension: 'color',
     default: {
       scaleType: 'ordinal',
-      interpolator: 'interpolateSpectral',
+      interpolator: 'schemeCategory10',
     },
     group: 'colors',
-  },
-
-  showHierarchyLabels: {
-    type: 'boolean',
-    label: 'Show hierarchy labels',
-    default: true,
-    group: 'labels',
   },
 }

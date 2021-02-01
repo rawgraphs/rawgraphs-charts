@@ -39,11 +39,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
   // create nest structure
   const nestedData = d3
-    .rollups(
-      data,
-      (v) => v,
-      (d) => d.series
-    )
+    .groups(data, (d) => d.series)
     .map((d) => ({ data: d, totalSize: d3.sum(d[1], (d) => d.size) }))
 
   // series sorting functions

@@ -1,8 +1,29 @@
-## v1.0.0-beta.5
+## upcoming
 
 - _bar charts_ now accepts dates in `bar` dimension
 - added _bar chart multiset_
 - added _stacked bar chart_
+- minor fix in barchart, barchart multiset and barchart stacked grouping
+- added option to hide hierarchy in sunburst
+
+## v1.0.0-beta.7
+
+#### 25 jan 2020
+
+- added box plot
+
+## v1.0.0-beta.6
+
+#### 23 jan 2020
+
+- added violin plot
+
+## v1.0.0-beta.5
+
+#### 12 jan 2020
+
+- added arc diagram
+- fix: radar chart now asks for at least three dimensions as spokes
 
 ## v1.0.0-beta.4
 

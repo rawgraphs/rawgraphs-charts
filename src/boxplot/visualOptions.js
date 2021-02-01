@@ -16,15 +16,36 @@ export const visualOptions = {
   marginBottom: {
     type: 'number',
     label: 'Margin (bottom)',
-    default: 10,
+    default: 30,
     group: 'artboard',
   },
 
   marginLeft: {
     type: 'number',
     label: 'Margin (left)',
-    default: 10,
+    default: 40,
     group: 'artboard',
+  },
+
+  padding: {
+    type: 'number',
+    label: 'Padding between shapes',
+    default: 20,
+    group: 'chart',
+  },
+
+  iqrMultiplier: {
+    type: 'number',
+    label: 'interquartile range multiplier',
+    default: 1.5,
+    group: 'chart',
+  },
+
+  dotsRadius: {
+    type: 'number',
+    label: 'dots radius',
+    default: 4,
+    group: 'chart',
   },
 
   showLegend: {
@@ -48,52 +69,14 @@ export const visualOptions = {
     },
   },
 
-  padding: {
-    type: 'number',
-    label: 'Padding (px)',
-    default: 2,
-    group: 'chart',
-  },
-
-  label1Style: {
-    type: 'text',
-    label: 'Labels 1 style',
-    group: 'labels',
-    options: ['Primary', 'Secondary', 'Tertiary'],
-    default: 'Primary',
-  },
-
-  label2Style: {
-    type: 'text',
-    label: 'Labels 2 style',
-    group: 'labels',
-    options: ['Primary', 'Secondary', 'Tertiary'],
-    default: 'Secondary',
-  },
-
-  label3Style: {
-    type: 'text',
-    label: 'Labels 3 style',
-    group: 'labels',
-    options: ['Primary', 'Secondary', 'Tertiary'],
-    default: 'Tertiary',
-  },
-
   colorScale: {
     type: 'colorScale',
     label: 'Color scale',
     dimension: 'color',
     default: {
       scaleType: 'ordinal',
-      interpolator: 'interpolateSpectral',
+      interpolator: 'schemeCategory10',
     },
     group: 'colors',
-  },
-
-  showHierarchyLabels: {
-    type: 'boolean',
-    label: 'Show hierarchy labels',
-    default: true,
-    group: 'labels',
   },
 }
