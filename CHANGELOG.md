@@ -1,3 +1,7 @@
+## upcoming
+
+- renaming `radarChart` to `radarchart`
+
 ## v1.0.0-beta.8
 
 #### 01 feb 2021
