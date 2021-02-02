@@ -1,19 +1,19 @@
 export const dimensions = [
   {
     id: 'source',
-    name: 'source node',
+    name: 'Source node',
     validTypes: ['number', 'date', 'string'],
     required: true,
   },
   {
     id: 'target',
-    name: 'target node',
+    name: 'Target node',
     validTypes: ['number', 'date', 'string'],
     required: true,
   },
   {
     id: 'size',
-    name: 'size',
+    name: 'Size',
     validTypes: ['number'],
     required: false,
     aggregation: true,
