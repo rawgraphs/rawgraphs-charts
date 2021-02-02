@@ -1,28 +1,32 @@
 import barchart from 'rawcharts/barchartmultiset'
-import data from '../datasets/simple-barchart.tsv'
+import data from '../datasets/fake-multiset.tsv'
 
 export default {
   chart: barchart,
   data,
   dataTypes: {
-    category: 'string',
-    bar: 'string',
-    value: 'number',
+    group: 'string',
+    Value_1: 'number',
+    Value_2: 'number',
+    Value_3: 'number',
   },
   mapping: {
-    sets: { value: ['bar'] },
-    bars: { value: ['category'] },
-    size: { value: ['value'] },
-    color: { value: ['category'] },
+    groups: { value: ['group'] },
+    bars: {
+      value: ['Value_1', 'Value_2', 'Value_3'],
+    },
+    // series: { value: ['Language'] },
   },
   visualOptions: {
     width: 1000,
     height: 700,
     padding: 3,
-    marginTop: 20,
-    marginBottom: 0,
-    marginRight: 0,
-    marginLeft: 0,
+    stacksPadding: 0,
+    marginTop: 50,
+    marginBottom: 50,
+    marginRight: 50,
+    marginLeft: 50,
     sortSeriesBy: 'Value (descending)',
+    useSameScale: false,
   },
 }

@@ -1,14 +1,14 @@
 export const dimensions = [
   {
     id: 'hierarchy',
-    name: 'hierarchy',
+    name: 'Hierarchy',
     validTypes: ['number', 'date', 'string'],
     required: true,
     multiple: true,
   },
   {
     id: 'size',
-    name: 'size',
+    name: 'Size',
     validTypes: ['number'],
     required: false,
     aggregation: true,
@@ -16,7 +16,7 @@ export const dimensions = [
   },
   {
     id: 'color',
-    name: 'color',
+    name: 'Color',
     validTypes: ['number', 'date', 'string'],
     required: false,
     aggregation: true,
@@ -28,7 +28,7 @@ export const dimensions = [
   },
   {
     id: 'label',
-    name: 'label',
+    name: 'Label',
     validTypes: ['number', 'date', 'string'],
     required: false,
     multiple: true,

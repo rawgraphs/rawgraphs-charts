@@ -25,6 +25,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     label2Style,
     label3Style,
     sortBy,
+    // labels
+    showHierarchyLabels,
   } = visualOptions
 
   const margin = {
@@ -35,28 +37,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   }
 
   const labelStyles = [label1Style, label2Style, label3Style]
-
-  // define style
-  d3.select(svgNode).append('style').text(`
-      #viz text {
-        font-family: Helvetica, Arial, sans-serif;
-        font-size: 12px;
-      }
-
-			#viz #links {
-				fill: none;
-				stroke: gray;
-			}
-
-			#viz .Primary {
-				font-weight: bold;
-			}
-
-			#viz .Tertiary {
-				font-weight: lighter;
-				font-style: oblique;
-			}
-      `)
 
   const chartWidth = width - margin.left - margin.right
   const chartHeight = height - margin.top - margin.bottom
@@ -159,6 +139,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         .x((d) => d.y)
         .y((d) => d.x)
     )
+    .attr('fill', 'none')
+    .attr('stroke', '#ccc')
 
   const node = svg
     .append('g')
@@ -194,15 +176,13 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     })
 
   node
+    .filter((d) => (showHierarchyLabels ? true : !d.children))
     .append('text')
-    // .attr("x", d => d.children ? -10 : sizeScale(d.value))
     .attr('text-anchor', (d) => (d.children ? 'end' : 'start'))
-    // .attr("dy", 4)
-    // .attr("x", d => d.children ? -5 : sizeScale(d.value))
-    // .text(d => d.data[0])
+    .attr('font-family', 'sans-serif')
+    .attr('font-size', 10)
     .selectAll('tspan')
     .data((d) => {
-      // d.children ? [{string: d.data[0], x: -6}] : ([d.data[0]].concat(d.data[1].label)).map(d => ({label: d, x: sizeScale(d.value)}))
       if (d.children) {
         return [{ string: d.data[0], x: -6 }]
       } else {
@@ -212,6 +192,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
           .map((d) => ({ string: d, x: xpos }))
       }
     }) // add the node name
+    // @TODO change using the new labels module
     .join('tspan')
     .attr('x', (d) => d.x)
     .attr('y', (d, i, n) => (i + 1) * 12 - (n.length / 2) * 12 - 2) // 12 is the font size, should be automated

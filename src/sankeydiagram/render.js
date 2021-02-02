@@ -16,7 +16,11 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     nodesPadding,
     alignment,
     iterations,
+    // color scale
+    colorScale,
   } = visualOptions
+
+  console.log('color test', colorScale.domain())
 
   const margin = {
     top: marginTop,
@@ -105,7 +109,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   link
     .append('path')
     .attr('d', d3Sankey.sankeyLinkHorizontal())
-    .attr('stroke', 'gray')
+    .attr('stroke', (d) => colorScale(d.source.id))
     .attr('stroke-width', (d) => Math.max(1, d.width))
 
   link

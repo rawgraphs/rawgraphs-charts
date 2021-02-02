@@ -1,13 +1,5 @@
 export const dimensions = [
   {
-    id: 'bars',
-    name: 'Groups',
-    validTypes: ['number', 'string', 'date'],
-    required: true,
-    operation: 'get',
-  },
-
-  {
     id: 'stacks',
     name: 'X Axis',
     validTypes: ['number', 'string', 'date'],
@@ -16,18 +8,21 @@ export const dimensions = [
   },
 
   {
-    id: 'size',
-    name: 'size',
-    operation: 'get',
+    id: 'bars',
+    name: 'Sizes',
     validTypes: ['number'],
-    required: false,
-    aggregation: true,
-    aggregationDefault: 'sum',
+    required: true,
+    multiple: true,
+    operation: 'get',
+    // aggregation: true,
+    // aggregationDefault: {
+    //   number: 'sum',
+    // }, @TODO: allow aggregation on multiple values
   },
 
   {
     id: 'series',
-    name: 'series',
+    name: 'Series',
     validTypes: ['number', 'string', 'date'],
     required: false,
     operation: 'get',

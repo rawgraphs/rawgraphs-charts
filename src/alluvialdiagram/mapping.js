@@ -14,6 +14,7 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
   const results = []
 
   // compute the rollup for each couple of steps
+  // @TODO move this as grouping function
   mapping.steps.value.slice(0, -1).forEach((step1, index) => {
     //get the second step
     const step2 = mapping.steps.value[index + 1]
@@ -28,7 +29,7 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
           targetName: v[0][step2],
           targetStep: step2,
           target: step2 + ' - ' + v[0][step2],
-          value: mapping.size
+          value: mapping.size.value
             ? sizeAggregator(v.map((d) => d[mapping.size.value]))
             : v.length,
         }

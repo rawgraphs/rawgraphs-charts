@@ -20,7 +20,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     linksOpacity,
     sortNodesBy,
     verticalAlignment,
-    // @TODO labels
+    // color
+    colorScale,
   } = visualOptions
 
   const margin = {
@@ -29,6 +30,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     bottom: marginBottom,
     left: marginLeft,
   }
+
+  console.log('colorscale', colorScale.domain(), colorScale.range())
 
   const chartWidth = width - margin.left - margin.right
   const chartHeight = height - margin.top - margin.bottom
@@ -185,7 +188,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   link
     .append('path')
     .attr('d', d3Sankey.sankeyLinkHorizontal())
-    .attr('stroke', 'gray')
+    .attr('stroke', (d) => colorScale(d.source.id))
     .attr('stroke-width', (d) => Math.max(1, d.width))
 
   link

@@ -25,6 +25,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     label2Style,
     label3Style,
     sortBy,
+    // labels
+    showHierarchyLabels,
   } = visualOptions
 
   const margin = {
@@ -35,28 +37,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   }
 
   const labelStyles = [label1Style, label2Style, label3Style]
-
-  // define style
-  d3.select(svgNode).append('style').text(`
-      #viz text {
-        font-family: Helvetica, Arial, sans-serif;
-        font-size: 12px;
-      }
-
-			#viz #links {
-				fill: none;
-				stroke: gray;
-			}
-
-			#viz .Primary {
-				font-weight: bold;
-			}
-
-			#viz .Tertiary {
-				font-weight: lighter;
-				font-style: oblique;
-			}
-      `)
 
   const chartWidth = width - margin.left - margin.right
   const chartHeight = height - margin.top - margin.bottom
@@ -163,6 +143,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         .angle((d) => d.x)
         .radius((d) => d.y)
     )
+    .attr('fill', 'none')
+    .attr('stroke', '#ccc')
 
   svg
     .append('g')
@@ -208,6 +190,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .selectAll('g')
     .data(root.descendants())
     .join('g')
+    .filter((d) => (showHierarchyLabels ? true : !d.children)) // if showHierarchyLabels is false, hide non-leaf nodes
     .attr(
       'transform',
       (d) => `

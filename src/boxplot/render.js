@@ -51,7 +51,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
   const yScale = d3
     .scaleLinear()
-    .domain(d3.extent(data, (d) => d.value)) // Note that here the Y scale is set manually
+    .domain(d3.extent(data, (d) => d.value))
+    .nice()
     .range([chartHeight, 0])
 
   const groupsDomain = [...new Set(data.map((d) => d.group))]

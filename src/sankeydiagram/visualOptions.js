@@ -55,4 +55,15 @@ export const visualOptions = {
     default: 6,
     group: 'chart',
   },
+
+  colorScale: {
+    type: 'colorScale',
+    label: 'Color scale',
+    dimension: 'source',
+    default: {
+      scaleType: 'ordinal',
+      interpolator: 'interpolateSpectral',
+    },
+    group: 'colors',
+  },
 }

@@ -95,6 +95,13 @@ export const visualOptions = {
     group: 'series',
   },
 
+  showGrid: {
+    type: 'boolean',
+    label: 'Show series grid',
+    default: true,
+    group: 'series',
+  },
+
   showLegend: {
     type: 'boolean',
     label: 'Show legend',

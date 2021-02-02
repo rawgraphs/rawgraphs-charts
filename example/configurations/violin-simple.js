@@ -26,5 +26,6 @@ export default {
     width: 1000,
     height: 700,
     padding: 100,
+    marginLeft: 100,
   },
 }

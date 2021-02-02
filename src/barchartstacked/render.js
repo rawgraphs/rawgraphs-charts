@@ -38,16 +38,13 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   }
 
   // create nest structure
-  const nestedData = d3.groups(data, (d) => d.series).map((d) => ({ data: d }))
-
-  // comupte max values for series
-  // will add it as property to each series.
-  nestedData.forEach(function (serie) {
-    serie.totalValue = serie.data[1].reduce(
-      (result, item) => result + item.size,
-      0
+  const nestedData = d3
+    .rollups(
+      data,
+      (v) => v,
+      (d) => d.series
     )
-  })
+    .map((d) => ({ data: d, totalSize: d3.sum(d[1], (d) => d.size) }))
 
   // series sorting functions
   const seriesSortings = {
@@ -151,7 +148,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     // .offset(d3.stackOffsetNone)
 
     let stackedData = stack(localStack)
-    console.log(stackedData)
+
     // scales
     const stacksScale = d3
       .scaleBand()
@@ -180,19 +177,29 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .nice()
       .range([serieHeight, 0])
 
+    console.log('cs', colorScale.domain(), colorScale.range())
+
     const bars = selection
       .selectAll('g')
       .data(stackedData)
       .join('g')
       .attr('id', (d) => d.key)
-      .attr('fill', (d) => colorScale(d.key))
+      .attr('fill', (d) => {
+        console.log(d.key, colorScale(d.key))
+        return colorScale(d.key)
+      })
       .selectAll('rect')
       .data((d) => d)
       .join('rect')
       .attr('x', (d) => stacksScale(d.data[0]))
       .attr('y', (d) => sizeScale(d[1]))
       .attr('width', stacksScale.bandwidth())
-      .attr('height', (d) => serieHeight - sizeScale(d[1] - d[0]))
+      .attr('height', (d) => {
+        if (d[1] - d[0] < 0) {
+          console.log('Values cannot be negative', d) // @TODO: provide error if a value is negative
+        }
+        return serieHeight - sizeScale(d[1] - d[0])
+      })
 
     const xAxis = selection
       .append('g')
@@ -227,21 +234,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr('font-style', 'italic')
       .attr('text-anchor', 'end')
       .attr('display', serieIndex == 0 || repeatAxesLabels ? null : 'none')
-      .text(mapping.bars.value)
-
-    // add the y axis titles
-    selection
-      .append('text')
-      .attr('y', 0)
-      .attr('x', 4)
-      .attr('dominant-baseline', 'hanging')
-      .attr('class', 'axisTitle')
-      .attr('font-family', 'sans-serif')
-      .attr('font-size', 12)
-      .attr('font-style', 'italic')
-      .attr('text-anchor', 'start')
-      .attr('display', serieIndex == 0 || repeatAxesLabels ? null : 'none')
-      .text(mapping.size.value + ' (' + mapping.size.config.aggregation + ')')
+      .text(mapping.stacks.value)
   })
 
   // add legend
