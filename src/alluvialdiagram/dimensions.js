@@ -1,7 +1,7 @@
 export const dimensions = [
   {
     id: 'steps',
-    name: 'steps',
+    name: 'Steps',
     validTypes: ['number', 'date', 'string'],
     required: true,
     multiple: true,
@@ -9,7 +9,7 @@ export const dimensions = [
   },
   {
     id: 'size',
-    name: 'size',
+    name: 'Size',
     validTypes: ['number'],
     required: false,
     aggregation: true,

@@ -1,19 +1,19 @@
 export const dimensions = [
   {
     id: 'x',
-    name: 'x axis',
+    name: 'X Axis',
     validTypes: ['number', 'date', 'string'],
     required: true,
   },
   {
     id: 'y',
-    name: 'y axis',
+    name: 'Y Axis',
     validTypes: ['number', 'date', 'string'],
     required: true,
   },
   {
     id: 'size',
-    name: 'size',
+    name: 'Size',
     validTypes: ['number'],
     required: false,
     aggregation: true,
@@ -21,7 +21,7 @@ export const dimensions = [
   },
   {
     id: 'color',
-    name: 'color',
+    name: 'Color',
     validTypes: ['number', 'date', 'string'],
     required: false,
     aggregation: true,
@@ -33,7 +33,7 @@ export const dimensions = [
   },
   {
     id: 'label',
-    name: 'label',
+    name: 'Label',
     validTypes: ['number', 'date', 'string'],
     required: false,
     multiple: true,

@@ -1,7 +1,7 @@
 export const dimensions = [
   {
     id: 'x',
-    name: 'x',
+    name: 'X',
     operation: 'get',
     validTypes: ['number', 'date'],
     required: true,
@@ -9,7 +9,7 @@ export const dimensions = [
 
   {
     id: 'y',
-    name: 'y',
+    name: 'Y',
     operation: 'get',
     validTypes: ['number', 'date'],
     required: true,
@@ -19,7 +19,7 @@ export const dimensions = [
 
   {
     id: 'lines',
-    name: 'lines',
+    name: 'Lines',
     validTypes: ['number', 'string', 'date'],
     required: false,
     operation: 'get',
@@ -27,7 +27,7 @@ export const dimensions = [
 
   {
     id: 'color',
-    name: 'color',
+    name: 'Color',
     operation: 'get',
     validTypes: ['number', 'string', 'date'],
     required: false,
@@ -41,7 +41,7 @@ export const dimensions = [
 
   {
     id: 'series',
-    name: 'series',
+    name: 'Series',
     validTypes: ['number', 'string', 'date'],
     required: false,
     operation: 'get',

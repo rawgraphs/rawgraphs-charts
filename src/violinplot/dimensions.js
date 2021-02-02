@@ -1,7 +1,7 @@
 export const dimensions = [
   {
     id: 'value',
-    name: 'value',
+    name: 'Value',
     validTypes: ['number'],
     required: true,
   },
@@ -15,7 +15,7 @@ export const dimensions = [
 
   {
     id: 'color',
-    name: 'color',
+    name: 'Color',
     operation: 'get',
     validTypes: ['number', 'string', 'date'],
     required: false,

@@ -17,7 +17,7 @@ export const dimensions = [
 
   {
     id: 'size',
-    name: 'size',
+    name: 'Size',
     operation: 'get',
     validTypes: ['number'],
     required: false,
@@ -27,7 +27,7 @@ export const dimensions = [
 
   {
     id: 'series',
-    name: 'series',
+    name: 'Series',
     validTypes: ['number', 'string', 'date'],
     required: false,
     operation: 'get',
