@@ -1,8 +1,16 @@
 import * as d3 from 'd3'
 import { legend } from '@raw-temp/rawgraphs-core'
 import * as d3Gridding from 'd3-gridding'
+import '../d3-styles.js'
 
-export function render(svgNode, data, visualOptions, mapping, originalData) {
+export function render(
+  svgNode,
+  data,
+  visualOptions,
+  mapping,
+  originalData,
+  styles
+) {
   const {
     // artboard options
     width,
@@ -12,6 +20,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     marginRight,
     marginBottom,
     marginLeft,
+    showLegend,
+    legendWidth,
     // visual model options
     showDots,
     dotsRadius,
@@ -23,11 +33,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     //series options
     columnsNumber,
     showSeriesLabels,
-    // color dimension option, defined in visualOptions.js
+    showGrid,
+    // color otpions
     colorScale,
-    // legend
-    showLegend,
-    legendWidth,
   } = visualOptions
 
   // Margin convention
@@ -37,6 +45,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     bottom: marginBottom,
     left: marginLeft,
   }
+
+  console.log(styles)
 
   // convert string to d3 functions
   const curveType = {
@@ -115,6 +125,24 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .scaleLinear()
     .domain([maxValue, 0])
     .rangeRound([innerRadius, outerRadius])
+
+  // add grid
+  if (showGrid) {
+    console.log(griddingData)
+    svg
+      .append('g')
+      .attr('id', 'grid')
+      .selectAll('rect')
+      .data(griddingData)
+      .enter()
+      .append('rect')
+      .attr('x', (d) => d.x)
+      .attr('y', (d) => d.y)
+      .attr('width', (d) => d.width)
+      .attr('height', (d) => d.height)
+      .attr('fill', 'none')
+      .attr('stroke', '#ccc')
+  }
   /*
     CODE FOR EACH SERIE
   */
@@ -245,12 +273,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     if (showSeriesLabels) {
       selection
         .append('text')
-        .attr('y', 12)
-        .attr('font-family', 'sans-serif')
-        .attr('font-size', 12)
-        .attr('font-weight', 'bold')
-        .attr('class', 'title')
+        .attr('x', 5)
+        .attr('y', 5)
         .text((d) => d[0])
+        .styles(styles.seriesLabel)
     }
   })
 

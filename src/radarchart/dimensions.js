@@ -6,19 +6,6 @@ export const dimensions = [
     required: true,
     multiple: true,
     minValues: 3,
-    aggregation: true,
-    aggregationDefault: {
-      number: 'sum',
-      string: 'csvDistinct',
-      date: 'csvDistinct',
-    },
-  },
-
-  {
-    id: 'name',
-    name: 'name',
-    validTypes: ['number', 'string', 'date'],
-    required: false,
   },
 
   {

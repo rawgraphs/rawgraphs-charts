@@ -1,4 +1,4 @@
-import radarchart from 'rawcharts/radarChart'
+import radarchart from 'rawcharts/radarchart'
 import data from '../datasets/football-players.csv'
 
 export default {
@@ -23,9 +23,6 @@ export default {
     Strength: 'number',
   },
   mapping: {
-    name: {
-      value: ['Name'],
-    },
     axes: {
       value: [
         'BallControl',
@@ -35,11 +32,12 @@ export default {
         'Strength',
       ],
     },
-    color: { value: ['Club'] },
-    series: { value: ['Name'] },
+    // color: { value: ['Club'] },
+    series: { value: ['Nationality'] },
   },
   visualOptions: {
     width: 1500,
     height: 1500,
+    showGrid: true,
   },
 }

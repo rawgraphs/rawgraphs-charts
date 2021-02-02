@@ -1,12 +1,19 @@
 ## upcoming
 
+#### 02 feb 2021
+
 - fixed size in alluvial diagram
 - added option to hide hierarchy labels in _circular dendrogram_
 - removed injected css in _circular dendrogram_
 - added option to hide hierarchy labels in _linear dendrogram_
 - removed injected css in _linear dendrogram_
 - in _stacked barchart_ the dimension 'stacks' has been renamed 'X Axis'
-- renaming `radarChart` to `radarchart`
+- added colors to _alluvial diagram_ based on source node
+- renaming `radarChart` folder to `radarchart`
+- _radar chart_ no longer has `name` dimension
+- added styles to _radar chart_
+- added ability to show series grid in _radar chart_
+- added series label style in styles
 
 ## v1.0.0-beta.8
 
