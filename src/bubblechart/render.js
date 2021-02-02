@@ -11,14 +11,6 @@ export function render(
   styles
 ) {
   const {
-    axisLabel,
-    labelPrimary,
-    labelSecondary,
-    labelItalic,
-    labelOutline,
-  } = styles
-
-  const {
     width,
     height,
     background,
@@ -37,6 +29,7 @@ export function render(
     colorScale,
     showLabelsOutline,
     autoHideLabels,
+    labelStyles,
   } = visualOptions
 
   const margin = {
@@ -45,6 +38,7 @@ export function render(
     bottom: marginBottom,
     left: marginLeft,
   }
+
   const chartWidth = width - margin.left - margin.right
   const chartHeight = height - margin.top - margin.bottom
 
@@ -56,7 +50,7 @@ export function render(
   const x =
     mapping.x.dataType.type === 'date' ? d3.scaleTime() : d3.scaleLinear()
 
-  x.domain(xDomain).rangeRound([0, chartWidth])
+  x.domain(xDomain).rangeRound([0, chartWidth]).nice()
 
   // y scale
   const yDomain = yOrigin
@@ -66,7 +60,7 @@ export function render(
   const y =
     mapping.y.dataType.type === 'date' ? d3.scaleTime() : d3.scaleLinear()
 
-  y.domain(yDomain).rangeRound([chartHeight, 0])
+  y.domain(yDomain).rangeRound([chartHeight, 0]).nice()
 
   // size scale
   const size = d3
@@ -78,16 +72,14 @@ export function render(
     return g
       .attr('transform', `translate(0,${chartHeight})`)
       .call(d3.axisBottom(x))
-      .call(
-        (g) =>
-          g
-            .append('text')
-            .attr('x', chartWidth)
-            .attr('dy', -5)
-            .attr('text-anchor', 'end')
-            .text(mapping['x'].value)
-            .styles(axisLabel)
-        //.call(multiStyles(axisLabel))
+      .call((g) =>
+        g
+          .append('text')
+          .attr('x', chartWidth)
+          .attr('dy', -5)
+          .attr('text-anchor', 'end')
+          .text(mapping['x'].value)
+          .styles(styles.axisLabel)
       )
   }
 
@@ -101,7 +93,7 @@ export function render(
           .attr('text-anchor', 'start')
           .attr('dominant-baseline', 'hanging')
           .text(mapping['y'].value)
-          .styles(axisLabel)
+          .styles(styles.axisLabel)
       )
   }
 
@@ -195,8 +187,7 @@ export function render(
     .attr('x', 0)
     .attr('y', 0)
     .attr('text-anchor', 'middle')
-    .attr('dominant-baseline', 'middle')
-    .attr('data-priority', (d) => (d.size ? d.size : 1))
+    .attr('dominant-baseline', 'text-before-edge')
     .selectAll('tspan')
     .data((d) => (Array.isArray(d.label) ? d.label : [d.label]))
     .join('tspan')
@@ -212,21 +203,18 @@ export function render(
         return d
       }
     })
-    .styles(function (d, i) {
-      if (i === 0) {
-        return labelPrimary
-      } else if (i === 1) {
-        return labelSecondary
-      } else if (i === 2) {
-        return labelItalic
-      } else {
-        return labelPrimary
-      }
+    .styles((d, i) => styles[labelStyles[i]])
+
+  labelsLayer.selectAll('text').call((sel) => {
+    return sel.attr('transform', function (d) {
+      const height = sel.node().getBBox().height
+      return `translate(0,${-height / 2})`
     })
+  })
 
   if (showLabelsOutline) {
     // NOTE: Adobe Illustrator does not support paint-order attr
-    labelsLayer.selectAll('text').styles(labelOutline)
+    labelsLayer.selectAll('text').styles(styles.labelOutline)
   }
 
   if (autoHideLabels) {
@@ -258,43 +246,3 @@ export function render(
     legendLayer.call(chartLegend)
   }
 }
-
-// adapted from https://observablehq.com/@fil/occlusion
-
-// function occlusion(labels) {
-//   const texts = []
-//   labels.each((d, i, e) => {
-//     const bbox = e[i].getBoundingClientRect()
-//     texts.push({
-//       priority: +e[i].getAttribute('data-priority'),
-//       node: e[i],
-//       text: d,
-//       bbox,
-//       x: bbox.x,
-//       y: bbox.y,
-//       width: bbox.width,
-//       height: bbox.height,
-//     })
-//   })
-//
-//   texts.sort((a, b) => d3.descending(a.priority, b.priority))
-//
-//   const filled = []
-//
-//   texts.forEach((d) => {
-//     const isOccluded = filled.some((e) => intersect(d, e))
-//     d3.select(d.node).attr('opacity', isOccluded ? 0 : 1)
-//     if (!isOccluded) filled.push(d)
-//   })
-//
-//   return filled
-// }
-//
-// function intersect(a, b) {
-//   return !(
-//     a.x + a.width < b.x ||
-//     b.x + b.width < a.x ||
-//     a.y + a.height < b.y ||
-//     b.y + b.height < a.y
-//   )
-// }
