@@ -32,5 +32,6 @@ export default {
     showLegend: true,
     showLabelsOutline: true,
     showHierarchyLabels: true,
+    autoHideLabels: true,
   },
 }

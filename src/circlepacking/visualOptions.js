@@ -92,6 +92,13 @@ export const visualOptions = {
     group: 'labels',
   },
 
+  autoHideLabels: {
+    type: 'boolean',
+    label: 'Auto hide labels',
+    default: false,
+    group: 'labels',
+  },
+
   // labelStyle: {
   //   type: 'text',
   //   label: 'Label style',

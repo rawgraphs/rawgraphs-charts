@@ -6,6 +6,7 @@
 - added option to hide hierarchy labels in _linear dendrogram_
 - removed injected css in _linear dendrogram_
 - in _stacked barchart_ the dimension 'stacks' has been renamed 'X Axis'
+- renaming `radarChart` to `radarchart`
 
 ## v1.0.0-beta.8
 

@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-import { rawgraphsLegend } from '@raw-temp/rawgraphs-core'
+import { legend } from '@raw-temp/rawgraphs-core'
 import * as d3Gridding from 'd3-gridding'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
@@ -208,10 +208,12 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr('id', 'legend')
       .attr('transform', `translate(${width},${marginTop})`)
 
-    const legend = rawgraphsLegend().legendWidth(legendWidth)
+    const chartLegend = legend().legendWidth(legendWidth)
 
-    legend.addColor('Sets', colorScale)
+    if (mapping.color.value) {
+      chartLegend.addColor(mapping.color.value, colorScale)
+    }
 
-    legendLayer.call(legend)
+    legendLayer.call(chartLegend)
   }
 }

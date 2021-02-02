@@ -61,8 +61,5 @@ module.exports = {
     alias: {
       rawcharts: path.resolve(__dirname, 'src'),
     },
-  },
-  node: {
-    fs: 'empty',
-  },
+  }
 }

@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-import { rawgraphsLegend } from '@raw-temp/rawgraphs-core'
+import { legend } from '@raw-temp/rawgraphs-core'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
   console.log('- render')
@@ -261,10 +261,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr('id', 'legend')
       .attr('transform', `translate(${width},${marginTop})`)
 
-    const legend = rawgraphsLegend().legendWidth(legendWidth)
+    const chartLegend = legend().legendWidth(legendWidth)
 
     if (mapping.color.value) {
-      legend.addColor(mapping.color.value, colorScale)
+      chartLegend.addColor(mapping.color.value, colorScale)
     }
 
     if (mapping.size.value) {
@@ -282,9 +282,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         legendSizeScale.rangeRound(legendSizeScale.range().map((d) => d / 2))
       }
 
-      legend.addSize(mapping.size.value, legendSizeScale, shape)
+      chartLegend.addSize(mapping.size.value, legendSizeScale, shape)
     }
 
-    legendLayer.call(legend)
+    legendLayer.call(chartLegend)
   }
 }

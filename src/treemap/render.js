@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-import { rawgraphsLegend } from '@raw-temp/rawgraphs-core'
+import { legend } from '@raw-temp/rawgraphs-core'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
   console.log('- render')
@@ -25,7 +25,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     drawHierarchy,
     // labels
     showLabelsOutline,
-    showHierarchyLabels
+    showHierarchyLabels,
   } = visualOptions
 
   const margin = {
@@ -37,7 +37,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
   const chartWidth = width - margin.left - margin.right
   const chartHeight = height - margin.top - margin.bottom
-
 
   // create the hierarchical structure
   const nest = d3.rollup(
@@ -53,17 +52,14 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   //@TODO: understand how to handle empty values
 
   const treemap = d3
-      .treemap()
-      .tile(d3[tiling])
-      .size([chartWidth, chartHeight])
-      .padding(padding)
-      .round(true)
-      
-      
-  
-  if(showHierarchyLabels){
-    treemap
-      .paddingTop(12)
+    .treemap()
+    .tile(d3[tiling])
+    .size([chartWidth, chartHeight])
+    .padding(padding)
+    .round(true)
+
+  if (showHierarchyLabels) {
+    treemap.paddingTop(12)
   }
 
   const root = treemap(hierarchy)
@@ -87,8 +83,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   // if selected, draw a rectangle for each level in the hierarchy
 
   if (drawHierarchy || showHierarchyLabels) {
-    const ancestorData = root.descendants().filter(d=>d.children)
-    const depthScale = d3.scaleLinear().domain([0,root.leaves()[0].depth+1])
+    const ancestorData = root.descendants().filter((d) => d.children)
+    const depthScale = d3.scaleLinear().domain([0, root.leaves()[0].depth + 1])
     const ancestors = svg
       .append('g')
       .attr('id', 'ancestors')
@@ -96,23 +92,24 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .data(ancestorData)
       .join('g')
       .attr('transform', (d) => `translate(${d.x0},${d.y0})`)
-    
-    ancestors.append('rect')
+
+    ancestors
+      .append('rect')
       .attr('width', (d) => d.x1 - d.x0)
       .attr('height', (d) => d.y1 - d.y0)
       .attr('id', (d, i) => 'path_ancestor' + i)
-      .attr('fill', "#ccc")
-      .attr('fill-opacity', d=>depthScale(d.depth))
-      .attr('stroke', "#ccc")
-      .attr('stroke-opacity', d=>depthScale(d.depth)+0.1)
-      
-      if(showHierarchyLabels){
-        ancestors
+      .attr('fill', '#ccc')
+      .attr('fill-opacity', (d) => depthScale(d.depth))
+      .attr('stroke', '#ccc')
+      .attr('stroke-opacity', (d) => depthScale(d.depth) + 0.1)
+
+    if (showHierarchyLabels) {
+      ancestors
         .append('clipPath')
         .attr('id', (d, i) => 'clip_ancestor' + i)
         .append('use')
         .attr('xlink:href', (d, i) => '#path_ancestor' + i)
-    
+
       ancestors
         .append('text')
         .attr('x', padding)
@@ -121,11 +118,11 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         .attr('font-family', 'Arial, sans-serif')
         .attr('font-size', 8)
         .attr('dominant-baseline', 'text-before-edge')
-        .attr("class",'txt')
-        .text(d=>{
-          return d.depth===0&&!d.data[0]?'Root':d.data[0]
+        .attr('class', 'txt')
+        .text((d) => {
+          return d.depth === 0 && !d.data[0] ? 'Root' : d.data[0]
         })
-      }
+    }
   }
 
   const leaves = svg
@@ -155,8 +152,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('font-family', 'Arial, sans-serif')
     .attr('font-size', 10)
     .attr('dominant-baseline', 'text-before-edge')
-    .attr("class",'txt')
-  
+    .attr('class', 'txt')
+
   texts
     .selectAll('tspan')
     .data((d, i, a) => {
@@ -177,15 +174,15 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       }
     })
 
-    if (showLabelsOutline) {
-      // NOTE: Adobe Illustrator does not support paint-order attr
-      d3.selectAll('.txt')
-        .attr('stroke-width', 2)
-        .attr('paint-order', 'stroke')
-        .attr('stroke', 'white')
-        .attr('stroke-linecap', 'round')
-        .attr('stroke-linejoin', 'round')
-    }
+  if (showLabelsOutline) {
+    // NOTE: Adobe Illustrator does not support paint-order attr
+    d3.selectAll('.txt')
+      .attr('stroke-width', 2)
+      .attr('paint-order', 'stroke')
+      .attr('stroke', 'white')
+      .attr('stroke-linecap', 'round')
+      .attr('stroke-linejoin', 'round')
+  }
 
   if (showLegend) {
     const legendLayer = d3
@@ -194,12 +191,12 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr('id', 'legend')
       .attr('transform', `translate(${width},${marginTop})`)
 
-    const legend = rawgraphsLegend().legendWidth(legendWidth)
+    const chartLegend = legend().legendWidth(legendWidth)
 
     if (mapping.color.value) {
-      legend.addColor(mapping.color.value, colorScale)
+      chartLegend.addColor(mapping.color.value, colorScale)
     }
 
-    legendLayer.call(legend)
+    legendLayer.call(chartLegend)
   }
 }

@@ -1,9 +1,15 @@
 import * as d3 from 'd3'
-import { rawgraphsLegend, dateFormats } from '@raw-temp/rawgraphs-core'
-import '../d3-styles.js' 
+import { legend, dateFormats, labelsOcclusion } from '@raw-temp/rawgraphs-core'
+import '../d3-styles.js'
 
-export function render(svgNode, data, visualOptions, mapping, originalData, styles) {
-
+export function render(
+  svgNode,
+  data,
+  visualOptions,
+  mapping,
+  originalData,
+  styles
+) {
   const {
     axisLabel,
     labelPrimary,
@@ -30,6 +36,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData, styl
     marginLeft,
     colorScale,
     showLabelsOutline,
+    autoHideLabels,
   } = visualOptions
 
   const margin = {
@@ -189,6 +196,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData, styl
     .attr('y', 0)
     .attr('text-anchor', 'middle')
     .attr('dominant-baseline', 'middle')
+    .attr('data-priority', (d) => (d.size ? d.size : 1))
     .selectAll('tspan')
     .data((d) => (Array.isArray(d.label) ? d.label : [d.label]))
     .join('tspan')
@@ -221,6 +229,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData, styl
     labelsLayer.selectAll('text').styles(labelOutline)
   }
 
+  if (autoHideLabels) {
+    labelsOcclusion(labelsLayer.selectAll('text'), (d) => d.size)
+  }
+
   if (showLegend) {
     const legendLayer = d3
       .select(svgNode)
@@ -228,10 +240,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData, styl
       .attr('id', 'legend')
       .attr('transform', `translate(${width},${marginTop})`)
 
-    const legend = rawgraphsLegend().legendWidth(legendWidth)
+    const chartLegend = legend().legendWidth(legendWidth)
 
     if (mapping.color.value) {
-      legend.addColor(mapping.color.value, colorScale)
+      chartLegend.addColor(mapping.color.value, colorScale)
     }
 
     if (mapping.size.value) {
@@ -240,9 +252,49 @@ export function render(svgNode, data, visualOptions, mapping, originalData, styl
         .domain(d3.extent(data, (d) => d.size))
         .rangeRound([size(d3.min(data, (d) => d.size)), maxRadius])
 
-      legend.addSize(mapping.size.value, legendSizeScale, 'circle')
+      chartLegend.addSize(mapping.size.value, legendSizeScale, 'circle')
     }
 
-    legendLayer.call(legend)
+    legendLayer.call(chartLegend)
   }
 }
+
+// adapted from https://observablehq.com/@fil/occlusion
+
+// function occlusion(labels) {
+//   const texts = []
+//   labels.each((d, i, e) => {
+//     const bbox = e[i].getBoundingClientRect()
+//     texts.push({
+//       priority: +e[i].getAttribute('data-priority'),
+//       node: e[i],
+//       text: d,
+//       bbox,
+//       x: bbox.x,
+//       y: bbox.y,
+//       width: bbox.width,
+//       height: bbox.height,
+//     })
+//   })
+//
+//   texts.sort((a, b) => d3.descending(a.priority, b.priority))
+//
+//   const filled = []
+//
+//   texts.forEach((d) => {
+//     const isOccluded = filled.some((e) => intersect(d, e))
+//     d3.select(d.node).attr('opacity', isOccluded ? 0 : 1)
+//     if (!isOccluded) filled.push(d)
+//   })
+//
+//   return filled
+// }
+//
+// function intersect(a, b) {
+//   return !(
+//     a.x + a.width < b.x ||
+//     b.x + b.width < a.x ||
+//     a.y + a.height < b.y ||
+//     b.y + b.height < a.y
+//   )
+// }
