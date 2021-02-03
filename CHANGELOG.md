@@ -7,6 +7,7 @@
 - added axes labels to _violin plot_
 - added styles to _circular dendrogram_
 - added label mapping to _circular dendrogram_
+- in _circular dendrogram_ if no labels are mapped, by default label are the leaf level of hierarchy
 
 #### 02 feb 2021
 
