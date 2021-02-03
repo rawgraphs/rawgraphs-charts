@@ -36,7 +36,7 @@ export const visualOptions = {
 
   binsNumber: {
     type: 'number',
-    label: 'Shape resolution', //amount of bins used to compute the histogram
+    label: 'Number of bins',
     default: 10,
     group: 'chart',
   },
@@ -57,6 +57,23 @@ export const visualOptions = {
       'Step After',
       'Step Before',
     ],
+    group: 'chart',
+  },
+
+  showDots: {
+    type: 'boolean',
+    label: 'Show dots on data values',
+    default: false,
+    group: 'chart',
+  },
+
+  dotsRadius: {
+    type: 'number',
+    label: 'Dots radius',
+    disabled: {
+      showDots: false,
+    },
+    default: 2,
     group: 'chart',
   },
 

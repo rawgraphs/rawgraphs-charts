@@ -1,7 +1,15 @@
 import * as d3 from 'd3'
 import { legend } from '@raw-temp/rawgraphs-core'
+import '../d3-styles.js'
 
-export function render(svgNode, data, visualOptions, mapping, originalData) {
+export function render(
+  svgNode,
+  data,
+  visualOptions,
+  mapping,
+  originalData,
+  styles
+) {
   const {
     // artboard options
     width,
@@ -15,6 +23,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     padding,
     binsNumber, // how many 'bins' are available
     interpolation,
+    showDots,
+    dotsRadius,
     //legend
     showLegend,
     legendWidth,
@@ -102,23 +112,40 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .domain([-maxValue, maxValue])
 
   // append scales
-  svg.append('g').attr('id', 'y axis').call(d3.axisLeft(yScale))
+  svg
+    .append('g')
+    .attr('id', 'y axis')
+    .call(d3.axisLeft(yScale))
+    .append('text')
+    .attr('x', 4)
+    .attr('text-anchor', 'start')
+    .attr('dominant-baseline', 'hanging')
+    .text(mapping['value'].value)
+    .styles(styles.axisLabel)
 
   svg
     .append('g')
     .attr('id', 'x axis')
     .attr('transform', 'translate(0,' + chartHeight + ')')
     .call(d3.axisBottom(xScale))
+    .append('text')
+    .attr('x', chartWidth)
+    .attr('dy', -5)
+    .attr('text-anchor', 'end')
+    .text(mapping['group'].value)
+    .styles(styles.axisLabel)
 
-  let shapes = svg.append('g').attr('id', 'shapes')
-
-  shapes
+  let shapes = svg
+    .append('g')
+    .attr('id', 'shapes')
     .selectAll('g')
     .data(nestedData)
     .join('g')
     .attr('id', (d) => d[0])
     .attr('transform', (d) => 'translate(' + xScale(d[0]) + ' ,0)')
     .style('fill', (d) => colorScale(d[1].color))
+
+  shapes
     .append('path')
     .datum((d) => d[1].bins) // So now we are working bin per bin
     .style('stroke', 'none')
@@ -131,6 +158,30 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         .y((d) => yScale(d.x0))
         .curve(curveType[interpolation])
     )
+
+  if (showDots) {
+    shapes
+      .selectAll('circle')
+      .data((d) =>
+        // merge down bins keeping x position
+        d[1].bins
+          .map((bin, index) =>
+            bin.map((elm) => ({
+              value: elm,
+              index: index,
+              length: bin.length,
+              x0: bin.x0,
+              x1: bin.x1,
+            }))
+          )
+          .flat(1)
+      )
+      .join('circle')
+      .attr('cy', (d) => yScale(d.value))
+      .attr('cx', xScale.bandwidth() / 2)
+      .attr('r', dotsRadius)
+      .attr('fill', 'black')
+  }
 
   if (showLegend) {
     // svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option
