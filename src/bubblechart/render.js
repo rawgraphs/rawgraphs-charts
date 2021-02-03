@@ -168,7 +168,7 @@ export function render(
     .attr('cx', (d) => x(d.x))
     .attr('cy', (d) => y(d.y))
     .attr('fill', (d) => {
-      return mapping.color.value ? colorScale(d.color) : 'grey'
+      return colorScale(d.color)
     })
     .attr('r', (d) => {
       return mapping.size.value ? size(d.size) : maxRadius

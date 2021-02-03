@@ -101,6 +101,7 @@ export const visualOptions = {
     default: {
       scaleType: 'ordinal',
       interpolator: 'interpolateSpectral',
+      defaultColor: '#aa0000',
     },
     group: 'colors',
   },
