@@ -96,6 +96,13 @@ export const visualOptions = {
     group: 'series',
   },
 
+  showGrid: {
+    type: 'boolean',
+    label: 'Show series grid',
+    default: true,
+    group: 'series',
+  },
+
   colorScale: {
     type: 'colorScale',
     label: 'Color scale',

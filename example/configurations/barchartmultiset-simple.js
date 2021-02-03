@@ -14,6 +14,7 @@ export default {
     groups: { value: ['group'] },
     bars: {
       value: ['Value_1', 'Value_2', 'Value_3'],
+      config: { aggregation: ['sum', 'sum', 'sum'] },
     },
     // series: { value: ['Language'] },
   },

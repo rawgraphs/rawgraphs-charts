@@ -1,8 +1,16 @@
 import * as d3 from 'd3'
 import { legend } from '@raw-temp/rawgraphs-core'
 import * as d3Gridding from 'd3-gridding'
+import '../d3-styles.js'
 
-export function render(svgNode, data, visualOptions, mapping, originalData) {
+export function render(
+  svgNode,
+  data,
+  visualOptions,
+  mapping,
+  originalData,
+  styles
+) {
   console.log('- render')
 
   const {
@@ -23,6 +31,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     sortSeriesBy,
     showSeriesLabels,
     repeatAxesLabels,
+    showGrid = true,
     // color options
     colorScale,
     // legend
@@ -36,6 +45,13 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     bottom: marginBottom,
     left: marginLeft,
   }
+
+  //check if there are negative values, in case throw error
+  data.forEach((d) => {
+    if (d.size < 0) {
+      throw new Error('Values cannot be negative:', d)
+    }
+  })
 
   // create nest structure
   const nestedData = d3
@@ -88,10 +104,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .data(griddingData)
     .join('g')
     .attr('id', (d) => d[0])
-    .attr(
-      'transform',
-      (d) => 'translate(' + (d.x + margin.left) + ',' + (d.y + margin.top) + ')'
-    )
+    .attr('transform', (d) => 'translate(' + d.x + ',' + d.y + ')')
 
   // domains
   // sum all values for each serie / stack
@@ -109,9 +122,29 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
   const barsDomain = [...new Set(data.map((d) => d.bars))]
 
+  // add grid
+  if (showGrid) {
+    svg
+      .append('g')
+      .attr('id', 'grid')
+      .selectAll('rect')
+      .data(griddingData)
+      .enter()
+      .append('rect')
+      .attr('x', (d) => d.x)
+      .attr('y', (d) => d.y)
+      .attr('width', (d) => d.width)
+      .attr('height', (d) => d.height)
+      .attr('fill', 'none')
+      .attr('stroke', '#ccc')
+  }
+
   series.each(function (d, serieIndex) {
     // make a local selection for each serie
-    const selection = d3.select(this)
+    const selection = d3
+      .select(this)
+      .append('g')
+      .attr('transform', 'translate(' + margin.right + ',' + margin.top + ')')
 
     // compute each serie width and height
     const serieWidth = d.width - margin.right - margin.left
@@ -177,29 +210,19 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .nice()
       .range([serieHeight, 0])
 
-    console.log('cs', colorScale.domain(), colorScale.range())
-
     const bars = selection
       .selectAll('g')
       .data(stackedData)
       .join('g')
       .attr('id', (d) => d.key)
-      .attr('fill', (d) => {
-        console.log(d.key, colorScale(d.key))
-        return colorScale(d.key)
-      })
+      .attr('fill', (d) => colorScale(d.key))
       .selectAll('rect')
       .data((d) => d)
       .join('rect')
       .attr('x', (d) => stacksScale(d.data[0]))
       .attr('y', (d) => sizeScale(d[1]))
       .attr('width', stacksScale.bandwidth())
-      .attr('height', (d) => {
-        if (d[1] - d[0] < 0) {
-          console.log('Values cannot be negative', d) // @TODO: provide error if a value is negative
-        }
-        return serieHeight - sizeScale(d[1] - d[0])
-      })
+      .attr('height', (d) => serieHeight - sizeScale(d[1] - d[0]))
 
     const xAxis = selection
       .append('g')
@@ -213,28 +236,23 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .call(d3.axisLeft(sizeScale).tickSizeOuter(0))
 
     if (showSeriesLabels) {
-      selection
+      d3.select(this)
         .append('text')
-        .attr('class', 'title')
+        .attr('x', 4)
+        .attr('y', 4)
         .text((d) => d.data[0])
-        .attr('y', -4)
-        .attr('font-family', 'sans-serif')
-        .attr('font-size', 12)
-        .attr('font-weight', 'bold')
+        .styles(styles.seriesLabel)
     }
 
     // add the x axis titles
     selection
       .append('text')
-      .attr('dy', serieHeight - 4)
+      .attr('y', serieHeight - 4)
       .attr('x', serieWidth)
-      .attr('class', 'axisTitle')
-      .attr('font-family', 'sans-serif')
-      .attr('font-size', 12)
-      .attr('font-style', 'italic')
       .attr('text-anchor', 'end')
       .attr('display', serieIndex == 0 || repeatAxesLabels ? null : 'none')
       .text(mapping.stacks.value)
+      .styles(styles.axisLabel)
   })
 
   // add legend

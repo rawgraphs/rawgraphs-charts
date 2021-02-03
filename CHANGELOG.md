@@ -8,6 +8,10 @@
 - added styles to _circular dendrogram_
 - added label mapping to _circular dendrogram_
 - in _circular dendrogram_ if no labels are mapped, by default label are the leaf level of hierarchy
+- added styles to _stacked barchart_
+- added ability to show series grid in _stacked barchart_
+- added styles to _multiset barchart_
+- added ability to show series grid in _multiset barchart_
 
 #### 02 feb 2021
 
