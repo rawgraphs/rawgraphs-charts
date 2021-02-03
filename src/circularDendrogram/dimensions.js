@@ -33,6 +33,10 @@ export const dimensions = [
     required: false,
     multiple: true,
     aggregation: true,
-    aggregationDefault: 'csvDistinct',
+    aggregationDefault: {
+      number: 'sum',
+      string: 'csvDistinct',
+      date: 'csvDistinct',
+    },
   },
 ]

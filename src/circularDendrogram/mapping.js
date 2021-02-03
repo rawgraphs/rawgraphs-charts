@@ -23,11 +23,6 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
     dimensions
   )
 
-  // add the non-compulsory dimensions.
-  'color' in mapping ? null : (mapping.color = { value: undefined })
-  'size' in mapping ? null : (mapping.size = { value: undefined })
-  'label' in mapping ? null : (mapping.label = { value: undefined })
-
   const results = []
 
   const result = d3.rollups(

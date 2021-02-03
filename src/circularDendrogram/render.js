@@ -1,7 +1,15 @@
 import * as d3 from 'd3'
 import { legend } from '@raw-temp/rawgraphs-core'
+import '../d3-styles.js'
 
-export function render(svgNode, data, visualOptions, mapping, originalData) {
+export function render(
+  svgNode,
+  data,
+  visualOptions,
+  mapping,
+  originalData,
+  styles
+) {
   console.log('- render')
 
   const {
@@ -27,6 +35,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     sortBy,
     // labels
     showHierarchyLabels,
+    labelStyles,
+    showLabelsOutline,
   } = visualOptions
 
   const margin = {
@@ -35,8 +45,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     bottom: marginBottom,
     left: marginLeft,
   }
-
-  const labelStyles = [label1Style, label2Style, label3Style]
 
   const chartWidth = width - margin.left - margin.right
   const chartHeight = height - margin.top - margin.bottom
@@ -217,7 +225,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       // else pass the mapped labels
       else {
         const xpos = sizeScale(d.value) + 5
-        return [d.data[0]].concat(d.data[1].label).map((e) => ({
+        return d.data[1].label.map((e) => ({
           string: e,
           x: d.x < Math.PI === !d.children ? xpos : -xpos,
           align: d.x < Math.PI === !d.children ? 'start' : 'end',
@@ -226,9 +234,16 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     })
     .join('text')
     .attr('x', (d) => d.x)
-    .attr('y', (d, i, n) => (i + 1) * 12 - (n.length / 2) * 12 - 2) // 12 is the font size, should be automated
+    .attr('dy', (d, i, n) => {
+      const sizeArray = n.map((e) =>
+        parseFloat(styles[labelStyles[i]].fontSize)
+      )
+      const offset = d3.sum(sizeArray) / 2 - 2
+      const size = d3.sum(sizeArray.slice(0, i))
+      return size - offset
+    })
     .attr('text-anchor', (d) => d.align)
-    .attr('class', (d, i) => (i < 3 ? labelStyles[i] : labelStyles[2]))
+    .styles((d, i) => styles[labelStyles[i]])
     .text((d) => d.string)
 
   if (showLegend) {

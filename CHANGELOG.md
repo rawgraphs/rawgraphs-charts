@@ -1,5 +1,13 @@
 ## upcoming
 
+#### 03 feb 2021
+
+- added option to show data points in _violin plot_
+- added styles to _violin plot_
+- added axes labels to _violin plot_
+- added styles to _circular dendrogram_
+- added label mapping to _circular dendrogram_
+
 #### 02 feb 2021
 
 - fixed size in alluvial diagram
