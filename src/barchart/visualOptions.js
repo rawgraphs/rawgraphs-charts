@@ -62,6 +62,19 @@ export const visualOptions = {
     group: 'chart',
   },
 
+  sortBarsBy: {
+    type: 'text',
+    label: 'Sort bars by',
+    group: 'chart',
+    options: [
+      'Total value (descending)',
+      'Total value (ascending)',
+      'Name',
+      'Original',
+    ],
+    default: 'Name',
+  },
+
   useSameScale: {
     type: 'boolean',
     label: 'Use same scale',

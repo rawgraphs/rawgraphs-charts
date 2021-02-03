@@ -25,6 +25,7 @@ export function render(
     // chart options
     padding,
     horizontalBars,
+    sortBarsBy,
     // series options
     columnsNumber,
     useSameScale,
@@ -59,7 +60,7 @@ export function render(
     'Total value (ascending)': function (a, b) {
       return d3.ascending(a.totalSize, b.totalSize)
     },
-    'Series name': function (a, b) {
+    Name: function (a, b) {
       return d3.ascending(a.data[0], b.data[0])
     },
   }
@@ -95,11 +96,35 @@ export function render(
     .attr('id', (d) => d.data[0])
     .attr('transform', (d) => 'translate(' + d.x + ',' + d.y + ')')
 
-  // domains
+  // value domain
   let originalDomain = d3.extent(data, (d) => d.size)
   let sizeDomain =
     originalDomain[0] > 0 ? [0, originalDomain[1]] : originalDomain
-  const barsDomain = [...new Set(data.map((d) => d.bars))]
+
+  // bars sorting functions
+  const barsSortings = {
+    'Total value (descending)': function (a, b) {
+      return d3.descending(a[1], b[1])
+    },
+    'Total value (ascending)': function (a, b) {
+      return d3.ascending(a[1], b[1])
+    },
+    Name: function (a, b) {
+      return d3.ascending(a[0], b[0])
+    },
+    Original: function (a, b) {
+      return true
+    },
+  }
+  // bars domain
+  const barsDomain = d3
+    .rollups(
+      data,
+      (v) => d3.sum(v, (d) => d.size),
+      (d) => d.bars
+    )
+    .sort(barsSortings[sortBarsBy])
+    .map((d) => d[0])
 
   // add grid
   if (showGrid) {

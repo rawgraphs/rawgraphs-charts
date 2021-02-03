@@ -16,6 +16,7 @@
 - axes in _bar chart_ are now placed on the zero value
 - added styles to _bar chart_
 - added ability to show series grid in _bar chart_
+- in _bar chart_ is now possible to sort bars by value
 
 #### 02 feb 2021
 
