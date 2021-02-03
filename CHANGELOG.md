@@ -12,6 +12,10 @@
 - added ability to show series grid in _stacked barchart_
 - added styles to _multiset barchart_
 - added ability to show series grid in _multiset barchart_
+- small fixes to _multiset barchart_ and _multiset barchart_
+- axes in _bar chart_ are now placed on the zero value
+- added styles to _bar chart_
+- added ability to show series grid in _bar chart_
 
 #### 02 feb 2021
 

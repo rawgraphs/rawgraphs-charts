@@ -144,7 +144,7 @@ export function render(
     const selection = d3
       .select(this)
       .append('g')
-      .attr('transform', 'translate(' + margin.right + ',' + margin.top + ')')
+      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
     // compute each serie width and height
     const serieWidth = d.width - margin.right - margin.left
