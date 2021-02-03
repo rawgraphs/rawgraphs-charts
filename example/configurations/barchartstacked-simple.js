@@ -13,6 +13,7 @@ export default {
     stacks: { value: ['Letter'] },
     bars: {
       value: ['Frequency (%)'],
+      config: { aggregation: ['sum'] },
     },
     series: { value: ['Language'] },
   },

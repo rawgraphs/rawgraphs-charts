@@ -39,6 +39,7 @@ export default {
         'terapia_intensiva',
         'deceduti',
       ],
+      config: { aggregation: ['sum', 'sum', 'sum', 'sum'] },
     },
     series: { value: ['denominazione_regione'] },
   },
