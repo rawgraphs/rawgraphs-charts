@@ -25,6 +25,7 @@ export function render(
     // chart options
     stacksOrder,
     stacksPadding,
+    SortXAxisBy,
     // series options
     columnsNumber,
     useSameScale,
@@ -49,7 +50,7 @@ export function render(
   //check if there are negative values, in case throw error
   data.forEach((d) => {
     if (d.size < 0) {
-      throw new Error('Values cannot be negative:', d)
+      throw new Error('Values cannot be negative')
     }
   })
 
@@ -118,7 +119,30 @@ export function render(
 
   let sizeDomain = [0, d3.max(scaleRollup)]
 
-  const stacksDomain = [...new Set(data.map((d) => d.stacks))]
+  // stacks (x axis) sorting functions
+  const stacksSortings = {
+    'Total value (descending)': function (a, b) {
+      return d3.descending(a[1], b[1])
+    },
+    'Total value (ascending)': function (a, b) {
+      return d3.ascending(a[1], b[1])
+    },
+    Name: function (a, b) {
+      return d3.ascending(a[0], b[0])
+    },
+    Original: function (a, b) {
+      return true
+    },
+  }
+  // stacks (x axis) domain
+  const stacksDomain = d3
+    .rollups(
+      data,
+      (v) => d3.sum(v, (d) => d.size),
+      (d) => d.stacks
+    )
+    .sort(stacksSortings[SortXAxisBy])
+    .map((d) => d[0])
 
   const barsDomain = [...new Set(data.map((d) => d.bars))]
 
@@ -178,9 +202,15 @@ export function render(
       .keys(barsDomain)
       .value((data, key) => (data[1].has(key) ? data[1].get(key).size : 0))
       .order(d3[orderings[stacksOrder]])
-    // .offset(d3.stackOffsetNone)
 
     let stackedData = stack(localStack)
+
+    // check if padding is too high and leave no space for bars
+    if (stacksPadding * stacksDomain.length > serieWidth) {
+      throw new Error(
+        'Padding is too high, decrase it in the panel "chart" > "Padding between bars (px)"'
+      )
+    }
 
     // scales
     const stacksScale = d3
@@ -265,9 +295,7 @@ export function render(
 
     const chartLegend = legend().legendWidth(legendWidth)
 
-    if (mapping.color.value) {
-      chartLegend.addColor(mapping.bars.value, colorScale)
-    }
+    chartLegend.addColor('Colors', colorScale)
 
     legendLayer.call(chartLegend)
   }
