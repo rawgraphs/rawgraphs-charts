@@ -101,10 +101,21 @@ export const visualOptions = {
     type: 'text',
     label: 'Label',
     group: 'labels',
-    options: ['Primary', 'Secondary', 'Tertiary'],
-    default: 'Primary',
+    options: [
+      { label: 'Primary', value: 'labelPrimary' },
+      { label: 'Secondary', value: 'labelSecondary' },
+      { label: 'Italic', value: 'labelItalic' },
+    ],
+    default: 'labelPrimary',
     repeatFor: 'label',
-    repeatDefault: ['Primary', 'Secondary', 'Tertiary'],
+    repeatDefault: ['labelPrimary', 'labelSecondary', 'labelItalic'],
+  },
+
+  showLabelsOutline: {
+    type: 'boolean',
+    label: 'Show outline',
+    default: false,
+    group: 'labels',
   },
 
   colorScale: {
@@ -117,5 +128,4 @@ export const visualOptions = {
     },
     group: 'colors',
   },
-
 }

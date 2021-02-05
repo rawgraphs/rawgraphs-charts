@@ -1,7 +1,15 @@
 import * as d3 from 'd3'
 import { legend } from '@raw-temp/rawgraphs-core'
+import '../d3-styles'
 
-export function render(svgNode, data, visualOptions, mapping, originalData) {
+export function render(
+  svgNode,
+  data,
+  visualOptions,
+  mapping,
+  originalData,
+  styles
+) {
   console.log('- render')
 
   const {
@@ -19,6 +27,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     showGrid,
     colorScale,
     labelStyles,
+    showLabelsOutline,
     // legend
     showLegend,
     legendWidth,
@@ -30,41 +39,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     bottom: marginBottom,
     left: marginLeft,
   }
-
-  // define style
-  d3.select(svgNode).append('style').text(`
-      #viz {
-        font-family: Helvetica, Arial, sans-serif;
-        font-size: 12px;
-      }
-
-      #viz #axes path, #axes line {
-        stroke:#161616
-      }
-
-      #viz .tick > line {
-        stroke: #e5e5e5;
-      }
-
-      #viz .axisTitle {
-        font-size: 12px;
-        font-weight: bold;
-        fill: #161616;
-      }
-
-			#viz .labels {
-				font-size: 8px;
-			}
-
-			#viz .Primary {
-				font-weight: bold;
-			}
-
-			#viz .Tertiary {
-				font-weight: lighter;
-				font-style: oblique;
-			}
-      `)
 
   let chartWidth = width - margin.left - margin.right
   let chartHeight = height - margin.top - margin.bottom
@@ -204,8 +178,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('dx', -9) // proportional to tick lines
     .attr('dy', -9) // proportional to tick lines
     .style('text-anchor', 'end')
-    .attr('class', 'axisTitle')
     .text(mapping.y.value)
+    .styles(styles.axisLabel)
 
   // add x axis title
   svg
@@ -216,8 +190,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('dy', -Math.sqrt(12)) // proportional to text size. @TODO we should use a variable.
     .attr('transform', 'rotate(-45)')
     .style('text-anchor', 'start')
-    .attr('class', 'axisTitle')
     .text(mapping.x.value)
+    .styles(styles.axisLabel)
 
   // draw squares or circles for each value
   svg
@@ -233,24 +207,52 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('height', (d) => sizeScale(d.size))
     .style('fill', (d) => colorScale(d.color))
 
-  let texts = svg
-    .append('g')
-    .attr('class', 'labels')
-    .selectAll('text')
-    .data(data)
-    .enter()
-    .append('text')
-    .attr('y', (d) => y(d.y) + cellSize / 2)
+  const labelsLayer = svg.append('g').attr('id', 'labels')
 
-  texts
-    .selectAll('tspan')
-    .data((d) => d.label.map((e) => ({ string: e, x: x(d.x) + cellSize / 2 })))
-    .join('tspan')
+  labelsLayer
+    .selectAll('g')
+    .data(mapping.label.value ? data : [])
+    .join('g')
+    .attr(
+      'transform',
+      (d) => `translate(${x(d.x) + cellSize / 2},${y(d.y) + cellSize / 2})`
+    )
+    .append('text')
+    .attr('x', 0)
+    .attr('y', 0)
     .attr('text-anchor', 'middle')
-    .attr('x', (d) => d.x)
-    .attr('dy', (d, i, n) => (i + 1) * 8 - (n.length / 2) * 8) // 12 is the font size, should be automated
-    .attr('class', (d, i) => (i < 3 ? labelStyles[i] : labelStyles[2])) // if there are more than three
-    .text((d) => d.string)
+    .attr('dominant-baseline', 'text-before-edge')
+    .selectAll('tspan')
+    .data((d) => (Array.isArray(d.label) ? d.label : [d.label]))
+    .join('tspan')
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr(
+      'dy',
+      (d, i) => i * (+styles[labelStyles[i]].fontSize.replace('px', '') + 2)
+    )
+    .text((d, i) => {
+      if (d && mapping.label.dataType[i].type === 'date') {
+        return d3.timeFormat(dateFormats[mapping.label.dataType[i].dateFormat])(
+          d
+        )
+      } else {
+        return d
+      }
+    })
+    .styles((d, i) => styles[labelStyles[i]])
+
+  labelsLayer.selectAll('text').call((sel) => {
+    return sel.attr('transform', function (d) {
+      const height = sel.node().getBBox().height
+      return `translate(0,${-height / 2})`
+    })
+  })
+
+  if (showLabelsOutline) {
+    // NOTE: Adobe Illustrator does not support paint-order attr
+    labelsLayer.selectAll('text').styles(styles.labelOutline)
+  }
 
   if (showLegend) {
     // svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option

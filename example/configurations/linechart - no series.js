@@ -21,7 +21,7 @@ export default {
     lines: { value: ['Category'] },
     x: { value: ['Year_date'] },
     y: { value: ['Revenues-Adjusted'] },
-    color: { value: ['Category'] },
+    //color: { value: ['Category'] },
   },
   visualOptions: {
     width: 1000,
