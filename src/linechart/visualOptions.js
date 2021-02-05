@@ -70,16 +70,16 @@ export const visualOptions = {
     label: 'Interpolation',
     default: 'Linear',
     options: [
-      'Basis',
-      'Bundle',
-      'Cardinal',
-      'Catmull–Rom',
-      'Linear',
-      'Monotone X',
-      'Natural',
-      'Step',
-      'Step After',
-      'Step Before',
+      { label: 'Basis', value: 'Basis' },
+      { label: 'Bundle', value: 'Bundle' },
+      { label: 'Cardinal', value: 'Cardinal' },
+      { label: 'Catmull–Rom', value: 'CatmullRom' },
+      { label: 'Linear', value: 'Linear' },
+      { label: 'Monotone X', value: 'MonotoneX' },
+      { label: 'Natural', value: 'Natural' },
+      { label: 'Step', value: 'Step' },
+      { label: 'Step After', value: 'StepAfter' },
+      { label: 'Step Before', value: 'StepBefore' },
     ],
     group: 'chart',
   },
@@ -87,7 +87,7 @@ export const visualOptions = {
   columnsNumber: {
     type: 'number',
     label: 'Number of columns',
-    default: 0,
+    default: 2,
     group: 'series',
   },
 
@@ -154,6 +154,3 @@ export const visualOptions = {
     group: 'colors',
   },
 }
-
-// showLegend,
-// legendWidth,

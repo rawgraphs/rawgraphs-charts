@@ -1,7 +1,7 @@
 .axisLabel {
   font-family: 'Arial, sans-serif';
   font-size: 12px;
-  fill: black;
+  fill:#7B7B7B;
   font-weight: bold;
 }
 
@@ -32,7 +32,7 @@
   font-size: 12px;
   fill: black;
   font-weight: bold;
-  dominant-baseline: hanging;
+  text-anchor: middle;
 }
 
 .labelOutline {

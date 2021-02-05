@@ -1,8 +1,16 @@
 import * as d3 from 'd3'
 import { legend } from '@raw-temp/rawgraphs-core'
 import * as d3Gridding from 'd3-gridding'
+import '../d3-styles'
 
-export function render(svgNode, data, visualOptions, mapping, originalData) {
+export function render(
+  svgNode,
+  data,
+  visualOptions,
+  mapping,
+  originalData,
+  styles
+) {
   console.log('- render')
 
   const {
@@ -20,22 +28,18 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     pointsRadius,
     // series options
     columnsNumber,
-    useSameScale = false, // @TODO: add
+    useSameScale, // @TODO: add
     sortSeriesBy,
     showSeriesLabels,
     repeatAxesLabels,
     // labels options
     showLabels,
     labelsPosition,
-    labelsShorten,
-    labelsChars,
     // color options
     colorScale,
     // legend
     showLegend,
     legendWidth,
-    // othe non-exposed variables
-    serieTitleHeight = 20,
   } = visualOptions
 
   const margin = {
@@ -93,7 +97,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .size([width, height])
     .mode('grid')
     .padding(0) // no padding, margins will be applied inside
-    .cols(columnsNumber)
+    .cols(mapping.series.value ? columnsNumber : 1)
 
   const griddingData = gridding(nestedData)
 
@@ -122,20 +126,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   mapping.x.dataType === 'number'
     ? (mapping.x.dataType = { type: 'number' })
     : null // @TODO it should be better to have always the same kind of object in mapping
-
-  // convert string to d3 functions
-  const curveType = {
-    Basis: d3.curveBasis,
-    Bundle: d3.curveBundle,
-    Cardinal: d3.curveCardinal,
-    'Catmull–Rom': d3.curveCatmullRom,
-    Linear: d3.curveLinear,
-    'Monotone X': d3.curveMonotoneX,
-    Natural: d3.curveNatural,
-    Step: d3.curveStep,
-    'Step After': d3.curveStepAfter,
-    'Step Before': d3.curveStepBefore,
-  }
 
   // now add everything to each series
 
@@ -186,30 +176,57 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .y(function (d) {
         return yScale(d.y)
       })
-      .curve(curveType[interpolation])
+      .curve(d3['curve' + interpolation])
 
-    console.log(yDomain)
+    const xAxis = (g) => {
+      return g
+        .attr(
+          'transform',
+          (d) =>
+            'translate(0,' + (yDomain[0] >= 0 ? serieHeight : yScale(0)) + ')'
+        )
+        .call(d3.axisBottom(xScale).tickSizeOuter(0))
+        .call((g) =>
+          g
+            .append('text')
+            .attr('x', serieWidth)
+            .attr('dy', -5)
+            .attr('text-anchor', 'end')
+            .attr(
+              'display',
+              serieIndex == 0 || repeatAxesLabels ? null : 'none'
+            )
+            .text(mapping['x'].value)
+            .styles(styles.axisLabel)
+        )
+    }
 
-    // add x axis
-    const xAxis = selection
-      .append('g')
-      .attr('id', 'xAxis')
-      .attr(
-        'transform',
-        (d) =>
-          'translate(0,' + (yDomain[0] >= 0 ? serieHeight : yScale(0)) + ')'
-      )
-      .call(d3.axisBottom(xScale).tickSizeOuter(0))
+    const yAxis = (g) => {
+      return g
+        .attr(
+          'transform',
+          (d) => 'translate(' + (xDomain[0] >= 0 ? 0 : xScale(0)) + ',0)'
+        )
+        .call(d3.axisLeft(yScale).tickSizeOuter(0))
+        .call((g) =>
+          g
+            .append('text')
+            .attr('x', 4)
+            .attr('text-anchor', 'start')
+            .attr('dominant-baseline', 'hanging')
+            .attr(
+              'display',
+              serieIndex == 0 || repeatAxesLabels ? null : 'none'
+            )
+            .text(mapping['y'].value)
+            .styles(styles.axisLabel)
+        )
+    }
 
-    // add y axis
-    const yAxis = selection
-      .append('g')
-      .attr('id', 'yAxis')
-      .attr(
-        'transform',
-        (d) => 'translate(' + (xDomain[0] >= 0 ? 0 : xScale(0)) + ',0)'
-      )
-      .call(d3.axisLeft(yScale).tickSizeOuter(0))
+    const axisLayer = selection.append('g').attr('id', 'axis')
+
+    axisLayer.append('g').call(xAxis)
+    axisLayer.append('g').call(yAxis)
 
     // create a group for each line.
     // the group will contain the line and the dots.
@@ -277,40 +294,11 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     if (showSeriesLabels) {
       selection
         .append('text')
-        .attr('y', -4)
-        .attr('font-family', 'sans-serif')
-        .attr('font-size', 12)
-        .attr('font-weight', 'bold')
-        .attr('class', 'title')
+        .attr('y', 0)
+        .attr('x', serieWidth / 2)
         .text((d) => d[0])
+        .styles(styles.seriesLabel)
     }
-
-    // add the x axis titles
-    selection
-      .append('text')
-      .attr('dy', serieHeight - 4)
-      .attr('x', serieWidth)
-      .attr('class', 'axisTitle')
-      .attr('font-family', 'sans-serif')
-      .attr('font-size', 12)
-      .attr('font-style', 'italic')
-      .attr('text-anchor', 'end')
-      .attr('display', serieIndex == 0 || repeatAxesLabels ? null : 'none')
-      .text(mapping.x.value)
-
-    // add the y axis titles
-    selection
-      .append('text')
-      .attr('y', 0)
-      .attr('x', 4)
-      .attr('dominant-baseline', 'hanging')
-      .attr('class', 'axisTitle')
-      .attr('font-family', 'sans-serif')
-      .attr('font-size', 12)
-      .attr('font-style', 'italic')
-      .attr('text-anchor', 'start')
-      .attr('display', serieIndex == 0 || repeatAxesLabels ? null : 'none')
-      .text(mapping.y.value + ' (' + mapping.y.config.aggregation + ')')
   })
 
   if (showLegend) {
