@@ -1,5 +1,8 @@
 ## upcoming
 
+- added example for requiredDimensions in bubble chart visual options
+- always using colorScale for bubble chart (support for defaultColor)
+
 #### 03 feb 2021
 
 - added option to show data points in _violin plot_
