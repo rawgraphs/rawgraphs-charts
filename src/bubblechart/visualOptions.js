@@ -53,6 +53,7 @@ export const visualOptions = {
     label: 'Set x origin to 0',
     default: false,
     group: 'chart',
+    requiredDimensions: ['x', 'y'],
   },
 
   yOrigin: {
@@ -60,6 +61,7 @@ export const visualOptions = {
     label: 'Set y origin to 0',
     default: false,
     group: 'chart',
+    requiredDimensions: ['x', 'y'],
   },
 
   maxRadius: {
@@ -68,6 +70,7 @@ export const visualOptions = {
     default: 15,
     step: 1,
     group: 'chart',
+    requiredDimensions: ['x', 'y'],
   },
 
   showStroke: {
@@ -75,6 +78,7 @@ export const visualOptions = {
     label: 'Show bubbles stroke',
     default: false,
     group: 'chart',
+    requiredDimensions: ['x', 'y'],
   },
 
   showPoints: {
@@ -82,6 +86,7 @@ export const visualOptions = {
     label: 'Show points',
     default: false,
     group: 'chart',
+    requiredDimensions: ['x', 'y'],
   },
 
   pointsRadius: {
@@ -92,6 +97,7 @@ export const visualOptions = {
     disabled: {
       showPoints: false,
     },
+    requiredDimensions: ['x', 'y'],
   },
 
   colorScale: {

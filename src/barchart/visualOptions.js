@@ -62,6 +62,19 @@ export const visualOptions = {
     group: 'chart',
   },
 
+  sortBarsBy: {
+    type: 'text',
+    label: 'Sort bars by',
+    group: 'chart',
+    options: [
+      'Total value (descending)',
+      'Total value (ascending)',
+      'Name',
+      'Original',
+    ],
+    default: 'Name',
+  },
+
   useSameScale: {
     type: 'boolean',
     label: 'Use same scale',
@@ -72,7 +85,7 @@ export const visualOptions = {
   columnsNumber: {
     type: 'number',
     label: 'Number of columns',
-    default: 2,
+    default: 0,
     group: 'series',
   },
 
@@ -96,6 +109,20 @@ export const visualOptions = {
     group: 'series',
   },
 
+  repeatAxesLabels: {
+    type: 'boolean',
+    label: 'Show series titles',
+    default: false,
+    group: 'series',
+  },
+
+  showGrid: {
+    type: 'boolean',
+    label: 'Show series grid',
+    default: false,
+    group: 'series',
+  },
+
   colorScale: {
     type: 'colorScale',
     label: 'Color scale',
@@ -107,6 +134,3 @@ export const visualOptions = {
     group: 'colors',
   },
 }
-
-// showLegend,
-// legendWidth,

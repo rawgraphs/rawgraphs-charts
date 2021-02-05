@@ -14,10 +14,10 @@ export const dimensions = [
     required: true,
     multiple: true,
     operation: 'get',
-    // aggregation: true,
-    // aggregationDefault: {
-    //   number: 'sum',
-    // }, @TODO: allow aggregation on multiple values
+    aggregation: true,
+    aggregationDefault: {
+      number: 'sum',
+    },
   },
 
   {

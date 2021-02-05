@@ -1,8 +1,16 @@
 import * as d3 from 'd3'
 import { legend } from '@raw-temp/rawgraphs-core'
 import * as d3Gridding from 'd3-gridding'
+import '../d3-styles.js'
 
-export function render(svgNode, data, visualOptions, mapping, originalData) {
+export function render(
+  svgNode,
+  data,
+  visualOptions,
+  mapping,
+  originalData,
+  styles
+) {
   console.log('- render')
 
   const {
@@ -17,12 +25,14 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     // chart options
     padding,
     horizontalBars,
+    sortBarsBy,
     // series options
     columnsNumber,
     useSameScale,
     sortSeriesBy,
     showSeriesLabels,
     repeatAxesLabels,
+    showGrid,
     // color options
     colorScale,
     // legend
@@ -50,7 +60,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     'Total value (ascending)': function (a, b) {
       return d3.ascending(a.totalSize, b.totalSize)
     },
-    'Series name': function (a, b) {
+    Name: function (a, b) {
       return d3.ascending(a.data[0], b.data[0])
     },
   }
@@ -84,33 +94,84 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .data(griddingData)
     .join('g')
     .attr('id', (d) => d.data[0])
-    .attr(
-      'transform',
-      (d) => 'translate(' + (d.x + margin.left) + ',' + (d.y + margin.top) + ')'
-    )
+    .attr('transform', (d) => 'translate(' + d.x + ',' + d.y + ')')
 
-  // domains
+  // value domain
   let originalDomain = d3.extent(data, (d) => d.size)
   let sizeDomain =
     originalDomain[0] > 0 ? [0, originalDomain[1]] : originalDomain
-  const barsDomain = [...new Set(data.map((d) => d.bars))]
+
+  // bars sorting functions
+  const barsSortings = {
+    'Total value (descending)': function (a, b) {
+      return d3.descending(a[1], b[1])
+    },
+    'Total value (ascending)': function (a, b) {
+      return d3.ascending(a[1], b[1])
+    },
+    Name: function (a, b) {
+      return d3.ascending(a[0], b[0])
+    },
+    Original: function (a, b) {
+      return true
+    },
+  }
+  // bars domain
+  const barsDomain = d3
+    .rollups(
+      data,
+      (v) => d3.sum(v, (d) => d.size),
+      (d) => d.bars
+    )
+    .sort(barsSortings[sortBarsBy])
+    .map((d) => d[0])
+
+  // add grid
+  if (showGrid) {
+    svg
+      .append('g')
+      .attr('id', 'grid')
+      .selectAll('rect')
+      .data(griddingData)
+      .enter()
+      .append('rect')
+      .attr('x', (d) => d.x)
+      .attr('y', (d) => d.y)
+      .attr('width', (d) => d.width)
+      .attr('height', (d) => d.height)
+      .attr('fill', 'none')
+      .attr('stroke', '#ccc')
+  }
 
   series.each(function (d, seriesIndex) {
     // make a local selection for each serie
-    const selection = d3.select(this)
+    const selection = d3
+      .select(this)
+      .append('g')
+      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
     // compute each serie width and height
     const seriesWidth = d.width - margin.right - margin.left
     const seriesHeight = d.height - margin.top - margin.bottom
 
+    // check if padding is too high and leave no space for bars
+    if (
+      padding * barsDomain.length >
+      (horizontalBars ? seriesHeight : seriesWidth)
+    ) {
+      throw new Error(
+        'Padding is too high, decrase it in the panel "chart" > "Padding between bars (px)"'
+      )
+    }
     // scales
     const barScale = d3
       .scaleBand()
       .range([0, horizontalBars ? seriesHeight : seriesWidth])
       .domain(barsDomain)
+      //convert padding from px to percentage
       .padding(
         padding /
-          (horizontalBars ? seriesHeight : seriesWidth / barsDomain.length) //convert padding from px to percentage
+          (horizontalBars ? seriesHeight : seriesWidth / barsDomain.length)
       )
 
     const seriesDomain = d3.extent(d.data[1], (d) => d.size)
@@ -180,6 +241,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       const yAxis = selection
         .append('g')
         .attr('id', 'yAxis')
+        .attr('transform', 'translate(' + sizeScale(0) + ',0)')
         .call(d3.axisLeft(barScale).tickSizeOuter(0))
         .call((g) =>
           g
@@ -202,23 +264,20 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       const xAxis = selection
         .append('g')
         .attr('id', 'xAxis')
-        .attr('transform', 'translate(0,' + seriesHeight + ')')
+        .attr('transform', 'translate(0,' + sizeScale(0) + ')')
         .call(d3.axisBottom(barScale).tickSizeOuter(0))
         .call((g) =>
           g
             .append('text')
-            .attr('font-family', 'Arial, sans-serif')
-            .attr('font-size', 10)
             .attr('x', seriesWidth)
-            .attr('dy', -5)
-            .attr('fill', 'black')
-            .attr('font-weight', 'bold')
+            .attr('y', -4)
             .attr('text-anchor', 'end')
             .attr(
               'display',
               seriesIndex === 0 || repeatAxesLabels ? null : 'none'
             )
             .text(mapping['bars'].value)
+            .styles(styles.axisLabel)
         )
 
       const yAxis = selection
@@ -228,11 +287,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         .call((g) =>
           g
             .append('text')
-            .attr('font-family', 'Arial, sans-serif')
-            .attr('font-size', 10)
             .attr('x', 4)
-            .attr('fill', 'black')
-            .attr('font-weight', 'bold')
             .attr('text-anchor', 'start')
             .attr('dominant-baseline', 'hanging')
             .attr(
@@ -244,21 +299,17 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
                 ? `${mapping['size'].value} [${mapping.size.config.aggregation}]`
                 : ''
             })
+            .styles(styles.axisLabel)
         )
     }
 
     if (showSeriesLabels) {
-      selection
+      d3.select(this)
         .append('text')
-        .attr('class', 'title')
-        .attr('y', -4)
-        .attr('x', seriesWidth / 2)
-        .attr('font-family', 'Arial, sans-serif')
-        .attr('font-size', 12)
-        .attr('fill', 'black')
-        .attr('font-weight', 'bold')
-        .attr('text-anchor', 'middle')
         .text((d) => d.data[0])
+        .attr('y', 4)
+        .attr('x', 4)
+        .styles(styles.seriesLabel)
     }
   })
 

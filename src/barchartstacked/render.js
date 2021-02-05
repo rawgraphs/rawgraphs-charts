@@ -1,8 +1,16 @@
 import * as d3 from 'd3'
 import { legend } from '@raw-temp/rawgraphs-core'
 import * as d3Gridding from 'd3-gridding'
+import '../d3-styles.js'
 
-export function render(svgNode, data, visualOptions, mapping, originalData) {
+export function render(
+  svgNode,
+  data,
+  visualOptions,
+  mapping,
+  originalData,
+  styles
+) {
   console.log('- render')
 
   const {
@@ -17,12 +25,14 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     // chart options
     stacksOrder,
     stacksPadding,
+    SortXAxisBy,
     // series options
     columnsNumber,
     useSameScale,
     sortSeriesBy,
     showSeriesLabels,
     repeatAxesLabels,
+    showGrid = true,
     // color options
     colorScale,
     // legend
@@ -36,6 +46,13 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     bottom: marginBottom,
     left: marginLeft,
   }
+
+  //check if there are negative values, in case throw error
+  data.forEach((d) => {
+    if (d.size < 0) {
+      throw new Error('Values cannot be negative')
+    }
+  })
 
   // create nest structure
   const nestedData = d3
@@ -88,10 +105,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .data(griddingData)
     .join('g')
     .attr('id', (d) => d[0])
-    .attr(
-      'transform',
-      (d) => 'translate(' + (d.x + margin.left) + ',' + (d.y + margin.top) + ')'
-    )
+    .attr('transform', (d) => 'translate(' + d.x + ',' + d.y + ')')
 
   // domains
   // sum all values for each serie / stack
@@ -105,13 +119,56 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
   let sizeDomain = [0, d3.max(scaleRollup)]
 
-  const stacksDomain = [...new Set(data.map((d) => d.stacks))]
+  // stacks (x axis) sorting functions
+  const stacksSortings = {
+    'Total value (descending)': function (a, b) {
+      return d3.descending(a[1], b[1])
+    },
+    'Total value (ascending)': function (a, b) {
+      return d3.ascending(a[1], b[1])
+    },
+    Name: function (a, b) {
+      return d3.ascending(a[0], b[0])
+    },
+    Original: function (a, b) {
+      return true
+    },
+  }
+  // stacks (x axis) domain
+  const stacksDomain = d3
+    .rollups(
+      data,
+      (v) => d3.sum(v, (d) => d.size),
+      (d) => d.stacks
+    )
+    .sort(stacksSortings[SortXAxisBy])
+    .map((d) => d[0])
 
   const barsDomain = [...new Set(data.map((d) => d.bars))]
 
+  // add grid
+  if (showGrid) {
+    svg
+      .append('g')
+      .attr('id', 'grid')
+      .selectAll('rect')
+      .data(griddingData)
+      .enter()
+      .append('rect')
+      .attr('x', (d) => d.x)
+      .attr('y', (d) => d.y)
+      .attr('width', (d) => d.width)
+      .attr('height', (d) => d.height)
+      .attr('fill', 'none')
+      .attr('stroke', '#ccc')
+  }
+
   series.each(function (d, serieIndex) {
     // make a local selection for each serie
-    const selection = d3.select(this)
+    const selection = d3
+      .select(this)
+      .append('g')
+      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
     // compute each serie width and height
     const serieWidth = d.width - margin.right - margin.left
@@ -145,9 +202,15 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .keys(barsDomain)
       .value((data, key) => (data[1].has(key) ? data[1].get(key).size : 0))
       .order(d3[orderings[stacksOrder]])
-    // .offset(d3.stackOffsetNone)
 
     let stackedData = stack(localStack)
+
+    // check if padding is too high and leave no space for bars
+    if (stacksPadding * stacksDomain.length > serieWidth) {
+      throw new Error(
+        'Padding is too high, decrase it in the panel "chart" > "Padding between bars (px)"'
+      )
+    }
 
     // scales
     const stacksScale = d3
@@ -177,29 +240,19 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .nice()
       .range([serieHeight, 0])
 
-    console.log('cs', colorScale.domain(), colorScale.range())
-
     const bars = selection
       .selectAll('g')
       .data(stackedData)
       .join('g')
       .attr('id', (d) => d.key)
-      .attr('fill', (d) => {
-        console.log(d.key, colorScale(d.key))
-        return colorScale(d.key)
-      })
+      .attr('fill', (d) => colorScale(d.key))
       .selectAll('rect')
       .data((d) => d)
       .join('rect')
       .attr('x', (d) => stacksScale(d.data[0]))
       .attr('y', (d) => sizeScale(d[1]))
       .attr('width', stacksScale.bandwidth())
-      .attr('height', (d) => {
-        if (d[1] - d[0] < 0) {
-          console.log('Values cannot be negative', d) // @TODO: provide error if a value is negative
-        }
-        return serieHeight - sizeScale(d[1] - d[0])
-      })
+      .attr('height', (d) => serieHeight - sizeScale(d[1] - d[0]))
 
     const xAxis = selection
       .append('g')
@@ -213,28 +266,23 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .call(d3.axisLeft(sizeScale).tickSizeOuter(0))
 
     if (showSeriesLabels) {
-      selection
+      d3.select(this)
         .append('text')
-        .attr('class', 'title')
+        .attr('x', 4)
+        .attr('y', 4)
         .text((d) => d.data[0])
-        .attr('y', -4)
-        .attr('font-family', 'sans-serif')
-        .attr('font-size', 12)
-        .attr('font-weight', 'bold')
+        .styles(styles.seriesLabel)
     }
 
     // add the x axis titles
     selection
       .append('text')
-      .attr('dy', serieHeight - 4)
+      .attr('y', serieHeight - 4)
       .attr('x', serieWidth)
-      .attr('class', 'axisTitle')
-      .attr('font-family', 'sans-serif')
-      .attr('font-size', 12)
-      .attr('font-style', 'italic')
       .attr('text-anchor', 'end')
       .attr('display', serieIndex == 0 || repeatAxesLabels ? null : 'none')
       .text(mapping.stacks.value)
+      .styles(styles.axisLabel)
   })
 
   // add legend
@@ -247,9 +295,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
     const chartLegend = legend().legendWidth(legendWidth)
 
-    if (mapping.color.value) {
-      chartLegend.addColor(mapping.bars.value, colorScale)
-    }
+    chartLegend.addColor('Colors', colorScale)
 
     legendLayer.call(chartLegend)
   }

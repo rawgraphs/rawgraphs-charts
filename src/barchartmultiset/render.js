@@ -1,8 +1,16 @@
 import * as d3 from 'd3'
 import { legend } from '@raw-temp/rawgraphs-core'
 import * as d3Gridding from 'd3-gridding'
+import '../d3-styles.js'
 
-export function render(svgNode, data, visualOptions, mapping, originalData) {
+export function render(
+  svgNode,
+  data,
+  visualOptions,
+  mapping,
+  originalData,
+  styles
+) {
   console.log('- render')
 
   const {
@@ -23,6 +31,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     sortSeriesBy,
     showSeriesLabels,
     repeatAxesLabels,
+    showGrid,
     // color options
     colorScale,
     // legend
@@ -36,7 +45,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     bottom: marginBottom,
     left: marginLeft,
   }
-  console.log('color test', colorScale.domain())
 
   // create nest structure
   const nestedData = d3
@@ -89,10 +97,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .data(griddingData)
     .join('g')
     .attr('id', (d) => d[0])
-    .attr(
-      'transform',
-      (d) => 'translate(' + (d.x + margin.left) + ',' + (d.y + margin.top) + ')'
-    )
+    .attr('transform', (d) => 'translate(' + d.x + ',' + d.y + ')')
 
   // domains
   let originalDomain = d3.extent(data, (d) => d.size)
@@ -104,9 +109,29 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
   const barsDomain = [...new Set(data.map((d) => d.bars))]
 
+  // add grid
+  if (showGrid) {
+    svg
+      .append('g')
+      .attr('id', 'grid')
+      .selectAll('rect')
+      .data(griddingData)
+      .enter()
+      .append('rect')
+      .attr('x', (d) => d.x)
+      .attr('y', (d) => d.y)
+      .attr('width', (d) => d.width)
+      .attr('height', (d) => d.height)
+      .attr('fill', 'none')
+      .attr('stroke', '#ccc')
+  }
+
   series.each(function (d, serieIndex) {
     // make a local selection for each serie
-    const selection = d3.select(this)
+    const selection = d3
+      .select(this)
+      .append('g')
+      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
     // compute each serie width and height
     const serieWidth = d.width - margin.right - margin.left
@@ -148,7 +173,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr('y', (d) => sizeScale(Math.max(0, d.size)))
       .attr('height', (d) => Math.abs(sizeScale(d.size) - sizeScale(0)))
       .attr('width', barScale.bandwidth())
-      .attr('fill', (d) => colorScale(d.color))
+      .attr('fill', (d) => colorScale(d.bars))
 
     const xAxis = selection
       .append('g')
@@ -162,28 +187,23 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .call(d3.axisLeft(sizeScale).tickSizeOuter(0))
 
     if (showSeriesLabels) {
-      selection
+      d3.select(this)
         .append('text')
-        .attr('class', 'title')
+        .attr('x', 4)
+        .attr('y', 4)
         .text((d) => d.data[0])
-        .attr('y', -4)
-        .attr('font-family', 'sans-serif')
-        .attr('font-size', 12)
-        .attr('font-weight', 'bold')
+        .styles(styles.seriesLabel)
     }
 
     // add the x axis titles
     selection
       .append('text')
-      .attr('dy', serieHeight - 4)
+      .attr('y', serieHeight - 4)
       .attr('x', serieWidth)
-      .attr('class', 'axisTitle')
       .attr('text-anchor', 'end')
       .attr('display', serieIndex == 0 || repeatAxesLabels ? null : 'none')
-      .attr('font-family', 'Arial, sans-serif')
-      .attr('font-size', 10)
-      .attr('font-weight', 'bold')
-      .text(mapping.bars.value)
+      .text(mapping.groups.value)
+      .styles(styles.axisLabel)
 
     // add the y axis titles
     selection
@@ -197,7 +217,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .attr('font-style', 'italic')
       .attr('text-anchor', 'start')
       .attr('display', serieIndex == 0 || repeatAxesLabels ? null : 'none')
-    console.log(mapping)
   })
 
   // add legend

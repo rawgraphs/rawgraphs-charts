@@ -35,6 +35,7 @@ export function render(
     sortBy,
     // labels
     showHierarchyLabels,
+    hierarchyStyle,
     labelStyles,
     showLabelsOutline,
   } = visualOptions
@@ -213,37 +214,45 @@ export function render(
     .data((d) => {
       // if the node has children
       // pass just its name in hierarhcy
-      if (d.children) {
+      if (d.children || d.data[1].label.length == 0) {
         return [
           {
             string: d.data[0],
             x: d.x < Math.PI === !d.children ? 6 : -6,
             align: d.x < Math.PI === !d.children ? 'start' : 'end',
+            style: styles[hierarchyStyle],
+            hierarchy: true,
           },
         ]
       }
       // else pass the mapped labels
       else {
         const xpos = sizeScale(d.value) + 5
-        return d.data[1].label.map((e) => ({
+        return d.data[1].label.map((e, i) => ({
           string: e,
           x: d.x < Math.PI === !d.children ? xpos : -xpos,
           align: d.x < Math.PI === !d.children ? 'start' : 'end',
+          style: styles[labelStyles[i]],
         }))
       }
     })
     .join('text')
     .attr('x', (d) => d.x)
     .attr('dy', (d, i, n) => {
-      const sizeArray = n.map((e) =>
-        parseFloat(styles[labelStyles[i]].fontSize)
-      )
-      const offset = d3.sum(sizeArray) / 2 - 2
-      const size = d3.sum(sizeArray.slice(0, i))
-      return size - offset
+      if (!d.hierarchy) {
+        const sizeArray = n.map((e) =>
+          parseFloat(styles[labelStyles[i]].fontSize)
+        )
+        const offset = d3.sum(sizeArray) / 2 - 2
+        const size = d3.sum(sizeArray.slice(0, i))
+        return size - offset
+      } else {
+        return d.style.fontSize / 2
+      }
     })
     .attr('text-anchor', (d) => d.align)
-    .styles((d, i) => styles[labelStyles[i]])
+    // .styles((d, i) => styles[labelStyles[i]])
+    .styles((d) => d.style)
     .text((d) => d.string)
 
   if (showLegend) {

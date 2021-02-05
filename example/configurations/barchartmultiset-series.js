@@ -1,8 +1,8 @@
-import barchartstacked from 'rawcharts/barchartstacked'
+import barchart from 'rawcharts/barchartmultiset'
 import data from '../datasets/letters-freq.tsv'
 
 export default {
-  chart: barchartstacked,
+  chart: barchart,
   data,
   dataTypes: {
     Letter: 'string',
@@ -10,7 +10,7 @@ export default {
     'Frequency (%)': 'number',
   },
   mapping: {
-    stacks: { value: ['Letter'] },
+    groups: { value: ['Letter'] },
     bars: {
       value: ['Frequency (%)'],
       config: { aggregation: ['sum'] },
@@ -20,8 +20,8 @@ export default {
   visualOptions: {
     width: 1000,
     height: 700,
-    padding: 3,
-    stacksPadding: 0,
+    padding: 0,
+    setsPadding: 1,
     marginTop: 20,
     marginBottom: 20,
     marginRight: 20,

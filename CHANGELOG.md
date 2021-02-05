@@ -1,5 +1,8 @@
 ## upcoming
 
+- added example for requiredDimensions in bubble chart visual options
+- always using colorScale for bubble chart (support for defaultColor)
+
 #### 03 feb 2021
 
 - added option to show data points in _violin plot_
@@ -7,6 +10,16 @@
 - added axes labels to _violin plot_
 - added styles to _circular dendrogram_
 - added label mapping to _circular dendrogram_
+- in _circular dendrogram_ if no labels are mapped, by default label are the leaf level of hierarchy
+- added styles to _stacked barchart_
+- added ability to show series grid in _stacked barchart_
+- added styles to _multiset barchart_
+- added ability to show series grid in _multiset barchart_
+- small fixes to _multiset barchart_ and _multiset barchart_
+- axes in _bar chart_ are now placed on the zero value
+- added styles to _bar chart_
+- added ability to show series grid in _bar chart_
+- in _bar chart_ is now possible to sort bars by value
 
 #### 02 feb 2021
 
