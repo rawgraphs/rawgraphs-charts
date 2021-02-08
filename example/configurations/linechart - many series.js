@@ -29,7 +29,7 @@ export default {
   visualOptions: {
     width: 1000,
     height: 3000,
-    marginTop: 10,
+    marginTop: 20,
     marginBottom: 20,
     marginRight: 15,
     marginLeft: 50,

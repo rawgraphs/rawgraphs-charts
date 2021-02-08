@@ -135,6 +135,3 @@ export const visualOptions = {
     group: 'colors',
   },
 }
-
-// showLegend,
-// legendWidth,

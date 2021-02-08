@@ -32,6 +32,7 @@ export function render(
     sortSeriesBy,
     showSeriesLabels,
     repeatAxesLabels,
+    showGrid,
     // labels options
     showLabels,
     labelsPosition,
@@ -118,20 +119,36 @@ export function render(
     .data(griddingData)
     .join('g')
     .attr('id', (d) => d[0])
-    .attr(
-      'transform',
-      (d) => 'translate(' + (d.x + margin.left) + ',' + (d.y + margin.top) + ')'
-    )
+    .attr('transform', (d) => 'translate(' + d.x + ',' + d.y + ')')
 
   mapping.x.dataType === 'number'
     ? (mapping.x.dataType = { type: 'number' })
     : null // @TODO it should be better to have always the same kind of object in mapping
 
+  // add grid
+  if (showGrid) {
+    svg
+      .append('g')
+      .attr('id', 'grid')
+      .selectAll('rect')
+      .data(griddingData)
+      .enter()
+      .append('rect')
+      .attr('x', (d) => d.x)
+      .attr('y', (d) => d.y)
+      .attr('width', (d) => d.width)
+      .attr('height', (d) => d.height)
+      .attr('fill', 'none')
+      .attr('stroke', '#ccc')
+  }
   // now add everything to each series
 
   series.each(function (d, serieIndex) {
     // load the single selection
-    const selection = d3.select(this)
+    const selection = d3
+      .select(this)
+      .append('g')
+      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
     // add the clip path
     // clip-path: url(#clipPath);
     selection.attr('clip-path', 'url(#serieClipPath)')
@@ -292,10 +309,10 @@ export function render(
 
     // add series titles
     if (showSeriesLabels) {
-      selection
+      d3.select(this)
         .append('text')
-        .attr('y', 0)
-        .attr('x', serieWidth / 2)
+        .attr('y', 4)
+        .attr('x', 4)
         .text((d) => d[0])
         .styles(styles.seriesLabel)
     }

@@ -1,7 +1,20 @@
 ## upcoming
 
+#### 08 feb 2021
+
+- _multiset barchart_: warning when the padding is too high
+- _multiset barchart_: possible to sort sets
+- _multiset barchart_: added styles
+- _multiset barchart_: `group` dimension now is called `sets`
+- _line chart_: added grid for series
+- _line chart_: fixed margins in series
+
+#### 05 feb 2021
+
 - added example for requiredDimensions in bubble chart visual options
 - always using colorScale for bubble chart (support for defaultColor)
+- _stacked barchart_: possible to sort x axis
+- _stacked barchart_: fixed legend
 
 #### 03 feb 2021
 

@@ -87,7 +87,7 @@ export const visualOptions = {
   columnsNumber: {
     type: 'number',
     label: 'Number of columns',
-    default: 2,
+    default: 0,
     group: 'series',
   },
 
@@ -141,6 +141,13 @@ export const visualOptions = {
     disabled: {
       showLabels: false,
     },
+  },
+
+  showGrid: {
+    type: 'boolean',
+    label: 'Show series grid',
+    default: true,
+    group: 'series',
   },
 
   colorScale: {

@@ -25,6 +25,7 @@ export function render(
     // chart options
     barsPadding,
     setsPadding,
+    SortXAxisBy,
     // series options
     columnsNumber,
     useSameScale,
@@ -105,7 +106,30 @@ export function render(
   let sizeDomain =
     originalDomain[0] > 0 ? [0, originalDomain[1]] : originalDomain
 
-  const setsDomain = [...new Set(data.map((d) => d.groups))]
+  // sets (x axis) sorting functions
+  const stacksSortings = {
+    'Total value (descending)': function (a, b) {
+      return d3.descending(a[1], b[1])
+    },
+    'Total value (ascending)': function (a, b) {
+      return d3.ascending(a[1], b[1])
+    },
+    Name: function (a, b) {
+      return d3.ascending(a[0], b[0])
+    },
+    Original: function (a, b) {
+      return true
+    },
+  }
+  // sets (x axis) domain
+  const setsDomain = d3
+    .rollups(
+      data,
+      (v) => d3.sum(v, (d) => d.size),
+      (d) => d.groups
+    )
+    .sort(stacksSortings[SortXAxisBy])
+    .map((d) => d[0])
 
   const barsDomain = [...new Set(data.map((d) => d.bars))]
 
@@ -162,6 +186,19 @@ export function render(
       .nice()
       .range([serieHeight, 0])
 
+    // check if padding is too high and leave no space for bars
+
+    if (
+      setsPadding * setsDomain.length +
+        barsPadding * barsDomain.length * setsDomain.length >=
+      serieWidth
+    ) {
+      throw new Error(
+        'Paddings are too high, decrase them in the "chart" options panel'
+      )
+    }
+    const minimumBarSize = serieWidth / setScale.domain() / barScale.domain()
+
     const bars = selection
       .append('g')
       .attr('class', 'bars')
@@ -198,12 +235,12 @@ export function render(
     // add the x axis titles
     selection
       .append('text')
-      .attr('y', serieHeight - 4)
+      .attr('y', sizeScale(0) - 4)
       .attr('x', serieWidth)
       .attr('text-anchor', 'end')
       .attr('display', serieIndex == 0 || repeatAxesLabels ? null : 'none')
-      .text(mapping.groups.value)
       .styles(styles.axisLabel)
+      .text('Sets')
 
     // add the y axis titles
     selection
@@ -211,12 +248,10 @@ export function render(
       .attr('y', 0)
       .attr('x', 4)
       .attr('dominant-baseline', 'hanging')
-      .attr('class', 'axisTitle')
-      .attr('font-family', 'sans-serif')
-      .attr('font-size', 12)
-      .attr('font-style', 'italic')
       .attr('text-anchor', 'start')
       .attr('display', serieIndex == 0 || repeatAxesLabels ? null : 'none')
+      .styles(styles.axisLabel)
+      .text('Value')
   })
 
   // add legend
@@ -229,9 +264,7 @@ export function render(
 
     const chartLegend = legend().legendWidth(legendWidth)
 
-    if (mapping.color.value) {
-      chartLegend.addColor(mapping.color.value, colorScale)
-    }
+    chartLegend.addColor('Colors', colorScale)
 
     legendLayer.call(chartLegend)
   }
