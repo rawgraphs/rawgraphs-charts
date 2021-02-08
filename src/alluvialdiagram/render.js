@@ -225,10 +225,10 @@ export function render(
       .text((d) => d.value)
       .styles(styles.labelSecondary)
 
-    nodesLabels.call((sel) => {
-      const height = sel.node().getBBox().height
-      sel.attr('transform', `translate(0,${-height / 2})`)
-    })
+    nodesLabels.attr(
+      'transform',
+      `translate(0,${-parseFloat(styles.labelSecondary.fontSize) / 2})`
+    )
   }
 
   // add steps titles

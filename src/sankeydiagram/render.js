@@ -1,7 +1,15 @@
 import * as d3 from 'd3'
 import * as d3Sankey from 'd3-sankey'
+import '../d3-styles.js'
 
-export function render(svgNode, data, visualOptions, mapping, originalData) {
+export function render(
+  svgNode,
+  data,
+  visualOptions,
+  mapping,
+  originalData,
+  styles
+) {
   console.log('- render')
 
   const {
@@ -16,11 +24,11 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     nodesPadding,
     alignment,
     iterations,
+    //labels
+    showValues,
     // color scale
     colorScale,
   } = visualOptions
-
-  console.log('color test', colorScale.domain())
 
   const margin = {
     top: marginTop,
@@ -116,16 +124,33 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .append('title')
     .text((d) => `${d.source.name} → ${d.target.name}: ${d.value}`)
 
-  svg
+  const nodesLabels = svg
     .append('g')
-    .attr('font-family', 'sans-serif')
-    .attr('font-size', 10)
     .selectAll('text')
     .data(network.nodes)
     .join('text')
-    .attr('x', (d) => (d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6))
-    .attr('y', (d) => (d.y1 + d.y0) / 2)
-    .attr('dy', '0.35em')
+    .attr('x', (d) => (d.x0 < width / 2 ? d.x1 + 4 : d.x0 - 4))
+    .attr('y', (d) => d.y0 + (d.y1 - d.y0) / 2)
     .attr('text-anchor', (d) => (d.x0 < width / 2 ? 'start' : 'end'))
+
+  nodesLabels
+    .append('tspan')
+    .attr('alignment-baseline', 'middle')
     .text((d) => d.id)
+    .styles(styles.labelPrimary)
+
+  if (showValues) {
+    nodesLabels
+      .append('tspan')
+      .attr('alignment-baseline', 'middle')
+      .attr('x', (d) => (d.x0 < width / 2 ? d.x1 + 4 : d.x0 - 4))
+      .attr('dy', parseFloat(styles.labelPrimary.fontSize) + 2)
+      .text((d) => d.value)
+      .styles(styles.labelSecondary)
+
+    nodesLabels.attr(
+      'transform',
+      `translate(0,${-parseFloat(styles.labelSecondary.fontSize) / 2})`
+    )
+  }
 }

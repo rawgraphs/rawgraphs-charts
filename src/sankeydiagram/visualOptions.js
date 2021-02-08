@@ -66,4 +66,11 @@ export const visualOptions = {
     },
     group: 'colors',
   },
+
+  showValues: {
+    type: 'boolean',
+    label: 'show nodes values',
+    default: false,
+    group: 'Labels',
+  },
 }

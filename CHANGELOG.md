@@ -12,6 +12,7 @@
 - _alluvial diagram_: added 'show values' option
 - _alluvial diagram_: added styles support
 - _alluvial diagram_: fixed horizontal scale
+- _sankey diagram_: added 'show values' option
 
 #### 05 feb 2021
 
