@@ -27,6 +27,11 @@ export default {
   visualOptions: {
     width: 1200,
     height: 700,
+    marginTop: 0,
+    marginBottom: 0,
+    marginLeft: 0,
+    marginRight: 0,
     background: 'white',
+    nodesWidth: 50,
   },
 }

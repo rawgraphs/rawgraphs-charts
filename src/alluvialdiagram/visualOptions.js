@@ -49,6 +49,14 @@ export const visualOptions = {
     step: 0.1,
   },
 
+  linksBlendMode: {
+    type: 'text',
+    label: 'Overlapping links blend mode',
+    group: 'chart',
+    options: ['normal', 'multiply'],
+    default: 'multiply',
+  },
+
   sortNodesBy: {
     type: 'text',
     label: 'Vertically sort bars by',
@@ -79,5 +87,12 @@ export const visualOptions = {
       interpolator: 'interpolateSpectral',
     },
     group: 'colors',
+  },
+
+  showValues: {
+    type: 'boolean',
+    label: 'show nodes values',
+    default: false,
+    group: 'Labels',
   },
 }

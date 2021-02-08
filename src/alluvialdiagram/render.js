@@ -1,7 +1,15 @@
 import * as d3 from 'd3'
 import * as d3Sankey from 'd3-sankey'
+import '../d3-styles.js'
 
-export function render(svgNode, data, visualOptions, mapping, originalData) {
+export function render(
+  svgNode,
+  data,
+  visualOptions,
+  mapping,
+  originalData,
+  styles
+) {
   console.log('- render')
 
   const {
@@ -20,8 +28,11 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     linksOpacity,
     sortNodesBy,
     verticalAlignment,
+    linksBlendMode,
     // color
     colorScale,
+    // Labels
+    showValues,
   } = visualOptions
 
   const margin = {
@@ -30,8 +41,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     bottom: marginBottom,
     left: marginLeft,
   }
-
-  console.log('colorscale', colorScale.domain(), colorScale.range())
 
   const chartWidth = width - margin.left - margin.right
   const chartHeight = height - margin.top - margin.bottom
@@ -100,19 +109,15 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
   // compute x positions of groups
   // get the first node for each category
+
   const xScale = d3
     .scaleBand()
-    .rangeRound([0, chartWidth])
+    .rangeRound([0, chartWidth - nodesWidth])
     .domain(mapping.steps.value)
     .align(0)
-    .paddingOuter(0) // no outer padding
-    // inner padding is the chart size minus the node widths, divided by the spaces among steps
-    .paddingInner(
-      (chartWidth - mapping.steps.value.length) /
-        (mapping.steps.value.length - 1)
-    )
+    .paddingInner(1)
 
-  // update nodes position
+  // update nodes vertical position
   d3.groups(network.nodes, (d) => d.step)
     // for each group, compute position
     .forEach((group) => {
@@ -183,7 +188,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .selectAll('g')
     .data(network.links)
     .join('g')
-    .style('mix-blend-mode', 'multiply')
+    .style('mix-blend-mode', linksBlendMode)
 
   link
     .append('path')
@@ -195,32 +200,48 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .append('title')
     .text((d) => `${d.source.name} → ${d.target.name}: ${d.value}`)
 
-  svg
+  const nodesLabels = svg
     .append('g')
-    .attr('font-family', 'sans-serif')
-    .attr('font-size', 10)
     .selectAll('text')
     .data(network.nodes)
     .join('text')
-    .attr('x', (d) => (d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6))
-    .attr('y', (d) => (d.y1 + d.y0) / 2)
-    .attr('dy', '0.35em')
+    .attr('x', (d) => (d.x0 < width / 2 ? d.x1 + 4 : d.x0 - 4))
+    .attr('y', (d) => d.y0 + (d.y1 - d.y0) / 2)
     .attr('text-anchor', (d) => (d.x0 < width / 2 ? 'start' : 'end'))
+
+  nodesLabels
+    .append('tspan')
+    .attr('alignment-baseline', 'middle')
+    .attr('x', (d) => (d.x0 < width / 2 ? d.x1 + 4 : d.x0 - 4))
     .text((d) => d.name)
+    .styles(styles.labelPrimary)
+
+  if (showValues) {
+    nodesLabels
+      .append('tspan')
+      .attr('alignment-baseline', 'middle')
+      .attr('x', (d) => (d.x0 < width / 2 ? d.x1 + 4 : d.x0 - 4))
+      .attr('dy', parseFloat(styles.labelPrimary.fontSize) + 2)
+      .text((d) => d.value)
+      .styles(styles.labelSecondary)
+
+    nodesLabels.call((sel) => {
+      const height = sel.node().getBBox().height
+      sel.attr('transform', `translate(0,${-height / 2})`)
+    })
+  }
 
   // add steps titles
   const firstNodes = d3.groups(network.nodes, (d) => d.step).map((d) => d[1][0])
 
   svg
     .append('g')
-    .attr('font-family', 'sans-serif')
-    .attr('font-size', 10)
-    .attr('font-weight', 'bold')
     .selectAll('text')
     .data(firstNodes)
     .join('text')
-    .attr('x', (d) => d.x0 + nodesPadding / 2)
-    .attr('y', (d) => d.y0 - 6)
+    .attr('x', (d) => d.x0 + nodesWidth / 2)
+    .attr('y', (d) => d.y0 - 4)
     .attr('text-anchor', 'middle')
     .text((d) => d.step)
+    .styles(styles.axisLabel)
 }

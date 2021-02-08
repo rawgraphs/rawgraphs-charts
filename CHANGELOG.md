@@ -4,10 +4,14 @@
 
 - _multiset barchart_: warning when the padding is too high
 - _multiset barchart_: possible to sort sets
-- _multiset barchart_: added styles
+- _multiset barchart_: added styles support
 - _multiset barchart_: `group` dimension now is called `sets`
 - _line chart_: added grid for series
 - _line chart_: fixed margins in series
+- _alluvial diagram_: added blend mode option
+- _alluvial diagram_: added 'show values' option
+- _alluvial diagram_: added styles support
+- _alluvial diagram_: fixed horizontal scale
 
 #### 05 feb 2021
 
