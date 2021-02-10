@@ -66,7 +66,7 @@ export const visualOptions = {
 
   radius: {
     type: 'number',
-    label: 'hex radius (px)',
+    label: 'bin radius (px)',
     default: 8,
     step: 1,
     group: 'chart',
@@ -109,5 +109,27 @@ export const visualOptions = {
       interpolator: 'interpolateBlues',
     },
     group: 'colors',
+  },
+
+  showCountLabels: {
+    type: 'boolean',
+    label: 'Show count labels',
+    default: false,
+    group: 'labels',
+    requiredDimensions: ['x', 'y'],
+  },
+
+  showLabelsOutline: {
+    type: 'boolean',
+    label: 'Show outline',
+    default: false,
+    group: 'labels',
+  },
+
+  autoHideLabels: {
+    type: 'boolean',
+    label: 'Auto hide labels',
+    default: false,
+    group: 'labels',
   },
 }

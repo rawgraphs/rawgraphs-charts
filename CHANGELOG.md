@@ -1,3 +1,9 @@
+## next
+
+#### date
+
+- _hexagonal binning_: first version
+
 ## v1.0.0-beta.9
 
 #### 08 feb 2021

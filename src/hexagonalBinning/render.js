@@ -33,6 +33,9 @@ export function render(
     marginBottom,
     marginLeft,
     colorScale,
+    showCountLabels,
+    showLabelsOutline,
+    autoHideLabels,
   } = visualOptions
 
   const margin = {
@@ -129,20 +132,16 @@ export function render(
 
   const bins = hexbin(data)
 
-  let size
-
-  if (weightSize) {
-    size = d3
-      .scaleSqrt()
-      .domain([0, d3.max(bins, (d) => d.length)])
-      .rangeRound([0, radius])
-  }
+  const size = d3
+    .scaleSqrt()
+    .domain([0, d3.max(bins, (d) => d.length)])
+    .rangeRound([weightSize ? 0 : radius, radius])
 
   const hex = vizLayer.selectAll('g').data(bins).join('g')
 
   hex
     .append('path')
-    .attr('d', (d) => hexbin.hexagon(weightSize ? size(d.length) : radius))
+    .attr('d', (d) => hexbin.hexagon(size(d.length)))
     .attr('transform', (d) => `translate(${d.x},${d.y})`)
     .attr('fill', (d) => colorScale(d.length))
     .attr('stroke', 'white')
@@ -156,6 +155,26 @@ export function render(
       .attr('cy', (d) => y(d.y))
       .attr('fill', 'black')
       .attr('r', pointsRadius)
+  }
+
+  if (showCountLabels) {
+    hex
+      .append('text')
+      .attr('text-anchor', 'middle')
+      .attr('dominant-baseline', 'middle')
+      .attr('x', (d) => d.x)
+      .attr('y', (d) => d.y)
+      .text((d) => d.length)
+      .styles(styles.labelSecondary)
+  }
+
+  if (showLabelsOutline) {
+    // NOTE: Adobe Illustrator does not support paint-order attr
+    hex.selectAll('text').styles(styles.labelOutline)
+  }
+
+  if (autoHideLabels) {
+    labelsOcclusion(hex.selectAll('text'), (d) => d.length)
   }
 
   // if (showLegend) {
