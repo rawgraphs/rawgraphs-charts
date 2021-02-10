@@ -142,7 +142,6 @@ export function render(
           .axisTop(x)
           .tickSize(Math.round(-chartHeight + 1))
           .tickSizeOuter(0)
-          .tickFormat('')
       )
 
     // add the Y gridlines
@@ -155,7 +154,6 @@ export function render(
           .axisLeft(y)
           .tickSize(Math.round(-chartWidth + 1))
           .tickSizeOuter(0)
-          .tickFormat('')
       )
   }
   // add top x axis
@@ -170,7 +168,6 @@ export function render(
 
   // add left y axis
   svg.append('g').call(d3.axisLeft(y).tickSizeOuter(0)).selectAll('text')
-  // .attr("dy", cellSize/2)
 
   // add y axis title
   svg
