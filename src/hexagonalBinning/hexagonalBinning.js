@@ -1,7 +1,7 @@
 import { metadata } from './metadata'
 import { dimensions } from './dimensions'
 import { mapData } from './mapping'
-import { render } from './render'
+import { render, colorDomain } from './render'
 import { visualOptions } from './visualOptions'
 import styles from '../styles'
 
@@ -12,4 +12,5 @@ export default {
   render,
   visualOptions,
   styles,
+  colorDomain,
 }

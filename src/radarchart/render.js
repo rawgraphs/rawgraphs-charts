@@ -46,7 +46,12 @@ export function render(
     left: marginLeft,
   }
 
-  console.log(styles)
+  //check if there are negative values, in case throw error
+  data.forEach((d) => {
+    if (d.value < 0) {
+      throw new Error('Values cannot be negative')
+    }
+  })
 
   // convert string to d3 functions
   const curveType = {

@@ -103,7 +103,8 @@ export const visualOptions = {
   colorScale: {
     type: 'colorScale',
     label: 'Color scale',
-    dimension: 'color',
+    //dimension: 'color',
+    domain: 'colorDomain',
     default: {
       scaleType: 'sequential',
       interpolator: 'interpolateBlues',

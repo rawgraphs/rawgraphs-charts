@@ -147,7 +147,19 @@ export function render(
 
   shapes
     .append('path')
-    .datum((d) => d[1].bins) // So now we are working bin per bin
+    .datum((d) => {
+      const delta = d[1].bins[0].x1 - d[1].bins[0].x0
+      const completeShape = [...d[1].bins] // make a copy
+      //add a first and last element to be sure to 'close' the path with a 0 value
+      //@TODO could be maybe improved, not really nice
+      completeShape.unshift([])
+      completeShape[0].x0 = d[1].bins[0].x0 - delta
+      completeShape.push([])
+      completeShape[completeShape.length - 1].x0 =
+        completeShape[completeShape.length - 2].x0 + delta
+
+      return completeShape
+    }) // So now we are working bin per bin
     .style('stroke', 'none')
     .attr(
       'd',

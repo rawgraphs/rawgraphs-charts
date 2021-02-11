@@ -39,6 +39,9 @@ export const visualOptions = {
     label: 'Dots radius',
     default: 2,
     group: 'chart',
+    disabled: {
+      showDots: false,
+    },
   },
 
   innerRadius: {

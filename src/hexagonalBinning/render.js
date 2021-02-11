@@ -8,6 +8,80 @@ import {
 } from '@raw-temp/rawgraphs-core'
 import '../d3-styles.js'
 
+
+
+export function colorDomain(data, mapping, visualOptions) {
+
+  const {
+    width,
+    height,
+    radius,
+    marginTop,
+    marginRight,
+    marginBottom,
+    marginLeft,
+    xOrigin,
+    yOrigin,
+  } = visualOptions
+
+  const margin = {
+    top: marginTop,
+    right: marginRight,
+    bottom: marginBottom,
+    left: marginLeft,
+  }
+
+  const chartWidth = width - margin.left - margin.right
+  const chartHeight = height - margin.top - margin.bottom
+
+  if(!data){
+    return {
+      domain: [],
+      type: "number"
+    }
+  }
+
+  // x scale
+  const xDomain = xOrigin
+    ? [0, d3.max(data, (d) => d.x)]
+    : d3.extent(data, (d) => d.x)
+
+  const x =
+    mapping.x.mappedType === 'date' ? d3.scaleTime() : d3.scaleLinear()
+
+  x.domain(xDomain).rangeRound([0, chartWidth]).nice()
+
+  // y scale
+  const yDomain = yOrigin
+    ? [0, d3.max(data, (d) => d.y)]
+    : d3.extent(data, (d) => d.y)
+
+  const y =
+    mapping.y.mappedType === 'date' ? d3.scaleTime() : d3.scaleLinear()
+
+  y.domain(yDomain).rangeRound([chartHeight, 0]).nice()
+
+  const hexbin = d3Hexbin
+    .hexbin()
+    .x((d) => x(d.x))
+    .y((d) => y(d.y))
+    .radius(radius)
+    .extent([
+      [margin.left, margin.top],
+      [chartWidth, chartHeight],
+    ])
+
+  const bins = hexbin(data)
+  const domain =  bins.map(d => d.length)
+  return {
+    domain,
+    type: 'number',
+  }
+
+}
+
+
+
 export function render(
   svgNode,
   data,
