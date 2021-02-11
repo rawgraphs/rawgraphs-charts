@@ -5,7 +5,7 @@ export const metadata = {
   name: 'Contour plot',
   thumbnail,
   icon,
-  categories: ['distribution'],
+  categories: ['correlation', 'density'],
   description:
     'It shows the estimated density of point clouds, which is especially useful to avoid overplotting in large datasets.',
   code: 'https://github.com/rawgraphs/raw',

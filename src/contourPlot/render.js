@@ -176,7 +176,7 @@ export function render(
                   'transform',
                   `translate(${xy})rotate(${(angle * 180) / Math.PI})`
                 )
-                .text(index)
+                .text(cont.value)
                 .styles(styles.labelSecondary)
                 .styles(styles.labelOutline)
             }
