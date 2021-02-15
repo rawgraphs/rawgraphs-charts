@@ -113,38 +113,13 @@ export function render(
     .rollups(
       data,
       (v) => d3.sum(v, (d) => d.size),
-      (d) => d.stacks + '_' + d.series
+      (d) => d.x + '_' + d.series
     )
     .map((d) => d[1])
 
   let sizeDomain = [0, d3.max(scaleRollup)]
 
-  // stacks (x axis) sorting functions
-  const stacksSortings = {
-    'Total value (descending)': function (a, b) {
-      return d3.descending(a[1], b[1])
-    },
-    'Total value (ascending)': function (a, b) {
-      return d3.ascending(a[1], b[1])
-    },
-    Name: function (a, b) {
-      return d3.ascending(a[0], b[0])
-    },
-    Original: function (a, b) {
-      return true
-    },
-  }
-  // stacks (x axis) domain
-  const stacksDomain = d3
-    .rollups(
-      data,
-      (v) => d3.sum(v, (d) => d.size),
-      (d) => d.stacks
-    )
-    .sort(stacksSortings[SortXAxisBy])
-    .map((d) => d[0])
-
-  const barsDomain = [...new Set(data.map((d) => d.bars))]
+  const barsDomain = [...new Set(data.map((d) => d.streams))]
 
   // add grid
   if (showGrid) {
@@ -162,7 +137,7 @@ export function render(
       .attr('fill', 'none')
       .attr('stroke', '#ccc')
   }
-
+  //
   series.each(function (d, serieIndex) {
     // make a local selection for each serie
     const selection = d3
@@ -174,17 +149,18 @@ export function render(
     const serieWidth = d.width - margin.right - margin.left
     const serieHeight = d.height - margin.top - margin.bottom
 
+    console.log(d.data[1])
     //prepare data for stack
     let localStack = Array.from(
       d3.rollup(
-        d.data[1],
+        d.data[1].sort((a, b) => d3.ascending(a.x, b.x)), // check that x axis is properly sorted
         ([e]) => e,
-        (e) => e.stacks,
-        (e) => e.bars
+        (e) => e.x,
+        (e) => e.streams
       )
     )
 
-    // creaet an object with ordering methods
+    // create an object with ordering methods
     const orderings = {
       Earliest: 'stackOrderAppearance',
       Ascending: 'stackOrderAscending',
@@ -195,7 +171,7 @@ export function render(
     }
 
     // create the stack
-    // define the funciton to retrieve the value
+    // define the function to retrieve the value
     // inspired by https://observablehq.com/@stevndegwa/stack-chart
     let stack = d3
       .stack()
@@ -205,21 +181,18 @@ export function render(
 
     let stackedData = stack(localStack)
 
-    // check if padding is too high and leave no space for bars
-    if (stacksPadding * stacksDomain.length > serieWidth) {
-      throw new Error(
-        'Padding is too high, decrase it in the panel "chart" > "Padding between bars (px)"'
-      )
-    }
-
     // scales
-    const stacksScale = d3
-      .scaleBand()
-      .range([0, serieWidth])
-      .domain(stacksDomain)
-      .padding(
-        stacksPadding / (serieWidth / stacksDomain.length) //convert padding from px to percentage
-      )
+    const xDomain = d3.extent(data, (e) => e.x)
+    let xScale
+
+    switch (mapping.x.dataType.type) {
+      case 'number':
+        xScale = d3.scaleLinear().domain(xDomain).range([0, serieWidth])
+        break
+      case 'date':
+        xScale = d3.scaleTime().domain(xDomain).range([0, serieWidth])
+        break
+    }
 
     let localDomain = [
       0,
@@ -228,7 +201,7 @@ export function render(
           .rollups(
             d.data[1],
             (v) => d3.sum(v, (d) => d.size),
-            (d) => d.stacks
+            (d) => d.x
           )
           .map((d) => d[1])
       ),
@@ -240,30 +213,44 @@ export function render(
       .nice()
       .range([serieHeight, 0])
 
-    const bars = selection
-      .selectAll('g')
+    const areas = selection
+      .append('g')
+      .selectAll('path')
       .data(stackedData)
-      .join('g')
-      .attr('id', (d) => d.key)
-      .attr('fill', (d) => colorScale(d.key))
-      .selectAll('rect')
-      .data((d) => d)
-      .join('rect')
-      .attr('x', (d) => stacksScale(d.data[0]))
-      .attr('y', (d) => sizeScale(d[1]))
-      .attr('width', stacksScale.bandwidth())
-      .attr('height', (d) => serieHeight - sizeScale(d[1] - d[0]))
+      .join('path')
+      .attr('fill', ({ key }) => {
+        return colorScale(key)
+      })
+      .attr(
+        'd',
+        d3
+          .area()
+          .x((d) => xScale(d.data[0]))
+          .y0((d) => sizeScale(d[0]))
+          .y1((d) => sizeScale(d[1]))
+      )
+      .append('title')
+      .text(({ key }) => key)
 
+    //   const bars = selection
+    //     .selectAll('g')
+    //     .data(stackedData)
+    //     .join('g')
+    //     .attr('id', (d) => d.key)
+    //     .attr('fill', (d) => colorScale(d.key))
+    //     .selectAll('rect')
+    //     .data((d) => d)
+    //     .join('rect')
+    //     .attr('x', (d) => stacksScale(d.data[0]))
+    //     .attr('y', (d) => sizeScale(d[1]))
+    //     .attr('width', stacksScale.bandwidth())
+    //     .attr('height', (d) => serieHeight - sizeScale(d[1] - d[0]))
+    //
     const xAxis = selection
       .append('g')
       .attr('id', 'xAxis')
       .attr('transform', 'translate(0,' + sizeScale(0) + ')')
-      .call(d3.axisBottom(stacksScale).tickSizeOuter(0))
-
-    const yAxis = selection
-      .append('g')
-      .attr('id', 'yAxis')
-      .call(d3.axisLeft(sizeScale).tickSizeOuter(0))
+      .call(d3.axisBottom(xScale).tickSizeOuter(0))
 
     if (showSeriesLabels) {
       d3.select(this)
@@ -277,12 +264,12 @@ export function render(
     // add the x axis titles
     selection
       .append('text')
+      .styles(styles.axisLabel)
       .attr('y', serieHeight - 4)
       .attr('x', serieWidth)
       .attr('text-anchor', 'end')
       .attr('display', serieIndex == 0 || repeatAxesLabels ? null : 'none')
-      .text(mapping.stacks.value)
-      .styles(styles.axisLabel)
+      .text(mapping.x.value)
   })
 
   // add legend

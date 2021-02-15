@@ -1,8 +1,8 @@
-import icon from './barchartstacked.svg'
-import thumbnail from './barchartstacked_thumb.svg'
+import icon from './streamgraph.svg'
+import thumbnail from './streamgraph_thumb.svg'
 
 export const metadata = {
-  name: 'Stacked bar chart',
+  name: 'Streamgraph',
   thumbnail,
   icon,
   categories: ['correlations', 'proportions'],

@@ -1,23 +1,27 @@
 export const dimensions = [
   {
-    id: 'stacks',
+    id: 'x',
     name: 'X Axis',
-    validTypes: ['number', 'string', 'date'],
-    required: true,
     operation: 'get',
+    validTypes: ['number', 'date'],
+    required: true,
   },
 
   {
-    id: 'bars',
-    name: 'Sizes',
-    validTypes: ['number'],
-    required: true,
-    multiple: true,
+    id: 'size',
+    name: 'Size',
     operation: 'get',
+    validTypes: ['number'],
     aggregation: true,
-    aggregationDefault: {
-      number: 'sum',
-    }
+    aggregationDefault: 'sum',
+  },
+
+  {
+    id: 'streams',
+    name: 'Streams',
+    validTypes: ['number', 'string', 'date'],
+    required: false,
+    operation: 'get',
   },
 
   {

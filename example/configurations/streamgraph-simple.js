@@ -1,32 +1,27 @@
-import barchartstacked from 'rawcharts/barchartstacked'
-import data from '../datasets/letters-freq.tsv'
+import chart from 'rawcharts/streamgraph'
+import data from '../datasets/Music.csv'
 
 export default {
-  chart: barchartstacked,
+  chart: chart,
   data,
   dataTypes: {
-    Letter: 'string',
-    Language: 'string',
-    'Frequency (%)': 'number',
+    Category: 'string',
+    Format: 'string',
+    Year: 'number',
+    Units: 'number',
+    Revenues: 'number',
+    'Revenues-Adjusted': 'number',
+    Year_date: {
+      type: 'date',
+      dateFormat: 'YYYY-MM-DD',
+    },
   },
   mapping: {
-    stacks: { value: ['Letter'] },
-    bars: {
-      value: ['Frequency (%)'],
-      config: { aggregation: ['sum'] },
-    },
-    series: { value: ['Language'] },
+    series: { value: ['Category'] },
+    streams: { value: ['Format'] },
+    x: { value: ['Year_date'] },
+    size: { value: ['Revenues-Adjusted'] },
+    //color: { value: ['Category'] },
   },
-  visualOptions: {
-    width: 1000,
-    height: 700,
-    padding: 3,
-    stacksPadding: 0,
-    marginTop: 20,
-    marginBottom: 20,
-    marginRight: 20,
-    marginLeft: 20,
-    sortSeriesBy: 'Value (descending)',
-    useSameScale: false,
-  },
+  visualOptions: {},
 }

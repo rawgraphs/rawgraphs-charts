@@ -127,7 +127,7 @@ export const visualOptions = {
   colorScale: {
     type: 'colorScale',
     label: 'Color scale',
-    dimension: 'bars',
+    dimension: 'streams',
     default: {
       scaleType: 'ordinal',
       interpolator: 'interpolateSpectral',
