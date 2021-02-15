@@ -23,9 +23,9 @@ export function render(
     marginBottom,
     marginLeft,
     // chart options
-    stacksOrder,
-    stacksPadding,
-    SortXAxisBy,
+    streamsOrder,
+    streamsPadding,
+    streamsOffset,
     // series options
     columnsNumber,
     useSameScale,
@@ -117,9 +117,30 @@ export function render(
     )
     .map((d) => d[1])
 
+  // @TODO: move here the stacking and then compute scale across all the stacks
+
   let sizeDomain = [0, d3.max(scaleRollup)]
 
-  const barsDomain = [...new Set(data.map((d) => d.streams))]
+  const streamsDomain = [...new Set(data.map((d) => d.streams))]
+
+  // x scale
+  const xDomain = d3.extent(data, (e) => e.x)
+  let xScale
+
+  switch (mapping.x.dataType.type) {
+    case 'number':
+      xScale = d3
+        .scaleLinear()
+        .domain(xDomain)
+        .range([0, griddingData[0].width - margin.right - margin.left])
+      break
+    case 'date':
+      xScale = d3
+        .scaleTime()
+        .domain(xDomain)
+        .range([0, griddingData[0].width - margin.right - margin.left])
+      break
+  }
 
   // add grid
   if (showGrid) {
@@ -137,7 +158,11 @@ export function render(
       .attr('fill', 'none')
       .attr('stroke', '#ccc')
   }
-  //
+
+  /*
+      YOU CAN PUT HERE CODE THAT APPLIES TO ALL THE SERIES
+    */
+
   series.each(function (d, serieIndex) {
     // make a local selection for each serie
     const selection = d3
@@ -148,8 +173,6 @@ export function render(
     // compute each serie width and height
     const serieWidth = d.width - margin.right - margin.left
     const serieHeight = d.height - margin.top - margin.bottom
-
-    console.log(d.data[1])
     //prepare data for stack
     let localStack = Array.from(
       d3.rollup(
@@ -170,41 +193,29 @@ export function render(
       Reverse: 'stackOrderReverse',
     }
 
+    const offsets = {
+      Expand: 'stackOffsetExpand',
+      Diverging: 'stackOffsetDiverging',
+      Silhouette: 'stackOffsetSilhouette',
+      Wiggle: 'stackOffsetWiggle',
+      None: 'stackOffsetNone',
+    }
+
     // create the stack
     // define the function to retrieve the value
     // inspired by https://observablehq.com/@stevndegwa/stack-chart
     let stack = d3
       .stack()
-      .keys(barsDomain)
+      .keys(streamsDomain)
       .value((data, key) => (data[1].has(key) ? data[1].get(key).size : 0))
-      .order(d3[orderings[stacksOrder]])
+      .order(d3[orderings[streamsOrder]])
+      .offset(d3[offsets[streamsOffset]])
 
     let stackedData = stack(localStack)
 
-    // scales
-    const xDomain = d3.extent(data, (e) => e.x)
-    let xScale
-
-    switch (mapping.x.dataType.type) {
-      case 'number':
-        xScale = d3.scaleLinear().domain(xDomain).range([0, serieWidth])
-        break
-      case 'date':
-        xScale = d3.scaleTime().domain(xDomain).range([0, serieWidth])
-        break
-    }
-
     let localDomain = [
-      0,
-      d3.max(
-        d3
-          .rollups(
-            d.data[1],
-            (v) => d3.sum(v, (d) => d.size),
-            (d) => d.x
-          )
-          .map((d) => d[1])
-      ),
+      d3.min(stackedData, (d) => d3.min(d, (d) => d[0])),
+      d3.max(stackedData, (d) => d3.max(d, (d) => d[1])),
     ]
 
     const sizeScale = d3
@@ -232,24 +243,10 @@ export function render(
       .append('title')
       .text(({ key }) => key)
 
-    //   const bars = selection
-    //     .selectAll('g')
-    //     .data(stackedData)
-    //     .join('g')
-    //     .attr('id', (d) => d.key)
-    //     .attr('fill', (d) => colorScale(d.key))
-    //     .selectAll('rect')
-    //     .data((d) => d)
-    //     .join('rect')
-    //     .attr('x', (d) => stacksScale(d.data[0]))
-    //     .attr('y', (d) => sizeScale(d[1]))
-    //     .attr('width', stacksScale.bandwidth())
-    //     .attr('height', (d) => serieHeight - sizeScale(d[1] - d[0]))
-    //
     const xAxis = selection
       .append('g')
       .attr('id', 'xAxis')
-      .attr('transform', 'translate(0,' + sizeScale(0) + ')')
+      .attr('transform', 'translate(0,' + serieHeight + ')')
       .call(d3.axisBottom(xScale).tickSizeOuter(0))
 
     if (showSeriesLabels) {

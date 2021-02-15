@@ -48,16 +48,16 @@ export const visualOptions = {
     },
   },
 
-  stacksPadding: {
+  streamsPadding: {
     type: 'number',
-    label: 'Padding between stacks (px)',
+    label: 'Padding between streams (px)',
     default: 1,
     group: 'chart',
   },
 
-  stacksOrder: {
+  streamsOrder: {
     type: 'text',
-    label: 'Sort stacks by',
+    label: 'Sort streams by',
     group: 'chart',
     options: [
       'Earliest',
@@ -70,17 +70,12 @@ export const visualOptions = {
     default: 'None',
   },
 
-  SortXAxisBy: {
+  streamsOffset: {
     type: 'text',
-    label: 'Sort X axis by',
+    label: 'Sort streams by',
     group: 'chart',
-    options: [
-      'Total value (descending)',
-      'Total value (ascending)',
-      'Name',
-      'Original',
-    ],
-    default: 'Name',
+    options: ['Expand', 'Diverging', 'Silhouette', 'Wiggle', 'None'],
+    default: 'Silhouette',
   },
 
   useSameScale: {

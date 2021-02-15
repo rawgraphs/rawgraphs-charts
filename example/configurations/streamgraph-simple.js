@@ -23,5 +23,5 @@ export default {
     size: { value: ['Revenues-Adjusted'] },
     //color: { value: ['Category'] },
   },
-  visualOptions: {},
+  visualOptions: { useSameScale: false, streamsOffset: 'Wiggle' },
 }
