@@ -20,7 +20,7 @@ export function render(
     marginBottom,
     marginLeft,
     // charts options
-    padding,
+    barsWidth,
     iqrMultiplier, // to compute otuliers
     dotsRadius,
     //legend
@@ -68,10 +68,12 @@ export function render(
   const groupsDomain = [...new Set(data.map((d) => d.group))]
 
   const xScale = d3
-    .scaleBand()
-    .range([0, chartWidth])
+    .scalePoint()
+    .rangeRound([0, chartWidth])
     .domain(groupsDomain)
-    .padding(padding / (chartWidth / groupsDomain.length))
+    .padding(0.5)
+
+  console.log(xScale.bandwidth())
 
   // if series is exposed, recreate the nested structure
   const nestedData = d3.rollups(
@@ -131,8 +133,8 @@ export function render(
   // add the line between quartiles
   boxplots
     .append('line')
-    .attr('x1', (d) => xScale(d[1].group) + xScale.bandwidth() / 2)
-    .attr('x2', (d) => xScale(d[1].group) + xScale.bandwidth() / 2)
+    .attr('x1', (d) => xScale(d[1].group))
+    .attr('x2', (d) => xScale(d[1].group))
     .attr('y1', (d) => yScale(d[1].range[1]))
     .attr('y2', (d) => yScale(d[1].range[0]))
     .attr('stroke', (d) => colorScale(d[1].color))
@@ -141,16 +143,16 @@ export function render(
   // add lines at top and bottom
   boxplots
     .append('line')
-    .attr('x1', (d) => xScale(d[1].group))
-    .attr('x2', (d) => xScale(d[1].group) + xScale.bandwidth())
+    .attr('x1', (d) => xScale(d[1].group) - barsWidth / 2)
+    .attr('x2', (d) => xScale(d[1].group) + barsWidth / 2)
     .attr('y1', (d) => yScale(d[1].range[1]))
     .attr('y2', (d) => yScale(d[1].range[1]))
     .attr('stroke', (d) => colorScale(d[1].color))
 
   boxplots
     .append('line')
-    .attr('x1', (d) => xScale(d[1].group))
-    .attr('x2', (d) => xScale(d[1].group) + xScale.bandwidth())
+    .attr('x1', (d) => xScale(d[1].group) - barsWidth / 2)
+    .attr('x2', (d) => xScale(d[1].group) + barsWidth / 2)
     .attr('y1', (d) => yScale(d[1].range[0]))
     .attr('y2', (d) => yScale(d[1].range[0]))
     .attr('stroke', (d) => colorScale(d[1].color))
@@ -158,9 +160,9 @@ export function render(
   // add the boxes
   boxplots
     .append('rect')
-    .attr('x', (d) => xScale(d[1].group))
+    .attr('x', (d) => xScale(d[1].group) - barsWidth / 2)
     .attr('y', (d) => yScale(d[1].quartiles[2]))
-    .attr('width', xScale.bandwidth())
+    .attr('width', barsWidth)
     .attr(
       'height',
       (d) => yScale(d[1].quartiles[0]) - yScale(d[1].quartiles[2])
@@ -170,9 +172,9 @@ export function render(
   //add the half line
   boxplots
     .append('line')
-    .attr('x1', (d) => xScale(d[1].group))
+    .attr('x1', (d) => xScale(d[1].group) - barsWidth / 2)
     .attr('y1', (d) => yScale(d[1].quartiles[1]))
-    .attr('x2', (d) => xScale(d[1].group) + xScale.bandwidth())
+    .attr('x2', (d) => xScale(d[1].group) + barsWidth / 2)
     .attr('y2', (d) => yScale(d[1].quartiles[1]))
     .attr('stroke', background)
 
@@ -181,7 +183,7 @@ export function render(
     .data((d) => d[1].outliers)
     .join('circle')
     .attr('r', dotsRadius)
-    .attr('cx', (d) => xScale(d.group) + xScale.bandwidth() / 2)
+    .attr('cx', (d) => xScale(d.group))
     .attr('cy', (d) => yScale(d.value))
     .attr('fill', background)
     .attr('stroke', (d) => colorScale(d.color))
@@ -197,7 +199,7 @@ export function render(
     valuesLabels
       .append('text')
       .styles(styles.labelSecondary)
-      .attr('x', (d) => xScale(d[1].group) + xScale.bandwidth() + 4)
+      .attr('x', (d) => xScale(d[1].group) + barsWidth / 2 + 4)
       .attr('y', (d) => yScale(d[1].range[1]))
       .attr('dominant-baseline', 'middle')
       .text((d) => d[1].range[1])
@@ -205,7 +207,7 @@ export function render(
     valuesLabels
       .append('text')
       .styles(styles.labelSecondary)
-      .attr('x', (d) => xScale(d[1].group) + xScale.bandwidth() + 4)
+      .attr('x', (d) => xScale(d[1].group) + barsWidth / 2 + 4)
       .attr('y', (d) => yScale(d[1].range[0]))
       .attr('dominant-baseline', 'middle')
       .text((d) => d[1].range[0])
@@ -213,7 +215,7 @@ export function render(
     valuesLabels
       .append('text')
       .styles(styles.labelSecondary)
-      .attr('x', (d) => xScale(d[1].group) + xScale.bandwidth() + 4)
+      .attr('x', (d) => xScale(d[1].group) + barsWidth / 2 + 4)
       .attr('y', (d) => yScale(d[1].quartiles[1]))
       .attr('dominant-baseline', 'middle')
       .text((d) => d[1].quartiles[1])
@@ -221,7 +223,7 @@ export function render(
     valuesLabels
       .append('text')
       .styles(styles.labelSecondary)
-      .attr('x', (d) => xScale(d[1].group) - 4)
+      .attr('x', (d) => xScale(d[1].group) - barsWidth / 2 - 4)
       .attr('y', (d) => yScale(d[1].quartiles[0]))
       .attr('dominant-baseline', 'middle')
       .attr('text-anchor', 'end')

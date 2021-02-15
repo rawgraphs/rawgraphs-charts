@@ -27,9 +27,9 @@ export const visualOptions = {
     group: 'artboard',
   },
 
-  padding: {
+  barsWidth: {
     type: 'number',
-    label: 'Padding between shapes',
+    label: 'Box plots width',
     default: 20,
     group: 'chart',
   },

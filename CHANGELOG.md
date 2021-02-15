@@ -3,6 +3,8 @@
 #### date
 
 - _hexagonal binning_: first version
+- _box plot_: added colors, labels and styles support
+- _box plot_: it is possible to set box width
 
 #### 10 feb 2021
 
