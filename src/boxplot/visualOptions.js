@@ -48,6 +48,13 @@ export const visualOptions = {
     group: 'chart',
   },
 
+  yOrigin: {
+    type: 'boolean',
+    label: 'Set y origin to 0',
+    default: false,
+    group: 'chart',
+  },
+
   showLegend: {
     type: 'boolean',
     label: 'Show legend',

@@ -5,6 +5,8 @@
 - _hexagonal binning_: first version
 - _box plot_: added colors, labels and styles support
 - _box plot_: it is possible to set box width
+- _box plot_: `values` dimension renamed to `Y Axis`.
+- _box plot_: added "Start from 0" visual option.
 
 #### 10 feb 2021
 

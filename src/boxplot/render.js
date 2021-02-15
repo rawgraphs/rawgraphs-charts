@@ -23,6 +23,7 @@ export function render(
     barsWidth,
     iqrMultiplier, // to compute otuliers
     dotsRadius,
+    yOrigin,
     //legend
     showLegend,
     legendWidth,
@@ -59,11 +60,11 @@ export function render(
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
     .attr('id', 'viz')
 
-  const yScale = d3
-    .scaleLinear()
-    .domain(d3.extent(data, (d) => d.value))
-    .nice()
-    .range([chartHeight, 0])
+  const yDomain = yOrigin
+    ? [0, d3.max(data, (d) => d.value)]
+    : d3.extent(data, (d) => d.value)
+
+  const yScale = d3.scaleLinear().domain(yDomain).nice().range([chartHeight, 0])
 
   const groupsDomain = [...new Set(data.map((d) => d.group))]
 
