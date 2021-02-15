@@ -79,4 +79,11 @@ export const visualOptions = {
     },
     group: 'colors',
   },
+
+  showValues: {
+    type: 'boolean',
+    label: 'Show boxpot values',
+    default: true,
+    group: 'labels',
+  },
 }
