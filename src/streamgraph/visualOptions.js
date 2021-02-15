@@ -23,7 +23,7 @@ export const visualOptions = {
   marginLeft: {
     type: 'number',
     label: 'Margin (left)',
-    default: 40,
+    default: 10,
     group: 'margins',
   },
 
@@ -60,22 +60,46 @@ export const visualOptions = {
     label: 'Sort streams by',
     group: 'chart',
     options: [
-      'Earliest',
-      'Ascending',
-      'Descending',
-      'Inside out',
-      'None',
-      'Reverse',
+      { label: 'Earliest', value: 'stackOrderAppearance' },
+      { label: 'Ascending', value: 'stackOrderAscending' },
+      { label: 'Descending', value: 'stackOrderDescending' },
+      { label: 'Inside out', value: 'stackOrderInsideOut' },
+      { label: 'None', value: 'stackOrderNone' },
+      { label: 'Reverse', value: 'stackOrderReverse' },
     ],
-    default: 'None',
+    default: 'stackOrderNone',
+  },
+
+  interpolation: {
+    type: 'text',
+    label: 'Interpolation',
+    default: 'curveMonotoneX',
+    options: [
+      { label: 'Basis', value: 'curveBasis' },
+      { label: 'Cardinal', value: 'curveCardinal' },
+      { label: 'Catmull–Rom', value: 'curveCatmullRom' },
+      { label: 'Linear', value: 'curveLinear' },
+      { label: 'Monotone X', value: 'curveMonotoneX' },
+      { label: 'Natural', value: 'curveNatural' },
+      { label: 'Step', value: 'curveStep' },
+      { label: 'Step After', value: 'curveStepAfter' },
+      { label: 'Step Before', value: 'curveStepBefore' },
+    ],
+    group: 'chart',
   },
 
   streamsOffset: {
     type: 'text',
     label: 'Sort streams by',
     group: 'chart',
-    options: ['Expand', 'Diverging', 'Silhouette', 'Wiggle', 'None'],
-    default: 'Silhouette',
+    options: [
+      { label: 'Expand', value: 'stackOffsetExpand' },
+      // { label: 'Diverging', value: 'stackOffsetDiverging' },
+      { label: 'Silhouette', value: 'stackOffsetSilhouette' },
+      { label: 'Wiggle', value: 'stackOffsetWiggle' },
+      { label: 'None', value: 'stackOffsetNone' },
+    ],
+    default: 'stackOffsetNone',
   },
 
   useSameScale: {
@@ -115,7 +139,7 @@ export const visualOptions = {
   showGrid: {
     type: 'boolean',
     label: 'Show series grid',
-    default: true,
+    default: false,
     group: 'series',
   },
 

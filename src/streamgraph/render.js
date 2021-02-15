@@ -26,6 +26,7 @@ export function render(
     streamsOrder,
     streamsPadding,
     streamsOffset,
+    interpolation,
     // series options
     columnsNumber,
     useSameScale,
@@ -54,11 +55,33 @@ export function render(
     }
   })
 
+  const streamsDomain = [...new Set(data.map((d) => d.streams))]
+  // create the stack function
+  // define the function to retrieve the value
+  // inspired by https://observablehq.com/@stevndegwa/stack-chart
+  let stack = d3
+    .stack()
+    .keys(streamsDomain)
+    .value((data, key) => (data[1].has(key) ? data[1].get(key).size : 0))
+    .order(d3[streamsOrder])
+    .offset(d3[streamsOffset])
+
   // create nest structure
   const nestedData = d3
     .rollups(
       data,
-      (v) => v,
+      (v) => {
+        let localStack = Array.from(
+          d3.rollup(
+            v.sort((a, b) => d3.ascending(a.x, b.x)), // check that x axis is properly sorted
+            ([e]) => e,
+            (e) => e.x,
+            (e) => e.streams
+          )
+        )
+
+        return stack(localStack)
+      },
       (d) => d.series
     )
     .map((d) => ({ data: d, totalSize: d3.sum(d[1], (d) => d.size) }))
@@ -107,21 +130,13 @@ export function render(
     .attr('id', (d) => d[0])
     .attr('transform', (d) => 'translate(' + d.x + ',' + d.y + ')')
 
-  // domains
-  // sum all values for each serie / stack
-  const scaleRollup = d3
-    .rollups(
-      data,
-      (v) => d3.sum(v, (d) => d.size),
-      (d) => d.x + '_' + d.series
-    )
-    .map((d) => d[1])
+  // calculate global stacks value
+  const stacksValues = nestedData.map((d) => d.data[1]).flat(2)
 
-  // @TODO: move here the stacking and then compute scale across all the stacks
-
-  let sizeDomain = [0, d3.max(scaleRollup)]
-
-  const streamsDomain = [...new Set(data.map((d) => d.streams))]
+  const globalDomain = [
+    d3.min(stacksValues, (d) => d[0]),
+    d3.max(stacksValues, (d) => d[1]),
+  ]
 
   // x scale
   const xDomain = d3.extent(data, (e) => e.x)
@@ -173,45 +188,8 @@ export function render(
     // compute each serie width and height
     const serieWidth = d.width - margin.right - margin.left
     const serieHeight = d.height - margin.top - margin.bottom
-    //prepare data for stack
-    let localStack = Array.from(
-      d3.rollup(
-        d.data[1].sort((a, b) => d3.ascending(a.x, b.x)), // check that x axis is properly sorted
-        ([e]) => e,
-        (e) => e.x,
-        (e) => e.streams
-      )
-    )
 
-    // create an object with ordering methods
-    const orderings = {
-      Earliest: 'stackOrderAppearance',
-      Ascending: 'stackOrderAscending',
-      Descending: 'stackOrderDescending',
-      'Inside out': 'stackOrderInsideOut',
-      None: 'stackOrderNone',
-      Reverse: 'stackOrderReverse',
-    }
-
-    const offsets = {
-      Expand: 'stackOffsetExpand',
-      Diverging: 'stackOffsetDiverging',
-      Silhouette: 'stackOffsetSilhouette',
-      Wiggle: 'stackOffsetWiggle',
-      None: 'stackOffsetNone',
-    }
-
-    // create the stack
-    // define the function to retrieve the value
-    // inspired by https://observablehq.com/@stevndegwa/stack-chart
-    let stack = d3
-      .stack()
-      .keys(streamsDomain)
-      .value((data, key) => (data[1].has(key) ? data[1].get(key).size : 0))
-      .order(d3[orderings[streamsOrder]])
-      .offset(d3[offsets[streamsOffset]])
-
-    let stackedData = stack(localStack)
+    const stackedData = d.data[1]
 
     let localDomain = [
       d3.min(stackedData, (d) => d3.min(d, (d) => d[0])),
@@ -220,7 +198,7 @@ export function render(
 
     const sizeScale = d3
       .scaleLinear()
-      .domain(useSameScale ? sizeDomain : localDomain)
+      .domain(useSameScale ? globalDomain : localDomain)
       .nice()
       .range([serieHeight, 0])
 
@@ -236,6 +214,7 @@ export function render(
         'd',
         d3
           .area()
+          .curve(d3[interpolation])
           .x((d) => xScale(d.data[0]))
           .y0((d) => sizeScale(d[0]))
           .y1((d) => sizeScale(d[1]))
