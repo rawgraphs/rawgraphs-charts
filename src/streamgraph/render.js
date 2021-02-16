@@ -27,6 +27,7 @@ export function render(
     streamsPadding,
     streamsOffset,
     interpolation,
+    showYAxis,
     // series options
     columnsNumber,
     useSameScale,
@@ -228,6 +229,14 @@ export function render(
       .attr('transform', 'translate(0,' + serieHeight + ')')
       .call(d3.axisBottom(xScale).tickSizeOuter(0))
 
+    if (showYAxis) {
+      const yAxis = selection
+        .append('g')
+        .attr('id', 'yAxis')
+        //.attr('transform', 'translate(0,' + serieHeight + ')')
+        .call(d3.axisLeft(sizeScale).tickSizeOuter(0))
+    }
+
     if (showSeriesLabels) {
       d3.select(this)
         .append('text')
@@ -237,7 +246,7 @@ export function render(
         .styles(styles.seriesLabel)
     }
 
-    // add the x axis titles
+    // add the axes titles
     selection
       .append('text')
       .styles(styles.axisLabel)
@@ -246,6 +255,15 @@ export function render(
       .attr('text-anchor', 'end')
       .attr('display', serieIndex == 0 || repeatAxesLabels ? null : 'none')
       .text(mapping.x.value)
+
+    selection
+      .append('text')
+      .styles(styles.axisLabel)
+      .attr('x', 4)
+      .attr('text-anchor', 'start')
+      .attr('dominant-baseline', 'hanging')
+      .attr('display', serieIndex == 0 || repeatAxesLabels ? null : 'none')
+      .text(mapping['size'].value)
   })
 
   // add legend

@@ -48,13 +48,6 @@ export const visualOptions = {
     },
   },
 
-  streamsPadding: {
-    type: 'number',
-    label: 'Padding between streams (px)',
-    default: 1,
-    group: 'chart',
-  },
-
   streamsOrder: {
     type: 'text',
     label: 'Sort streams by',
@@ -104,8 +97,15 @@ export const visualOptions = {
 
   useSameScale: {
     type: 'boolean',
-    label: 'Use same scale',
+    label: 'Use same y scale',
     default: true,
+    group: 'series',
+  },
+
+  showYAxis: {
+    type: 'boolean',
+    label: 'Show Y axis',
+    default: false,
     group: 'series',
   },
 
