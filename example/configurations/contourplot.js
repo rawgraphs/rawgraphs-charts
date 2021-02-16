@@ -27,9 +27,9 @@ export default {
     marginBottom: 50,
     marginLeft: 50,
     showLegend: true,
-    weightSize: true,
     showCountLabels: true,
     showLabelsOutline: true,
     autoHideLabels: true,
+    showPoints: true,
   },
 }

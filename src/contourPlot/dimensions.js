@@ -11,10 +11,10 @@ export const dimensions = [
     validTypes: ['number', 'date'],
     required: true,
   },
-  {
-    id: 'weight',
-    name: 'Density weight',
-    validTypes: ['number'],
-    required: false,
-  },
+  // {
+  //   id: 'weight',
+  //   name: 'Density weight',
+  //   validTypes: ['number'],
+  //   required: false,
+  // },
 ]

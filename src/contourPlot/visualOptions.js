@@ -96,12 +96,13 @@ export const visualOptions = {
   colorScale: {
     type: 'colorScale',
     label: 'Color scale',
-    dimension: 'color',
+    domain: 'colorDomain',
     default: {
       scaleType: 'sequential',
       interpolator: 'interpolateBlues',
     },
     group: 'colors',
+    requiredDimensions: ['x', 'y'],
   },
 
   showBandLabels: {
@@ -112,11 +113,28 @@ export const visualOptions = {
     requiredDimensions: ['x', 'y'],
   },
 
+  labelThresholds: {
+    type: 'number',
+    label: 'Labels threshold steps',
+    default: 5,
+    step: 1,
+    min: 1,
+    group: 'labels',
+    disabled: {
+      showBandLabels: false,
+    },
+    requiredDimensions: ['x', 'y'],
+  },
+
   showLabelsOutline: {
     type: 'boolean',
     label: 'Show outline',
     default: false,
     group: 'labels',
+    disabled: {
+      showBandLabels: false,
+    },
+    requiredDimensions: ['x', 'y'],
   },
 
   autoHideLabels: {
@@ -124,5 +142,9 @@ export const visualOptions = {
     label: 'Auto hide labels',
     default: false,
     group: 'labels',
+    disabled: {
+      showBandLabels: false,
+    },
+    requiredDimensions: ['x', 'y'],
   },
 }
