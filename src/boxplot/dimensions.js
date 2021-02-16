@@ -1,7 +1,7 @@
 export const dimensions = [
   {
     id: 'value',
-    name: 'Value',
+    name: 'Y Axis',
     validTypes: ['number'],
     required: true,
   },

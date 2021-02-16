@@ -27,9 +27,9 @@ export const visualOptions = {
     group: 'artboard',
   },
 
-  padding: {
+  barsWidth: {
     type: 'number',
-    label: 'Padding between shapes',
+    label: 'Box plots width',
     default: 20,
     group: 'chart',
   },
@@ -45,6 +45,13 @@ export const visualOptions = {
     type: 'number',
     label: 'dots radius',
     default: 4,
+    group: 'chart',
+  },
+
+  yOrigin: {
+    type: 'boolean',
+    label: 'Set y origin to 0',
+    default: false,
     group: 'chart',
   },
 
@@ -78,5 +85,12 @@ export const visualOptions = {
       interpolator: 'schemeCategory10',
     },
     group: 'colors',
+  },
+
+  showValues: {
+    type: 'boolean',
+    label: 'Show boxpot values',
+    default: true,
+    group: 'labels',
   },
 }
