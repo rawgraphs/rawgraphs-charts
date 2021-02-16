@@ -65,7 +65,7 @@ export const visualOptions = {
 
   interpolation: {
     type: 'text',
-    label: 'Interpolation',
+    label: 'Curves interpolation',
     default: 'curveMonotoneX',
     options: [
       { label: 'Basis', value: 'curveBasis' },
@@ -83,7 +83,7 @@ export const visualOptions = {
 
   streamsOffset: {
     type: 'text',
-    label: 'Sort streams by',
+    label: 'Align streams by',
     group: 'chart',
     options: [
       { label: 'Expand', value: 'stackOffsetExpand' },
