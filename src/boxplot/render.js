@@ -1,7 +1,15 @@
 import * as d3 from 'd3'
 import { legend } from '@raw-temp/rawgraphs-core'
+import '../d3-styles.js'
 
-export function render(svgNode, data, visualOptions, mapping, originalData) {
+export function render(
+  svgNode,
+  data,
+  visualOptions,
+  mapping,
+  originalData,
+  styles
+) {
   let {
     // artboard options
     width,
@@ -12,14 +20,17 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     marginBottom,
     marginLeft,
     // charts options
-    padding,
+    barsWidth,
     iqrMultiplier, // to compute otuliers
     dotsRadius,
+    yOrigin,
     //legend
     showLegend,
     legendWidth,
-    // color dimension option, defined in visualOptions.js
+    // color
     colorScale,
+    // labels
+    showValues,
   } = visualOptions
 
   // Margin convention
@@ -49,19 +60,21 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
     .attr('id', 'viz')
 
-  const yScale = d3
-    .scaleLinear()
-    .domain(d3.extent(data, (d) => d.value))
-    .nice()
-    .range([chartHeight, 0])
+  const yDomain = yOrigin
+    ? [0, d3.max(data, (d) => d.value)]
+    : d3.extent(data, (d) => d.value)
+
+  const yScale = d3.scaleLinear().domain(yDomain).nice().range([chartHeight, 0])
 
   const groupsDomain = [...new Set(data.map((d) => d.group))]
 
   const xScale = d3
-    .scaleBand()
-    .range([0, chartWidth])
+    .scalePoint()
+    .rangeRound([0, chartWidth])
     .domain(groupsDomain)
-    .padding(padding / (chartWidth / groupsDomain.length))
+    .padding(0.5)
+
+  console.log(xScale.bandwidth())
 
   // if series is exposed, recreate the nested structure
   const nestedData = d3.rollups(
@@ -92,7 +105,16 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   console.log(nestedData)
 
   // append scales
-  svg.append('g').attr('id', 'y axis').call(d3.axisLeft(yScale))
+  svg
+    .append('g')
+    .attr('id', 'y axis')
+    .call(d3.axisLeft(yScale))
+    .append('text')
+    .styles(styles.axisLabel)
+    .attr('x', 4)
+    .attr('text-anchor', 'start')
+    .attr('dominant-baseline', 'hanging')
+    .text(mapping['value'].value)
 
   svg
     .append('g')
@@ -112,30 +134,48 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   // add the line between quartiles
   boxplots
     .append('line')
-    .attr('x1', (d) => xScale(d[1].group) + xScale.bandwidth() / 2)
-    .attr('x2', (d) => xScale(d[1].group) + xScale.bandwidth() / 2)
+    .attr('x1', (d) => xScale(d[1].group))
+    .attr('x2', (d) => xScale(d[1].group))
     .attr('y1', (d) => yScale(d[1].range[1]))
+    .attr('y2', (d) => yScale(d[1].range[0]))
+    .attr('stroke', (d) => colorScale(d[1].color))
+    .attr('stroke-dasharray', 4)
+
+  // add lines at top and bottom
+  boxplots
+    .append('line')
+    .attr('x1', (d) => xScale(d[1].group) - barsWidth / 2)
+    .attr('x2', (d) => xScale(d[1].group) + barsWidth / 2)
+    .attr('y1', (d) => yScale(d[1].range[1]))
+    .attr('y2', (d) => yScale(d[1].range[1]))
+    .attr('stroke', (d) => colorScale(d[1].color))
+
+  boxplots
+    .append('line')
+    .attr('x1', (d) => xScale(d[1].group) - barsWidth / 2)
+    .attr('x2', (d) => xScale(d[1].group) + barsWidth / 2)
+    .attr('y1', (d) => yScale(d[1].range[0]))
     .attr('y2', (d) => yScale(d[1].range[0]))
     .attr('stroke', (d) => colorScale(d[1].color))
 
   // add the boxes
   boxplots
     .append('rect')
-    .attr('x', (d) => xScale(d[1].group))
+    .attr('x', (d) => xScale(d[1].group) - barsWidth / 2)
     .attr('y', (d) => yScale(d[1].quartiles[2]))
-    .attr('width', xScale.bandwidth())
+    .attr('width', barsWidth)
     .attr(
       'height',
       (d) => yScale(d[1].quartiles[0]) - yScale(d[1].quartiles[2])
     )
-    .attr('fill', 'silver')
+    .attr('fill', (d) => colorScale(d[1].color))
 
   //add the half line
   boxplots
     .append('line')
-    .attr('x1', (d) => xScale(d[1].group))
+    .attr('x1', (d) => xScale(d[1].group) - barsWidth / 2)
     .attr('y1', (d) => yScale(d[1].quartiles[1]))
-    .attr('x2', (d) => xScale(d[1].group) + xScale.bandwidth())
+    .attr('x2', (d) => xScale(d[1].group) + barsWidth / 2)
     .attr('y2', (d) => yScale(d[1].quartiles[1]))
     .attr('stroke', background)
 
@@ -144,10 +184,61 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .data((d) => d[1].outliers)
     .join('circle')
     .attr('r', dotsRadius)
-    .attr('cx', (d) => xScale(d.group) + xScale.bandwidth() / 2)
+    .attr('cx', (d) => xScale(d.group))
     .attr('cy', (d) => yScale(d.value))
     .attr('fill', background)
-    .attr('stroke', 'silver')
+    .attr('stroke', (d) => colorScale(d.color))
+
+  if (showValues) {
+    const valuesLabels = svg
+      .append('g')
+      .attr('id', 'boxplots')
+      .selectAll('g')
+      .data(nestedData)
+      .join('g')
+
+    valuesLabels
+      .append('text')
+      .styles(styles.labelSecondary)
+      .attr('x', (d) => xScale(d[1].group) + barsWidth / 2 + 4)
+      .attr('y', (d) => yScale(d[1].range[1]))
+      .attr('dominant-baseline', 'middle')
+      .text((d) => d[1].range[1])
+
+    valuesLabels
+      .append('text')
+      .styles(styles.labelSecondary)
+      .attr('x', (d) => xScale(d[1].group) + barsWidth / 2 + 4)
+      .attr('y', (d) => yScale(d[1].range[0]))
+      .attr('dominant-baseline', 'middle')
+      .text((d) => d[1].range[0])
+
+    valuesLabels
+      .append('text')
+      .styles(styles.labelSecondary)
+      .attr('x', (d) => xScale(d[1].group) + barsWidth / 2 + 4)
+      .attr('y', (d) => yScale(d[1].quartiles[1]))
+      .attr('dominant-baseline', 'middle')
+      .text((d) => d[1].quartiles[1])
+
+    valuesLabels
+      .append('text')
+      .styles(styles.labelSecondary)
+      .attr('x', (d) => xScale(d[1].group) - barsWidth / 2 - 4)
+      .attr('y', (d) => yScale(d[1].quartiles[0]))
+      .attr('dominant-baseline', 'middle')
+      .attr('text-anchor', 'end')
+      .text((d) => d[1].quartiles[0])
+
+    valuesLabels
+      .append('text')
+      .styles(styles.labelSecondary)
+      .attr('x', (d) => xScale(d[1].group) - 4)
+      .attr('y', (d) => yScale(d[1].quartiles[2]))
+      .attr('dominant-baseline', 'middle')
+      .attr('text-anchor', 'end')
+      .text((d) => d[1].quartiles[2])
+  }
 
   if (showLegend) {
     // svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option

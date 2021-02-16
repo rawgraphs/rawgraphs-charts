@@ -47,7 +47,7 @@ export function colorDomain(data, mapping, visualOptions) {
     : d3.extent(data, (d) => d.x)
 
   const x =
-    mapping.x.mappedType === 'date' ? d3.scaleTime() : d3.scaleLinear()
+    mapping.x.dataType === 'date' ? d3.scaleTime() : d3.scaleLinear()
 
   x.domain(xDomain).rangeRound([0, chartWidth]).nice()
 
@@ -57,7 +57,7 @@ export function colorDomain(data, mapping, visualOptions) {
     : d3.extent(data, (d) => d.y)
 
   const y =
-    mapping.y.mappedType === 'date' ? d3.scaleTime() : d3.scaleLinear()
+    mapping.y.dataType === 'date' ? d3.scaleTime() : d3.scaleLinear()
 
   y.domain(yDomain).rangeRound([chartHeight, 0]).nice()
 
