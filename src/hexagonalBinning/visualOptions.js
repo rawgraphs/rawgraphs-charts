@@ -46,6 +46,7 @@ export const visualOptions = {
     containerCondition: {
       showLegend: true,
     },
+    requiredDimensions: ['x', 'y'],
   },
 
   xOrigin: {
@@ -110,6 +111,7 @@ export const visualOptions = {
       interpolator: 'interpolateBlues',
     },
     group: 'colors',
+    requiredDimensions: ['x', 'y'],
   },
 
   showCountLabels: {
@@ -125,6 +127,7 @@ export const visualOptions = {
     label: 'Show outline',
     default: false,
     group: 'labels',
+    requiredDimensions: ['x', 'y'],
   },
 
   autoHideLabels: {
@@ -132,5 +135,6 @@ export const visualOptions = {
     label: 'Auto hide labels',
     default: false,
     group: 'labels',
+    requiredDimensions: ['x', 'y'],
   },
 }

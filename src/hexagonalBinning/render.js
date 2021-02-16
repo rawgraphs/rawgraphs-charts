@@ -8,10 +8,7 @@ import {
 } from '@raw-temp/rawgraphs-core'
 import '../d3-styles.js'
 
-
-
 export function colorDomain(data, mapping, visualOptions) {
-
   const {
     width,
     height,
@@ -34,10 +31,10 @@ export function colorDomain(data, mapping, visualOptions) {
   const chartWidth = width - margin.left - margin.right
   const chartHeight = height - margin.top - margin.bottom
 
-  if(!data){
+  if (!data) {
     return {
       domain: [],
-      type: "number"
+      type: 'number',
     }
   }
 
@@ -46,8 +43,7 @@ export function colorDomain(data, mapping, visualOptions) {
     ? [0, d3.max(data, (d) => d.x)]
     : d3.extent(data, (d) => d.x)
 
-  const x =
-    mapping.x.dataType === 'date' ? d3.scaleTime() : d3.scaleLinear()
+  const x = mapping.x.dataType === 'date' ? d3.scaleTime() : d3.scaleLinear()
 
   x.domain(xDomain).rangeRound([0, chartWidth]).nice()
 
@@ -56,8 +52,7 @@ export function colorDomain(data, mapping, visualOptions) {
     ? [0, d3.max(data, (d) => d.y)]
     : d3.extent(data, (d) => d.y)
 
-  const y =
-    mapping.y.dataType === 'date' ? d3.scaleTime() : d3.scaleLinear()
+  const y = mapping.y.dataType === 'date' ? d3.scaleTime() : d3.scaleLinear()
 
   y.domain(yDomain).rangeRound([chartHeight, 0]).nice()
 
@@ -72,15 +67,12 @@ export function colorDomain(data, mapping, visualOptions) {
     ])
 
   const bins = hexbin(data)
-  const domain =  bins.map(d => d.length)
+  const domain = bins.map((d) => d.length)
   return {
     domain,
     type: 'number',
   }
-
 }
-
-
 
 export function render(
   svgNode,
@@ -251,28 +243,19 @@ export function render(
     labelsOcclusion(hex.selectAll('text'), (d) => d.length)
   }
 
-  // if (showLegend) {
-  //   const legendLayer = d3
-  //     .select(svgNode)
-  //     .append('g')
-  //     .attr('id', 'legend')
-  //     .attr('transform', `translate(${width},${marginTop})`)
+  if (showLegend) {
+    const legendLayer = d3
+      .select(svgNode)
+      .append('g')
+      .attr('id', 'legend')
+      .attr('transform', `translate(${width},${marginTop})`)
 
-  //   const chartLegend = legend().legendWidth(legendWidth)
+    const chartLegend = legend().legendWidth(legendWidth)
 
-  //   if (mapping.color.value) {
-  //     chartLegend.addColor(mapping.color.value, colorScale)
-  //   }
+    if (colorScale.domain().length) {
+      chartLegend.addColor('count', colorScale)
+    }
 
-  //   if (mapping.size.value) {
-  //     const legendSizeScale = size.copy()
-  //     legendSizeScale
-  //       .domain(d3.extent(data, (d) => d.size))
-  //       .rangeRound([size(d3.min(data, (d) => d.size)), maxRadius])
-
-  //     chartLegend.addSize(mapping.size.value, legendSizeScale, 'circle')
-  //   }
-
-  //   legendLayer.call(chartLegend)
-  // }
+    legendLayer.call(chartLegend)
+  }
 }
