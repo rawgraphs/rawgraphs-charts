@@ -1,4 +1,4 @@
-import chart from 'rawcharts/streamgraph'
+import chart from 'rawcharts/bumpchart'
 import data from '../datasets/Music.csv'
 
 export default {
@@ -17,11 +17,15 @@ export default {
     },
   },
   mapping: {
-    series: { value: ['Category'] },
+    // series: { value: ['Category'] },
     streams: { value: ['Category'] },
-    x: { value: ['Year_date'] },
+    x: { value: ['Year'] },
     size: { value: ['Revenues-Adjusted'] },
     //color: { value: ['Category'] },
   },
-  visualOptions: { useSameScale: true, streamsOffset: 'Wiggle' },
+  visualOptions: {
+    useSameScale: true,
+    streamsOffset: 'Silhouette',
+    interpolation: 'curveLinear',
+  },
 }

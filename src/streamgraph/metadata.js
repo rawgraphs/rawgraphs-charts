@@ -8,6 +8,6 @@ export const metadata = {
   categories: ['correlations', 'proportions'],
   description:
     'It allows the comparison on multiple categories over a continuous dimension.',
-  // code: "https://github.com/rawgraphs/raw",
+  code: 'https://observablehq.com/@d3/streamgraph',
   // tutorial: "https://rawgraphs.io/learning/",
 }

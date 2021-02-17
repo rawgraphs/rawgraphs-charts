@@ -85,7 +85,41 @@ export function render(
           )
         )
 
-        return stack(localStack)
+        let stackedData = stack(localStack)
+
+        // re-sort streams
+        stackedData[0].map((row, rowIndex) => {
+          // get the value for each vertical stack
+          let vStack = stackedData.map((d) => d[rowIndex])
+          // get min value (depending from stack function)
+          let minValue = d3.min(vStack, (d) => d[0])
+          // stack by delta
+
+          if (mapping.rank.value) {
+            let rankedKeys = stackedData.map((d) => d.key)
+            vStack.forEach((d, i) => {
+              if (d.data[1].has(rankedKeys[i])) {
+                d.rank = d.data[1].get(rankedKeys[i]).rank
+              } else {
+                d.rank = Infinity
+              }
+            })
+            // sort by ranking value
+            vStack.sort((a, b) => d3.descending(a.rank, b.rank))
+          } else {
+            //sort by size
+            vStack.sort((a, b) => d3.ascending(a[1] - a[0], b[1] - b[0]))
+          }
+          // re-calculate positions
+          vStack.forEach((d) => {
+            const delta = d[1] - d[0]
+            d[0] = minValue
+            d[1] = minValue + delta
+            minValue += delta
+          })
+        })
+
+        return stackedData
       },
       (d) => d.series
     )
@@ -147,19 +181,18 @@ export function render(
   const xDomain = d3.extent(data, (e) => e.x)
   let xScale
 
-  switch (mapping.x.dataType.type) {
-    case 'number':
-      xScale = d3
-        .scaleLinear()
-        .domain(xDomain)
-        .range([0, griddingData[0].width - margin.right - margin.left])
-      break
-    case 'date':
-      xScale = d3
-        .scaleTime()
-        .domain(xDomain)
-        .range([0, griddingData[0].width - margin.right - margin.left])
-      break
+  // console.log('datatype', mapping.x.dataType)
+
+  if (mapping.x.dataType == 'number') {
+    xScale = d3
+      .scaleLinear()
+      .domain(xDomain)
+      .range([0, griddingData[0].width - margin.right - margin.left])
+  } else if (mapping.x.dataType.type == 'date') {
+    xScale = d3
+      .scaleTime()
+      .domain(xDomain)
+      .range([0, griddingData[0].width - margin.right - margin.left])
   }
 
   // add grid
@@ -332,7 +365,7 @@ export function render(
             // get x position
             return xScale(d.maxElement.data[0])
           })
-          .attr('y', sizeScale((d.maxElement[0] + d.maxElement[1]) / 2))
+          .attr('y', (d) => sizeScale((d.maxElement[0] + d.maxElement[1]) / 2))
           .attr('text-anchor', (d) =>
             xScale(d.maxElement.data[0]) > serieWidth - 10
               ? 'end'

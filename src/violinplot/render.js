@@ -154,20 +154,26 @@ export function render(
       //@TODO could be maybe improved, not really nice
       completeShape.unshift([])
       completeShape[0].x0 = d[1].bins[0].x0 - delta
+      completeShape[0].x1 = d[1].bins[0].x0
       completeShape.push([])
       completeShape[completeShape.length - 1].x0 =
         completeShape[completeShape.length - 2].x0 + delta
+      completeShape[completeShape.length - 1].x1 =
+        completeShape[completeShape.length - 2].x0 + delta * 2
 
       return completeShape
     }) // So now we are working bin per bin
     .style('stroke', 'none')
+    .attr('teest', (d) => {
+      console.log(d)
+    })
     .attr(
       'd',
       d3
         .area()
         .x0((d) => shapeScale(-d.length))
         .x1((d) => shapeScale(d.length))
-        .y((d) => yScale(d.x0))
+        .y((d) => yScale((d.x0 + d.x1) / 2))
         .curve(curveType[interpolation])
     )
 
