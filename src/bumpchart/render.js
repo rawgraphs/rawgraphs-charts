@@ -40,6 +40,10 @@ export function render(
     // legend
     showLegend,
     legendWidth,
+    // labels
+    showLabels,
+    labelsType,
+    showLabelsOutline,
   } = visualOptions
 
   const margin = {
@@ -297,6 +301,85 @@ export function render(
       .attr('dominant-baseline', 'hanging')
       .attr('display', serieIndex == 0 || repeatAxesLabels ? null : 'none')
       .text(mapping['size'].value)
+
+    if (showLabels) {
+      if (labelsType == 'On path') {
+        let defs = d3.select(svgNode).append('defs')
+
+        defs
+          .selectAll('path')
+          .data(stackedData.filter((d) => d3.sum(d, (e) => e[1] - e[0]) > 0))
+          .join('path')
+          .attr('id', (d, i) => 'path-' + serieIndex + '-' + i)
+          .attr(
+            'd',
+            d3
+              .line()
+              .curve(d3[interpolation])
+              .x((d) => xScale(d.data[0]))
+              .y((d) => sizeScale((d[0] + d[1]) / 2))
+          )
+
+        selection
+          .append('g')
+          .attr('id', 'labels')
+          .selectAll('text')
+          .data(stackedData.filter((d) => d3.sum(d, (e) => e[1] - e[0]) > 0))
+          .join('text')
+          .attr('dy', '0.5ex')
+          .attr('class', 'label')
+          .append('textPath')
+          .attr('xlink:xlink:href', (d, i) => '#path-' + serieIndex + '-' + i)
+          .attr('startOffset', (d) => {
+            // find max value
+            const maxIndex = d3.maxIndex(d, (e) => e[1] - e[0])
+            // get x position
+            d.offset = Math.round((maxIndex / d.length) * 100)
+            //clamp offset between 5% and 95%, return it
+            return Math.min(95, Math.max(5, d.offset)) + '%'
+          })
+          .attr('alignment-baseline', 'middle')
+          .attr('text-anchor', (d) =>
+            d.offset > 90 ? 'end' : d.offset < 10 ? 'start' : 'middle'
+          )
+          .text((d) => d.key)
+          .styles(styles.labelPrimary)
+      }
+      if (labelsType == 'On point') {
+        let labels = selection
+          .append('g')
+          .attr('id', 'labels')
+          .selectAll('text')
+          .data(stackedData.filter((d) => d3.sum(d, (e) => e[1] - e[0]) > 0))
+          .join('text')
+          .attr('x', (d) => {
+            // find max value index
+            const maxIndex = d3.maxIndex(d, (e) => e[1] - e[0])
+            d.maxElement = d[maxIndex]
+            // get x position
+            return xScale(d.maxElement.data[0])
+          })
+          .attr('y', (d) => {
+            // find max value
+            const maxIndex = d3.maxIndex(d, (e) => e[1] - e[0])
+            // get y position
+            return sizeScale((d.maxElement[1] - d.maxElement[0]) / 2)
+          })
+          .attr('text-anchor', (d) =>
+            xScale(d.maxElement.data[0]) > serieWidth - 10
+              ? 'end'
+              : xScale(d.maxElement.data[0]) < 10
+              ? 'start'
+              : 'middle'
+          )
+          .attr('alignment-baseline', 'middle')
+          .text((d) => d.key)
+          .styles(styles.labelPrimary)
+        if (showLabelsOutline) {
+          labels.styles(styles.labelOutline)
+        }
+      }
+    }
   })
 
   // add legend

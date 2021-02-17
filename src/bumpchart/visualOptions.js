@@ -153,4 +153,32 @@ export const visualOptions = {
     },
     group: 'colors',
   },
+
+  showLabels: {
+    type: 'boolean',
+    label: 'show streams labels',
+    default: true,
+    group: 'Labels',
+  },
+
+  labelsType: {
+    type: 'text',
+    label: 'Label placement',
+    group: 'Labels',
+    options: ['On path', 'On point'],
+    default: 'On point',
+    disabled: {
+      showLabels: false,
+    },
+  },
+
+  showLabelsOutline: {
+    type: 'boolean',
+    label: 'Show outline',
+    default: false,
+    group: 'Labels',
+    disabled: {
+      showLabels: false,
+    },
+  },
 }

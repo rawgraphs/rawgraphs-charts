@@ -18,7 +18,7 @@ export default {
   },
   mapping: {
     series: { value: ['Category'] },
-    streams: { value: ['Format'] },
+    streams: { value: ['Category'] },
     x: { value: ['Year_date'] },
     size: { value: ['Revenues-Adjusted'] },
     //color: { value: ['Category'] },
