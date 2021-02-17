@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chart.js": "^2.9.4",
     "css": "^3.0.0",
     "d3": "^6.2.0",
     "d3-contour": "^2.0.0",

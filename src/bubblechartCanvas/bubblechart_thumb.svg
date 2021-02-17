@@ -1,0 +1,211 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="320" height="160" viewBox="0 0 320 160">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #000;
+      }
+
+      .cls-3 {
+        isolation: isolate;
+        font-size: 10px;
+        font-family: Helvetica;
+      }
+
+      .cls-4 {
+        fill: #9e0142;
+      }
+
+      .cls-5 {
+        fill: #4696b3;
+      }
+
+      .cls-6 {
+        fill: #5e4fa2;
+      }
+
+      .cls-7 {
+        fill: #d5ee9f;
+      }
+
+      .cls-8 {
+        fill: #89cfa5;
+      }
+
+      .cls-9 {
+        fill: #fed281;
+      }
+
+      .cls-10 {
+        fill: #db494a;
+      }
+
+      .cls-11 {
+        fill: #f88e53;
+      }
+
+      .cls-12 {
+        fill: #fbf8b0;
+      }
+    </style>
+  </defs>
+  <rect id="background" class="cls-1" width="320" height="160"/>
+  <g id="visualization">
+    <g id="axis">
+      <g>
+        <path class="cls-2" d="M26.5,150v-5.5h284V150"/>
+        <g>
+          <line class="cls-2" x1="26.5" y1="144" x2="26.5" y2="150"/>
+          <text class="cls-3" transform="translate(19.5493 160.1)">6.2</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="45.5" y1="144" x2="45.5" y2="150"/>
+          <text class="cls-3" transform="translate(38.5493 160.1)">6.4</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="64.5" y1="144" x2="64.5" y2="150"/>
+          <text class="cls-3" transform="translate(57.5493 160.1)">6.6</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="83.5" y1="144" x2="83.5" y2="150"/>
+          <text class="cls-3" transform="translate(76.5493 160.1)">6.8</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="102.5" y1="144" x2="102.5" y2="150"/>
+          <text class="cls-3" transform="translate(95.5493 160.1)">7.0</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="121.5" y1="144" x2="121.5" y2="150"/>
+          <text class="cls-3" transform="translate(114.5493 160.1)">7.2</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="140.5" y1="144" x2="140.5" y2="150"/>
+          <text class="cls-3" transform="translate(133.5493 160.1)">7.4</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="159.5" y1="144" x2="159.5" y2="150"/>
+          <text class="cls-3" transform="translate(152.5493 160.1)">7.6</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="177.5" y1="144" x2="177.5" y2="150"/>
+          <text class="cls-3" transform="translate(170.5488 160.1)">7.8</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="196.5" y1="144" x2="196.5" y2="150"/>
+          <text class="cls-3" transform="translate(189.5488 160.1)">8.0</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="215.5" y1="144" x2="215.5" y2="150"/>
+          <text class="cls-3" transform="translate(208.5488 160.1)">8.2</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="234.5" y1="144" x2="234.5" y2="150"/>
+          <text class="cls-3" transform="translate(227.5488 160.1)">8.4</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="253.5" y1="144" x2="253.5" y2="150"/>
+          <text class="cls-3" transform="translate(246.5488 160.1)">8.6</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="272.5" y1="144" x2="272.5" y2="150"/>
+          <text class="cls-3" transform="translate(265.5488 160.1)">8.8</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="291.5" y1="144" x2="291.5" y2="150"/>
+          <text class="cls-3" transform="translate(284.5488 160.1)">9.0</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="310.5" y1="144" x2="310.5" y2="150"/>
+          <text class="cls-3" transform="translate(303.5488 160.1)">9.2</text>
+        </g>
+      </g>
+      <g>
+        <path class="cls-2" d="M20,144.5h6.5V10.5H20"/>
+        <g>
+          <line class="cls-2" x1="26" y1="129.5" x2="20" y2="129.5"/>
+          <text class="cls-3" transform="translate(5.877 132.7)">50</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="26" y1="112.5" x2="20" y2="112.5"/>
+          <text class="cls-3" transform="translate(0.3154 115.7)">100</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="26" y1="94.5" x2="20" y2="94.5"/>
+          <text class="cls-3" transform="translate(0.3154 97.7)">150</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="26" y1="77.5" x2="20" y2="77.5"/>
+          <text class="cls-3" transform="translate(0.3154 80.7)">200</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="26" y1="60.5" x2="20" y2="60.5"/>
+          <text class="cls-3" transform="translate(0.3154 63.7)">250</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="26" y1="43.5" x2="20" y2="43.5"/>
+          <text class="cls-3" transform="translate(0.3154 46.7)">300</text>
+        </g>
+        <g>
+          <line class="cls-2" x1="26" y1="26.5" x2="20" y2="26.5"/>
+          <text class="cls-3" transform="translate(0.3154 29.7)">350</text>
+        </g>
+      </g>
+    </g>
+    <g id="viz">
+      <circle class="cls-4" cx="177" cy="48" r="10"/>
+      <circle class="cls-4" cx="253" cy="132" r="5"/>
+      <circle class="cls-4" cx="234" cy="20" r="10"/>
+      <circle class="cls-5" cx="187" cy="52" r="9"/>
+      <circle class="cls-4" cx="206" cy="101" r="6"/>
+      <circle class="cls-6" cx="244" cy="23" r="9"/>
+      <circle class="cls-7" cx="102" cy="89" r="8"/>
+      <circle class="cls-4" cx="54" cy="76" r="6"/>
+      <circle class="cls-4" cx="196" cy="59" r="7"/>
+      <circle class="cls-6" cx="263" cy="121" r="4"/>
+      <circle class="cls-8" cx="102" cy="92" r="5"/>
+      <circle class="cls-4" cx="111" cy="75" r="7"/>
+      <circle class="cls-4" cx="102" cy="108" r="2"/>
+      <circle class="cls-7" cx="130" cy="36" r="6"/>
+      <circle class="cls-4" cx="130" cy="10" r="7"/>
+      <circle class="cls-4" cx="168" cy="131" r="2"/>
+      <circle class="cls-4" cx="272" cy="94" r="6"/>
+      <circle class="cls-6" cx="130" cy="76" r="7"/>
+      <circle class="cls-4" cx="102" cy="56" r="7"/>
+      <circle class="cls-4" cx="225" cy="114" r="4"/>
+      <circle class="cls-4" cx="121" cy="69" r="7"/>
+      <circle class="cls-7" cx="26" cy="83" r="7"/>
+      <circle class="cls-7" cx="206" cy="134" r="4"/>
+      <circle class="cls-7" cx="177" cy="44" r="9"/>
+      <circle class="cls-9" cx="196" cy="122" r="3"/>
+      <circle class="cls-8" cx="177" cy="135" r="5"/>
+      <circle class="cls-10" cx="177" cy="64" r="2"/>
+      <circle class="cls-7" cx="196" cy="112" r="3"/>
+      <circle class="cls-11" cx="159" cy="143" r="4"/>
+      <circle class="cls-10" cx="196" cy="132" r="4"/>
+      <circle class="cls-5" cx="196" cy="128" r="4"/>
+      <circle class="cls-11" cx="121" cy="137" r="3"/>
+      <circle class="cls-11" cx="244" cy="115" r="6"/>
+      <circle class="cls-11" cx="159" cy="139" r="4"/>
+      <circle class="cls-10" cx="206" cy="81" r="2"/>
+      <circle class="cls-10" cx="282" cy="97" r="6"/>
+      <circle class="cls-11" cx="92" cy="55" r="8"/>
+      <circle class="cls-10" cx="159" cy="75" r="6"/>
+      <circle class="cls-11" cx="130" cy="140" r="3"/>
+      <circle class="cls-10" cx="206" cy="76" r="7"/>
+      <circle class="cls-11" cx="130" cy="144" r="3"/>
+      <circle class="cls-7" cx="272" cy="105" r="5"/>
+      <circle class="cls-10" cx="263" cy="96" r="6"/>
+      <circle class="cls-11" cx="140" cy="87" r="7"/>
+      <circle class="cls-11" cx="92" cy="94" r="7"/>
+      <circle class="cls-11" cx="206" cy="97" r="6"/>
+      <circle class="cls-10" cx="140" cy="90" r="6"/>
+      <circle class="cls-11" cx="121" cy="70" r="6"/>
+      <circle class="cls-12" cx="310" cy="135" r="3"/>
+      <circle class="cls-6" cx="121" cy="138" r="4"/>
+    </g>
+  </g>
+</svg>
