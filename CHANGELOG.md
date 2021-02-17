@@ -9,6 +9,7 @@
 - _box plot_: added "Start from 0" visual option.
 - _stream graph_: first version
 - _contour plot_: first version
+- _convex hull_: first version
 
 #### 10 feb 2021
 
