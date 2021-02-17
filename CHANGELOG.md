@@ -9,12 +9,13 @@
 - _box plot_: added "Start from 0" visual option.
 - _stream graph_: first version
 - _contour plot_: first version
+- _violin plot_: area anchors are now in the middle of the bin.
 
 #### 10 feb 2021
 
 _radar chart_: error message when negative values are loaded
 _radar chart_: minor fix
-_violin plot_: paths are now closed adding a ppint after and before the bins
+_violin plot_: paths are now closed adding a point after and before the bins
 
 ## v1.0.0-beta.9
 
