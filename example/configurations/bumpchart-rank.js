@@ -1,5 +1,5 @@
 import chart from 'rawcharts/bumpchart'
-import data from '../datasets/Music.csv'
+import data from '../datasets/Music-ranking.tsv'
 
 export default {
   chart: chart,
@@ -11,21 +11,22 @@ export default {
     Units: 'number',
     Revenues: 'number',
     'Revenues-Adjusted': 'number',
-    Year_date: {
-      type: 'date',
-      dateFormat: 'YYYY-MM-DD',
-    },
+    Rank: 'number',
+    // Year_date: {
+    //   type: 'date',
+    //   dateFormat: 'YYYY-MM-DD',
+    // },
   },
   mapping: {
     // series: { value: ['Category'] },
     streams: { value: ['Category'] },
-    x: { value: ['Year_date'] },
+    x: { value: ['Year'] },
     size: { value: ['Revenues-Adjusted'] },
     //color: { value: ['Category'] },
   },
   visualOptions: {
     useSameScale: true,
-    streamsOffset: 'Silhouette',
+    streamsOffset: 'stackOffsetSilhouette',
     interpolation: 'curveLinear',
   },
 }

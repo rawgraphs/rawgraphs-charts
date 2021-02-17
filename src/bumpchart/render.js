@@ -81,9 +81,26 @@ export function render(
           )
         )
 
-        console.log(stack(localStack))
+        let stackedData = stack(localStack)
+        // re-sort streams
+        stackedData[0].map((row, rowIndex) => {
+          // get the value for each vertical stack
+          let vStack = stackedData.map((d) => d[rowIndex])
+          // get min value (depending from stack function)
+          let minValue = d3.min(vStack, (d) => d[0])
+          // stack by delta
+          vStack.sort((a, b) => d3.ascending(a[1] - a[0], b[1] - b[0]))
+          // re-calculate positions
+          console.log(mapping)
+          vStack.forEach((d) => {
+            const delta = d[1] - d[0]
+            d[0] = minValue
+            d[1] = minValue + delta
+            minValue += delta
+          })
+        })
 
-        return stack(localStack)
+        return stackedData
       },
       (d) => d.series
     )
@@ -213,6 +230,7 @@ export function render(
       .attr('fill', ({ key }) => {
         return colorScale(key)
       })
+      .attr('stroke', 'red')
       .attr(
         'd',
         d3
