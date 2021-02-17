@@ -89,6 +89,7 @@ export function render(
     type: 'bubble',
     data: transformedData,
     options: {
+      responsive: true,
       animation: false,
       
     }
