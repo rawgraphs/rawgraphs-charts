@@ -75,12 +75,12 @@ export function render(
   canvasNode.style.backgroundColor = background;
 
   const transformedData = {
-    datasets : [{
+    datasets: [{
       label: '',
       backgroundColor: data.map(d => colorScale(d.color)),
       data: data.map(d => ({
         ...d,
-        r: size(d.size) ,
+        r: size(d.size),
       }))
     }]
   }
@@ -91,7 +91,15 @@ export function render(
     options: {
       responsive: true,
       animation: false,
-      
+      layout: {
+        padding: {
+          left: marginLeft,
+          right: marginRight,
+          top: marginTop,
+          bottom: marginBottom,
+        }
+      }
+
     }
   });
 
