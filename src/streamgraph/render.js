@@ -270,6 +270,7 @@ export function render(
       .text(mapping['size'].value)
 
     if (showLabels) {
+      // if is on path, add paths to defs and then add texts
       if (labelsType == 'On path') {
         let defs = d3.select(svgNode).append('defs')
 
@@ -311,7 +312,12 @@ export function render(
           )
           .text((d) => d.key)
           .styles(styles.labelPrimary)
+
+        if (showLabelsOutline) {
+          labels.styles(styles.labelOutline)
+        }
       }
+      // if it is on point, find the maximum point
       if (labelsType == 'On point') {
         let labels = selection
           .append('g')
@@ -326,12 +332,7 @@ export function render(
             // get x position
             return xScale(d.maxElement.data[0])
           })
-          .attr('y', (d) => {
-            // find max value
-            const maxIndex = d3.maxIndex(d, (e) => e[1] - e[0])
-            // get y position
-            return sizeScale((d.maxElement[1] - d.maxElement[0]) / 2)
-          })
+          .attr('y', sizeScale((d.maxElement[0] + d.maxElement[1]) / 2))
           .attr('text-anchor', (d) =>
             xScale(d.maxElement.data[0]) > serieWidth - 10
               ? 'end'
@@ -342,6 +343,7 @@ export function render(
           .attr('alignment-baseline', 'middle')
           .text((d) => d.key)
           .styles(styles.labelPrimary)
+
         if (showLabelsOutline) {
           labels.styles(styles.labelOutline)
         }
