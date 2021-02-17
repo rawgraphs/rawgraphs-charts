@@ -9,6 +9,7 @@
 - _box plot_: added "Start from 0" visual option.
 - _stream graph_: first version
 - _contour plot_: first version
+- _bump chart_: first version
 - _violin plot_: area anchors are now in the middle of the bin.
 
 #### 10 feb 2021
