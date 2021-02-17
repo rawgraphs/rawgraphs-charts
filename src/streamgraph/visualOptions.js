@@ -83,7 +83,7 @@ export const visualOptions = {
 
   streamsOffset: {
     type: 'text',
-    label: 'Align streams by',
+    label: 'Streams vertical alignment',
     group: 'chart',
     options: [
       { label: 'Expand', value: 'stackOffsetExpand' },
@@ -95,17 +95,17 @@ export const visualOptions = {
     default: 'stackOffsetNone',
   },
 
-  useSameScale: {
-    type: 'boolean',
-    label: 'Use same y scale',
-    default: true,
-    group: 'series',
-  },
-
   showYAxis: {
     type: 'boolean',
     label: 'Show Y axis',
     default: false,
+    group: 'chart',
+  },
+
+  useSameScale: {
+    type: 'boolean',
+    label: 'Use same y scale',
+    default: true,
     group: 'series',
   },
 
