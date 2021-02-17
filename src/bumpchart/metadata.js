@@ -7,7 +7,7 @@ export const metadata = {
   icon,
   categories: ['correlations', 'proportions'],
   description:
-    'It allows the comparison on multiple categories over a continuous dimension.',
+    'It allows the comparison on multiple categories over a continuous dimension and the evolution of its sorting. By default, sorting is based on the stream size.',
   // code: '',
   // tutorial: "https://rawgraphs.io/learning/",
 }

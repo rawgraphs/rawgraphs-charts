@@ -29,7 +29,7 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
           const item = {
             x: vv[0][mapping.x.value], //get the first one since it's grouped
             size: sizeAggregator(vv.map((d) => d[mapping.size.value])), // aggregate
-            rank: rankAggregator(vv.map((d) => d[mapping.size.value])), // aggregate
+            rank: rankAggregator(vv.map((d) => d[mapping.rank.value])), // aggregate
             series: vv[0][mapping.series.value], //get the first one since it's grouped
             streams: vv[0][mapping.streams.value], //get the first one since it's grouped
           }

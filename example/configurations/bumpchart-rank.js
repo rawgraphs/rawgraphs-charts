@@ -22,6 +22,7 @@ export default {
     streams: { value: ['Category'] },
     x: { value: ['Year'] },
     size: { value: ['Revenues-Adjusted'] },
+    rank: { value: ['Rank'], config: { aggregation: ['mean'] } },
     //color: { value: ['Category'] },
   },
   visualOptions: {
