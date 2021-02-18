@@ -280,7 +280,6 @@ export function render(
       .attr('fill', ({ key }) => {
         return colorScale(key)
       })
-      .attr('stroke', 'blue')
       .attr(
         'd',
         d3
