@@ -27,5 +27,6 @@ export default {
     useSameScale: true,
     streamsOffset: 'Silhouette',
     interpolation: 'curveLinear',
+    streamsPadding: 10,
   },
 }

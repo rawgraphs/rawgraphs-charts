@@ -93,7 +93,10 @@ export function render(
           let vStack = stackedData.map((d) => d[rowIndex])
           // get min value (depending from stack function)
           let minValue = d3.min(vStack, (d) => d[0])
-          // stack by delta
+          // keep original order
+          vStack.forEach((d, i) => {
+            d.originalIndex = i
+          })
 
           if (mapping.rank.value) {
             let rankedKeys = stackedData.map((d) => d.key)
@@ -111,10 +114,12 @@ export function render(
             vStack.sort((a, b) => d3.ascending(a[1] - a[0], b[1] - b[0]))
           }
           // re-calculate positions
-          vStack.forEach((d) => {
+          vStack.forEach((d, i) => {
             const delta = d[1] - d[0]
             d[0] = minValue
             d[1] = minValue + delta
+            d.rankIndex = i
+
             minValue += delta
           })
         })
@@ -229,6 +234,33 @@ export function render(
 
     const stackedData = d.data[1]
 
+    //add padding to data
+    stackedData[0].map((row, rowIndex) => {
+      // get the value for each vertical stack
+      let vStack = stackedData.map((d) => d[rowIndex])
+      let index = 0
+
+      vStack
+        .sort((a, b) => d3.ascending(a.rankIndex, b.rankIndex))
+        .forEach((e, i) => {
+          const pv =
+            rowIndex > 0
+              ? stackedData[e.originalIndex][rowIndex - 1]
+              : [null, null]
+
+          const nv =
+            rowIndex < stackedData[0].length - 1
+              ? stackedData[e.originalIndex][rowIndex + 1]
+              : ['a', 'b']
+
+          e.padding = index * streamsPadding
+
+          if (e[0] != e[1] || nv[0] != nv[1]) {
+            index++
+          }
+        })
+    })
+
     let localDomain = [
       d3.min(stackedData, (d) => d3.min(d, (d) => d[0])),
       d3.max(stackedData, (d) => d3.max(d, (d) => d[1])),
@@ -248,14 +280,15 @@ export function render(
       .attr('fill', ({ key }) => {
         return colorScale(key)
       })
+      .attr('stroke', 'blue')
       .attr(
         'd',
         d3
           .area()
           .curve(d3[interpolation])
           .x((d) => xScale(d.data[0]))
-          .y0((d) => sizeScale(d[0]))
-          .y1((d) => sizeScale(d[1]))
+          .y0((d) => sizeScale(d[0]) - d.padding)
+          .y1((d) => sizeScale(d[1]) - d.padding)
       )
       .append('title')
       .text(({ key }) => key)

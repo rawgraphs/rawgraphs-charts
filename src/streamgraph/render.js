@@ -196,6 +196,28 @@ export function render(
 
     const stackedData = d.data[1]
 
+    //add padding to data
+    stackedData[0].map((row, rowIndex) => {
+      // get the value for each vertical stack
+      let vStack = stackedData.map((d) => d[rowIndex])
+      let index = 0
+
+      vStack.forEach((e, i) => {
+        const pv = rowIndex > 0 ? stackedData[i][rowIndex - 1] : [null, null]
+        // const cv = stackedData[i][rowIndex]
+        const nv =
+          rowIndex < stackedData[0].length - 1
+            ? stackedData[i][rowIndex + 1]
+            : ['a', 'b']
+
+        e.padding = index * streamsPadding
+
+        if (e[0] != e[1] || nv[0] != nv[1] || pv[0] != pv[1]) {
+          index++
+        }
+      })
+    })
+
     let localDomain = [
       d3.min(stackedData, (d) => d3.min(d, (d) => d[0])),
       d3.max(stackedData, (d) => d3.max(d, (d) => d[1])),
@@ -207,9 +229,6 @@ export function render(
       .nice()
       .range([serieHeight, 0])
 
-    // get keys
-    const sortedKeys = Object.fromEntries(stackedData.map((d, i) => [d.key, i]))
-
     const areas = selection
       .append('g')
       .selectAll('path')
@@ -218,16 +237,15 @@ export function render(
       .attr('fill', ({ key }) => {
         return colorScale(key)
       })
-      .attr('d', (stream) => {
-        return d3
+      .attr(
+        'd',
+        d3
           .area()
           .curve(d3[interpolation])
           .x((d) => xScale(d.data[0]))
-          .y0((d) => sizeScale(d[0]) - streamsPadding * sortedKeys[stream.key])
-          .y1((d) => sizeScale(d[1]) - streamsPadding * sortedKeys[stream.key])(
-          stream
-        )
-      })
+          .y0((d) => sizeScale(d[0]) - d.padding)
+          .y1((d) => sizeScale(d[1]) - d.padding)
+      )
       .append('title')
       .text(({ key }) => key)
 
