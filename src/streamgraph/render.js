@@ -207,6 +207,9 @@ export function render(
       .nice()
       .range([serieHeight, 0])
 
+    // get keys
+    const sortedKeys = Object.fromEntries(stackedData.map((d, i) => [d.key, i]))
+
     const areas = selection
       .append('g')
       .selectAll('path')
@@ -215,15 +218,16 @@ export function render(
       .attr('fill', ({ key }) => {
         return colorScale(key)
       })
-      .attr(
-        'd',
-        d3
+      .attr('d', (stream) => {
+        return d3
           .area()
           .curve(d3[interpolation])
           .x((d) => xScale(d.data[0]))
-          .y0((d) => sizeScale(d[0]))
-          .y1((d) => sizeScale(d[1]))
-      )
+          .y0((d) => sizeScale(d[0]) - streamsPadding * sortedKeys[stream.key])
+          .y1((d) => sizeScale(d[1]) - streamsPadding * sortedKeys[stream.key])(
+          stream
+        )
+      })
       .append('title')
       .text(({ key }) => key)
 
@@ -332,7 +336,7 @@ export function render(
             // get x position
             return xScale(d.maxElement.data[0])
           })
-          .attr('y', sizeScale((d.maxElement[0] + d.maxElement[1]) / 2))
+          .attr('y', (d) => sizeScale((d.maxElement[0] + d.maxElement[1]) / 2))
           .attr('text-anchor', (d) =>
             xScale(d.maxElement.data[0]) > serieWidth - 10
               ? 'end'
