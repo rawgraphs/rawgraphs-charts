@@ -1,6 +1,5 @@
-## next
-
-#### date
+## v1.0.0-beta.10
+#### 19 feb 2021
 
 - _hexagonal binning_: first version
 - _box plot_: added colors, labels and styles support
@@ -12,15 +11,11 @@
 - _convex hull_: first version
 - _bump chart_: first version
 - _violin plot_: area anchors are now in the middle of the bin.
-
-#### 10 feb 2021
-
-_radar chart_: error message when negative values are loaded
-_radar chart_: minor fix
-_violin plot_: paths are now closed adding a point after and before the bins
+- _radar chart_: error message when negative values are loaded
+- _radar chart_: minor fix
+- _violin plot_: paths are now closed adding a point after and before the bins
 
 ## v1.0.0-beta.9
-
 #### 08 feb 2021
 
 - _multiset barchart_: warning when the padding is too high
