@@ -3,6 +3,7 @@ import thumbnail from './alluvialdiagram_thumb.svg'
 
 export const metadata = {
   name: 'Alluvial Diagram',
+  id: 'rawgraphs.alluvialdiagram',
   thumbnail,
   icon,
   categories: ['correlations', 'proportions'],

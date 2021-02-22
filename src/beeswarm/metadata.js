@@ -3,6 +3,7 @@ import thumbnail from './beeswarm_thumb.svg'
 
 export const metadata = {
   name: 'Beeswarm plot',
+  id: 'rawgraphs.beeswarm',
   thumbnail,
   icon,
   categories: ['distributions', 'time series', 'proportions'],

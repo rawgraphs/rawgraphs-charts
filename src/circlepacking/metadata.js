@@ -3,7 +3,7 @@ import thumbnail from './circlepacking_thumb.svg'
 
 export const metadata = {
   name: 'Circle Packing',
-
+  id: 'rawgraphs.circlepacking',
   thumbnail,
   icon,
   categories: ['hierarchies', 'proportions'],

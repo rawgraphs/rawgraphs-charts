@@ -3,6 +3,7 @@ import thumbnail from './hexagonalBinning_thumb.svg'
 
 export const metadata = {
   name: 'Hexagonal binning',
+  id: 'rawgraphs.hexagonalbinning',
   thumbnail,
   icon,
   categories: ['correlation', 'density'],

@@ -24,7 +24,7 @@ export function render(
     marginLeft,
     // chart options
     streamsOrder,
-    streamsPadding,
+    streamsPadding = 0, //@TODO: fix padding for different sortings
     streamsOffset,
     interpolation,
     showYAxis,

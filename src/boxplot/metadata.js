@@ -3,6 +3,7 @@ import thumbnail from './boxplot_thumb.svg'
 
 export const metadata = {
   name: 'Box plot',
+  id: 'rawgraphs.boxplot',
   thumbnail,
   icon,
   categories: ['distributions'],

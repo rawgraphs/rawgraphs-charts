@@ -3,6 +3,7 @@ import thumbnail from './sankeydiagram_thumb.svg'
 
 export const metadata = {
   name: 'Sankey Diagram',
+  id: 'rawgraphs.sankeydiagram',
   thumbnail,
   icon,
   categories: ['flows', 'networks'],

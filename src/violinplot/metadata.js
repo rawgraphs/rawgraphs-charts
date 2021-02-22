@@ -3,6 +3,7 @@ import thumbnail from './violinplot_thumb.svg'
 
 export const metadata = {
   name: 'Violin plot',
+  id: 'rawgraphs.violinplot',
   thumbnail,
   icon,
   categories: ['distributions'],
