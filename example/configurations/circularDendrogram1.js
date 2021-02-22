@@ -18,8 +18,8 @@ export default {
       config: { aggregation: ['csvDistinct'] },
     },
     label: {
-      value: ['Level3', 'Level2', 'results'],
-      config: { aggregation: ['csvDistinct', 'csvDistinct', 'sum'] },
+      value: ['Level2', 'results'],
+      config: { aggregation: ['csvDistinct', 'sum'] },
     },
     size: {
       value: ['results'],

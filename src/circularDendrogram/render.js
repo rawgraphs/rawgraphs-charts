@@ -175,7 +175,7 @@ export function render(
         ]
         return childrenColors.length == 1
           ? colorScale(childrenColors[0])
-          : 'gray'
+          : '#ccc'
       } else {
         // otherwise, if it's a leaf use its own color
         return colorScale(d.data[1].color)
@@ -190,12 +190,9 @@ export function render(
     })
 
   // add labels
-  const textGroups = svg
-    .append('g')
-    .attr('font-family', 'sans-serif')
-    .attr('font-size', 10)
-    .attr('stroke-linejoin', 'round')
-    .attr('stroke-width', 3)
+  const textGroups = svg.append('g').attr('id', 'labels')
+
+  textGroups
     .selectAll('g')
     .data(root.descendants())
     .join('g')
@@ -208,9 +205,12 @@ export function render(
 	        rotate(${d.x >= Math.PI ? 180 : 0})
 	      `
     )
-
-  textGroups
-    .selectAll('text')
+    .append('text')
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr('text-anchor', 'middle')
+    .attr('dominant-baseline', 'text-before-edge')
+    .selectAll('tspan')
     .data((d) => {
       // if the node has children
       // pass just its name in hierarhcy
@@ -220,7 +220,7 @@ export function render(
             string: d.data[0],
             x: d.x < Math.PI === !d.children ? 6 : -6,
             align: d.x < Math.PI === !d.children ? 'start' : 'end',
-            style: styles[hierarchyStyle],
+            style: styles['labelSecondary'],
             hierarchy: true,
           },
         ]
@@ -236,24 +236,27 @@ export function render(
         }))
       }
     })
-    .join('text')
+    .join('tspan')
     .attr('x', (d) => d.x)
-    .attr('dy', (d, i, n) => {
-      if (!d.hierarchy) {
-        const sizeArray = n.map((e) =>
-          parseFloat(styles[labelStyles[i]].fontSize)
-        )
-        const offset = d3.sum(sizeArray) / 2 - 2
-        const size = d3.sum(sizeArray.slice(0, i))
-        return size - offset
-      } else {
-        return d.style.fontSize / 2
-      }
-    })
+    .attr('y', 0)
+    .attr('dy', (d, i) => i * 12)
     .attr('text-anchor', (d) => d.align)
     // .styles((d, i) => styles[labelStyles[i]])
     .styles((d) => d.style)
     .text((d) => d.string)
+
+  textGroups.selectAll('text').each(function () {
+    const sel = d3.select(this)
+    sel.attr('transform', function (d) {
+      const height = sel.node().getBBox().height
+      return `translate(0,${-height / 2})`
+    })
+  })
+
+  if (showLabelsOutline) {
+    // NOTE: Adobe Illustrator does not support paint-order attr
+    textGroups.selectAll('text').styles(styles.labelOutline)
+  }
 
   if (showLegend) {
     // svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option
