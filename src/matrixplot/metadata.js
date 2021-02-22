@@ -3,6 +3,7 @@ import thumbnail from './heatmap_thumb.svg'
 
 export const metadata = {
   name: 'Matrix Plot',
+  id: 'rawgraphs.matrixplot',
   thumbnail,
   icon,
   categories: ['correlations', 'time series', 'proportions'],

@@ -1,6 +1,6 @@
 export const metadata = {
   name: 'Color test',
-
+  id: 'rawgraphs.emptychart',
   // thumbnail,
   // icon,
   category: 'Test and Debugging',

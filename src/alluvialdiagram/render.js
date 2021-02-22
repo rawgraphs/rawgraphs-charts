@@ -10,8 +10,7 @@ export function render(
   originalData,
   styles
 ) {
-  console.log('- render')
-
+  
   const {
     // artboard
     width,

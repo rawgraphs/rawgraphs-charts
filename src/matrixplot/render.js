@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-import { legend } from '@raw-temp/rawgraphs-core'
+import { legend } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles'
 
 export function render(
@@ -10,8 +10,6 @@ export function render(
   originalData,
   styles
 ) {
-  console.log('- render')
-
   const {
     width = 500,
     height = 500,

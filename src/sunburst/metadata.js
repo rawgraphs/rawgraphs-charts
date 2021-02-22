@@ -3,6 +3,7 @@ import thumbnail from './sunburst_thumb.svg'
 
 export const metadata = {
   name: 'Sunburst diagram',
+  id: 'rawgraphs.sunburst',
   thumbnail,
   icon,
   categories: ['hierarchies', 'proportions'],

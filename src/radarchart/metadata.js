@@ -3,7 +3,7 @@ import thumbnail from './radarchart_thumb.svg'
 
 export const metadata = {
   name: 'Radar Chart',
-
+  id: 'rawgraphs.radarchart',
   thumbnail,
   icon,
   categories: ['correlations'],

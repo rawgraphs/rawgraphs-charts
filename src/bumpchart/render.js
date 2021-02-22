@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-import { legend } from '@raw-temp/rawgraphs-core'
+import { legend } from '@rawgraphs/rawgraphs-core'
 import * as d3Gridding from 'd3-gridding'
 import '../d3-styles.js'
 
@@ -11,8 +11,6 @@ export function render(
   originalData,
   styles
 ) {
-  console.log('- render')
-
   const {
     // artboard options
     width,
@@ -24,7 +22,7 @@ export function render(
     marginLeft,
     // chart options
     streamsOrder,
-    streamsPadding,
+    streamsPadding = 0, //@TODO: fix padding for different sortings
     streamsOffset,
     interpolation,
     showYAxis,
@@ -185,8 +183,6 @@ export function render(
   // x scale
   const xDomain = d3.extent(data, (e) => e.x)
   let xScale
-
-  // console.log('datatype', mapping.x.dataType)
 
   if (mapping.x.dataType == 'number') {
     xScale = d3

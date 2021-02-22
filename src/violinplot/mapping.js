@@ -1,9 +1,7 @@
 import * as d3 from 'd3'
-import { getDimensionAggregator } from '@raw-temp/rawgraphs-core'
+import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core'
 
 export const mapData = function (data, mapping, dataTypes, dimensions) {
-  console.log('- mapping')
-
   // define aggregators
   // you should provide the dimension name (defined in dimensions.js)
   // and pass mapping, dataTypes, and dimensions.

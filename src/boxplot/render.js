@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-import { legend } from '@raw-temp/rawgraphs-core'
+import { legend } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
 
 export function render(
@@ -74,8 +74,6 @@ export function render(
     .domain(groupsDomain)
     .padding(0.5)
 
-  console.log(xScale.bandwidth())
-
   // if series is exposed, recreate the nested structure
   const nestedData = d3.rollups(
     data,
@@ -102,8 +100,6 @@ export function render(
     },
     (d) => d.group
   )
-  console.log(nestedData)
-
   // append scales
   svg
     .append('g')

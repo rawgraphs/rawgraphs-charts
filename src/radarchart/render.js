@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-import { legend } from '@raw-temp/rawgraphs-core'
+import { legend } from '@rawgraphs/rawgraphs-core'
 import * as d3Gridding from 'd3-gridding'
 import '../d3-styles.js'
 
@@ -133,7 +133,7 @@ export function render(
 
   // add grid
   if (showGrid) {
-    console.log(griddingData)
+    
     svg
       .append('g')
       .attr('id', 'grid')

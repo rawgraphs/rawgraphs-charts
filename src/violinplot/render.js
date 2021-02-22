@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-import { legend } from '@raw-temp/rawgraphs-core'
+import { legend } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
 
 export function render(
@@ -165,7 +165,7 @@ export function render(
     }) // So now we are working bin per bin
     .style('stroke', 'none')
     .attr('teest', (d) => {
-      console.log(d)
+      // console.log(d)
     })
     .attr(
       'd',

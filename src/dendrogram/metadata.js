@@ -3,6 +3,7 @@ import thumbnail from './dendrogram_thumb.svg'
 
 export const metadata = {
   name: 'Linear dendrogram',
+  id: 'rawgraphs.lineardendrogram',
   thumbnail,
   icon,
   categories: ['hierarchies', 'proportions'],

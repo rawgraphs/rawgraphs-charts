@@ -3,6 +3,7 @@ import thumbnail from './bubblechart_thumb.svg'
 
 export const metadata = {
   name: 'Bubble chart',
+  id: 'rawgraphs.bubblechart',
   thumbnail,
   icon,
   categories: ['correlations', 'proportions'],

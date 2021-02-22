@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react"
-import { chart as rawChart, parseDataset } from "@raw-temp/rawgraphs-core"
+import { chart as rawChart, parseDataset } from "@rawgraphs/rawgraphs-core"
 
 const ChartPreview = ({ chart, data, mapping, dataTypes, visualOptions }) => {
 

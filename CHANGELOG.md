@@ -1,3 +1,6 @@
+## v1.0.0-beta.11
+#### 22 feb 2021
+- using public version of core 
 ## v1.0.0-beta.10
 #### 19 feb 2021
 

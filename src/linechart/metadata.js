@@ -3,6 +3,7 @@ import thumbnail from './linechart_thumb.svg'
 
 export const metadata = {
   name: 'Line chart',
+  id: 'rawgraphs.linechart',
   thumbnail,
   icon,
   categories: ['time series', 'correlations'],

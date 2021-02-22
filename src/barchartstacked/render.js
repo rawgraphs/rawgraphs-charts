@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-import { legend } from '@raw-temp/rawgraphs-core'
+import { legend } from '@rawgraphs/rawgraphs-core'
 import * as d3Gridding from 'd3-gridding'
 import '../d3-styles.js'
 
@@ -11,8 +11,6 @@ export function render(
   originalData,
   styles
 ) {
-  console.log('- render')
-
   const {
     // artboard options
     width,

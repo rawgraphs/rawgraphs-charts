@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-import { legend, dateFormats, labelsOcclusion } from '@raw-temp/rawgraphs-core'
+import { legend, dateFormats, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
 
 export function render(
@@ -109,7 +109,6 @@ export function render(
 
   const vizLayer = svg.append('g').attr('id', 'viz')
 
-  console.log(data)
   const hullsData = d3.groups(data, (d) =>
     d.group && d.group.length ? d.group : null
   )

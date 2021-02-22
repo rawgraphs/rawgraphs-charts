@@ -3,6 +3,7 @@ import thumbnail from './arcdiagram_thumb.svg'
 
 export const metadata = {
   name: 'Arc Diagram',
+  id: 'rawgraphs.arcdiagram',
   thumbnail,
   icon,
   categories: ['networks'],
