@@ -1,6 +1,5 @@
 import * as d3 from 'd3'
-<<<<<<< HEAD
-import { legend, labelsOcclusion } from '@raw-temp/rawgraphs-core'
+import { legend, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
 
 export function render(
@@ -11,13 +10,6 @@ export function render(
   originalData,
   styles
 ) {
-  console.log('- render')
-
-=======
-import { legend, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
-
-export function render(svgNode, data, visualOptions, mapping, originalData) {
->>>>>>> d80c095ca29bb5b1c788a749c4a07866b7c92571
   const {
     // artboard
     width,
