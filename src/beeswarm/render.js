@@ -1,7 +1,15 @@
 import * as d3 from 'd3'
-import { legend } from '@raw-temp/rawgraphs-core'
+import { legend, dateFormats, labelsOcclusion } from '@raw-temp/rawgraphs-core'
+import '../d3-styles.js'
 
-export function render(svgNode, data, visualOptions, mapping, originalData) {
+export function render(
+  svgNode,
+  data,
+  visualOptions,
+  mapping,
+  originalData,
+  styles
+) {
   console.log('- render')
 
   const {
@@ -25,7 +33,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     sortSeriesBy,
     // colors
     colorScale,
+    showLabelsOutline,
+    autoHideLabels,
     //TODO add labels legends
+    labelStyles,
   } = visualOptions
 
   const margin = {
@@ -34,22 +45,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     bottom: marginBottom,
     left: marginLeft,
   }
-
-  d3.select(svgNode).append('style').text(`
-
-    #viz{
-      font-family: Helvetica, Arial, sans-serif;
-      font-size: 12px;
-    }
-    #viz .tick > line {
-      stroke: #ccc
-    }
-    #viz .label {
-      fill: black;
-      text-anchor: middle;
-      font-size: 10px;
-    }
-      `)
 
   // create nest structure
   const grouped = d3.groups(data, (d) => d.series)
@@ -145,23 +140,57 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
     .attr('id', 'viz')
 
+  const xAxis = (g) => {
+    return g
+      .attr('transform', `translate(0,${chartHeight})`)
+      .call(d3.axisBottom(xScale))
+      .call((g) =>
+        g
+          .append('text')
+          .attr('x', chartWidth)
+          .attr('dy', -5)
+          .attr('text-anchor', 'end')
+          .text(mapping['xValue'].value)
+          .styles(styles.axisLabel)
+      )
+  }
+
+  const yAxis = (g) => {
+    return g
+      .call(
+        d3.axisLeft(yScale).tickSize(Math.round(-chartWidth)).tickSizeOuter(0)
+      )
+      .call((g) => g.selectAll('line').styles(styles.axisLine))
+      .call((g) =>
+        g
+          .append('text')
+          .attr('x', 4)
+          .attr('text-anchor', 'start')
+          .attr('dominant-baseline', 'hanging')
+          .text(mapping['series'].value)
+          .styles(styles.axisLabel)
+      )
+  }
+
   // draw the scale and axes
   const axisLayer = svg.append('g').attr('id', 'axis')
 
-  // draw y axis
-  axisLayer
-    .append('g')
-    .attr('id', 'y axis')
-    .call(
-      d3.axisLeft(yScale).tickSize(Math.round(-chartWidth)).tickSizeOuter(0)
-    )
+  axisLayer.append('g').call(xAxis)
+  axisLayer.append('g').call(yAxis)
+  // // draw y axis
+  // axisLayer
+  //   .append('g')
+  //   .attr('id', 'y axis')
+  //   .call(
+  //     d3.axisLeft(yScale).tickSize(Math.round(-chartWidth)).tickSizeOuter(0)
+  //   )
 
-  // draw x axis
-  axisLayer
-    .append('g')
-    .attr('id', 'y axis')
-    .attr('transform', `translate(0,${chartHeight})`)
-    .call(d3.axisBottom(xScale).tickSizeOuter(0))
+  // // draw x axis
+  // axisLayer
+  //   .append('g')
+  //   .attr('id', 'y axis')
+  //   .attr('transform', `translate(0,${chartHeight})`)
+  //   .call(d3.axisBottom(xScale).tickSizeOuter(0))
 
   // draw the viz
   const vizLayer = svg
@@ -199,17 +228,50 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .attr('r', (d) => sizeScale(d.size))
     .style('fill', (d) => colorScale(d.color))
 
-  //add all the texts @TODO: add styling
-  vizLayer
-    .append('g')
-    .attr('id', 'labels')
-    .selectAll('text')
-    .data((d) => d[1])
-    .join('text')
-    .attr('x', (d) => d.x)
-    .attr('y', (d) => d.y)
-    .text((d) => d.label)
-    .attr('class', 'label')
+  const labelsLayer = vizLayer.append('g').attr('class', 'labels')
+
+  labelsLayer
+    .selectAll('g')
+    .data((d) => (mapping.label.value ? d[1] : []))
+    .join('g')
+    .attr('transform', (d) => `translate(${d.x},${d.y})`)
+    .append('text')
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr('text-anchor', 'middle')
+    .attr('dominant-baseline', 'text-before-edge')
+    .selectAll('tspan')
+    .data((d) => (Array.isArray(d.label) ? d.label : [d.label]))
+    .join('tspan')
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr('dy', (d, i) => i * 12)
+    .text((d, i) => {
+      if (d && mapping.label.dataType[i].type === 'date') {
+        return d3.timeFormat(dateFormats[mapping.label.dataType[i].dateFormat])(
+          d
+        )
+      } else {
+        return d
+      }
+    })
+    .styles((d, i) => styles[labelStyles[i]])
+
+  labelsLayer.selectAll('text').call((sel) => {
+    return sel.attr('transform', function (d) {
+      const height = sel.node().getBBox().height
+      return `translate(0,${-height / 2})`
+    })
+  })
+
+  if (showLabelsOutline) {
+    // NOTE: Adobe Illustrator does not support paint-order attr
+    labelsLayer.selectAll('text').styles(styles.labelOutline)
+  }
+
+  if (autoHideLabels) {
+    labelsOcclusion(labelsLayer.selectAll('text'), (d) => d.size)
+  }
 
   if (showLegend) {
     // svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option

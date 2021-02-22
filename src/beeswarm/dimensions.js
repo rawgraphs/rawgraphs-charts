@@ -25,7 +25,7 @@ export const dimensions = [
     name: 'Label',
     validTypes: ['number', 'date', 'string'],
     required: false,
-    multiple: false,
+    multiple: true,
   },
   {
     id: 'series',

@@ -99,6 +99,34 @@ export const visualOptions = {
     },
     group: 'colors',
   },
+
+  labelStyles: {
+    type: 'text',
+    label: 'Label',
+    group: 'labels',
+    options: [
+      { label: 'Primary', value: 'labelPrimary' },
+      { label: 'Secondary', value: 'labelSecondary' },
+      { label: 'Italic', value: 'labelItalic' },
+    ],
+    default: 'labelPrimary',
+    repeatFor: 'label',
+    repeatDefault: ['labelPrimary', 'labelSecondary', 'labelItalic'],
+  },
+
+  showLabelsOutline: {
+    type: 'boolean',
+    label: 'Show outline',
+    default: false,
+    group: 'labels',
+  },
+
+  autoHideLabels: {
+    type: 'boolean',
+    label: 'Auto hide labels',
+    default: false,
+    group: 'labels',
+  },
 }
 
 // showLegend,

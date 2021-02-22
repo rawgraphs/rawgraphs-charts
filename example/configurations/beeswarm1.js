@@ -23,7 +23,7 @@ export default {
     xValue: { value: ['Year'] },
     series: { value: ['Genre'] },
     color: { value: ['Genre'] },
-    label: { value: ['Title'] },
+    label: { value: ['Title', 'Year'] },
     size: { value: ['Budget (Millions, adjusted for inflation)'] },
   },
   visualOptions: {
@@ -31,5 +31,6 @@ export default {
     height: 500,
     marginLeft: 50,
     marginBottom: 50,
+    autoHideLabels: true,
   },
 }

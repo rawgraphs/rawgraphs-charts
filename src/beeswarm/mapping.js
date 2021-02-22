@@ -14,6 +14,6 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
     series: d[mapping.series.value],
     color: d[mapping.color.value],
     size: mapping.size.value ? d[mapping.size.value] : 1,
-    label: d[mapping.label.value],
+    label: mapping.label.value ? mapping.label.value.map((l) => d[l]) : null,
   }))
 }

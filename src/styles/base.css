@@ -5,6 +5,10 @@
   font-weight: bold;
 }
 
+.axisLine{
+  stroke: #ccc;
+}
+
 .labelPrimary {
   font-family: 'Arial, sans-serif';
   font-size: 10px;
