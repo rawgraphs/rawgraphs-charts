@@ -29,10 +29,12 @@ export default {
   visualOptions: {
     width: 500,
     height: 1500,
-    marginRight: 50,
+    marginRight: 100,
     showHierarchyLabels: true,
+    sizeOnlyLeaves: false,
     layout: 'Cluster Dendogram',
     maxRadius: 15,
     sortBy: 'Size (ascending)',
+    showLabelsOutline: true,
   },
 }

@@ -1,7 +1,15 @@
 import * as d3 from 'd3'
 import { legend } from '@raw-temp/rawgraphs-core'
+import '../d3-styles.js'
 
-export function render(svgNode, data, visualOptions, mapping, originalData) {
+export function render(
+  svgNode,
+  data,
+  visualOptions,
+  mapping,
+  originalData,
+  styles
+) {
   console.log('- render')
 
   const {
@@ -21,12 +29,11 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     maxRadius,
     layout,
     sizeOnlyLeaves,
-    label1Style,
-    label2Style,
-    label3Style,
     sortBy,
     // labels
     showHierarchyLabels,
+    showLabelsOutline,
+    labelStyles,
   } = visualOptions
 
   const margin = {
@@ -35,8 +42,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     bottom: marginBottom,
     left: marginLeft,
   }
-
-  const labelStyles = [label1Style, label2Style, label3Style]
 
   const chartWidth = width - margin.left - margin.right
   const chartHeight = height - margin.top - margin.bottom
@@ -161,7 +166,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         ]
         return childrenColors.length == 1
           ? colorScale(childrenColors[0])
-          : 'gray'
+          : '#ccc'
       } else {
         // otherwise, if it's a leaf use its own color
         return colorScale(d.data[1].color)
@@ -179,25 +184,50 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .filter((d) => (showHierarchyLabels ? true : !d.children))
     .append('text')
     .attr('text-anchor', (d) => (d.children ? 'end' : 'start'))
-    .attr('font-family', 'sans-serif')
-    .attr('font-size', 10)
+    .attr('dominant-baseline', 'text-before-edge')
     .selectAll('tspan')
     .data((d) => {
       if (d.children) {
-        return [{ string: d.data[0], x: -6 }]
+        return [
+          {
+            string: d.data[0],
+            x: sizeOnlyLeaves ? -6 - 2 : -sizeScale(d.value) - 2,
+            children: true,
+          },
+        ]
       } else {
         const xpos = sizeScale(d.value)
-        return [d.data[0]]
-          .concat(d.data[1].label)
-          .map((d) => ({ string: d, x: xpos }))
+        // [d.data[0]]
+        // .concat(d.data[1].label)
+        // .map((d) => ({ string: d, x: xpos }))
+        return d.data[1].label.map((d) => ({ string: d, x: xpos + 2 }))
       }
-    }) // add the node name
-    // @TODO change using the new labels module
+    })
     .join('tspan')
     .attr('x', (d) => d.x)
-    .attr('y', (d, i, n) => (i + 1) * 12 - (n.length / 2) * 12 - 2) // 12 is the font size, should be automated
-    .attr('class', (d, i) => (i < 3 ? labelStyles[i] : labelStyles[2])) // if there are more than three
+    .attr('y', 0)
+    .attr('dy', (d, i) => i * 12)
     .text((d) => d.string)
+    .styles((d, i) => {
+      if (d.children) {
+        return styles['labelSecondary']
+      } else {
+        return styles[labelStyles[i]]
+      }
+    })
+
+  node.selectAll('text').each(function () {
+    const sel = d3.select(this)
+    sel.attr('transform', function (d) {
+      const height = sel.node().getBBox().height
+      return `translate(0,${-height / 2})`
+    })
+  })
+
+  if (showLabelsOutline) {
+    // NOTE: Adobe Illustrator does not support paint-order attr
+    node.selectAll('text').styles(styles.labelOutline)
+  }
 
   if (showLegend) {
     // svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option
