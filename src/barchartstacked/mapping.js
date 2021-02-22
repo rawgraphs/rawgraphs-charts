@@ -2,8 +2,6 @@ import * as d3 from 'd3'
 import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core'
 
 export const mapData = function (data, mapping, dataTypes, dimensions) {
-  console.log('- mapping')
-
   // as we are working on a multiple dimension (bars), `getDimensionAggregator` will return an array of aggregator functions
   // the order of aggregators is the same as the value of the mapping
   const barsAggregators = getDimensionAggregator(

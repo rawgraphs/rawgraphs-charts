@@ -1,8 +1,6 @@
 import * as d3 from 'd3'
 
 export const mapData = function (data, mapping, dataTypes, dimensions) {
-  console.log('- mapping')
-
   // add the non-compulsory dimensions.
   'series' in mapping ? null : (mapping.series = { value: undefined })
   'color' in mapping ? null : (mapping.color = { value: undefined })

@@ -7,7 +7,6 @@ const ChartPage = ({ match }) => {
   const [chartInfo, setChartInfo] = useState(null)
 
   useEffect(() => {
-    console.log("DYNAMIC IMPORT")
     import(`../configurations/${confName}`).then(result => {
       setChartInfo(result.default)
     })

@@ -11,8 +11,6 @@ export function render(
   originalData,
   styles
 ) {
-  console.log('- render')
-
   const {
     // artboard options
     width,
@@ -185,8 +183,6 @@ export function render(
   // x scale
   const xDomain = d3.extent(data, (e) => e.x)
   let xScale
-
-  // console.log('datatype', mapping.x.dataType)
 
   if (mapping.x.dataType == 'number') {
     xScale = d3

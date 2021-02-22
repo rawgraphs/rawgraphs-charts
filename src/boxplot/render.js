@@ -74,8 +74,6 @@ export function render(
     .domain(groupsDomain)
     .padding(0.5)
 
-  console.log(xScale.bandwidth())
-
   // if series is exposed, recreate the nested structure
   const nestedData = d3.rollups(
     data,
@@ -102,8 +100,6 @@ export function render(
     },
     (d) => d.group
   )
-  console.log(nestedData)
-
   // append scales
   svg
     .append('g')

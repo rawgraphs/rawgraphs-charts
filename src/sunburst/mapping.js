@@ -2,8 +2,6 @@ import * as d3 from 'd3'
 import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core'
 
 export const mapData = function (data, mapping, dataTypes, dimensions) {
-  console.log('- mapping')
-
   const colorAggregator = getDimensionAggregator(
     'color',
     mapping,
@@ -53,8 +51,6 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
     },
     ...mapping.hierarchy.value.map((level) => (d) => d[level]) // create a grouping for each level of the hierarchy
   )
-
-  console.log('mapping')
 
   return results
 }

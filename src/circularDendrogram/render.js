@@ -10,8 +10,6 @@ export function render(
   originalData,
   styles
 ) {
-  console.log('- render')
-
   const {
     width,
     height,

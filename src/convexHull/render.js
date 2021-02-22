@@ -109,7 +109,6 @@ export function render(
 
   const vizLayer = svg.append('g').attr('id', 'viz')
 
-  console.log(data)
   const hullsData = d3.groups(data, (d) =>
     d.group && d.group.length ? d.group : null
   )

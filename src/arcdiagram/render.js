@@ -3,7 +3,6 @@ import * as d3Sankey from 'd3-sankey'
 import * as louvain from 'louvain'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
-  console.log('- render')
 
   const {
     // artboard

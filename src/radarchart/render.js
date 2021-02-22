@@ -133,7 +133,7 @@ export function render(
 
   // add grid
   if (showGrid) {
-    console.log(griddingData)
+    
     svg
       .append('g')
       .attr('id', 'grid')

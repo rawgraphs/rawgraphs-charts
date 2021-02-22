@@ -165,7 +165,7 @@ export function render(
     }) // So now we are working bin per bin
     .style('stroke', 'none')
     .attr('teest', (d) => {
-      console.log(d)
+      // console.log(d)
     })
     .attr(
       'd',
