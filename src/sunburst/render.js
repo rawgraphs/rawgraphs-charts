@@ -1,7 +1,15 @@
 import * as d3 from 'd3'
 import { legend } from '@raw-temp/rawgraphs-core'
+import '../d3-styles.js'
 
-export function render(svgNode, data, visualOptions, mapping, originalData) {
+export function render(
+  svgNode,
+  data,
+  visualOptions,
+  mapping,
+  originalData,
+  styles
+) {
   console.log('- render')
 
   const {
@@ -26,6 +34,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     colorScale,
     // labels
     showHierarchyLabels,
+    labelStyles,
+    showLabelsOutline,
   } = visualOptions
 
   const margin = {
@@ -34,25 +44,6 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     bottom: marginBottom,
     left: marginLeft,
   }
-
-  const labelStyles = [label1Style, label2Style, label3Style]
-
-  // define style
-  d3.select(svgNode).append('style').text(`
-      #viz text {
-        font-family: Helvetica, Arial, sans-serif;
-        font-size: 12px;
-      }
-
-			#labels .Primary {
-				font-weight: bold;
-			}
-
-			#labels .Tertiary {
-				font-weight: lighter;
-				font-style: oblique;
-			}
-      `)
 
   const chartWidth = width - margin.left - margin.right
   const chartHeight = height - margin.top - margin.bottom
@@ -128,10 +119,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .append('g')
     .attr('id', 'labels')
     .attr('transform', `translate(${width / 2},${height / 2})`)
-    .attr('pointer-events', 'none')
     .attr('text-anchor', 'middle')
-    .attr('font-size', 10)
-    .attr('font-family', 'sans-serif')
     .selectAll('text')
     // .data(root.descendants().filter(d => d.depth && (d.y0 + d.y1) / 2 * (d.x1 - d.x0) > 10)) // @TODO: expose minimum text size filter
     .data(root.descendants())
@@ -148,11 +136,34 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     // if node not a leaf, show just its name.
     // if leaf, use all the mapped labels.
     .data((d) => (d.children ? [d.data[0]] : d.data[1].label))
+    .data((d) => {
+      if (d.children) {
+        return [
+          {
+            string: d.data[0],
+            children: true,
+          },
+        ]
+      } else {
+        return d.data[1].label.map((d) => ({ string: d }))
+      }
+    })
     .join('tspan')
     .attr('x', 0)
     .attr('y', (d, i, n) => (i + 1) * 12 - (n.length / 2) * 12 - 2) // @TODO: 12 is the font size. we should expose this
-    .text((d) => d)
-    .attr('class', (d, i) => (i < 3 ? labelStyles[i] : labelStyles[2]))
+    .text((d) => d.string)
+    .styles((d, i) => {
+      if (d.children) {
+        return styles['labelSecondary']
+      } else {
+        return styles[labelStyles[i]]
+      }
+    })
+
+  if (showLabelsOutline) {
+    // NOTE: Adobe Illustrator does not support paint-order attr
+    textGroups.selectAll('text').styles(styles.labelOutline)
+  }
 
   if (showLegend) {
     // svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option

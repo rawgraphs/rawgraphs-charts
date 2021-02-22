@@ -29,6 +29,6 @@ export default {
   visualOptions: {
     width: 500,
     height: 500,
-    showHierarchyLabels: false,
+    showHierarchyLabels: true,
   },
 }

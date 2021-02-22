@@ -55,30 +55,6 @@ export const visualOptions = {
     group: 'chart',
   },
 
-  label1Style: {
-    type: 'text',
-    label: 'Labels 1 style',
-    group: 'labels',
-    options: ['Primary', 'Secondary', 'Tertiary'],
-    default: 'Primary',
-  },
-
-  label2Style: {
-    type: 'text',
-    label: 'Labels 2 style',
-    group: 'labels',
-    options: ['Primary', 'Secondary', 'Tertiary'],
-    default: 'Secondary',
-  },
-
-  label3Style: {
-    type: 'text',
-    label: 'Labels 3 style',
-    group: 'labels',
-    options: ['Primary', 'Secondary', 'Tertiary'],
-    default: 'Tertiary',
-  },
-
   colorScale: {
     type: 'colorScale',
     label: 'Color scale',
@@ -89,11 +65,31 @@ export const visualOptions = {
     },
     group: 'colors',
   },
+  labelStyles: {
+    type: 'text',
+    label: 'Label',
+    group: 'labels',
+    options: [
+      { label: 'Primary', value: 'labelPrimary' },
+      { label: 'Secondary', value: 'labelSecondary' },
+      { label: 'Italic', value: 'labelItalic' },
+    ],
+    default: 'labelPrimary',
+    repeatFor: 'label',
+    repeatDefault: ['labelPrimary', 'labelSecondary', 'labelItalic'],
+  },
 
   showHierarchyLabels: {
     type: 'boolean',
     label: 'Show hierarchy labels',
     default: true,
+    group: 'labels',
+  },
+
+  showLabelsOutline: {
+    type: 'boolean',
+    label: 'Show outline',
+    default: false,
     group: 'labels',
   },
 }
