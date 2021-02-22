@@ -212,7 +212,7 @@ export function render(
     .data((d) => {
       // if the node has children
       // pass just its name in hierarhcy
-      if (d.children || d.data[1].label.length == 0) {
+      if (d.children) {
         return [
           {
             string: d.data[0],
