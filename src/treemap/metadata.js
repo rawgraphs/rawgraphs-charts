@@ -3,6 +3,7 @@ import thumbnail from './treemap_thumb.svg'
 
 export const metadata = {
   name: 'Treemap',
+  id: 'rawgraphs.treemap',
   thumbnail,
   icon,
   categories: ['hierarchies', 'proportions'],

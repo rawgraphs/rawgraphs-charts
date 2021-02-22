@@ -3,6 +3,7 @@ import thumbnail from './streamgraph_thumb.svg'
 
 export const metadata = {
   name: 'Streamgraph (area chart)',
+  id: 'rawgraphs.streamgraph',
   thumbnail,
   icon,
   categories: ['correlations', 'proportions'],

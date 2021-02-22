@@ -3,6 +3,7 @@ import thumbnail from './contourPlot_thumb.svg'
 
 export const metadata = {
   name: 'Contour plot',
+  id: 'rawgraphs.contourplot',
   thumbnail,
   icon,
   categories: ['correlation', 'density'],

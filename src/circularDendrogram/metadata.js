@@ -3,7 +3,7 @@ import thumbnail from './circulardendrogram_thumb.svg'
 
 export const metadata = {
   name: 'Circular dendrogram',
-
+  id: 'rawgraphs.circulardendrogram',
   thumbnail,
   icon,
   categories: ['hierarchies', 'proportions'],

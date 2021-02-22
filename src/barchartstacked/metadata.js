@@ -3,6 +3,7 @@ import thumbnail from './barchartstacked_thumb.svg'
 
 export const metadata = {
   name: 'Stacked bar chart',
+  id: 'rawgraphs.barchartstacked',
   thumbnail,
   icon,
   categories: ['correlations', 'proportions'],

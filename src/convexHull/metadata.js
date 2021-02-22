@@ -3,6 +3,7 @@ import thumbnail from './convexHull_thumb.svg'
 
 export const metadata = {
   name: 'Convex hull',
+  id: 'rawgraphs.convexhull',
   thumbnail,
   icon,
   categories: ['correlations', 'proportions'],
