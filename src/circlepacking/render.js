@@ -1,7 +1,15 @@
 import * as d3 from 'd3'
 import { legend, labelsOcclusion } from '@raw-temp/rawgraphs-core'
+import '../d3-styles.js'
 
-export function render(svgNode, data, visualOptions, mapping, originalData) {
+export function render(
+  svgNode,
+  data,
+  visualOptions,
+  mapping,
+  originalData,
+  styles
+) {
   console.log('- render')
 
   const {
@@ -26,6 +34,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     showLabelsOutline,
     showHierarchyLabels,
     autoHideLabels,
+    labelStyles,
   } = visualOptions
 
   const margin = {
@@ -118,14 +127,16 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
       .text((d) => d.data[0])
   }
 
-  const texts = leaves
+  const labelsLayer = svg.append('g').attr('id', 'labels')
+
+  labelsLayer
+    .selectAll('g')
+    .data(mapping.label.value ? root.leaves() : [])
+    .join('g')
+    .attr('transform', (d) => `translate(${d.x + 1},${d.y + 1})`)
     .append('text')
-    .attr('font-family', 'Arial, sans-serif')
-    .attr('font-size', 10)
     .attr('text-anchor', 'middle')
     .attr('dominant-baseline', 'text-before-edge')
-
-  texts
     .selectAll('tspan')
     .data((d, i, a) => {
       return Array.isArray(d.data[1].label)
@@ -134,7 +145,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     })
     .join('tspan')
     .attr('x', 0)
-    .attr('y', (d, i) => i * 1.1 + 'em')
+    .attr('y', 0)
+    .attr('dy', (d, i) => i * 12)
     .text((d, i) => {
       if (d && mapping.label.dataType[i].type === 'date') {
         return d3.timeFormat(dateFormats[mapping.label.dataType[i].dateFormat])(
@@ -144,8 +156,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         return d
       }
     })
+    .styles((d, i) => styles[labelStyles[i]])
 
-  texts.call((sel) => {
+  labelsLayer.selectAll('text').call((sel) => {
     return sel.attr('transform', function (d) {
       const height = sel.node().getBBox().height
       return `translate(0,${-height / 2})`
@@ -154,16 +167,13 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
 
   if (showLabelsOutline) {
     // NOTE: Adobe Illustrator does not support paint-order attr
-    texts
-      .attr('stroke-width', 2)
-      .attr('paint-order', 'stroke')
-      .attr('stroke', 'white')
-      .attr('stroke-linecap', 'round')
-      .attr('stroke-linejoin', 'round')
+
+    labelsLayer.selectAll('text').styles(styles.labelOutline)
   }
 
   if (autoHideLabels) {
-    labelsOcclusion(texts, (d) => d.r)
+    //labelsOcclusion(texts, (d) => d.r)
+    labelsOcclusion(labelsLayer.selectAll('text'), (d) => d.r)
   }
 
   if (showLegend) {
