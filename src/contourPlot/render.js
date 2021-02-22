@@ -1,6 +1,6 @@
 import * as d3 from 'd3'
 import * as d3Contour from 'd3-contour'
-import { legend, dateFormats, labelsOcclusion } from '@raw-temp/rawgraphs-core'
+import { legend, dateFormats, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
 
 export function colorDomain(data, mapping, visualOptions) {

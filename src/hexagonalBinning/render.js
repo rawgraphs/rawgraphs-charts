@@ -2,10 +2,8 @@ import * as d3 from 'd3'
 import * as d3Hexbin from 'd3-hexbin'
 import {
   legend,
-  dateFormats,
   labelsOcclusion,
-  colorPresets,
-} from '@raw-temp/rawgraphs-core'
+} from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
 
 export function colorDomain(data, mapping, visualOptions) {

@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-import { legend, labelsOcclusion } from '@raw-temp/rawgraphs-core'
+import { legend, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
   console.log('- render')
