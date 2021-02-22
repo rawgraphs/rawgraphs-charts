@@ -53,11 +53,11 @@ export const visualOptions = {
     label: 'Tiling method',
     group: 'chart',
     options: [
-      {label:'Binary', value:'treemapBinary'}, 
-      {label:'Dice', value:'treemapDice'},
-      {label:'Slice', value:'treemapSlice'},
-      {label:'Slice and dice', value:'treemapSliceDice'},
-      {label:'Squarify', value:'treemapSquarify'},
+      { label: 'Binary', value: 'treemapBinary' },
+      { label: 'Dice', value: 'treemapDice' },
+      { label: 'Slice', value: 'treemapSlice' },
+      { label: 'Slice and dice', value: 'treemapSliceDice' },
+      { label: 'Squarify', value: 'treemapSquarify' },
     ],
     default: 'treemapSquarify',
   },
@@ -85,6 +85,20 @@ export const visualOptions = {
       interpolator: 'interpolateSpectral',
     },
     group: 'colors',
+  },
+
+  labelStyles: {
+    type: 'text',
+    label: 'Label',
+    group: 'labels',
+    options: [
+      { label: 'Primary', value: 'labelPrimary' },
+      { label: 'Secondary', value: 'labelSecondary' },
+      { label: 'Italic', value: 'labelItalic' },
+    ],
+    default: 'labelPrimary',
+    repeatFor: 'label',
+    repeatDefault: ['labelPrimary', 'labelSecondary', 'labelItalic'],
   },
 
   showLabelsOutline: {

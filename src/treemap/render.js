@@ -1,7 +1,15 @@
 import * as d3 from 'd3'
 import { legend } from '@raw-temp/rawgraphs-core'
+import '../d3-styles.js'
 
-export function render(svgNode, data, visualOptions, mapping, originalData) {
+export function render(
+  svgNode,
+  data,
+  visualOptions,
+  mapping,
+  originalData,
+  styles
+) {
   console.log('- render')
 
   const {
@@ -26,6 +34,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     // labels
     showLabelsOutline,
     showHierarchyLabels,
+    labelStyles,
   } = visualOptions
 
   const margin = {
@@ -173,15 +182,11 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
         return d
       }
     })
+    .styles((d, i) => styles[labelStyles[i]])
 
   if (showLabelsOutline) {
     // NOTE: Adobe Illustrator does not support paint-order attr
-    d3.selectAll('.txt')
-      .attr('stroke-width', 2)
-      .attr('paint-order', 'stroke')
-      .attr('stroke', 'white')
-      .attr('stroke-linecap', 'round')
-      .attr('stroke-linejoin', 'round')
+    d3.selectAll('.txt').styles(styles.labelOutline)
   }
 
   if (showLegend) {
