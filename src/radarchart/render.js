@@ -72,6 +72,16 @@ export function render(
   // select the SVG element
   const svg = d3.select(svgNode)
 
+  // add background
+  d3.select(svgNode)
+    .append('rect')
+    .attr('width', showLegend ? width + legendWidth : width)
+    .attr('height', height)
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr('fill', background)
+    .attr('id', 'backgorund')
+
   // set up grid
   const gridding = d3Gridding
     .gridding()
@@ -133,7 +143,6 @@ export function render(
 
   // add grid
   if (showGrid) {
-    
     svg
       .append('g')
       .attr('id', 'grid')

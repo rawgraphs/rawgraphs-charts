@@ -79,7 +79,7 @@ export function render(
   // add background
   d3.select(svgNode)
     .append('rect')
-    .attr('width', width)
+    .attr('width', showLegend ? width + legendWidth : width)
     .attr('height', height)
     .attr('x', 0)
     .attr('y', 0)

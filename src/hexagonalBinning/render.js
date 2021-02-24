@@ -1,9 +1,6 @@
 import * as d3 from 'd3'
 import * as d3Hexbin from 'd3-hexbin'
-import {
-  legend,
-  labelsOcclusion,
-} from '@rawgraphs/rawgraphs-core'
+import { legend, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
 
 export function colorDomain(data, mapping, visualOptions) {
@@ -164,7 +161,7 @@ export function render(
   const artboardBackground = d3
     .select(svgNode)
     .append('rect')
-    .attr('width', width)
+    .attr('width', showLegend ? width + legendWidth : width)
     .attr('height', height)
     .attr('x', 0)
     .attr('y', 0)
