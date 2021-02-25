@@ -27,15 +27,15 @@ Rename the folder as you prefer (e.g. myChart). Rename as well the file `empty_c
 
 Now you should have the following structure:
 
-```shell
+```
 src
 └── myChart
-		├── dimensions.js
-		├── myChart.js
-		├── index.js
-		├── metadata.js
-		├── render.js
-		└── visualOptions.js
+    ├── dimensions.js
+    ├── myChart.js
+    ├── index.js
+    ├── metadata.js
+    ├── render.js
+    └── visualOptions.js
 ```
 
 Let's start from the simple things.
@@ -132,7 +132,7 @@ export const mapData = {
 
 For more elaborate kind of mapping, plese read the [API documentation]().
 
-At this point, you can start to test your chart in the sandbox, see the section [Test the chart in the sandbox]() if you prefer to see live the results of your operations.
+At this point, you can start to test your chart in the sandbox, see the section [Test the chart in the sandbox](#test-the-chart-in-the-sandbox) if you prefer to see live the results of your operations.
 
 #### 5. Define visual options
 
@@ -279,7 +279,7 @@ if (mapping.color.value) {
 }
 ```
 
-Legend width and position can be exposed as visual variable (see section [5. Define visual variables](#5. Define visual variables))
+Legend width and position can be exposed as visual variable (see section [5. Define visual variables](#5-define-visual-options))
 
 #### 8. Add styles
 
@@ -375,7 +375,7 @@ export default {
 
 ### Activate the sandbox
 
-To activate the sandbox, after installing NPM dependencies, run:
+To activate the sandbox, after installing NPM dependencies, open the folder containing the rawgraphs-charts repository in the terminal and run:
 
 ```shell
 npm run sandbox
