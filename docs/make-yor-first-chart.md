@@ -310,7 +310,7 @@ Finally, to use the chart in the rawgraphs app you must add it to the file `src/
 export { default as myChart } from './myChart'
 ```
 
-you can test locally in the sandbox environment bu following the steps in next section, or otherwise you can test it in the RAWGraphs app by following the [instruction in the main readme file]().
+you can test locally in the sandbox environment bu following the steps in next section, or otherwise you can test it in the RAWGraphs app by following the [instruction in the main readme file](https://github.com/rawgraphs/rawgraphs-charts/tree/docs#creating-a-build-and-using-locally-in-rawgraphs-app).
 
 ## Test the chart in the sandbox
 
@@ -369,9 +369,9 @@ export default {
 
 `dataTypes` define the data type for each column in the dataset.
 
-`mapping` defines which columns of the dataset are mapped on the data dimensions defined by the chart (see section [3. define data dimensions]())
+`mapping` defines which columns of the dataset are mapped on the data dimensions defined by the chart (see section [3. define data dimensions](#3-define-data-dimensions))
 
-`visualOptions` defines the visual options provided by the chart (see section [5. Define visual options]()).
+`visualOptions` defines the visual options provided by the chart (see section [5. Define visual options](#5-define-visual-options)).
 
 ### Activate the sandbox
 
