@@ -13,7 +13,8 @@ After cloning the repo, run `npm install` to install all the dependencies.
 ## Resources
 
 - [Make your first chart](docs/make-yor-first-chart.md)
-- General principles
+- [General principles](docs/good-practices.md)
+- [RAWGraphs dictionary](docs/RAWGraphs-dictionary.md)
 - RAWGraphs core API reference
 
 ## Running the sandbox environment
