@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
-          node-version: 12
-          registry-url: https://npm.inmagik.com/
+          node-version: '14.x'
+          registry-url: 'https://registry.npmjs.org'
       - run: npm install
       - run: npm run build
       - run: npm publish

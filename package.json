@@ -1,6 +1,6 @@
 {
   "name": "@rawgraphs/rawgraphs-charts",
-  "version": "1.0.0-beta.13",
+  "version": "v1.0.0-beta.15",
   "description": "RAWGRAPHS charts",
   "jsdelivr": "lib/index.umd.js",
   "unpkg": "lib/index.umd.js",
@@ -17,7 +17,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "css": "^3.0.0",
-    "d3": "^6.2.0",
+    "d3": "^6.5.0",
     "d3-contour": "^2.0.0",
     "d3-gridding": "^0.2.0",
     "d3-hexbin": "^0.2.2",
@@ -29,7 +29,7 @@
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
-    "@rawgraphs/rawgraphs-core": "^1.0.0-beta.8",
+    "@rawgraphs/rawgraphs-core": "^1.0.0-beta.11",
     "@rollup/plugin-babel": "^5.1.0",
     "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-image": "^2.0.5",

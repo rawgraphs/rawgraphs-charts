@@ -1,3 +1,16 @@
+## v1.0.0-beta.14
+#### 25 feb 2021
+- updated dependencies: d3, rawgraphs-core
+## v1.0.0-beta.14
+#### 24 feb 2021
+
+- .npmingore
+## v1.0.0-beta.13
+#### 23 feb 2021
+- publishing on npm, no repository
+## v1.0.0-beta.12
+#### 22 feb 2021
+- fixed labels in circular dendogram
 ## v1.0.0-beta.11
 #### 22 feb 2021
 - using public version of core 
