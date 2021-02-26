@@ -1,3 +1,7 @@
+## Next
+#### Date
+- _gantt chart_: first version
+  
 ## v1.0.0-beta.14
 #### 25 feb 2021
 - updated dependencies: d3, rawgraphs-core

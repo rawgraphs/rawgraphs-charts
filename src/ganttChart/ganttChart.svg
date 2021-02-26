@@ -1,0 +1,27 @@
+<svg id="rawgraphs-icons" xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #95e5c0;
+      }
+
+      .cls-2 {
+        fill: #06c26c;
+      }
+    </style>
+  </defs>
+  <g id="secundary">
+    <rect class="cls-1" x="34" y="20" width="8" height="4"/>
+    <rect class="cls-1" x="14" y="30" width="22" height="4"/>
+    <rect class="cls-1" x="22" y="35" width="10" height="4"/>
+    <rect class="cls-1" x="28" y="40" width="17" height="4"/>
+  </g>
+  <g id="primary">
+    <polygon class="cls-2" points="46.305 46.805 44.865 46.805 46.061 48 7.5 48 7.5 49 46.061 49 44.865 50.195 46.305 50.195 48 48.5 46.305 46.805"/>
+    <rect class="cls-2" x="8" y="10" width="10" height="4"/>
+    <rect class="cls-2" x="8" y="25" width="6" height="4"/>
+    <rect class="cls-2" x="18" y="15" width="18" height="4"/>
+    <rect class="cls-2" x="30" y="20" width="3" height="4"/>
+    <rect class="cls-2" x="33" y="35" width="7" height="4"/>
+  </g>
+</svg>
