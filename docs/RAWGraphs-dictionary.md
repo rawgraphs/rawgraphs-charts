@@ -2,8 +2,6 @@
 
 to keep consistent our guides, we drafted this small dictionary.
 
-The power (and limitation) of RAWGraphs is that the data input is a single plain table. 
-
 #### Chart
 
 Charts are the combination of [dimensions](#dimension), [mapping](mapping) and [visual options](visual-option), outputs and render function and outputs the visualizations.
