@@ -84,7 +84,7 @@ export const visualOptions = {
 
   alignLabels: {
     type: 'boolean',
-    label: 'Align labels to bar',
+    label: 'Align labels to group',
     default: false,
     group: 'labels',
   },

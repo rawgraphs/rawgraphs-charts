@@ -37,10 +37,8 @@ export function render(
   const chartHeight = height - margin.top - margin.bottom
 
   if (mapping.startDate.dataType.type != mapping.endDate.dataType.type) {
-    throw new Error('startDate and endDate must be the same data type')
+    throw new Error('startDate and endDate must have the same data type')
   }
-
-  console.log(data)
 
   const groups = d3.rollups(
     data,
@@ -62,7 +60,7 @@ export function render(
       level++
       return levels.flat()
     },
-    (d) => d.group
+    (d) => (d.group && d.group.length ? d.group : null)
   )
 
   groups.sort((a, b) => {
@@ -91,6 +89,8 @@ export function render(
     .domain(d3.range(lines))
     .range([0, chartHeight])
     .paddingInner(barPadding)
+    .paddingOuter(barPadding / 2)
+    .align(1)
 
   const lineHeight = heightScale.bandwidth()
   const lineStep = heightScale.step()
@@ -104,7 +104,7 @@ export function render(
   const artboardBackground = d3
     .select(svgNode)
     .append('rect')
-    .attr('width', showLegend ? width : width + legendWidth)
+    .attr('width', showLegend ? width + legendWidth : width)
     .attr('height', height)
     .attr('x', 0)
     .attr('y', 0)
@@ -142,7 +142,7 @@ export function render(
     .attr('x', (d) =>
       alignLabels ? x(d[0].data[d.index][1][0].startDate) - 4 : -4
     )
-    .attr('y', lineHeight / 2)
+    .attr('y', lineStep / 2)
     .attr('text-anchor', 'end')
     .attr('dominant-baseline', 'middle')
     .text((d) => d.key)
@@ -153,7 +153,7 @@ export function render(
     .data((d, i) => d[0].data[d.index][1])
     .join('rect')
     .attr('x', (d) => x(d.startDate))
-    .attr('y', (d) => lineStep * d.level)
+    .attr('y', (d) => lineStep * d.level + (lineStep - lineHeight) / 2)
     .attr('width', (d) => d3.max([1, x(d.endDate) - x(d.startDate)]))
     .attr('height', lineHeight)
     .attr('fill', (d) => colorScale(d.color))
@@ -165,11 +165,6 @@ export function render(
     .attr('x2', chartWidth)
     .attr('y2', 0)
     .styles(styles.axisLine)
-
-  // if (showLabelsOutline) {
-  //   // NOTE: Adobe Illustrator does not support paint-order attr
-  //   labelsLayer.selectAll('text').styles(styles.labelOutline)
-  // }
 
   if (showLegend) {
     const legendLayer = d3

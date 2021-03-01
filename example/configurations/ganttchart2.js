@@ -19,7 +19,7 @@ export default {
   mapping: {
     startDate: { value: ['Start date'] },
     endDate: { value: ['End date'] },
-    group: { value: ['Politician'] },
+    group: { value: ['Role'] },
     //color: { value: ['Role'] },
   },
   visualOptions: {
@@ -32,5 +32,6 @@ export default {
     marginLeft: 50,
     alignLabels: true,
     sortGroupsBy: 'ascending',
+    barPadding: 0.8,
   },
 }
