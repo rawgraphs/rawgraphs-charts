@@ -182,19 +182,12 @@ export function render(
 
   // x scale
   const xDomain = d3.extent(data, (e) => e.x)
-  let xScale
+  const xScale =
+    mapping.x.dataType.type === 'date' ? d3.scaleTime() : d3.scaleLinear()
 
-  if (mapping.x.dataType == 'number') {
-    xScale = d3
-      .scaleLinear()
-      .domain(xDomain)
-      .range([0, griddingData[0].width - margin.right - margin.left])
-  } else if (mapping.x.dataType.type == 'date') {
-    xScale = d3
-      .scaleTime()
-      .domain(xDomain)
-      .range([0, griddingData[0].width - margin.right - margin.left])
-  }
+  xScale
+    .domain(xDomain)
+    .range([0, griddingData[0].width - margin.right - margin.left])
 
   // add grid
   if (showGrid) {
