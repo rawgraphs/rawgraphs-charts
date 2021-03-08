@@ -220,7 +220,12 @@ export function render(
       return g
         .attr(
           'transform',
-          (d) => 'translate(' + (xDomain[0] >= 0 ? 0 : xScale(0)) + ',0)'
+          (d) =>
+            'translate(' +
+            (mapping.x.dataType.type === 'date' || xDomain[0] >= 0
+              ? 0
+              : xScale(0)) +
+            ',0)'
         )
         .call(d3.axisLeft(yScale).tickSizeOuter(0))
         .call((g) =>
