@@ -307,7 +307,7 @@ export function render(
     const chartLegend = legend().legendWidth(legendWidth)
 
     if (mapping.color.value) {
-      legchartLegendend.addColor(mapping.color.value, colorScale)
+      chartLegend.addColor(mapping.color.value, colorScale)
     }
 
     legendLayer.call(chartLegend)
