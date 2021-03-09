@@ -1,14 +1,14 @@
-# Make your first chart
+# Adding a chart
+
+While RAWGraphs API allows you to define your own chart in several ways, in this repository we adopt a strict structure to ensure readability.
 
 Differently from other great projects out there, RAWGraphs does not come with a strict framework to write charts. In RAWGraphs, charts can be written as you prefer. Instead, what RAWGraphs requires is some specification on how to build the necessary interface to let users transform their data and control some visual aspects of the chart.
 
-RAWGraphs charts are based on the rawgraphs-core APIs. Please, refer to the API Reference for a complete description of all the methods available.
-
-## The anatomy of a visual model
+## The anatomy of a chart in rawgraphs-charts
 
 Each chart is enclosed in a folder in the `src/` folder.
 
-It is composed by seven files:
+It is composed by eight files:
 
 * **index.js** exporting the chart;
 * **metadata.js** describes the chart;
@@ -16,10 +16,13 @@ It is composed by seven files:
 * **mapping.js** contains the code to tranform the data in the needed format. Mapping ***must*** always return a flat array of objects.
 * **visualOptions.js** describes all the visual options related to the chart (e.g. width, minimum dots size, sorting options etc.)
 * **render.js** containt the code needed to draw the chart.
+* **\<chartName\>.js**: exports the chart.
+* **\<chartName\>.svg**: contains the icon that will be shown in the interface.
+* **\<chartName\>_thumb.svg**: contains the thumbnail that will be shown in the interface.
 
 ## Getting started
 
-If you have not done this yet, please clone the rawgraphs-charts repository on your machine and follow the instructions to install dependencies.
+If you have not done this yet, please clone the `rawgraphs-charts` repository on your machine and follow the instructions to install dependencies.
 
 First of all, open the `src/` directory and make a copy of the `empty_chart` directory and all the contained files.
 
