@@ -25,7 +25,8 @@ export default {
   },
   visualOptions: {
     useSameScale: true,
-    streamsOffset: 'Silhouette',
+    streamsOffset: 'stackOffsetSilhouette',
+    streamsOrder: 'stackOrderInsideOut',
     interpolation: 'curveLinear',
     streamsPadding: 10,
   },

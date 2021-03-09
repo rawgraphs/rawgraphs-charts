@@ -95,12 +95,12 @@ export const visualOptions = {
     default: 'stackOffsetNone',
   },
 
-  // streamsPadding: {
-  //   type: 'number',
-  //   label: 'Padding between streams',
-  //   default: 1,
-  //   group: 'chart',
-  // },
+  streamsPadding: {
+    type: 'number',
+    label: 'Padding between streams',
+    default: 1,
+    group: 'chart',
+  },
 
   showYAxis: {
     type: 'boolean',

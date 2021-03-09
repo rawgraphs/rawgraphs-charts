@@ -1,26 +1,48 @@
+## upcoming
+
+- _stream graph_: fixed padding
+- _bump chart_: fixed padding
+
 ## v1.0.0-beta.16
+
 #### 8 mar 2021
+
 - _gantt chart_: first version
 - bugs fixing
 - update rawgraphs-core version
-  
+
 ## v1.0.0-beta.15
+
 #### 25 feb 2021
+
 - updated dependencies: d3, rawgraphs-core
+
 ## v1.0.0-beta.14
+
 #### 24 feb 2021
 
 - .npmingore
+
 ## v1.0.0-beta.13
+
 #### 23 feb 2021
+
 - publishing on npm, no repository
+
 ## v1.0.0-beta.12
+
 #### 22 feb 2021
+
 - fixed labels in circular dendogram
+
 ## v1.0.0-beta.11
+
 #### 22 feb 2021
-- using public version of core 
+
+- using public version of core
+
 ## v1.0.0-beta.10
+
 #### 19 feb 2021
 
 - _hexagonal binning_: first version
@@ -38,6 +60,7 @@
 - _violin plot_: paths are now closed adding a point after and before the bins
 
 ## v1.0.0-beta.9
+
 #### 08 feb 2021
 
 - _multiset barchart_: warning when the padding is too high
