@@ -27,5 +27,6 @@ export default {
     useSameScale: true,
     streamsOffset: 'Wiggle',
     streamsPadding: 10,
+    streamsOrder: 'stackOrderAppearance',
   },
 }

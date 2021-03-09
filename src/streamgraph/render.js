@@ -32,7 +32,7 @@ export function render(
     sortSeriesBy,
     showSeriesLabels,
     repeatAxesLabels,
-    showGrid = true,
+    showGrid,
     // color options
     colorScale,
     // legend
@@ -184,12 +184,18 @@ export function render(
     const serieHeight = d.height - margin.top - margin.bottom
 
     const stackedData = d.data[1]
-
+    // console.log(Object.assign({}, stackedData))
     //add padding to data
     stackedData[0].map((row, rowIndex) => {
       // get the value for each vertical stack
       let vStack = stackedData.map((d) => d[rowIndex])
       let index = 0
+      console.log(Object.assign({}, vStack))
+
+      // re-sort them by initial value
+      vStack
+        .sort((a, b) => d3.ascending(a[1], b[1]))
+        .sort((a, b) => d3.ascending(a[0], b[0]))
 
       vStack.forEach((e, i) => {
         const pv = rowIndex > 0 ? stackedData[i][rowIndex - 1] : [null, null]

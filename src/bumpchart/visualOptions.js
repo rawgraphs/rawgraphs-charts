@@ -48,21 +48,6 @@ export const visualOptions = {
     },
   },
 
-  streamsOrder: {
-    type: 'text',
-    label: 'Sort streams by',
-    group: 'chart',
-    options: [
-      { label: 'Earliest', value: 'stackOrderAppearance' },
-      { label: 'Ascending', value: 'stackOrderAscending' },
-      { label: 'Descending', value: 'stackOrderDescending' },
-      { label: 'Inside out', value: 'stackOrderInsideOut' },
-      { label: 'None', value: 'stackOrderNone' },
-      { label: 'Reverse', value: 'stackOrderReverse' },
-    ],
-    default: 'stackOrderNone',
-  },
-
   interpolation: {
     type: 'text',
     label: 'Curves interpolation',
