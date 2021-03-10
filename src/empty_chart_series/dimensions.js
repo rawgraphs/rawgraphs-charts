@@ -16,12 +16,38 @@ export const dimensions = [
   //   },
   //   operation: 'get',
   // },
-
-  //example dimension
   {
-    id: 'x',
-    name: 'x axis',
-    validTypes: ['number'],
-    required: true,
+    id: 'myDimension',
+    name: 'dimension Name',
+    validTypes: ['number', 'date', 'string'],
+    required: false,
+    aggregation: true,
+    aggregationDefault: {
+      number: 'sum',
+      string: 'csvDistinct',
+      date: 'csvDistinct',
+    },
+  },
+
+  {
+    id: 'color',
+    name: 'color',
+    operation: 'get',
+    validTypes: ['number', 'string', 'date'],
+    required: false,
+    aggregation: true,
+    aggregationDefault: {
+      number: 'sum',
+      string: 'csvDistinct',
+      date: 'csvDistinct',
+    },
+  },
+
+  {
+    id: 'series',
+    name: 'series',
+    validTypes: ['number', 'string', 'date'],
+    required: false,
+    operation: 'get',
   },
 ]
