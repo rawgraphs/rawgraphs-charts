@@ -385,3 +385,50 @@ npm run sandbox
 ```
 
 It will create a localhost running all the example configurations at the address http://localhost:9000.
+
+## Creating a build and testing locally in RAWGraphs app
+
+To test your work in the RAWGraphs app interface, you need to [clone and install dependecies for the RAWGraphs-app repo](https://github.com/rawgraphs/rawgraphs-app#instructions-mac-os).
+
+In terminal, browse the folder containging `rawgraphs-charts` and create a build with the command:
+
+```shell
+npm run build
+```
+
+Then create a link with the command:
+
+```shell
+yarn link
+```
+
+Open the terminal and browse the folder containing rawgraphs-app, link the local chart with the command:
+
+```shell
+yarn link "@rawgraphs/rawgraphs-charts"
+```
+
+In `ragraphs-app` repository, import your new chart in the file `src/charts.js`:
+
+```js
+import {
+  ...,
+  myChart
+} from '@rawgraphs/rawgraphs-charts'
+
+// New charts, not included into first release.
+// Comment at necessity.
+let charts = [
+  ...,
+  myChart,
+]
+```
+
+And test it locally by starting the app:
+
+```shell
+yarn start
+```
+
+Everytime you will create a new build of `rawgraphs-chart` your local version of `rawgraphs-app` will be updated.
+
