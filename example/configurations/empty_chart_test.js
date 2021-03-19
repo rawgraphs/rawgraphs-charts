@@ -1,4 +1,4 @@
-import chart from 'rawcharts/myChart'
+import chart from 'rawcharts/empty_chart'
 import data from '../datasets/Movies.tsv'
 
 export default {

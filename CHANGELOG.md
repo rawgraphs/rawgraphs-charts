@@ -1,5 +1,6 @@
 ## upcoming
 
+- _alluvial diagram_: fixed links sorting and sizes calculation
 - _stream graph_: fixed padding
 - _bump chart_: fixed padding
 

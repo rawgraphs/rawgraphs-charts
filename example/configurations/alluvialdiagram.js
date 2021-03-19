@@ -33,5 +33,6 @@ export default {
     marginRight: 0,
     background: 'white',
     nodesWidth: 50,
+    sortNodesBy: 'Total value (descending)',
   },
 }

@@ -2,7 +2,6 @@ import * as d3 from 'd3'
 import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core'
 
 export const mapData = function (data, mapping, dataTypes, dimensions) {
-  
   const sizeAggregator = getDimensionAggregator(
     'size',
     mapping,
@@ -35,7 +34,7 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
         results.push(item)
         return item
       },
-      (d) => d[step1] + d[step2]
+      (d) => d[step1] + '_' + d[step2]
     )
   })
 

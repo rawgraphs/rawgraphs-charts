@@ -10,7 +10,6 @@ export function render(
   originalData,
   styles
 ) {
-  
   const {
     // artboard
     width,
@@ -94,20 +93,19 @@ export function render(
   })
 
   // sort nodes according to options
-  switch (sortNodesBy) {
-    case 'Total value (descending)':
-      network.nodes.sort((a, b) => d3.descending(a.value, b.value))
-      break
-    case 'Total value (ascending)':
-      network.nodes.sort((a, b) => d3.ascending(a.value, b.value))
-      break
-    case 'Name':
-      network.nodes.sort((a, b) => d3.ascending(a.id, b.id))
-      break
-  }
+
+  network.nodes.sort((a, b) => {
+    return {
+      'Total value (descending)': d3.descending(a.value, b.value),
+      'Total value (ascending)': d3.ascending(a.value, b.value),
+      Name: d3.ascending(a.id, b.id),
+    }[sortNodesBy]
+  })
 
   // compute x positions of groups
   // get the first node for each category
+  // we don't use the sankey.nodeSort() and sankey.linkSort()
+  // d3 functions since it doens't allow to center vertically the nodes
 
   const xScale = d3
     .scaleBand()
@@ -147,6 +145,12 @@ export function render(
         return ypos + nodeSize + nodesPadding
       }, yPos0)
     })
+
+  // sort edges to avoid overlaps
+  network.nodes.forEach((node) => {
+    node.sourceLinks.sort((a, b) => d3.ascending(a.target.y0, b.target.y0))
+    node.targetLinks.sort((a, b) => d3.ascending(a.source.y0, b.source.y0))
+  })
 
   // updates link position
   sankey.update(network)
