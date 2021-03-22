@@ -21,6 +21,7 @@ export function render(
     marginLeft,
     // charts options
     padding,
+    sortGroupsBy,
     binsNumber, // how many 'bins' are available
     interpolation,
     showDots,
@@ -57,6 +58,38 @@ export function render(
     'Step Before': d3.curveStepBefore,
   }
 
+  //get vertical scale
+  const yScale = d3
+    .scaleLinear()
+    .domain(d3.extent(data, (d) => d.value))
+    .nice()
+    .range([chartHeight, 0])
+
+  // prepare the data
+  const nestedData = d3.rollups(
+    data,
+    (v) => ({
+      group: v[0].group,
+      color: v[0].color,
+      bins: d3.bin().domain(yScale.domain()).thresholds(binsNumber)(
+        v.map((e) => e.value)
+      ),
+      totalValue: d3.sum(v, (d) => d.value),
+    }),
+    (d) => d.group
+  )
+
+  // sort series
+  nestedData.sort((a, b) => {
+    return {
+      valueDescending: d3.descending(a[1].totalValue, b[1].totalValue),
+      valueAscending: d3.ascending(a[1].totalValue, b[1].totalValue),
+      name: d3.ascending(a[0], b[0]),
+    }[sortGroupsBy]
+  })
+
+  console.log(nestedData)
+
   // add background
   d3.select(svgNode)
     .append('rect')
@@ -73,32 +106,13 @@ export function render(
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
     .attr('id', 'viz')
 
-  const yScale = d3
-    .scaleLinear()
-    .domain(d3.extent(data, (d) => d.value))
-    .nice()
-    .range([chartHeight, 0])
-
-  const groupsDomain = [...new Set(data.map((d) => d.group))]
+  const groupsDomain = nestedData.map((d) => d[0])
 
   const xScale = d3
     .scaleBand()
     .range([0, chartWidth])
     .domain(groupsDomain)
     .padding(padding / (chartWidth / groupsDomain.length)) // convert padding from pixel to percentage @TODO: not working, check
-
-  // if series is exposed, recreate the nested structure
-  const nestedData = d3.rollups(
-    data,
-    (v) => ({
-      group: v[0].group,
-      color: v[0].color,
-      bins: d3.bin().domain(yScale.domain()).thresholds(binsNumber)(
-        v.map((e) => e.value)
-      ),
-    }),
-    (d) => d.group
-  )
 
   // get the max value in the bins
   const maxValue = d3.max(

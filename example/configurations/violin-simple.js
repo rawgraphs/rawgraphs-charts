@@ -28,5 +28,6 @@ export default {
     padding: 100,
     marginLeft: 100,
     interpolation: 'Linear',
+    sortGroupsBy: 'valueDescending',
   },
 }

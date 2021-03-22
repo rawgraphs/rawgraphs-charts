@@ -3,6 +3,9 @@
 - _alluvial diagram_: fixed links sorting and sizes calculation
 - _stream graph_: fixed padding
 - _bump chart_: fixed padding
+- _stacked barchart_: fixed sorting
+- _multiset barchart_: fixed sorting
+- _violin plot_: added sorting
 
 ## v1.0.0-beta.16
 

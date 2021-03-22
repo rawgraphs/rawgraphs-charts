@@ -41,6 +41,19 @@ export const visualOptions = {
     group: 'chart',
   },
 
+  sortGroupsBy: {
+    type: 'text',
+    label: 'Sort violins by',
+    group: 'chart',
+    options: [
+      { label: 'Total value (descending)', value: 'valueDescending' },
+      { label: 'Total value (ascending)', value: 'valueAscending' },
+      { label: 'Name', value: 'name' },
+      { label: 'Original', value: 'none' },
+    ],
+    default: 'valueDescending',
+  },
+
   interpolation: {
     type: 'text',
     label: 'curve type',

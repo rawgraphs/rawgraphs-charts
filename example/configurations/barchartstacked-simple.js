@@ -26,7 +26,7 @@ export default {
     marginBottom: 20,
     marginRight: 20,
     marginLeft: 20,
-    sortSeriesBy: 'Value (descending)',
+    sortSeriesBy: 'valueDescending',
     useSameScale: false,
   },
 }

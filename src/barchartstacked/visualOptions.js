@@ -102,12 +102,12 @@ export const visualOptions = {
     label: 'Sort series by',
     group: 'series',
     options: [
-      'Total value (descending)',
-      'Total value (ascending)',
-      'Name',
-      'Original',
+      { label: 'Total value (descending)', value: 'valueDescending' },
+      { label: 'Total value (ascending)', value: 'valueAscending' },
+      { label: 'Name', value: 'name' },
+      { label: 'Original', value: 'none' },
     ],
-    default: 'Total value (descending)',
+    default: 'valueDescending',
   },
 
   showSeriesLabels: {

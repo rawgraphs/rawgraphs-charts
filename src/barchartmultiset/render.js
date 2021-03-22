@@ -54,20 +54,14 @@ export function render(
     )
     .map((d) => ({ data: d, totalSize: d3.sum(d[1], (d) => d.size) }))
 
-  // series sorting functions
-  const seriesSortings = {
-    'Total value (descending)': function (a, b) {
-      return d3.descending(a.totalValue, b.totalValue)
-    },
-    'Total value (ascending)': function (a, b) {
-      return d3.ascending(a.totalValue, b.totalValue)
-    },
-    Name: function (a, b) {
-      return d3.ascending(a[0], b[0])
-    },
-  }
   // sort series
-  nestedData.sort(seriesSortings[sortSeriesBy])
+  nestedData.sort((a, b) => {
+    return {
+      valueDescending: d3.descending(a.totalSize, b.totalSize),
+      valueAscending: d3.ascending(a.totalSize, b.totalSize),
+      name: d3.ascending(a.data[0], b.data[0]),
+    }[sortSeriesBy]
+  })
 
   // add background
   d3.select(svgNode)
