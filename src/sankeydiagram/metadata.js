@@ -6,7 +6,7 @@ export const metadata = {
   id: 'rawgraphs.sankeydiagram',
   thumbnail,
   icon,
-  categories: ['flows', 'networks'],
+  categories: ['networks'],
   description:
     'It represents flows among nodes of a network. Nodes are represented as rectangles, the height represents their value. Flows are represented with curved lines whose width is proportional to their value.',
   code: 'https://observablehq.com/@d3/sankey-diagram',

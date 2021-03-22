@@ -6,9 +6,9 @@ export const metadata = {
   id: 'rawgraphs.streamgraph',
   thumbnail,
   icon,
-  categories: ['correlations', 'proportions'],
+  categories: ['time series', 'correlations', 'proportions'],
   description:
-    'It allows the comparison on multiple categories over a continuous dimension.',
+    'It allows the comparison of multiple categories over a continuous dimension.',
   code: 'https://observablehq.com/@d3/streamgraph',
   // tutorial: "https://rawgraphs.io/learning/",
 }
