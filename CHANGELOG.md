@@ -1,4 +1,4 @@
-## upcoming
+## v1.0.0-beta.17
 
 - _alluvial diagram_: fixed links sorting and sizes calculation
 - _stream graph_: fixed padding

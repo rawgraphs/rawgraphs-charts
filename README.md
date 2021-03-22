@@ -4,7 +4,9 @@ This repository contains a curated selection of charts included in [RAWGraphs ap
 
 If you'd like to contribute, please check the "[contributing](#contributing)" section.
 
-The repository contains also a sandbox enviroment to test directly the charts in development.
+The repository contains also a sandbox environment to test directly the charts in development.
+
+Charts are still in beta version, breaking changes may occur.
 
 ## Installation
 
@@ -12,8 +14,8 @@ If you want to run the repository locally on your machine, be sure you have the 
 
 ### Requirements
 
-* [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-* [Node.js](https://nodejs.org/en/)
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- [Node.js](https://nodejs.org/en/)
 
 ### Instructions (Mac OS)
 
@@ -51,8 +53,8 @@ If you want to contribute you're more thank welcome. You will need to sign a [Co
 
 After doing that, you can:
 
-* help us to close [issues related to charts](https://github.com/rawgraphs/rawgraphs-charts/issues)
-* Help us in the development of [new charts listed on the roadmap](https://github.com/rawgraphs/rawgraphs-charts/projects/2).
+- help us to close [issues related to charts](https://github.com/rawgraphs/rawgraphs-charts/issues)
+- Help us in the development of [new charts listed on the roadmap](https://github.com/rawgraphs/rawgraphs-charts/projects/2).
 
 At the moment, we won't accept usolicited pull request with charts not in the roadmap. In the near future it will be possible to add custom charts on the flight, so if you want to add a very specific, quirk or experimental chart stay tuned with the new updates by following our [Twitter account @rawgraphs](https://twitter.com/rawgraphs).
 
@@ -69,13 +71,13 @@ Before pulling a new request, please check the following resources to comply wit
 
 RAWGraphs is provided under the [Apache License 2.0](https://github.com/rawgraphs/rawgraphs-frontend/blob/master/LICENSE):
 
->Copyright (c), 2013-2021 DensityDesign Lab, Calibro, INMAGIK \<hello@rawgraphs.io\>
+> Copyright (c), 2013-2021 DensityDesign Lab, Calibro, INMAGIK \<hello@rawgraphs.io\>
 >
->Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
->    
->http://www.apache.org/licenses/LICENSE-2.0
->    
->Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
->    
->See the License for the specific language governing permissions and limitations under the License.
+> Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+> You may obtain a copy of the License at
+>
+> http://www.apache.org/licenses/LICENSE-2.0
+>
+> Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>
+> See the License for the specific language governing permissions and limitations under the License.
