@@ -1,3 +1,11 @@
+## upcoming
+
+New features:
+
+- _Voronoi diagram_: added chart
+
+Bugfixing:
+
 ## v1.0.0-beta.17
 
 - _alluvial diagram_: fixed links sorting and sizes calculation
