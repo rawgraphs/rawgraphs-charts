@@ -1,10 +1,20 @@
 ## upcoming
 
-New features:
+#### New features:
 
 - _Voronoi diagram_: added chart
 
-Bugfixing:
+#### Bugfixing:
+
+- _bump chart_: removed unused visual variable `sortStreamsBy`
+
+#### Changes:
+
+- _beeswarm diagram_: `series` dimension is now called `Y Axis`
+- _bump chart_: removed unused options in `streamsOffset`
+- _bump chart_: vertical axis disabled when `stack` is `stackOffsetSilhouette`
+- _treemap_: removed unused `drawHierarchy` visual option
+- increased default left margin in all charts to `50px`
 
 ## v1.0.0-beta.17
 

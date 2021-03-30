@@ -72,9 +72,7 @@ export const visualOptions = {
     group: 'chart',
     options: [
       { label: 'Expand', value: 'stackOffsetExpand' },
-      // { label: 'Diverging', value: 'stackOffsetDiverging' },
       { label: 'Silhouette', value: 'stackOffsetSilhouette' },
-      { label: 'Wiggle', value: 'stackOffsetWiggle' },
       { label: 'None', value: 'stackOffsetNone' },
     ],
     default: 'stackOffsetNone',
@@ -92,6 +90,9 @@ export const visualOptions = {
     label: 'Show Y axis',
     default: false,
     group: 'chart',
+    disabled: {
+      streamsOffset: 'stackOffsetSilhouette',
+    },
   },
 
   useSameScale: {

@@ -23,7 +23,7 @@ export const visualOptions = {
   marginLeft: {
     type: 'number',
     label: 'Margin (left)',
-    default: 40,
+    default: 50,
     group: 'margins',
   },
 

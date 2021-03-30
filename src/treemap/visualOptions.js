@@ -69,13 +69,6 @@ export const visualOptions = {
     group: 'chart',
   },
 
-  drawHierarchy: {
-    type: 'boolean',
-    label: 'Draw hierarchy structure',
-    default: false,
-    group: 'chart',
-  },
-
   colorScale: {
     type: 'colorScale',
     label: 'Color scale',

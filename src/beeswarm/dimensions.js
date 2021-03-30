@@ -29,7 +29,7 @@ export const dimensions = [
   },
   {
     id: 'series',
-    name: 'Series',
+    name: 'Y axis',
     validTypes: ['number', 'string', 'date'],
     required: false,
     operation: 'get',

@@ -28,7 +28,6 @@ export function render(
     // chart options
     tiling,
     padding,
-    drawHierarchy,
     // labels
     showLabelsOutline,
     showHierarchyLabels,
@@ -89,7 +88,7 @@ export function render(
 
   // if selected, draw a rectangle for each level in the hierarchy
 
-  if (drawHierarchy || showHierarchyLabels) {
+  if (showHierarchyLabels) {
     const ancestorData = root.descendants().filter((d) => d.children)
     const depthScale = d3.scaleLinear().domain([0, root.leaves()[0].depth + 1])
     const ancestors = svg
