@@ -3,10 +3,15 @@
 #### New features:
 
 - _Voronoi diagram_: added chart
+- _Sunburst_: added `auto hide labels` visual option
+- _Sunburst_: possible to define style for hierarchical labels
+- _Sunburst_: If no labels are mapped by default is shown the hierarchical label
+- _Circle packing_: possible to put hierarchy labels on path or on point
 
 #### Bugfixing:
 
 - _bump chart_: removed unused visual variable `sortStreamsBy`
+- Margins are now in the `artboard` group for all the charts
 
 #### Changes:
 

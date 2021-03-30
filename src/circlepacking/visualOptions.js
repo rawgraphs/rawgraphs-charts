@@ -106,6 +106,20 @@ export const visualOptions = {
     group: 'labels',
   },
 
+  hierarchyLabelsStyle: {
+    type: 'text',
+    label: 'Hierarchy labels style',
+    group: 'labels',
+    options: [
+      { label: 'On path', value: 'onPath' },
+      { label: 'On point', value: 'onPoint' },
+    ],
+    default: 'onPoint',
+    disabled: {
+      showHierarchyLabels: false,
+    },
+  },
+
   autoHideLabels: {
     type: 'boolean',
     label: 'Auto hide labels',

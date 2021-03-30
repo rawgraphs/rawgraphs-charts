@@ -65,6 +65,29 @@ export const visualOptions = {
     },
     group: 'colors',
   },
+
+  showHierarchyLabels: {
+    type: 'boolean',
+    label: 'Show hierarchy labels',
+    default: true,
+    group: 'labels',
+  },
+
+  labelHierarchyStyle: {
+    type: 'text',
+    label: 'Hierarchy labels',
+    group: 'labels',
+    options: [
+      { label: 'Primary', value: 'labelPrimary' },
+      { label: 'Secondary', value: 'labelSecondary' },
+      { label: 'Italic', value: 'labelItalic' },
+    ],
+    default: 'labelItalic',
+    disabled: {
+      showHierarchyLabels: false,
+    },
+  },
+
   labelStyles: {
     type: 'text',
     label: 'Label',
@@ -79,16 +102,16 @@ export const visualOptions = {
     repeatDefault: ['labelPrimary', 'labelSecondary', 'labelItalic'],
   },
 
-  showHierarchyLabels: {
-    type: 'boolean',
-    label: 'Show hierarchy labels',
-    default: true,
-    group: 'labels',
-  },
-
   showLabelsOutline: {
     type: 'boolean',
     label: 'Show outline',
+    default: false,
+    group: 'labels',
+  },
+
+  autoHideLabels: {
+    type: 'boolean',
+    label: 'Auto hide labels',
     default: false,
     group: 'labels',
   },

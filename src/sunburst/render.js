@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-import { legend } from '@rawgraphs/rawgraphs-core'
+import { legend, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
 
 export function render(
@@ -32,8 +32,10 @@ export function render(
     colorScale,
     // labels
     showHierarchyLabels,
+    labelHierarchyStyle,
     labelStyles,
     showLabelsOutline,
+    autoHideLabels,
   } = visualOptions
 
   const margin = {
@@ -58,6 +60,7 @@ export function render(
   const hierarchy = d3
     .hierarchy(nest)
     .sum((d) => (d[1] instanceof Map ? 0 : d[1].size)) // since maps have also a .size porperty, sum only values for leaves, and not for Maps
+  //@TODO: find a way to filter hierarchy
 
   const partition = (nest) =>
     d3
@@ -119,10 +122,10 @@ export function render(
     .attr('transform', `translate(${width / 2},${height / 2})`)
     .attr('text-anchor', 'middle')
     .selectAll('text')
-    // .data(root.descendants().filter(d => d.depth && (d.y0 + d.y1) / 2 * (d.x1 - d.x0) > 10)) // @TODO: expose minimum text size filter
     .data(root.descendants())
     .join('text')
     .filter((d) => (showHierarchyLabels ? true : !d.children)) // if showHierarchyLabels is false, hide non-leaf nodes
+    .filter((d) => d.data[0] != '')
     .attr('transform', function (d) {
       const x = (((d.x0 + d.x1) / 2) * 180) / Math.PI
       const y = (d.y0 + d.y1) / 2
@@ -132,35 +135,40 @@ export function render(
   textGroups
     .selectAll('tspan')
     // if node not a leaf, show just its name.
-    // if leaf, use all the mapped labels.
-    .data((d) => (d.children ? [d.data[0]] : d.data[1].label))
     .data((d) => {
+      console.log(d)
       if (d.children) {
         return [
           {
             string: d.data[0],
-            children: true,
+            hierarchy: true,
           },
         ]
       } else {
-        return d.data[1].label.map((d) => ({ string: d }))
+        // if labels are mapped, return them
+        if (mapping.label.value.length > 0) {
+          return d.data[1].label.map((d) => ({ string: d, hierarchy: false }))
+        } else {
+          //otherwise, return just leaf name
+          return [{ string: d.data[0], hierarchy: true }]
+        }
       }
     })
     .join('tspan')
     .attr('x', 0)
     .attr('y', (d, i, n) => (i + 1) * 12 - (n.length / 2) * 12 - 2) // @TODO: 12 is the font size. we should expose this
     .text((d) => d.string)
-    .styles((d, i) => {
-      if (d.children) {
-        return styles['labelSecondary']
-      } else {
-        return styles[labelStyles[i]]
-      }
-    })
+    .styles((d, i) =>
+      d.hierarchy ? styles[labelHierarchyStyle] : styles[labelStyles[i]]
+    )
 
   if (showLabelsOutline) {
     // NOTE: Adobe Illustrator does not support paint-order attr
     textGroups.selectAll('text').styles(styles.labelOutline)
+  }
+
+  if (autoHideLabels) {
+    labelsOcclusion(textGroups, (d) => d.size)
   }
 
   if (showLegend) {

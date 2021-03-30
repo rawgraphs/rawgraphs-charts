@@ -31,6 +31,7 @@ export function render(
     // labels
     showLabelsOutline,
     showHierarchyLabels,
+    hierarchyLabelsStyle,
     autoHideLabels,
     labelStyles,
   } = visualOptions
@@ -112,17 +113,31 @@ export function render(
 
   if (showHierarchyLabels) {
     const parents = node.filter((d) => d.children)
-    parents
-      .append('text')
-      .attr('fill', 'black')
-      .attr('text-anchor', 'middle')
-      .attr('font-family', "'Arial', sans-serif")
-      .attr('font-size', 8)
-      .attr('dominant-baseline', 'middle')
-      .append('textPath')
-      .attr('href', (d) => '#p_' + (d.x + d.y + d.r + d.depth + d.height))
-      .attr('startOffset', '50%')
-      .text((d) => d.data[0])
+    if (hierarchyLabelsStyle === 'onPath') {
+      parents
+        .append('text')
+        .attr('fill', 'black')
+        .attr('text-anchor', 'middle')
+        .attr('font-family', "'Arial', sans-serif")
+        .attr('font-size', 8)
+        .attr('dominant-baseline', 'middle')
+        .append('textPath')
+        .attr('href', (d) => '#p_' + (d.x + d.y + d.r + d.depth + d.height))
+        .attr('startOffset', '50%')
+        .text((d) => d.data[0])
+    }
+    if (hierarchyLabelsStyle === 'onPoint') {
+      parents
+        .append('text')
+        .attr('fill', 'black')
+        .attr('text-anchor', 'middle')
+        .attr('font-family', "'Arial', sans-serif")
+        .attr('font-size', 8)
+        .attr('dominant-baseline', 'middle')
+        .attr('x', (d) => 0)
+        .attr('y', (d) => -d.r)
+        .text((d) => d.data[0])
+    }
   }
 
   const labelsLayer = svg.append('g').attr('id', 'labels')
