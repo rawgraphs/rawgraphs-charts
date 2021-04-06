@@ -65,7 +65,7 @@ Before pulling a new request, please check the following resources to comply wit
 - [RAWGraphs dictionary](docs/RAWGraphs-dictionary.md)
 - [General principles](docs/good-practices.md)
 - [Adding a new chart](docs/add-a-new-chart.md)
-- RAWGraphs core API reference
+- [RAWGraphs core API reference](https://rawgraphs.github.io/rawgraphs-core)
 
 ## License
 
