@@ -69,7 +69,7 @@ Before pulling a new request, please check the following resources to comply wit
 
 ## License
 
-RAWGraphs is provided under the [Apache License 2.0](https://github.com/rawgraphs/rawgraphs-frontend/blob/master/LICENSE):
+RAWGraphs is provided under the [Apache License 2.0](https://github.com/rawgraphs/rawgraphs-charts/blob/master/LICENSE):
 
 > Copyright (c), 2013-2021 DensityDesign Lab, Calibro, INMAGIK \<hello@rawgraphs.io\>
 >
