@@ -3,6 +3,7 @@
 #### New features:
 
 - _Voronoi diagram_: added chart
+- _Horizon graph_: added chart
 - _Sunburst_: added `auto hide labels` visual option
 - _Sunburst_: possible to define style for hierarchical labels
 - _Sunburst_: If no labels are mapped by default is shown the hierarchical label
