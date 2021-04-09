@@ -11,8 +11,6 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
 
   let results = []
 
-  console.log(mapping)
-
   const result = d3.rollups(
     data,
     (v) => {

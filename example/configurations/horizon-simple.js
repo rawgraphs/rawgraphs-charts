@@ -1,3 +1,4 @@
+import charts from 'rawcharts'
 import chart from 'rawcharts/horizongraph'
 import data from '../datasets/simple-horizon.tsv'
 
@@ -14,5 +15,8 @@ export default {
     x: { value: ['xpos'] },
     y: { value: ['value'], config: { aggregation: ['sum'] } },
   },
-  visualOptions: {},
+  visualOptions: {
+    negativeStyle: 'mirrored',
+    bands: 3,
+  },
 }

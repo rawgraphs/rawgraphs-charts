@@ -9,7 +9,7 @@ export const visualOptions = {
   marginRight: {
     type: 'number',
     label: 'Margin (right)',
-    default: 10,
+    default: 20,
     group: 'artboard',
   },
 
@@ -23,14 +23,46 @@ export const visualOptions = {
   marginLeft: {
     type: 'number',
     label: 'Margin (left)',
-    default: 50,
+    default: 20,
     group: 'artboard',
+  },
+
+  bands: {
+    type: 'number',
+    label: 'Number of bands',
+    default: 4,
+    group: 'chart',
+  },
+
+  padding: {
+    type: 'number',
+    label: 'Padding between horizons',
+    default: 1,
+    group: 'chart',
+  },
+
+  interpolation: {
+    type: 'text',
+    label: 'Curves interpolation',
+    default: 'curveMonotoneX',
+    options: [
+      { label: 'Basis', value: 'curveBasis' },
+      { label: 'Cardinal', value: 'curveCardinal' },
+      { label: 'Catmull–Rom', value: 'curveCatmullRom' },
+      { label: 'Linear', value: 'curveLinear' },
+      { label: 'Monotone X', value: 'curveMonotoneX' },
+      { label: 'Natural', value: 'curveNatural' },
+      { label: 'Step', value: 'curveStep' },
+      { label: 'Step After', value: 'curveStepAfter' },
+      { label: 'Step Before', value: 'curveStepBefore' },
+    ],
+    group: 'chart',
   },
 
   negativeStyle: {
     type: 'text',
     label: 'Show negative values as',
-    group: 'Chart',
+    group: 'chart',
     options: [
       { label: 'Mirrored', value: 'mirrored' },
       { label: 'On top', value: 'top' },
