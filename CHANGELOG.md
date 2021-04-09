@@ -1,4 +1,4 @@
-## upcoming
+## v1.0.0-beta.18
 
 #### New features:
 

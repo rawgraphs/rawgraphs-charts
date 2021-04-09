@@ -1,6 +1,6 @@
 {
   "name": "@rawgraphs/rawgraphs-charts",
-  "version": "v1.0.0-beta.17",
+  "version": "v1.0.0-beta.18",
   "description": "RAWGRAPHS charts",
   "jsdelivr": "lib/index.umd.js",
   "unpkg": "lib/index.umd.js",
