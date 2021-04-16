@@ -67,7 +67,7 @@ export const visualOptions = {
 
   groupStrokeWidth: {
     type: 'number',
-    label: 'Group stroke width',
+    label: 'Groups stroke width',
     default: 10,
     step: 1,
     min: 1,
@@ -77,7 +77,7 @@ export const visualOptions = {
 
   groupOpacity: {
     type: 'number',
-    label: 'Group opacity',
+    label: 'Groups opacity',
     default: 0.5,
     step: 0.1,
     min: 0,
@@ -88,7 +88,7 @@ export const visualOptions = {
 
   showPoints: {
     type: 'boolean',
-    label: 'Show points',
+    label: 'Show dots',
     default: true,
     group: 'chart',
     requiredDimensions: ['x', 'y'],
@@ -96,7 +96,7 @@ export const visualOptions = {
 
   pointsRadius: {
     type: 'number',
-    label: 'Points radius (px)',
+    label: 'Dots radius',
     default: 2,
     group: 'chart',
     disabled: {

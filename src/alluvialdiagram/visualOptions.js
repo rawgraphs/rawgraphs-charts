@@ -29,14 +29,14 @@ export const visualOptions = {
 
   nodesWidth: {
     type: 'number',
-    label: 'Bars width (px)',
+    label: 'Bars width',
     default: 5,
     group: 'chart',
   },
 
   nodesPadding: {
     type: 'number',
-    label: 'Vertical padding (px)',
+    label: 'Vertical padding',
     default: 5,
     group: 'chart',
   },
@@ -59,7 +59,7 @@ export const visualOptions = {
 
   sortNodesBy: {
     type: 'text',
-    label: 'Vertically sort bars by',
+    label: 'Sort nodes by',
     group: 'chart',
     options: [
       'Total value (descending)',

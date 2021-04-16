@@ -67,7 +67,7 @@ export const visualOptions = {
 
   radius: {
     type: 'number',
-    label: 'bin radius (px)',
+    label: 'Bin radius',
     default: 8,
     step: 1,
     group: 'chart',
@@ -76,7 +76,7 @@ export const visualOptions = {
 
   weightSize: {
     type: 'boolean',
-    label: 'Weight size',
+    label: 'Scale area',
     default: false,
     group: 'chart',
     requiredDimensions: ['x', 'y'],
@@ -84,7 +84,7 @@ export const visualOptions = {
 
   showPoints: {
     type: 'boolean',
-    label: 'Show points',
+    label: 'Show dots',
     default: false,
     group: 'chart',
     requiredDimensions: ['x', 'y'],
@@ -92,7 +92,7 @@ export const visualOptions = {
 
   pointsRadius: {
     type: 'number',
-    label: 'Points radius (px)',
+    label: 'Dots radius',
     default: 1,
     group: 'chart',
     disabled: {

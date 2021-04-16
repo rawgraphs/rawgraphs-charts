@@ -158,7 +158,7 @@ export function render(
       (horizontalBars ? seriesHeight : seriesWidth)
     ) {
       throw new Error(
-        'Padding is too high, decrase it in the panel "chart" > "Padding between bars (px)"'
+        'Padding is too high, decrase it in the panel "chart" > "Padding between bars"'
       )
     }
     // scales

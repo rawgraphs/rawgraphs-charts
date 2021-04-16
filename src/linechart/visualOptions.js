@@ -50,14 +50,14 @@ export const visualOptions = {
 
   showPoints: {
     type: 'boolean',
-    label: 'Show points',
+    label: 'Show dots',
     default: false,
     group: 'chart',
   },
 
   pointsRadius: {
     type: 'number',
-    label: 'Points radius (px)',
+    label: 'Dots radius',
     default: 3,
     group: 'chart',
     disabled: {
@@ -67,7 +67,7 @@ export const visualOptions = {
 
   interpolation: {
     type: 'text',
-    label: 'Interpolation',
+    label: 'Curve type',
     default: 'Linear',
     options: [
       { label: 'Basis', value: 'Basis' },
@@ -106,7 +106,7 @@ export const visualOptions = {
 
   useSameScale: {
     type: 'boolean',
-    label: 'Use same vertical scale',
+    label: 'Use same scale',
     default: true,
     group: 'series',
   },

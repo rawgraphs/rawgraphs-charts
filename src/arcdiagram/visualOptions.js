@@ -73,7 +73,7 @@ export const visualOptions = {
 
   orderNodesBy: {
     type: 'text',
-    label: 'Nodes order',
+    label: 'Sort nodes by',
     group: 'chart',
     options: [
       'Name',

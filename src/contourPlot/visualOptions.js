@@ -66,7 +66,7 @@ export const visualOptions = {
 
   bandwidth: {
     type: 'number',
-    label: 'Bandwidth (px)',
+    label: 'Bandwidth',
     default: 20,
     step: 1,
     min: 1,
@@ -76,7 +76,7 @@ export const visualOptions = {
 
   showPoints: {
     type: 'boolean',
-    label: 'Show points',
+    label: 'Show dots',
     default: false,
     group: 'chart',
     requiredDimensions: ['x', 'y'],
@@ -84,7 +84,7 @@ export const visualOptions = {
 
   pointsRadius: {
     type: 'number',
-    label: 'Points radius (px)',
+    label: 'Dots radius',
     default: 1,
     group: 'chart',
     disabled: {

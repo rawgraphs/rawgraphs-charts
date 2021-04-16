@@ -50,7 +50,7 @@ export const visualOptions = {
 
   padding: {
     type: 'number',
-    label: 'Padding (px)',
+    label: 'Padding',
     default: 2,
     group: 'chart',
   },

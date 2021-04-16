@@ -200,7 +200,7 @@ export function render(
     // check if padding is too high and leave no space for bars
     if (stacksPadding * stacksDomain.length > serieWidth) {
       throw new Error(
-        'Padding is too high, decrase it in the panel "chart" > "Padding between bars (px)"'
+        'Padding is too high, decrase it in the panel "chart" > "Padding between bars"'
       )
     }
 

@@ -1,3 +1,7 @@
+## upcoming
+
+- Fixed dimensions and visual options names
+
 ## v1.0.0-beta.18
 
 #### New features:

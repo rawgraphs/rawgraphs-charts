@@ -50,7 +50,7 @@ export const visualOptions = {
 
   stacksPadding: {
     type: 'number',
-    label: 'Padding between stacks (px)',
+    label: 'Padding between stacks',
     default: 1,
     group: 'chart',
   },

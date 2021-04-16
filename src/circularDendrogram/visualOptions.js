@@ -98,7 +98,7 @@ export const visualOptions = {
 
   hierarchyStyle: {
     type: 'text',
-    label: 'Label',
+    label: 'Hierarchy labels',
     group: 'labels',
     options: [
       { label: 'Primary', value: 'labelPrimary' },

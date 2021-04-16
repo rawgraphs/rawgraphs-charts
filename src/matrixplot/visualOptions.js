@@ -59,7 +59,7 @@ export const visualOptions = {
 
   padding: {
     type: 'number',
-    label: 'Space between rows and lines',
+    label: 'Padding',
     default: 2,
     group: 'chart',
   },

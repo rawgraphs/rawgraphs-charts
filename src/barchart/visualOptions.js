@@ -50,7 +50,7 @@ export const visualOptions = {
 
   padding: {
     type: 'number',
-    label: 'Padding between bars (px)',
+    label: 'Padding between bars',
     default: 1,
     group: 'chart',
   },

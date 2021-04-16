@@ -43,7 +43,7 @@ export const visualOptions = {
 
   interpolation: {
     type: 'text',
-    label: 'Curves interpolation',
+    label: 'Curve type',
     default: 'curveMonotoneX',
     options: [
       { label: 'Basis', value: 'curveBasis' },

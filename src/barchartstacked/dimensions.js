@@ -9,7 +9,7 @@ export const dimensions = [
 
   {
     id: 'bars',
-    name: 'Sizes',
+    name: 'Size',
     validTypes: ['number'],
     required: true,
     multiple: true,
@@ -17,7 +17,7 @@ export const dimensions = [
     aggregation: true,
     aggregationDefault: {
       number: 'sum',
-    }
+    },
   },
 
   {

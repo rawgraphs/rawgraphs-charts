@@ -50,7 +50,7 @@ export const visualOptions = {
 
   interpolation: {
     type: 'text',
-    label: 'Curves interpolation',
+    label: 'Curves type',
     default: 'curveMonotoneX',
     options: [
       { label: 'Basis', value: 'curveBasis' },
@@ -97,7 +97,7 @@ export const visualOptions = {
 
   useSameScale: {
     type: 'boolean',
-    label: 'Use same y scale',
+    label: 'Use same scale',
     default: true,
     group: 'series',
   },
@@ -156,7 +156,7 @@ export const visualOptions = {
 
   labelsType: {
     type: 'text',
-    label: 'Label placement',
+    label: 'Labels position',
     group: 'Labels',
     options: ['On path', 'On point'],
     default: 'On point',

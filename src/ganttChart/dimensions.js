@@ -13,7 +13,7 @@ export const dimensions = [
   },
   {
     id: 'group',
-    name: 'Group',
+    name: 'Groups',
     validTypes: ['string'],
     required: false,
   },

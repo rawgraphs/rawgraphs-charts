@@ -8,7 +8,7 @@ export const dimensions = [
 
   {
     id: 'group',
-    name: 'Group',
+    name: 'Groups',
     validTypes: ['number', 'date', 'string'],
     required: false,
   },

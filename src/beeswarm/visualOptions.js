@@ -50,14 +50,14 @@ export const visualOptions = {
 
   minDiameter: {
     type: 'number',
-    label: 'Minimum diameter',
+    label: 'Min diameter',
     default: 1,
     group: 'chart',
   },
 
   maxDiameter: {
     type: 'number',
-    label: 'Maximum diameter',
+    label: 'Max diameter',
     default: 20,
     group: 'chart',
   },
@@ -69,16 +69,9 @@ export const visualOptions = {
     group: 'chart',
   },
 
-  simulationStrength: {
-    type: 'number',
-    label: 'Simulation strength (%)',
-    default: 0.05,
-    group: 'chart',
-  },
-
   sortSeriesBy: {
     type: 'text',
-    label: 'Vertically sort series by',
+    label: 'Sort groups by',
     group: 'series',
     options: [
       'Total value (descending)',

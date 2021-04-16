@@ -108,7 +108,7 @@ export const visualOptions = {
 
   hierarchyLabelsStyle: {
     type: 'text',
-    label: 'Hierarchy labels style',
+    label: 'Hierarchy labels position',
     group: 'labels',
     options: [
       { label: 'On path', value: 'onPath' },

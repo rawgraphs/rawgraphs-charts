@@ -53,7 +53,7 @@ export const visualOptions = {
 
   interpolation: {
     type: 'text',
-    label: 'Interpolation',
+    label: 'Curve type',
     default: 'Catmull–Rom',
     options: ['Basis', 'Cardinal', 'Catmull–Rom', 'Linear'],
     group: 'chart',

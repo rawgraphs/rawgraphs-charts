@@ -66,7 +66,7 @@ export const visualOptions = {
 
   maxRadius: {
     type: 'number',
-    label: 'Max radius (px)',
+    label: 'Max radius',
     default: 15,
     step: 1,
     group: 'chart',
@@ -83,7 +83,7 @@ export const visualOptions = {
 
   showPoints: {
     type: 'boolean',
-    label: 'Show points',
+    label: 'Show dots',
     default: false,
     group: 'chart',
     requiredDimensions: ['x', 'y'],
@@ -91,7 +91,7 @@ export const visualOptions = {
 
   pointsRadius: {
     type: 'number',
-    label: 'Points radius (px)',
+    label: 'Dots radius',
     default: 1,
     group: 'chart',
     disabled: {
