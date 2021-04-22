@@ -24,6 +24,10 @@ export function render(
     interpolation,
     showPoints,
     pointsRadius,
+    // ticks options
+    xTicksAuto,
+    xTicksAmount,
+    xTicksOuter,
     // series options
     columnsNumber,
     useSameScale, // @TODO: add
@@ -193,6 +197,8 @@ export function render(
       })
       .curve(d3['curve' + interpolation])
 
+    console.log(xTicksAuto, xTicksAmount, xTicksOuter)
+
     const xAxis = (g) => {
       return g
         .attr(
@@ -200,7 +206,20 @@ export function render(
           (d) =>
             'translate(0,' + (yDomain[0] >= 0 ? serieHeight : yScale(0)) + ')'
         )
-        .call(d3.axisBottom(xScale).tickSizeOuter(0))
+        .call(
+          d3
+            .axisBottom(xScale)
+            .tickValues(
+              xTicksAuto
+                ? xScale.ticks()
+                : xTicksOuter
+                ? xScale.ticks(xTicksAmount).concat(xScale.domain())
+                : xScale.ticks(xTicksAmount)
+            )
+          // xTicksAuto,
+          // xTicksAmount,
+          // xTicksOuter,
+        )
         .call((g) =>
           g
             .append('text')
