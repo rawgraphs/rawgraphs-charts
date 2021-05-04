@@ -7,7 +7,7 @@ export function colorDomain(data, mapping, visualOptions) {
   const {
     width,
     height,
-    radius,
+    diameter,
     marginTop,
     marginRight,
     marginBottom,
@@ -55,7 +55,7 @@ export function colorDomain(data, mapping, visualOptions) {
     .hexbin()
     .x((d) => x(d.x))
     .y((d) => y(d.y))
-    .radius(radius)
+    .radius(diameter / 2)
     .extent([
       [margin.left, margin.top],
       [chartWidth, chartHeight],
@@ -83,10 +83,10 @@ export function render(
     background,
     xOrigin,
     yOrigin,
-    radius,
+    diameter,
     weightSize,
     showPoints,
-    pointsRadius,
+    dotsDiameter,
     showLegend,
     legendWidth,
     marginTop,
@@ -185,7 +185,7 @@ export function render(
     .hexbin()
     .x((d) => x(d.x))
     .y((d) => y(d.y))
-    .radius(radius)
+    .radius(diameter / 2)
     .extent([
       [margin.left, margin.top],
       [chartWidth, chartHeight],
@@ -196,7 +196,7 @@ export function render(
   const size = d3
     .scaleSqrt()
     .domain([0, d3.max(bins, (d) => d.length)])
-    .rangeRound([weightSize ? 0 : radius, radius])
+    .rangeRound([weightSize ? 0 : diameter / 2, diameter / 2])
 
   const hex = vizLayer.selectAll('g').data(bins).join('g')
 
@@ -215,7 +215,7 @@ export function render(
       .attr('cx', (d) => x(d.x))
       .attr('cy', (d) => y(d.y))
       .attr('fill', 'black')
-      .attr('r', pointsRadius)
+      .attr('r', dotsDiameter / 2)
   }
 
   if (showCountLabels) {

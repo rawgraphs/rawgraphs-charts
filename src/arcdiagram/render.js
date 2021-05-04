@@ -3,7 +3,6 @@ import * as d3Sankey from 'd3-sankey'
 import * as louvain from 'louvain'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
-
   const {
     // artboard
     width,
@@ -14,8 +13,8 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     marginBottom,
     marginLeft,
     //chart
-    minRadius,
-    maxRadius,
+    minDiameter,
+    maxDiameter,
     nodeSize,
     orderNodesBy,
     linkOpacity,
@@ -68,34 +67,20 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     }
   })
 
-  // define how nodes size is defined
-  const setSizeBy = {
-    'Same size': 'default',
-    'Total value': 'totalValue',
-    'Total incoming value': 'inValue',
-    'Total outgoing value': 'outValue',
-    'Links count': 'degree',
-    'Outgoing links count': 'outDegree',
-    'Incoming links count': 'inDegree',
-  }
-
-  // define size variable
-  const sizeVariable = setSizeBy[nodeSize]
-
   // size scale
   const sizeScale = d3
     .scaleSqrt()
-    .domain([0, d3.max(graph.nodes, (d) => d[sizeVariable])])
-    .range([minRadius, maxRadius])
+    .domain([0, d3.max(graph.nodes, (d) => d[nodeSize])])
+    .range([minDiameter, maxDiameter])
 
   // widthScale (for nodes)
   const widthScale = d3
     .scaleLinear()
     .domain([0, d3.max(graph.links, (d) => d.value)])
-    .range([0, maxRadius])
+    .range([0, maxDiameter])
 
   // get the total size
-  const totalValue = d3.sum(graph.nodes, (d) => sizeScale(d[sizeVariable]) * 2)
+  const totalValue = d3.sum(graph.nodes, (d) => sizeScale(d[nodeSize]) * 2)
 
   // compute padding
   const padding = (chartWidth - totalValue) / (graph.nodes.length - 1)
@@ -103,9 +88,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
   // compute x positions. @TODO could be improved
   let xPos = 0
   graph.nodes.forEach((d, i) => {
-    d.x = xPos + sizeScale(d[sizeVariable])
-    d.y = sameSide ? chartHeight - maxRadius : chartHeight / 2
-    xPos += padding + sizeScale(d[sizeVariable]) * 2
+    d.x = xPos + sizeScale(d[nodeSize])
+    d.y = sameSide ? chartHeight - maxDiameter : chartHeight / 2
+    xPos += padding + sizeScale(d[nodeSize]) * 2
   })
 
   // add background
@@ -157,17 +142,16 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     .append('circle')
     .attr('cx', (d) => d.x)
     .attr('cy', (d) => d.y)
-    .attr('r', (d) => sizeScale(d[sizeVariable]))
+    .attr('r', (d) => sizeScale(d[nodeSize]))
   // add labels
   nodes
     .append('text')
     // .attr('x', (d) => d.x)
-    // .attr('y', (d) => d.y + sizeScale(d[sizeVariable]))
+    // .attr('y', (d) => d.y + sizeScale(d[nodeSize]))
     .text((d) => d.id)
     .attr(
       'transform',
-      (d) =>
-        `translate(${d.x},${d.y + sizeScale(d[sizeVariable]) + 5}) rotate(-90)`
+      (d) => `translate(${d.x},${d.y + sizeScale(d[nodeSize]) + 5}) rotate(-90)`
     )
     .attr('alignment-baseline', 'middle')
     .attr('font-family', 'Helvetica, Arial, sans-serif')

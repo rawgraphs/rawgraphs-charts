@@ -41,10 +41,10 @@ export const visualOptions = {
     group: 'chart',
   },
 
-  dotsRadius: {
+  dotsDiameter: {
     type: 'number',
-    label: 'dots radius',
-    default: 4,
+    label: 'dots diameter',
+    default: 2,
     group: 'chart',
   },
 

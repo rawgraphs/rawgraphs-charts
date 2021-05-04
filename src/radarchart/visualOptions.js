@@ -34,9 +34,9 @@ export const visualOptions = {
     group: 'chart',
   },
 
-  dotsRadius: {
+  dotsDiameter: {
     type: 'number',
-    label: 'Dots radius',
+    label: 'Dots diameter',
     default: 2,
     group: 'chart',
     disabled: {

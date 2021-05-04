@@ -65,9 +65,9 @@ export const visualOptions = {
     requiredDimensions: ['x', 'y'],
   },
 
-  radius: {
+  diameter: {
     type: 'number',
-    label: 'Bin radius',
+    label: 'Bin diameter',
     default: 8,
     step: 1,
     group: 'chart',
@@ -90,10 +90,10 @@ export const visualOptions = {
     requiredDimensions: ['x', 'y'],
   },
 
-  pointsRadius: {
+  dotsDiameter: {
     type: 'number',
-    label: 'Dots radius',
-    default: 1,
+    label: 'Dots diameter',
+    default: 2,
     group: 'chart',
     disabled: {
       showPoints: false,

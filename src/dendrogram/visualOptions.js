@@ -27,9 +27,9 @@ export const visualOptions = {
     group: 'artboard',
   },
 
-  maxRadius: {
+  maxDiameter: {
     type: 'number',
-    label: 'Maximum radius',
+    label: 'Maximum diameter',
     default: 20,
     group: 'chart',
   },

@@ -23,7 +23,7 @@ export function render(
     // chart options
     interpolation,
     showPoints,
-    pointsRadius,
+    dotsDiameter,
     // series options
     columnsNumber,
     useSameScale, // @TODO: add
@@ -274,7 +274,7 @@ export function render(
         .attr('class', 'dot')
         .attr('cx', (d) => xScale(d.x))
         .attr('cy', (d) => yScale(d.y))
-        .attr('r', pointsRadius)
+        .attr('r', dotsDiameter / 2)
         .attr('fill', (d) => colorScale(d.color))
     }
 

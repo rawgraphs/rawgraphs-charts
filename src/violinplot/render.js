@@ -25,7 +25,7 @@ export function render(
     binsNumber, // how many 'bins' are available
     interpolation,
     showDots,
-    dotsRadius,
+    dotsDiameter,
     //legend
     showLegend,
     legendWidth,
@@ -211,7 +211,7 @@ export function render(
       .join('circle')
       .attr('cy', (d) => yScale(d.value))
       .attr('cx', xScale.bandwidth() / 2)
-      .attr('r', dotsRadius)
+      .attr('r', dotsDiameter / 2)
       .attr('fill', 'black')
   }
 

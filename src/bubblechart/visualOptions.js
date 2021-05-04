@@ -64,9 +64,9 @@ export const visualOptions = {
     requiredDimensions: ['x', 'y'],
   },
 
-  maxRadius: {
+  maxDiameter: {
     type: 'number',
-    label: 'Max radius',
+    label: 'Max diameter',
     default: 15,
     step: 1,
     group: 'chart',
@@ -89,10 +89,10 @@ export const visualOptions = {
     requiredDimensions: ['x', 'y'],
   },
 
-  pointsRadius: {
+  dotsDiameter: {
     type: 'number',
-    label: 'Dots radius',
-    default: 1,
+    label: 'Dots diameter',
+    default: 2,
     group: 'chart',
     disabled: {
       showPoints: false,

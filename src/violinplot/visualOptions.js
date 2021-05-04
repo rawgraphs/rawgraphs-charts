@@ -80,9 +80,9 @@ export const visualOptions = {
     group: 'chart',
   },
 
-  dotsRadius: {
+  dotsDiameter: {
     type: 'number',
-    label: 'Dots radius',
+    label: 'Dots diameter',
     disabled: {
       showDots: false,
     },

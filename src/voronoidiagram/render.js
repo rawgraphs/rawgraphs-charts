@@ -16,10 +16,9 @@ export function render(
     background,
     xOrigin,
     yOrigin,
-    maxRadius,
     showStroke,
     showPoints,
-    pointsRadius,
+    dotsDiameter,
     showLegend,
     legendWidth,
     marginTop,
@@ -134,7 +133,7 @@ export function render(
       .join('circle')
       .attr('cx', (d) => xScale(d.x))
       .attr('cy', (d) => yScale(d.y))
-      .attr('r', pointsRadius)
+      .attr('r', dotsDiameter / 2)
       .attr('fill', 'black')
   }
 

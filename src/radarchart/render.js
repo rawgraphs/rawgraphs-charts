@@ -24,7 +24,7 @@ export function render(
     legendWidth,
     // visual model options
     showDots,
-    dotsRadius,
+    dotsDiameter,
     interpolation,
     innerRadius,
     fillOpacity,
@@ -278,7 +278,7 @@ export function render(
         .append('circle')
         .attr('cx', (d) => Math.cos(radialScale(d.axes)) * axesScale(d.value))
         .attr('cy', (d) => Math.sin(radialScale(d.axes)) * axesScale(d.value))
-        .attr('r', dotsRadius)
+        .attr('r', dotsDiameter / 2)
         .attr('stroke', 'none')
         .attr('fill', (d) => colorScale(d.color))
     }

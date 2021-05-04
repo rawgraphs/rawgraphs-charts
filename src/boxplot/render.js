@@ -22,7 +22,7 @@ export function render(
     // charts options
     barsWidth,
     iqrMultiplier, // to compute otuliers
-    dotsRadius,
+    dotsDiameter,
     yOrigin,
     //legend
     showLegend,
@@ -179,7 +179,7 @@ export function render(
     .selectAll('circle')
     .data((d) => d[1].outliers)
     .join('circle')
-    .attr('r', dotsRadius)
+    .attr('r', dotsDiameter / 2)
     .attr('cx', (d) => xScale(d.group))
     .attr('cy', (d) => yScale(d.value))
     .attr('fill', background)

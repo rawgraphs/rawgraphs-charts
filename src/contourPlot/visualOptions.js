@@ -82,10 +82,10 @@ export const visualOptions = {
     requiredDimensions: ['x', 'y'],
   },
 
-  pointsRadius: {
+  dotsDiameter: {
     type: 'number',
-    label: 'Dots radius',
-    default: 1,
+    label: 'Dots diameter',
+    default: 2,
     group: 'chart',
     disabled: {
       showPoints: false,

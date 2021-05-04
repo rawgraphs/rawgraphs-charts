@@ -27,16 +27,16 @@ export const visualOptions = {
     group: 'artboard',
   },
 
-  minRadius: {
+  minDiameter: {
     type: 'number',
-    label: 'Minimum Radius',
+    label: 'Minimum diameter',
     default: 2,
     group: 'chart',
   },
 
-  maxRadius: {
+  maxDiameter: {
     type: 'number',
-    label: 'Maxiumum Radius',
+    label: 'Maxiumum diameter',
     default: 30,
     group: 'chart',
   },
@@ -60,15 +60,15 @@ export const visualOptions = {
     label: 'Nodes size',
     group: 'chart',
     options: [
-      'Same size',
-      'Total value',
-      'Total outgoing value',
-      'Total incoming value',
-      'Links count',
-      'Outgoing links count',
-      'Incoming links count',
+      { label: 'Same size', value: 'default' },
+      { label: 'Weighted degree', value: 'totalValue' },
+      { label: 'Weighted inDegree', value: 'inValue' },
+      { label: 'Weighted outDegree', value: 'outValue' },
+      { label: 'Links count', value: 'degree' },
+      { label: 'OutDegree', value: 'outDegree' },
+      { label: 'InDegree', value: 'inDegree' },
     ],
-    default: 'Total value',
+    default: 'totalValue',
   },
 
   orderNodesBy: {

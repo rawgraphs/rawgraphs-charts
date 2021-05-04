@@ -24,7 +24,7 @@ export function render(
     legendWidth,
     // colors
     colorScale,
-    maxRadius,
+    maxDiameter,
     layout,
     sizeOnlyLeaves,
     label1Style,
@@ -97,7 +97,7 @@ export function render(
   const sizeScale = d3
     .scaleSqrt()
     .domain([0, d3.max(hierarchy.leaves(), (d) => d.value)])
-    .range([0, maxRadius])
+    .range([0, maxDiameter / 2])
 
   // get the total size
   const totalValue = d3.sum(hierarchy.leaves(), (d) => sizeScale(d.value) * 2)

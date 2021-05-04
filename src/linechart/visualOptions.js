@@ -55,10 +55,10 @@ export const visualOptions = {
     group: 'chart',
   },
 
-  pointsRadius: {
+  dotsDiameter: {
     type: 'number',
-    label: 'Dots radius',
-    default: 3,
+    label: 'Dots diameter',
+    default: 2,
     group: 'chart',
     disabled: {
       showPoints: false,

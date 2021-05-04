@@ -81,7 +81,7 @@ export function render(
     xOrigin,
     yOrigin,
     showPoints,
-    pointsRadius,
+    dotsDiameter,
     bandwidth,
     showLegend,
     legendWidth,
@@ -209,7 +209,7 @@ export function render(
       .attr('cx', (d) => x(d.x))
       .attr('cy', (d) => y(d.y))
       .attr('fill', 'black')
-      .attr('r', pointsRadius)
+      .attr('r', dotsDiameter / 2)
   }
 
   const labelsLayer = svg.append('g').attr('id', 'labels')
