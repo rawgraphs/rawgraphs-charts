@@ -52,13 +52,13 @@ export function render(
 
   // series sorting functions
   const seriesSortings = {
-    'Total value (descending)': function (a, b) {
+    totalDescending: function (a, b) {
       return d3.descending(a.totalSize, b.totalSize)
     },
-    'Total value (ascending)': function (a, b) {
+    totalAscending: function (a, b) {
       return d3.ascending(a.totalSize, b.totalSize)
     },
-    Name: function (a, b) {
+    name: function (a, b) {
       return d3.ascending(a.data[0], b.data[0])
     },
   }
@@ -158,7 +158,7 @@ export function render(
       (horizontalBars ? seriesHeight : seriesWidth)
     ) {
       throw new Error(
-        'Padding is too high, decrase it in the panel "chart" > "Padding between bars"'
+        'Padding is too high, decrase it in the panel "chart" > "Padding"'
       )
     }
     // scales

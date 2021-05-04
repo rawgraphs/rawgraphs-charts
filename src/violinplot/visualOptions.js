@@ -29,7 +29,7 @@ export const visualOptions = {
 
   padding: {
     type: 'number',
-    label: 'Padding between shapes',
+    label: 'Padding',
     default: 10,
     group: 'chart',
   },

@@ -29,7 +29,7 @@ export const visualOptions = {
 
   showDots: {
     type: 'boolean',
-    label: 'Show dots',
+    label: 'Show dots on data values',
     default: true,
     group: 'chart',
   },
@@ -63,6 +63,9 @@ export const visualOptions = {
     type: 'number',
     label: 'Fill opacity',
     default: 0.5,
+    step: 0.1,
+    min: 0,
+    max: 1,
     group: 'chart',
   },
 
@@ -93,7 +96,7 @@ export const visualOptions = {
 
   showSeriesLabels: {
     type: 'boolean',
-    label: 'Show series labels',
+    label: 'Show series titles',
     default: true,
     group: 'series',
   },

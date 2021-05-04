@@ -178,7 +178,7 @@ export function render(
     return sel.attr('transform', function (d) {
       const height = sel.node().getBBox().height
       return `translate(0,${
-        showPoints ? -height - pointsRadius - 2 : -height / 2
+        showPoints ? -height - dotsDiameter / 2 - 2 : -height / 2
       })`
     })
   })

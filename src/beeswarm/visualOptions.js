@@ -64,7 +64,7 @@ export const visualOptions = {
 
   nodePadding: {
     type: 'number',
-    label: 'Padding between nodes',
+    label: 'Padding',
     default: 1,
     group: 'chart',
   },

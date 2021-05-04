@@ -45,6 +45,9 @@ export const visualOptions = {
     type: 'number',
     label: 'Links opacity',
     default: 0.5,
+    step: 0.1,
+    min: 0,
+    max: 1,
     group: 'chart',
   },
 
@@ -57,7 +60,7 @@ export const visualOptions = {
 
   nodeSize: {
     type: 'text',
-    label: 'Nodes size',
+    label: 'Nodes diameter',
     group: 'chart',
     options: [
       { label: 'Same size', value: 'default' },

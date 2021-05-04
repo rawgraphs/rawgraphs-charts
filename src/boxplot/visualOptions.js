@@ -29,7 +29,7 @@ export const visualOptions = {
 
   barsWidth: {
     type: 'number',
-    label: 'Box plots width',
+    label: 'Bars width',
     default: 20,
     group: 'chart',
   },

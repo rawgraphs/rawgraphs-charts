@@ -29,14 +29,14 @@ export const visualOptions = {
 
   nodesWidth: {
     type: 'number',
-    label: 'Bars width',
+    label: 'Nodes width',
     default: 5,
     group: 'chart',
   },
 
   nodesPadding: {
     type: 'number',
-    label: 'Vertical padding',
+    label: 'Padding',
     default: 5,
     group: 'chart',
   },
@@ -45,8 +45,10 @@ export const visualOptions = {
     type: 'number',
     label: 'Links opacity (0-1)',
     default: 1,
-    group: 'chart',
     step: 0.1,
+    min: 0,
+    max: 1,
+    group: 'chart',
   },
 
   linksBlendMode: {
@@ -72,7 +74,7 @@ export const visualOptions = {
 
   verticalAlignment: {
     type: 'text',
-    label: 'Align bars groups vertically',
+    label: 'Flows alignment',
     group: 'chart',
     options: ['Top', 'Center', 'Bottom'],
     default: 'Center',

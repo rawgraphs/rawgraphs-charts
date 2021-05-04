@@ -80,7 +80,7 @@ export const visualOptions = {
 
   streamsPadding: {
     type: 'number',
-    label: 'Padding between streams',
+    label: 'Padding',
     default: 1,
     group: 'chart',
   },

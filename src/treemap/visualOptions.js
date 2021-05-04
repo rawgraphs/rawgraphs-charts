@@ -64,7 +64,7 @@ export const visualOptions = {
 
   padding: {
     type: 'number',
-    label: 'Padding between treemap levels',
+    label: 'Padding',
     default: 2,
     group: 'chart',
   },

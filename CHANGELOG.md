@@ -1,5 +1,7 @@
 ## upcoming
 
+#### Changes:
+
 - Fixed dimensions and visual options names
 - all the charts now uses `diameter` as visual variable instead of `radius`
 

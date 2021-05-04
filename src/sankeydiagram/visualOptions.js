@@ -36,7 +36,7 @@ export const visualOptions = {
 
   nodesPadding: {
     type: 'number',
-    label: 'Nodes padding',
+    label: 'Padding',
     default: 5,
     group: 'chart',
   },
@@ -51,7 +51,7 @@ export const visualOptions = {
 
   iterations: {
     type: 'number',
-    label: 'Amount of iterations (higher values can require long time)',
+    label: 'Iterations (attempts to solve overlaps)',
     default: 6,
     group: 'chart',
   },

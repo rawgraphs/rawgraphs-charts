@@ -84,7 +84,7 @@ export const visualOptions = {
 
   showPoints: {
     type: 'boolean',
-    label: 'Show dots',
+    label: 'Show dots on data values',
     default: false,
     group: 'chart',
     requiredDimensions: ['x', 'y'],

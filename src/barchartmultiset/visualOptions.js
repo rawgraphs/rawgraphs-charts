@@ -50,14 +50,14 @@ export const visualOptions = {
 
   setsPadding: {
     type: 'number',
-    label: 'Padding between sets',
+    label: 'Padding',
     default: 4,
     group: 'chart',
   },
 
   barsPadding: {
     type: 'number',
-    label: 'Padding between bars',
+    label: 'Padding',
     default: 1,
     group: 'chart',
   },

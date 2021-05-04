@@ -66,7 +66,7 @@ export const visualOptions = {
 
   showStroke: {
     type: 'boolean',
-    label: 'Show cells stroke',
+    label: 'Show stroke',
     default: false,
     group: 'chart',
     requiredDimensions: ['x', 'y'],
@@ -74,7 +74,7 @@ export const visualOptions = {
 
   showPoints: {
     type: 'boolean',
-    label: 'Show dots',
+    label: 'Show dots on data values',
     default: false,
     group: 'chart',
     requiredDimensions: ['x', 'y'],

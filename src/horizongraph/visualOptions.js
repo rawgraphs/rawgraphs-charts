@@ -36,7 +36,7 @@ export const visualOptions = {
 
   padding: {
     type: 'number',
-    label: 'Padding between horizons',
+    label: 'Padding',
     default: 1,
     group: 'chart',
   },
@@ -65,7 +65,7 @@ export const visualOptions = {
     group: 'chart',
     options: [
       { label: 'Mirrored', value: 'mirrored' },
-      { label: 'On top', value: 'top' },
+      { label: 'Offset', value: 'top' },
     ],
     default: 'mirrored',
   },

@@ -77,7 +77,7 @@ export const visualOptions = {
 
   groupOpacity: {
     type: 'number',
-    label: 'Groups opacity',
+    label: 'Fill opacity',
     default: 0.5,
     step: 0.1,
     min: 0,
@@ -88,7 +88,7 @@ export const visualOptions = {
 
   showPoints: {
     type: 'boolean',
-    label: 'Show dots',
+    label: 'Show dots on data values',
     default: true,
     group: 'chart',
     requiredDimensions: ['x', 'y'],
