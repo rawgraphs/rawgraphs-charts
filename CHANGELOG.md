@@ -4,6 +4,7 @@
 
 - Fixed dimensions and visual options names
 - all the charts now uses `diameter` as visual variable instead of `radius`
+- _Barchart_: horizontal/vertical orientation of bar variable is now called `barsOrientation` (breaking change)
 
 ## v1.0.0-beta.18
 

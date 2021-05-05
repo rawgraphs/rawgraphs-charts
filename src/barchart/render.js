@@ -22,7 +22,7 @@ export function render(
     marginLeft,
     // chart options
     padding,
-    horizontalBars,
+    barsOrientation,
     sortBarsBy,
     // series options
     columnsNumber,
@@ -44,12 +44,12 @@ export function render(
     bottom: marginBottom,
     left: marginLeft,
   }
+  const horizontalBars = { horizontal: true, vertical: false }[barsOrientation]
 
   // create nest structure
   const nestedData = d3
     .groups(data, (d) => d.series)
     .map((d) => ({ data: d, totalSize: d3.sum(d[1], (d) => d.size) }))
-
   // series sorting functions
   const seriesSortings = {
     totalDescending: function (a, b) {

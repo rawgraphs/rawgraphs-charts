@@ -55,15 +55,15 @@ export const visualOptions = {
     group: 'chart',
   },
 
-  horizontalBars: {
+  barsOrientation: {
     type: 'text',
     label: 'Bars orientation',
-    options: [
-      { label: 'Vertically', value: false },
-      { label: 'Horizontally', value: true },
-    ],
-    default: false,
     group: 'chart',
+    options: [
+      { label: 'Vertically', value: 'vertical' },
+      { label: 'Horizontally', value: 'horizontal' },
+    ],
+    default: 'vertical',
   },
 
   sortBarsBy: {
@@ -76,7 +76,7 @@ export const visualOptions = {
       { label: 'Name', value: 'name' },
       { label: 'Original', value: 'original' },
     ],
-    default: 'Name',
+    default: 'name',
   },
 
   useSameScale: {
