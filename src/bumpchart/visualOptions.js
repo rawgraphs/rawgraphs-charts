@@ -149,7 +149,7 @@ export const visualOptions = {
 
   showLabels: {
     type: 'boolean',
-    label: 'show streams labels',
+    label: 'Show streams labels',
     default: true,
     group: 'Labels',
   },

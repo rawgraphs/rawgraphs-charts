@@ -53,7 +53,7 @@ export const visualOptions = {
 
   linksBlendMode: {
     type: 'text',
-    label: 'Overlapping links blend mode',
+    label: 'Links blend mode',
     group: 'chart',
     options: ['normal', 'multiply'],
     default: 'multiply',
@@ -64,12 +64,12 @@ export const visualOptions = {
     label: 'Sort nodes by',
     group: 'chart',
     options: [
-      'Total value (descending)',
-      'Total value (ascending)',
-      'Name',
-      'Minimize Overlaps',
+      { label: 'Size (descending)', value: 'sizeDescending' },
+      { label: 'Size (ascending)', value: 'sizeAscending' },
+      { label: 'Name', value: 'name' },
+      { label: 'Minimize Overlaps', value: 'auto' },
     ],
-    default: 'Total value (ascending)',
+    default: 'sizeAscending',
   },
 
   verticalAlignment: {
@@ -93,7 +93,7 @@ export const visualOptions = {
 
   showValues: {
     type: 'boolean',
-    label: 'show nodes values',
+    label: 'Show nodes values',
     default: false,
     group: 'Labels',
   },

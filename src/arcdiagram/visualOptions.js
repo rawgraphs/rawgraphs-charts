@@ -29,21 +29,21 @@ export const visualOptions = {
 
   minDiameter: {
     type: 'number',
-    label: 'Minimum diameter',
+    label: 'Min diameter',
     default: 2,
     group: 'chart',
   },
 
   maxDiameter: {
     type: 'number',
-    label: 'Maxiumum diameter',
+    label: 'Max diameter',
     default: 30,
     group: 'chart',
   },
 
   linkOpacity: {
     type: 'number',
-    label: 'Links opacity',
+    label: 'Links opacity (0-1)',
     default: 0.5,
     step: 0.1,
     min: 0,
@@ -78,12 +78,7 @@ export const visualOptions = {
     type: 'text',
     label: 'Sort nodes by',
     group: 'chart',
-    options: [
-      'Name',
-      'Links count (degree)',
-      'Total value',
-      'Minimize overlaps',
-    ],
+    options: ['Name', 'Links count (degree)', 'Size', 'Minimize overlaps'],
     default: 'Minimize overlaps',
   },
 }

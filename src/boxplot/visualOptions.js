@@ -36,21 +36,21 @@ export const visualOptions = {
 
   iqrMultiplier: {
     type: 'number',
-    label: 'interquartile range multiplier',
+    label: 'Interquartile range multiplier',
     default: 1.5,
     group: 'chart',
   },
 
   dotsDiameter: {
     type: 'number',
-    label: 'dots diameter',
+    label: 'Dots diameter',
     default: 2,
     group: 'chart',
   },
 
   yOrigin: {
     type: 'boolean',
-    label: 'Set y origin to 0',
+    label: 'Set Y origin to 0',
     default: false,
     group: 'chart',
   },

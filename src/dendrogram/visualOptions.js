@@ -29,7 +29,7 @@ export const visualOptions = {
 
   maxDiameter: {
     type: 'number',
-    label: 'Maximum diameter',
+    label: 'Max diameter',
     default: 20,
     group: 'chart',
   },

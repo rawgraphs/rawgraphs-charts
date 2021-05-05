@@ -56,7 +56,7 @@ export const visualOptions = {
       { label: 'Original', value: '' },
       { label: 'Start date (ascending)', value: 'ascending' },
       { label: 'Start date (descending)', value: 'descending' },
-      { label: 'Name (ascending)', value: 'group' },
+      { label: 'Name', value: 'group' },
     ],
     default: '',
   },

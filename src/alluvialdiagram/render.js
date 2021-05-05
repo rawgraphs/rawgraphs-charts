@@ -96,9 +96,9 @@ export function render(
 
   network.nodes.sort((a, b) => {
     return {
-      'Total value (descending)': d3.descending(a.value, b.value),
-      'Total value (ascending)': d3.ascending(a.value, b.value),
-      Name: d3.ascending(a.id, b.id),
+      sizeDescending: d3.descending(a.value, b.value),
+      sizeAscending: d3.ascending(a.value, b.value),
+      name: d3.ascending(a.id, b.id),
     }[sortNodesBy]
   })
 

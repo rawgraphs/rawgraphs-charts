@@ -50,14 +50,14 @@ export const visualOptions = {
 
   setsPadding: {
     type: 'number',
-    label: 'Padding',
+    label: 'Padding between sets',
     default: 4,
     group: 'chart',
   },
 
   barsPadding: {
     type: 'number',
-    label: 'Padding',
+    label: 'Padding between bars',
     default: 1,
     group: 'chart',
   },
@@ -106,6 +106,13 @@ export const visualOptions = {
     type: 'boolean',
     label: 'Show series titles',
     default: true,
+    group: 'series',
+  },
+
+  repeatAxesLabels: {
+    type: 'boolean',
+    label: 'Repeat axis labels for each series',
+    default: false,
     group: 'series',
   },
 

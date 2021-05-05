@@ -51,7 +51,7 @@ export const visualOptions = {
 
   xOrigin: {
     type: 'boolean',
-    label: 'Set x origin to 0',
+    label: 'Set X origin to 0',
     default: false,
     group: 'chart',
     requiredDimensions: ['x', 'y'],
@@ -59,7 +59,7 @@ export const visualOptions = {
 
   yOrigin: {
     type: 'boolean',
-    label: 'Set y origin to 0',
+    label: 'Set Y origin to 0',
     default: false,
     group: 'chart',
     requiredDimensions: ['x', 'y'],

@@ -44,9 +44,9 @@ export const visualOptions = {
     },
   },
 
-  innerRadius: {
+  innerDiameter: {
     type: 'number',
-    label: 'Inner radius',
+    label: 'Inner diameter',
     default: 0,
     group: 'chart',
   },

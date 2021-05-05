@@ -127,7 +127,7 @@ export const visualOptions = {
 
   showLabels: {
     type: 'boolean',
-    label: 'Show Labels',
+    label: 'Show labels',
     default: true,
     group: 'labels',
   },

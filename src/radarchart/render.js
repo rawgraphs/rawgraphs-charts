@@ -26,7 +26,7 @@ export function render(
     showDots,
     dotsDiameter,
     interpolation,
-    innerRadius,
+    innerDiameter,
     fillOpacity,
     //labels
     labelsPadding,
@@ -124,6 +124,8 @@ export function render(
     .round(false)
 
   const maxValue = d3.max(data, (d) => d.value)
+
+  const innerRadius = innerDiameter / 2
 
   const outerRadius = d3.min([
     (griddingData[0].width - margin.right - margin.left) / 2,

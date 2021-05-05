@@ -69,7 +69,7 @@ export const visualOptions = {
 
   showValues: {
     type: 'boolean',
-    label: 'show nodes values',
+    label: 'Show nodes values',
     default: false,
     group: 'Labels',
   },
