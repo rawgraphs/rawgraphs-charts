@@ -7,6 +7,8 @@
 - _Barchart_: horizontal/vertical orientation of bar variable is now called `barsOrientation` (breaking change)
 - _Multiset barchart_: added repeat axes labels option
 - _Stacked barchart_: added repeat axes labels option
+- _line chart_: added "Start at 0" option (fix \#79)
+- _alluvial diagram_: now nodes are properly sorted if their label is a number (fix \#82)
 
 ## v1.0.0-beta.18
 

@@ -94,13 +94,23 @@ export function render(
 
   // sort nodes according to options
 
-  network.nodes.sort((a, b) => {
-    return {
-      sizeDescending: d3.descending(a.value, b.value),
-      sizeAscending: d3.ascending(a.value, b.value),
-      name: d3.ascending(a.id, b.id),
-    }[sortNodesBy]
-  })
+  switch (sortNodesBy) {
+    case 'sizeDescending':
+      network.nodes.sort((a, b) => d3.descending(a.value, b.value))
+      break
+    case 'sizeAscending':
+      network.nodes.sort((a, b) => d3.ascending(a.value, b.value))
+      break
+    case 'name':
+      network.nodes
+        //first sort by type
+        .sort((a, b) => d3.ascending(typeof a.name, typeof b.name))
+        // then by actual value
+        .sort((a, b) => d3.ascending(a.name, b.name))
+      break
+  }
+
+  console.log(network.nodes.map((d) => d.name))
 
   // compute x positions of groups
   // get the first node for each category

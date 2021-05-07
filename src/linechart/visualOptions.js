@@ -84,6 +84,14 @@ export const visualOptions = {
     group: 'chart',
   },
 
+  yOrigin: {
+    type: 'boolean',
+    label: 'Set Y origin to 0',
+    default: false,
+    group: 'chart',
+    requiredDimensions: ['y'],
+  },
+
   columnsNumber: {
     type: 'number',
     label: 'Number of columns',
