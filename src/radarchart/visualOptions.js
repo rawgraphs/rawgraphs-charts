@@ -94,6 +94,19 @@ export const visualOptions = {
     group: 'series',
   },
 
+  sortSeriesBy: {
+    type: 'text',
+    label: 'Sort series by',
+    group: 'series',
+    options: [
+      { label: 'Total value (descending)', value: 'valueDescending' },
+      { label: 'Total value (ascending)', value: 'valueAscending' },
+      { label: 'Name', value: 'nameAscending' },
+      { label: 'Original', value: 'none' },
+    ],
+    default: 'valueDescending',
+  },
+
   showSeriesLabels: {
     type: 'boolean',
     label: 'Show series titles',

@@ -1,4 +1,8 @@
-## upcoming
+## v1.0.0-beta.19
+
+#### New features:
+
+- _parallel coordinates_: added chart
 
 #### Changes:
 
@@ -7,6 +11,10 @@
 - _Barchart_: horizontal/vertical orientation of bar variable is now called `barsOrientation` (breaking change)
 - _Multiset barchart_: added repeat axes labels option
 - _Stacked barchart_: added repeat axes labels option
+- _Radar chart_: added series sorting
+
+#### Bugfixing:
+
 - _line chart_: added "Start at 0" option (fix \#79)
 - _alluvial diagram_: now nodes are properly sorted if their label is a number (fix \#82)
 

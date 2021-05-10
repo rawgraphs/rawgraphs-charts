@@ -6,7 +6,7 @@ export const metadata = {
   id: 'rawgraphs.parallelcoordinates',
   thumbnail,
   icon,
-  categories: ['correlations'],
+  categories: ['correlations', 'distributions'],
   description:
     'It displays multiple continuous dimensions as axes, and each row in the dataset produces a line connecting its values across the axes.',
   code: 'https://observablehq.com/@d3/parallel-coordinates',
