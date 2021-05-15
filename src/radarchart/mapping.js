@@ -14,14 +14,12 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
   // we will use rollup to populate a flat array of objects
   // that will be passed to the render
   let results = []
-  let index = 0
 
   const result = d3.rollups(
     data,
     (v) => {
-      //@TODO: find a better way to assing a unique index to each entry
       return v.map((d) => {
-        mapping.axes.value.forEach((axisName) => {
+        mapping.axes.value.forEach((axisName, index) => {
           let item = {
             name: index, // each line will create a radar
             color: d[mapping.color.value],
@@ -32,9 +30,7 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
 
           results.push(item)
         })
-
-        index++
-
+        
         return 'done'
       })
     },
