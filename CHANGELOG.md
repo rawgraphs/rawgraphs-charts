@@ -1,3 +1,9 @@
+## next
+
+#### Changes:
+
+- using @rawgraphs/rawgraphs-core 1.0.0-beta.15
+
 ## v1.0.0-beta.19
 
 #### New features:
