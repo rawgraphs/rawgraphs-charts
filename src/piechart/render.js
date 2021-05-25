@@ -83,7 +83,7 @@ export function render(
     .selectAll('g')
     .data(griddingData)
     .join('g')
-    .attr('id', (d) => d.label)
+    .attr('id', (d) => d.name)
     .attr('transform', (d) => 'translate(' + d.x + ',' + d.y + ')')
 
   //get max radius
@@ -188,7 +188,7 @@ export function render(
     if (showSeriesLabels) {
       selection
         .append('text')
-        .text((d) => d.label)
+        .text((d) => d.name)
         .attr('y', 4)
         .attr('x', 4)
         .styles(styles.seriesLabel)

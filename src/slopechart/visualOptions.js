@@ -3,28 +3,28 @@ export const visualOptions = {
   marginTop: {
     type: 'number',
     label: 'Margin (top)',
-    default: 0,
+    default: 20,
     group: 'artboard',
   },
 
   marginRight: {
     type: 'number',
     label: 'Margin (right)',
-    default: 0,
+    default: 10,
     group: 'artboard',
   },
 
   marginBottom: {
     type: 'number',
     label: 'Margin (bottom)',
-    default: 0,
+    default: 10,
     group: 'artboard',
   },
 
   marginLeft: {
     type: 'number',
     label: 'Margin (left)',
-    default: 0,
+    default: 10,
     group: 'artboard',
   },
 
@@ -64,7 +64,7 @@ export const visualOptions = {
   showGrid: {
     type: 'boolean',
     label: 'Show grid',
-    default: false,
+    default: true,
     group: 'series',
   },
 }

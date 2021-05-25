@@ -11,7 +11,7 @@ export default {
     Country: 'string',
   },
   mapping: {
-    label: { value: ['Country'] },
+    // name: { value: ['Country'] },
     arcs: {
       value: ['Service (US$MM)', 'Industrial (US$MM)', 'Agricultural (US$MM)'],
     },
@@ -23,5 +23,6 @@ export default {
     marginRight: 10,
     marginBottom: 10,
     marginLeft: 10,
+    showSeriesLabels: false,
   },
 }

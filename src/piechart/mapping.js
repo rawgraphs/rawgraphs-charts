@@ -1,4 +1,4 @@
 export const mapData = {
-  label: 'get',
+  name: 'get',
   arcs: 'get',
 }

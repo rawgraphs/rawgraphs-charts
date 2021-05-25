@@ -1,5 +1,6 @@
 import * as d3 from 'd3'
 import { legend } from '@rawgraphs/rawgraphs-core'
+import * as d3Gridding from 'd3-gridding'
 import '../d3-styles.js'
 
 export function render(svgNode, data, visualOptions, mapping, originalData) {
@@ -12,6 +13,12 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     marginRight,
     marginBottom,
     marginLeft,
+    showLegend,
+    legendWidth,
+    // series
+    columnsNumber,
+    showSeriesLabels,
+    showGrid,
     // color dimension option, defined in visualOptions.js
     colorScale,
   } = visualOptions
@@ -24,23 +31,58 @@ export function render(svgNode, data, visualOptions, mapping, originalData) {
     left: marginLeft,
   }
 
-  const vizLayer = svg.append('g').attr('id', 'viz')
-
   // if series is exposed, recreate the nested structure
-  const nestedData = d3.rollups(
-    data,
-    (v) => v,
-    (d) => d.series
-  )
+  const nestedData = d3.groups(data, (d) => d.series)
 
   // select the SVG element
   const svg = d3.select(svgNode)
+
+  // add background
+  svg
+    .append('rect')
+    .attr('width', showLegend ? width + legendWidth : width)
+    .attr('height', height)
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr('fill', background)
+    .attr('id', 'backgorund')
+
+  // add the visualization layer
+  const vizLayer = svg.append('g').attr('id', 'viz')
+
+  // set up grid
+  const gridding = d3Gridding
+    .gridding()
+    .size([width, height])
+    .mode('grid')
+    .padding(0) // no padding, margins will be applied inside
+    .cols(columnsNumber)
+
+  const griddingData = gridding(nestedData)
+
+  // draw the grid if asked
+  if (showGrid) {
+    svg
+      .append('g')
+      .attr('id', 'grid')
+      .selectAll('rect')
+      .data(griddingData)
+      .enter()
+      .append('rect')
+      .attr('x', (d) => d.x)
+      .attr('y', (d) => d.y)
+      .attr('width', (d) => d.width)
+      .attr('height', (d) => d.height)
+      .attr('fill', 'none')
+      .attr('stroke', '#ccc')
+  }
+
   // create the grid
-  const series = svg
+  const series = vizLayer
     .selectAll('g')
     .data(griddingData)
     .join('g')
-    .attr('id', (d) => d.data[0])
+    .attr('id', (d) => d[0])
     .attr(
       'transform',
       (d) => 'translate(' + (d.x + margin.left) + ',' + (d.y + margin.top) + ')'

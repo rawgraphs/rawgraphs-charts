@@ -1,6 +1,6 @@
 export const dimensions = [
   {
-    id: 'label',
+    id: 'name',
     name: 'Pie label',
     validTypes: ['number', 'date', 'string'],
     required: false,
