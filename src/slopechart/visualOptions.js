@@ -45,6 +45,14 @@ export const visualOptions = {
     },
   },
 
+  // chart
+  nonOverlap: {
+    type: 'number',
+    label: 'anti overlap strenght',
+    default: 10,
+    group: 'chart',
+  },
+
   // series
 
   columnsNumber: {
@@ -66,5 +74,16 @@ export const visualOptions = {
     label: 'Show grid',
     default: true,
     group: 'series',
+  },
+
+  colorScale: {
+    type: 'colorScale',
+    label: 'Color scale',
+    dimension: 'color',
+    default: {
+      scaleType: 'ordinal',
+      interpolator: 'interpolateSpectral',
+    },
+    group: 'colors',
   },
 }

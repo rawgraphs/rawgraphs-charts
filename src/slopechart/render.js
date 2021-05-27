@@ -22,6 +22,8 @@ export function render(
     marginLeft,
     showLegend,
     legendWidth,
+    // chart
+    nonOverlap,
     // series
     columnsNumber,
     showSeriesLabels,
@@ -40,7 +42,7 @@ export function render(
 
   // if series is exposed, recreate the nested structure
   const nestedData = d3.groups(data, (d) => d.series)
-
+  console.log(nestedData)
   // select the SVG element
   const svg = d3.select(svgNode)
 
@@ -121,16 +123,22 @@ export function render(
     selection
       .append('g')
       .attr('text-anchor', 'middle')
+      .styles(styles.axisLabel)
       .selectAll('g')
       .data(columns)
       .join('g')
-      .attr('transform', (d, i) => `translate(${xScale(d)},20)`)
-      .call((g) => g.append('text').text((d) => d))
+      .attr('transform', (d, i) => `translate(${xScale(d)},${margin.top})`)
+      .call((g) =>
+        g
+          .append('text')
+          .attr('y', -9)
+          .text((d) => d)
+      )
       .call((g) =>
         g
           .append('line')
-          .attr('y1', 3)
-          .attr('y2', 9)
+          .attr('y1', 0)
+          .attr('y2', -6)
           .attr('stroke', 'currentColor')
       )
 
@@ -138,7 +146,6 @@ export function render(
     selection
       .append('g')
       .attr('fill', 'none')
-      .attr('stroke', 'red')
       .selectAll('line')
       .data(d[1])
       .join('line')
@@ -146,52 +153,60 @@ export function render(
       .attr('x2', (d) => xScale(mapping.target.value))
       .attr('y1', (d) => yGlobalScale(d.source))
       .attr('y2', (d) => yGlobalScale(d.target))
+      .attr('stroke', (d) => colorScale(d.color))
+
+    // create a single flat dataset containing all the labels
+    let labels = d[1].flatMap((d) => {
+      // return the couple for source and target
+      return [
+        {
+          label: mapping.name ? d.name + ' ' + d.source : d.source,
+          type: 'source',
+          originalX: xScale(mapping.source.value),
+          x: xScale(mapping.source.value),
+          y:
+            yGlobalScale(d.source) +
+            parseInt(styles.labelSecondary.fontSize) / 2,
+        },
+        {
+          label: mapping.name ? d.name + ' ' + d.target : d.target,
+          type: 'target',
+          originalX: xScale(mapping.target.value),
+          x: xScale(mapping.target.value),
+          y:
+            yGlobalScale(d.target) +
+            parseInt(styles.labelSecondary.fontSize) / 2,
+        },
+      ]
+    })
+
+    // use forces to avoid overlaps
+    const simulation = d3
+      .forceSimulation(labels)
+      .force(
+        'y',
+        d3.forceY().y((d) => d.y)
+      )
+      .force(
+        'x',
+        d3
+          .forceX()
+          .x((d) => d.x)
+          .strength(1)
+      )
+      .force('collision', d3.forceCollide().radius(nonOverlap))
+      .stop()
+      .tick(150) // precalculate positions
 
     // add labels
     let sourceLabels = selection
       .append('g')
       .selectAll('text')
-      .data(d[1])
+      .data(labels)
       .join('text')
-      .text((d) => (mapping.name ? d.name + ' ' + d.source : d.source))
-      .attr(
-        'transform',
-        (d) =>
-          `translate(${xScale(mapping.source.value)},${yGlobalScale(d.source)})`
-      )
-      .attr('text-anchor', 'end')
+      .text((d) => d.label)
+      .attr('transform', (d) => `translate(${d.originalX},${d.y})`)
+      .attr('text-anchor', (d) => (d.type == 'source' ? 'end' : 'start'))
       .styles(styles.labelSecondary)
-
-    // use forces to avoid overlaps
-    const simulation = d3
-      .forceSimulation(d[1])
-      .force(
-        'y',
-        d3.forceY().y((d) => yGlobalScale(d.source))
-      )
-      .force('x', d3.forceX().x(xScale(mapping.source.value)))
-      .force('collision', d3.forceCollide().radius(8))
-
-    simulation.on('tick', () => {
-      sourceLabels.attr('transform', function (d) {
-        d.x = xScale(mapping.source.value) // constrain x for all labels
-        return `translate(${d.x},${d.y})`
-      })
-    })
-
-    selection
-      .append('g')
-      .selectAll('text')
-      .data(d[1])
-      .join('text')
-      .text((d) => (mapping.name ? d.name + ' ' + d.target : d.target))
-      .attr('x', (d) => xScale(mapping.target.value))
-      .attr('y', (d) => yGlobalScale(d.target))
-      .attr('text-anchor', 'start')
-      .styles(styles.labelSecondary)
-
-    /*
-      ADD HERE THE CHART CODE
-    */
   })
 }

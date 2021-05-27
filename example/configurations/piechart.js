@@ -23,6 +23,6 @@ export default {
     marginRight: 10,
     marginBottom: 10,
     marginLeft: 10,
-    showSeriesLabels: false,
+    showSeriesLabels: true,
   },
 }

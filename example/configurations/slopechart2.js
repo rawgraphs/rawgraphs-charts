@@ -13,11 +13,13 @@ export default {
     source: { value: ['1970'] },
     target: { value: ['1979'] },
     name: { value: ['country'] },
+    color: { value: ['country'] },
   },
   visualOptions: {
     width: 800,
     height: 600,
     marginLeft: 100,
     marginRight: 100,
+    marginTop: 50,
   },
 }
