@@ -1,0 +1,2384 @@
+country	week	deaths
+Australia	1	2
+Australia	2	2
+Australia	3	2
+Australia	4	2
+Australia	5	1
+Australia	6	1
+Australia	7	1
+Australia	8	1
+Australia	9	1
+Australia	10	1
+Australia	11	1
+Australia	12	1
+Australia	13	1
+Australia	14	1
+Australia	15	1
+Australia	16	1
+Australia	17	1
+Australia	18	1
+Australia	19	1
+Australia	20	1
+Australia	21	1
+Australia	22	1
+Australia	23	1
+Australia	24	1
+Australia	25	1
+Australia	26	1
+Australia	27	1
+Australia	28	1
+Australia	29	1
+Australia	30	1
+Australia	31	1
+Australia	32	1
+Australia	33	1
+Australia	34	1
+Australia	35	1
+Australia	36	1
+Australia	37	1
+Australia	38	1
+Australia	39	1
+Australia	40	1
+Australia	41	1
+Australia	42	1
+Australia	43	1
+Australia	44	1
+Australia	45	1
+Australia	46	1
+Australia	47	1
+Australia	48	1
+Australia	49	1
+Australia	50	1
+Australia	51	1
+Australia	52	1
+Australia	53	1
+Austria	1	2
+Austria	2	2
+Austria	3	2
+Austria	4	2
+Austria	5	2
+Austria	6	2
+Austria	7	2
+Austria	8	2
+Austria	9	2
+Austria	10	2
+Austria	11	2
+Austria	12	2
+Austria	13	2
+Austria	14	2
+Austria	15	2
+Austria	16	2
+Austria	17	1
+Austria	18	1
+Austria	19	1
+Austria	20	1
+Austria	21	1
+Austria	22	1
+Austria	23	1
+Austria	24	1
+Austria	25	1
+Austria	26	1
+Austria	27	1
+Austria	28	1
+Austria	29	1
+Austria	30	1
+Austria	31	1
+Austria	32	1
+Austria	33	1
+Austria	34	1
+Austria	35	1
+Austria	36	1
+Austria	37	1
+Austria	38	1
+Austria	39	1
+Austria	40	1
+Austria	41	1
+Austria	42	1
+Austria	43	1
+Austria	44	1
+Austria	45	1
+Austria	46	1
+Austria	47	1
+Austria	48	1
+Austria	49	1
+Austria	50	1
+Austria	51	1
+Austria	52	1
+Austria	53	1
+Belgium	1	2
+Belgium	2	2
+Belgium	3	2
+Belgium	4	2
+Belgium	5	2
+Belgium	6	2
+Belgium	7	2
+Belgium	8	2
+Belgium	9	2
+Belgium	10	2
+Belgium	11	2
+Belgium	12	2
+Belgium	13	2
+Belgium	14	2
+Belgium	15	2
+Belgium	16	2
+Belgium	17	1
+Belgium	18	1
+Belgium	19	1
+Belgium	20	1
+Belgium	21	1
+Belgium	22	1
+Belgium	23	1
+Belgium	24	1
+Belgium	25	1
+Belgium	26	1
+Belgium	27	1
+Belgium	28	1
+Belgium	29	1
+Belgium	30	1
+Belgium	31	1
+Belgium	32	1
+Belgium	33	1
+Belgium	34	1
+Belgium	35	1
+Belgium	36	1
+Belgium	37	1
+Belgium	38	1
+Belgium	39	1
+Belgium	40	1
+Belgium	41	1
+Belgium	42	1
+Belgium	43	1
+Belgium	44	1
+Belgium	45	1
+Belgium	46	1
+Belgium	47	1
+Belgium	48	1
+Belgium	49	1
+Belgium	50	1
+Belgium	51	1
+Belgium	52	1
+Belgium	53	1
+Britain	1	28
+Britain	2	28
+Britain	3	28
+Britain	4	28
+Britain	5	28
+Britain	6	28
+Britain	7	28
+Britain	8	28
+Britain	9	28
+Britain	10	28
+Britain	11	28
+Britain	12	28
+Britain	13	28
+Britain	14	28
+Britain	15	28
+Britain	16	28
+Britain	17	28
+Britain	18	14
+Britain	19	14
+Britain	20	14
+Britain	21	14
+Britain	22	14
+Britain	23	14
+Britain	24	14
+Britain	25	14
+Britain	26	14
+Britain	27	14
+Britain	28	14
+Britain	29	14
+Britain	30	14
+Britain	31	14
+Britain	32	14
+Britain	33	14
+Britain	34	14
+Britain	35	14
+Britain	36	14
+Britain	37	14
+Britain	38	14
+Britain	39	14
+Britain	40	14
+Britain	41	14
+Britain	42	14
+Britain	43	14
+Britain	44	14
+Britain	45	14
+Britain	46	14
+Britain	47	14
+Britain	48	14
+Britain	49	14
+Britain	50	14
+Britain	51	14
+Britain	52	14
+Britain	53	14
+Bulgaria	1	2
+Bulgaria	2	2
+Bulgaria	3	2
+Bulgaria	4	2
+Bulgaria	5	2
+Bulgaria	6	2
+Bulgaria	7	2
+Bulgaria	8	2
+Bulgaria	9	2
+Bulgaria	10	2
+Bulgaria	11	2
+Bulgaria	12	2
+Bulgaria	13	2
+Bulgaria	14	2
+Bulgaria	15	2
+Bulgaria	16	2
+Bulgaria	17	1
+Bulgaria	18	1
+Bulgaria	19	1
+Bulgaria	20	1
+Bulgaria	21	1
+Bulgaria	22	1
+Bulgaria	23	1
+Bulgaria	24	1
+Bulgaria	25	1
+Bulgaria	26	1
+Bulgaria	27	1
+Bulgaria	28	1
+Bulgaria	29	1
+Bulgaria	30	1
+Bulgaria	31	1
+Bulgaria	32	1
+Bulgaria	33	1
+Bulgaria	34	1
+Bulgaria	35	1
+Bulgaria	36	1
+Bulgaria	37	1
+Bulgaria	38	1
+Bulgaria	39	1
+Bulgaria	40	1
+Bulgaria	41	1
+Bulgaria	42	1
+Bulgaria	43	1
+Bulgaria	44	1
+Bulgaria	45	1
+Bulgaria	46	1
+Bulgaria	47	1
+Bulgaria	48	1
+Bulgaria	49	1
+Bulgaria	50	1
+Bulgaria	51	1
+Bulgaria	52	1
+Bulgaria	53	1
+Canada	1	2
+Canada	2	1
+Canada	3	1
+Canada	4	1
+Canada	5	1
+Canada	6	1
+Canada	7	1
+Canada	8	1
+Canada	9	1
+Canada	10	1
+Canada	11	1
+Canada	12	1
+Canada	13	1
+Canada	14	1
+Canada	15	1
+Canada	16	1
+Canada	17	1
+Canada	18	1
+Canada	19	1
+Canada	20	1
+Canada	21	1
+Canada	22	1
+Canada	23	1
+Canada	24	1
+Canada	25	1
+Canada	26	1
+Canada	27	1
+Canada	28	1
+Canada	29	1
+Canada	30	1
+Canada	31	1
+Canada	32	1
+Canada	33	1
+Canada	34	1
+Canada	35	1
+Canada	36	1
+Canada	37	1
+Canada	38	1
+Canada	39	1
+Canada	40	1
+Canada	41	1
+Canada	42	1
+Canada	43	1
+Canada	44	1
+Canada	45	1
+Canada	46	1
+Canada	47	1
+Canada	48	1
+Canada	49	1
+Canada	50	1
+Canada	51	1
+Canada	52	1
+Canada	53	1
+Chile	1	32
+Chile	2	32
+Chile	3	32
+Chile	4	32
+Chile	5	32
+Chile	6	32
+Chile	7	32
+Chile	8	32
+Chile	9	32
+Chile	10	32
+Chile	11	32
+Chile	12	32
+Chile	13	32
+Chile	14	16
+Chile	15	16
+Chile	16	16
+Chile	17	16
+Chile	18	16
+Chile	19	16
+Chile	20	16
+Chile	21	16
+Chile	22	16
+Chile	23	16
+Chile	24	16
+Chile	25	16
+Chile	26	16
+Chile	27	16
+Chile	28	16
+Chile	29	16
+Chile	30	16
+Chile	31	16
+Chile	32	16
+Chile	33	16
+Chile	34	16
+Chile	35	16
+Chile	36	16
+Chile	37	16
+Chile	38	16
+Chile	39	16
+Chile	40	16
+Chile	41	16
+Chile	42	16
+Chile	43	16
+Chile	44	16
+Chile	45	16
+Chile	46	16
+Chile	47	16
+Chile	48	16
+Chile	49	16
+Chile	50	16
+Chile	51	16
+Chile	52	16
+Chile	53	16
+Colombia	1	2
+Colombia	2	2
+Colombia	3	2
+Colombia	4	2
+Colombia	5	2
+Colombia	6	2
+Colombia	7	2
+Colombia	8	2
+Colombia	9	2
+Colombia	10	2
+Colombia	11	2
+Colombia	12	2
+Colombia	13	2
+Colombia	14	2
+Colombia	15	1
+Colombia	16	1
+Colombia	17	1
+Colombia	18	1
+Colombia	19	1
+Colombia	20	1
+Colombia	21	1
+Colombia	22	1
+Colombia	23	1
+Colombia	24	1
+Colombia	25	1
+Colombia	26	1
+Colombia	27	1
+Colombia	28	1
+Colombia	29	1
+Colombia	30	1
+Colombia	31	1
+Colombia	32	1
+Colombia	33	1
+Colombia	34	1
+Colombia	35	1
+Colombia	36	1
+Colombia	37	1
+Colombia	38	1
+Colombia	39	1
+Colombia	40	1
+Colombia	41	1
+Colombia	42	1
+Colombia	43	1
+Colombia	44	1
+Colombia	45	1
+Colombia	46	1
+Colombia	47	1
+Colombia	48	1
+Colombia	49	1
+Colombia	50	1
+Colombia	51	1
+Colombia	52	1
+Colombia	53	1
+Croatia	1	2
+Croatia	2	2
+Croatia	3	2
+Croatia	4	2
+Croatia	5	2
+Croatia	6	2
+Croatia	7	2
+Croatia	8	2
+Croatia	9	2
+Croatia	10	2
+Croatia	11	2
+Croatia	12	2
+Croatia	13	1
+Croatia	14	1
+Croatia	15	1
+Croatia	16	1
+Croatia	17	1
+Croatia	18	1
+Croatia	19	1
+Croatia	20	1
+Croatia	21	1
+Croatia	22	1
+Croatia	23	1
+Croatia	24	1
+Croatia	25	1
+Croatia	26	1
+Croatia	27	1
+Croatia	28	1
+Croatia	29	1
+Croatia	30	1
+Croatia	31	1
+Croatia	32	1
+Croatia	33	1
+Croatia	34	1
+Croatia	35	1
+Croatia	36	1
+Croatia	37	1
+Croatia	38	1
+Croatia	39	1
+Croatia	40	1
+Croatia	41	1
+Croatia	42	1
+Croatia	43	1
+Croatia	44	1
+Croatia	45	1
+Croatia	46	1
+Croatia	47	1
+Croatia	48	1
+Croatia	49	1
+Croatia	50	1
+Croatia	51	1
+Croatia	52	1
+Croatia	53	1
+Cyprus	1	2
+Cyprus	2	2
+Cyprus	3	2
+Cyprus	4	2
+Cyprus	5	2
+Cyprus	6	2
+Cyprus	7	2
+Cyprus	8	2
+Cyprus	9	2
+Cyprus	10	2
+Cyprus	11	2
+Cyprus	12	2
+Cyprus	13	1
+Cyprus	14	1
+Cyprus	15	1
+Cyprus	16	1
+Cyprus	17	1
+Cyprus	18	1
+Cyprus	19	1
+Cyprus	20	1
+Cyprus	21	1
+Cyprus	22	1
+Cyprus	23	1
+Cyprus	24	1
+Cyprus	25	1
+Cyprus	26	1
+Cyprus	27	1
+Cyprus	28	1
+Cyprus	29	1
+Cyprus	30	1
+Cyprus	31	1
+Cyprus	32	1
+Cyprus	33	1
+Cyprus	34	1
+Cyprus	35	1
+Cyprus	36	1
+Cyprus	37	1
+Cyprus	38	1
+Cyprus	39	1
+Cyprus	40	1
+Cyprus	41	1
+Cyprus	42	1
+Cyprus	43	1
+Cyprus	44	1
+Cyprus	45	1
+Cyprus	46	1
+Cyprus	47	1
+Cyprus	48	1
+Cyprus	49	1
+Cyprus	50	1
+Cyprus	51	1
+Cyprus	52	1
+Cyprus	53	1
+Czech Republic	1	2
+Czech Republic	2	2
+Czech Republic	3	2
+Czech Republic	4	2
+Czech Republic	5	2
+Czech Republic	6	2
+Czech Republic	7	2
+Czech Republic	8	2
+Czech Republic	9	2
+Czech Republic	10	2
+Czech Republic	11	2
+Czech Republic	12	2
+Czech Republic	13	1
+Czech Republic	14	1
+Czech Republic	15	1
+Czech Republic	16	1
+Czech Republic	17	1
+Czech Republic	18	1
+Czech Republic	19	1
+Czech Republic	20	1
+Czech Republic	21	1
+Czech Republic	22	1
+Czech Republic	23	1
+Czech Republic	24	1
+Czech Republic	25	1
+Czech Republic	26	1
+Czech Republic	27	1
+Czech Republic	28	1
+Czech Republic	29	1
+Czech Republic	30	1
+Czech Republic	31	1
+Czech Republic	32	1
+Czech Republic	33	1
+Czech Republic	34	1
+Czech Republic	35	1
+Czech Republic	36	1
+Czech Republic	37	1
+Czech Republic	38	1
+Czech Republic	39	1
+Czech Republic	40	1
+Czech Republic	41	1
+Czech Republic	42	1
+Czech Republic	43	1
+Czech Republic	44	1
+Czech Republic	45	1
+Czech Republic	46	1
+Czech Republic	47	1
+Czech Republic	48	1
+Czech Republic	49	1
+Czech Republic	50	1
+Czech Republic	51	1
+Czech Republic	52	1
+Czech Republic	53	1
+Denmark	1	2
+Denmark	2	2
+Denmark	3	2
+Denmark	4	2
+Denmark	5	2
+Denmark	6	2
+Denmark	7	2
+Denmark	8	2
+Denmark	9	2
+Denmark	10	2
+Denmark	11	2
+Denmark	12	2
+Denmark	13	2
+Denmark	14	2
+Denmark	15	2
+Denmark	16	2
+Denmark	17	2
+Denmark	18	1
+Denmark	19	1
+Denmark	20	1
+Denmark	21	1
+Denmark	22	1
+Denmark	23	1
+Denmark	24	1
+Denmark	25	1
+Denmark	26	1
+Denmark	27	1
+Denmark	28	1
+Denmark	29	1
+Denmark	30	1
+Denmark	31	1
+Denmark	32	1
+Denmark	33	1
+Denmark	34	1
+Denmark	35	1
+Denmark	36	1
+Denmark	37	1
+Denmark	38	1
+Denmark	39	1
+Denmark	40	1
+Denmark	41	1
+Denmark	42	1
+Denmark	43	1
+Denmark	44	1
+Denmark	45	1
+Denmark	46	1
+Denmark	47	1
+Denmark	48	1
+Denmark	49	1
+Denmark	50	1
+Denmark	51	1
+Denmark	52	1
+Denmark	53	1
+Estonia	1	2
+Estonia	2	2
+Estonia	3	2
+Estonia	4	2
+Estonia	5	2
+Estonia	6	2
+Estonia	7	2
+Estonia	8	2
+Estonia	9	2
+Estonia	10	2
+Estonia	11	2
+Estonia	12	2
+Estonia	13	2
+Estonia	14	2
+Estonia	15	2
+Estonia	16	2
+Estonia	17	2
+Estonia	18	1
+Estonia	19	1
+Estonia	20	1
+Estonia	21	1
+Estonia	22	1
+Estonia	23	1
+Estonia	24	1
+Estonia	25	1
+Estonia	26	1
+Estonia	27	1
+Estonia	28	1
+Estonia	29	1
+Estonia	30	1
+Estonia	31	1
+Estonia	32	1
+Estonia	33	1
+Estonia	34	1
+Estonia	35	1
+Estonia	36	1
+Estonia	37	1
+Estonia	38	1
+Estonia	39	1
+Estonia	40	1
+Estonia	41	1
+Estonia	42	1
+Estonia	43	1
+Estonia	44	1
+Estonia	45	1
+Estonia	46	1
+Estonia	47	1
+Estonia	48	1
+Estonia	49	1
+Estonia	50	1
+Estonia	51	1
+Estonia	52	1
+Estonia	53	1
+Finland	1	2
+Finland	2	2
+Finland	3	2
+Finland	4	2
+Finland	5	2
+Finland	6	2
+Finland	7	2
+Finland	8	2
+Finland	9	2
+Finland	10	2
+Finland	11	2
+Finland	12	2
+Finland	13	2
+Finland	14	2
+Finland	15	1
+Finland	16	1
+Finland	17	1
+Finland	18	1
+Finland	19	1
+Finland	20	1
+Finland	21	1
+Finland	22	1
+Finland	23	1
+Finland	24	1
+Finland	25	1
+Finland	26	1
+Finland	27	1
+Finland	28	1
+Finland	29	1
+Finland	30	1
+Finland	31	1
+Finland	32	1
+Finland	33	1
+Finland	34	1
+Finland	35	1
+Finland	36	1
+Finland	37	1
+Finland	38	1
+Finland	39	1
+Finland	40	1
+Finland	41	1
+Finland	42	1
+Finland	43	1
+Finland	44	1
+Finland	45	1
+Finland	46	1
+Finland	47	1
+Finland	48	1
+Finland	49	1
+Finland	50	1
+Finland	51	1
+Finland	52	1
+Finland	53	1
+France	1	28
+France	2	28
+France	3	28
+France	4	28
+France	5	28
+France	6	28
+France	7	28
+France	8	28
+France	9	28
+France	10	28
+France	11	28
+France	12	28
+France	13	28
+France	14	28
+France	15	28
+France	16	28
+France	17	14
+France	18	14
+France	19	14
+France	20	14
+France	21	14
+France	22	14
+France	23	14
+France	24	14
+France	25	14
+France	26	14
+France	27	14
+France	28	14
+France	29	14
+France	30	14
+France	31	14
+France	32	14
+France	33	14
+France	34	14
+France	35	14
+France	36	14
+France	37	14
+France	38	14
+France	39	14
+France	40	14
+France	41	14
+France	42	14
+France	43	14
+France	44	14
+France	45	14
+France	46	14
+France	47	14
+France	48	14
+France	49	14
+France	50	14
+France	51	14
+France	52	14
+France	53	14
+Germany	1	2
+Germany	2	2
+Germany	3	2
+Germany	4	2
+Germany	5	2
+Germany	6	2
+Germany	7	2
+Germany	8	2
+Germany	9	2
+Germany	10	2
+Germany	11	2
+Germany	12	2
+Germany	13	2
+Germany	14	2
+Germany	15	2
+Germany	16	2
+Germany	17	1
+Germany	18	1
+Germany	19	1
+Germany	20	1
+Germany	21	1
+Germany	22	1
+Germany	23	1
+Germany	24	1
+Germany	25	1
+Germany	26	1
+Germany	27	1
+Germany	28	1
+Germany	29	1
+Germany	30	1
+Germany	31	1
+Germany	32	1
+Germany	33	1
+Germany	34	1
+Germany	35	1
+Germany	36	1
+Germany	37	1
+Germany	38	1
+Germany	39	1
+Germany	40	1
+Germany	41	1
+Germany	42	1
+Germany	43	1
+Germany	44	1
+Germany	45	1
+Germany	46	1
+Germany	47	1
+Germany	48	1
+Germany	49	1
+Germany	50	1
+Germany	51	1
+Germany	52	1
+Germany	53	1
+Greece	1	2
+Greece	2	2
+Greece	3	2
+Greece	4	2
+Greece	5	2
+Greece	6	2
+Greece	7	2
+Greece	8	2
+Greece	9	2
+Greece	10	2
+Greece	11	2
+Greece	12	2
+Greece	13	2
+Greece	14	1
+Greece	15	1
+Greece	16	1
+Greece	17	1
+Greece	18	1
+Greece	19	1
+Greece	20	1
+Greece	21	1
+Greece	22	1
+Greece	23	1
+Greece	24	1
+Greece	25	1
+Greece	26	1
+Greece	27	1
+Greece	28	1
+Greece	29	1
+Greece	30	1
+Greece	31	1
+Greece	32	1
+Greece	33	1
+Greece	34	1
+Greece	35	1
+Greece	36	1
+Greece	37	1
+Greece	38	1
+Greece	39	1
+Greece	40	1
+Greece	41	1
+Greece	42	1
+Greece	43	1
+Greece	44	1
+Greece	45	1
+Greece	46	1
+Greece	47	1
+Greece	48	1
+Greece	49	1
+Greece	50	1
+Greece	51	1
+Greece	52	1
+Greece	53	1
+Hungary	1	2
+Hungary	2	2
+Hungary	3	2
+Hungary	4	2
+Hungary	5	2
+Hungary	6	2
+Hungary	7	2
+Hungary	8	2
+Hungary	9	2
+Hungary	10	2
+Hungary	11	2
+Hungary	12	2
+Hungary	13	2
+Hungary	14	2
+Hungary	15	1
+Hungary	16	1
+Hungary	17	1
+Hungary	18	1
+Hungary	19	1
+Hungary	20	1
+Hungary	21	1
+Hungary	22	1
+Hungary	23	1
+Hungary	24	1
+Hungary	25	1
+Hungary	26	1
+Hungary	27	1
+Hungary	28	1
+Hungary	29	1
+Hungary	30	1
+Hungary	31	1
+Hungary	32	1
+Hungary	33	1
+Hungary	34	1
+Hungary	35	1
+Hungary	36	1
+Hungary	37	1
+Hungary	38	1
+Hungary	39	1
+Hungary	40	1
+Hungary	41	1
+Hungary	42	1
+Hungary	43	1
+Hungary	44	1
+Hungary	45	1
+Hungary	46	1
+Hungary	47	1
+Hungary	48	1
+Hungary	49	1
+Hungary	50	1
+Hungary	51	1
+Hungary	52	1
+Hungary	53	1
+Iceland	1	2
+Iceland	2	2
+Iceland	3	2
+Iceland	4	2
+Iceland	5	2
+Iceland	6	2
+Iceland	7	2
+Iceland	8	2
+Iceland	9	2
+Iceland	10	2
+Iceland	11	2
+Iceland	12	1
+Iceland	13	1
+Iceland	14	1
+Iceland	15	1
+Iceland	16	1
+Iceland	17	1
+Iceland	18	1
+Iceland	19	1
+Iceland	20	1
+Iceland	21	1
+Iceland	22	1
+Iceland	23	1
+Iceland	24	1
+Iceland	25	1
+Iceland	26	1
+Iceland	27	1
+Iceland	28	1
+Iceland	29	1
+Iceland	30	1
+Iceland	31	1
+Iceland	32	1
+Iceland	33	1
+Iceland	34	1
+Iceland	35	1
+Iceland	36	1
+Iceland	37	1
+Iceland	38	1
+Iceland	39	1
+Iceland	40	1
+Iceland	41	1
+Iceland	42	1
+Iceland	43	1
+Iceland	44	1
+Iceland	45	1
+Iceland	46	1
+Iceland	47	1
+Iceland	48	1
+Iceland	49	1
+Iceland	50	1
+Iceland	51	1
+Iceland	52	1
+Iceland	53	1
+Israel	1	2
+Israel	2	2
+Israel	3	2
+Israel	4	2
+Israel	5	2
+Israel	6	2
+Israel	7	2
+Israel	8	2
+Israel	9	2
+Israel	10	2
+Israel	11	1
+Israel	12	1
+Israel	13	1
+Israel	14	1
+Israel	15	1
+Israel	16	1
+Israel	17	1
+Israel	18	1
+Israel	19	1
+Israel	20	1
+Israel	21	1
+Israel	22	1
+Israel	23	1
+Israel	24	1
+Israel	25	1
+Israel	26	1
+Israel	27	1
+Israel	28	1
+Israel	29	1
+Israel	30	1
+Israel	31	1
+Israel	32	1
+Israel	33	1
+Israel	34	1
+Israel	35	1
+Israel	36	1
+Israel	37	1
+Israel	38	1
+Israel	39	1
+Israel	40	1
+Israel	41	1
+Israel	42	1
+Israel	43	1
+Israel	44	1
+Israel	45	1
+Israel	46	1
+Israel	47	1
+Israel	48	1
+Israel	49	1
+Israel	50	1
+Israel	51	1
+Israel	52	1
+Israel	53	1
+Italy	1	40
+Italy	2	40
+Italy	3	40
+Italy	4	40
+Italy	5	40
+Italy	6	20
+Italy	7	20
+Italy	8	20
+Italy	9	20
+Italy	10	20
+Italy	11	20
+Italy	12	20
+Italy	13	20
+Italy	14	20
+Italy	15	20
+Italy	16	20
+Italy	17	20
+Italy	18	20
+Italy	19	20
+Italy	20	20
+Italy	21	20
+Italy	22	20
+Italy	23	20
+Italy	24	20
+Italy	25	20
+Italy	26	20
+Italy	27	20
+Italy	28	20
+Italy	29	20
+Italy	30	20
+Italy	31	20
+Italy	32	20
+Italy	33	20
+Italy	34	20
+Italy	35	20
+Italy	36	20
+Italy	37	20
+Italy	38	20
+Italy	39	20
+Italy	40	20
+Italy	41	20
+Italy	42	20
+Italy	43	20
+Italy	44	20
+Italy	45	20
+Italy	46	20
+Italy	47	20
+Italy	48	20
+Italy	49	20
+Italy	50	20
+Italy	51	20
+Italy	52	20
+Italy	53	20
+Latvia	1	2
+Latvia	2	2
+Latvia	3	2
+Latvia	4	2
+Latvia	5	2
+Latvia	6	2
+Latvia	7	2
+Latvia	8	2
+Latvia	9	2
+Latvia	10	2
+Latvia	11	2
+Latvia	12	2
+Latvia	13	2
+Latvia	14	2
+Latvia	15	2
+Latvia	16	1
+Latvia	17	1
+Latvia	18	1
+Latvia	19	1
+Latvia	20	1
+Latvia	21	1
+Latvia	22	1
+Latvia	23	1
+Latvia	24	1
+Latvia	25	1
+Latvia	26	1
+Latvia	27	1
+Latvia	28	1
+Latvia	29	1
+Latvia	30	1
+Latvia	31	1
+Latvia	32	1
+Latvia	33	1
+Latvia	34	1
+Latvia	35	1
+Latvia	36	1
+Latvia	37	1
+Latvia	38	1
+Latvia	39	1
+Latvia	40	1
+Latvia	41	1
+Latvia	42	1
+Latvia	43	1
+Latvia	44	1
+Latvia	45	1
+Latvia	46	1
+Latvia	47	1
+Latvia	48	1
+Latvia	49	1
+Latvia	50	1
+Latvia	51	1
+Latvia	52	1
+Latvia	53	1
+Lithuania	1	2
+Lithuania	2	2
+Lithuania	3	2
+Lithuania	4	2
+Lithuania	5	2
+Lithuania	6	2
+Lithuania	7	2
+Lithuania	8	2
+Lithuania	9	2
+Lithuania	10	2
+Lithuania	11	2
+Lithuania	12	2
+Lithuania	13	2
+Lithuania	14	2
+Lithuania	15	2
+Lithuania	16	2
+Lithuania	17	1
+Lithuania	18	1
+Lithuania	19	1
+Lithuania	20	1
+Lithuania	21	1
+Lithuania	22	1
+Lithuania	23	1
+Lithuania	24	1
+Lithuania	25	1
+Lithuania	26	1
+Lithuania	27	1
+Lithuania	28	1
+Lithuania	29	1
+Lithuania	30	1
+Lithuania	31	1
+Lithuania	32	1
+Lithuania	33	1
+Lithuania	34	1
+Lithuania	35	1
+Lithuania	36	1
+Lithuania	37	1
+Lithuania	38	1
+Lithuania	39	1
+Lithuania	40	1
+Lithuania	41	1
+Lithuania	42	1
+Lithuania	43	1
+Lithuania	44	1
+Lithuania	45	1
+Lithuania	46	1
+Lithuania	47	1
+Lithuania	48	1
+Lithuania	49	1
+Lithuania	50	1
+Lithuania	51	1
+Lithuania	52	1
+Lithuania	53	1
+Luxembourg	1	2
+Luxembourg	2	2
+Luxembourg	3	2
+Luxembourg	4	2
+Luxembourg	5	2
+Luxembourg	6	2
+Luxembourg	7	2
+Luxembourg	8	2
+Luxembourg	9	2
+Luxembourg	10	2
+Luxembourg	11	2
+Luxembourg	12	2
+Luxembourg	13	2
+Luxembourg	14	1
+Luxembourg	15	1
+Luxembourg	16	1
+Luxembourg	17	1
+Luxembourg	18	1
+Luxembourg	19	1
+Luxembourg	20	1
+Luxembourg	21	1
+Luxembourg	22	1
+Luxembourg	23	1
+Luxembourg	24	1
+Luxembourg	25	1
+Luxembourg	26	1
+Luxembourg	27	1
+Luxembourg	28	1
+Luxembourg	29	1
+Luxembourg	30	1
+Luxembourg	31	1
+Luxembourg	32	1
+Luxembourg	33	1
+Luxembourg	34	1
+Luxembourg	35	1
+Luxembourg	36	1
+Luxembourg	37	1
+Luxembourg	38	1
+Luxembourg	39	1
+Luxembourg	40	1
+Luxembourg	41	1
+Luxembourg	42	1
+Luxembourg	43	1
+Luxembourg	44	1
+Luxembourg	45	1
+Luxembourg	46	1
+Luxembourg	47	1
+Luxembourg	48	1
+Luxembourg	49	1
+Luxembourg	50	1
+Luxembourg	51	1
+Luxembourg	52	1
+Luxembourg	53	1
+Malta	1	2
+Malta	2	2
+Malta	3	2
+Malta	4	2
+Malta	5	2
+Malta	6	2
+Malta	7	2
+Malta	8	2
+Malta	9	2
+Malta	10	2
+Malta	11	2
+Malta	12	1
+Malta	13	1
+Malta	14	1
+Malta	15	1
+Malta	16	1
+Malta	17	1
+Malta	18	1
+Malta	19	1
+Malta	20	1
+Malta	21	1
+Malta	22	1
+Malta	23	1
+Malta	24	1
+Malta	25	1
+Malta	26	1
+Malta	27	1
+Malta	28	1
+Malta	29	1
+Malta	30	1
+Malta	31	1
+Malta	32	1
+Malta	33	1
+Malta	34	1
+Malta	35	1
+Malta	36	1
+Malta	37	1
+Malta	38	1
+Malta	39	1
+Malta	40	1
+Malta	41	1
+Malta	42	1
+Malta	43	1
+Malta	44	1
+Malta	45	1
+Malta	46	1
+Malta	47	1
+Malta	48	1
+Malta	49	1
+Malta	50	1
+Malta	51	1
+Malta	52	1
+Malta	53	1
+Mexico	1	2
+Mexico	2	2
+Mexico	3	2
+Mexico	4	2
+Mexico	5	2
+Mexico	6	2
+Mexico	7	2
+Mexico	8	2
+Mexico	9	2
+Mexico	10	2
+Mexico	11	2
+Mexico	12	2
+Mexico	13	1
+Mexico	14	1
+Mexico	15	1
+Mexico	16	1
+Mexico	17	1
+Mexico	18	1
+Mexico	19	1
+Mexico	20	1
+Mexico	21	1
+Mexico	22	1
+Mexico	23	1
+Mexico	24	1
+Mexico	25	1
+Mexico	26	1
+Mexico	27	1
+Mexico	28	1
+Mexico	29	1
+Mexico	30	1
+Mexico	31	1
+Mexico	32	1
+Mexico	33	1
+Mexico	34	1
+Mexico	35	1
+Mexico	36	1
+Mexico	37	1
+Mexico	38	1
+Mexico	39	1
+Mexico	40	1
+Mexico	41	1
+Mexico	42	1
+Mexico	43	1
+Mexico	44	1
+Mexico	45	1
+Mexico	46	1
+Mexico	47	1
+Mexico	48	1
+Mexico	49	1
+Mexico	50	1
+Mexico	51	1
+Mexico	52	1
+Mexico	53	1
+Montenegro	1	2
+Montenegro	2	2
+Montenegro	3	2
+Montenegro	4	2
+Montenegro	5	1
+Montenegro	6	1
+Montenegro	7	1
+Montenegro	8	1
+Montenegro	9	1
+Montenegro	10	1
+Montenegro	11	1
+Montenegro	12	1
+Montenegro	13	1
+Montenegro	14	1
+Montenegro	15	1
+Montenegro	16	1
+Montenegro	17	1
+Montenegro	18	1
+Montenegro	19	1
+Montenegro	20	1
+Montenegro	21	1
+Montenegro	22	1
+Montenegro	23	1
+Montenegro	24	1
+Montenegro	25	1
+Montenegro	26	1
+Montenegro	27	1
+Montenegro	28	1
+Montenegro	29	1
+Montenegro	30	1
+Montenegro	31	1
+Montenegro	32	1
+Montenegro	33	1
+Montenegro	34	1
+Montenegro	35	1
+Montenegro	36	1
+Montenegro	37	1
+Montenegro	38	1
+Montenegro	39	1
+Montenegro	40	1
+Montenegro	41	1
+Montenegro	42	1
+Montenegro	43	1
+Montenegro	44	1
+Montenegro	45	1
+Montenegro	46	1
+Montenegro	47	1
+Montenegro	48	1
+Montenegro	49	1
+Montenegro	50	1
+Montenegro	51	1
+Montenegro	52	1
+Montenegro	53	1
+Netherlands	1	2
+Netherlands	2	2
+Netherlands	3	2
+Netherlands	4	2
+Netherlands	5	2
+Netherlands	6	2
+Netherlands	7	2
+Netherlands	8	2
+Netherlands	9	2
+Netherlands	10	2
+Netherlands	11	2
+Netherlands	12	2
+Netherlands	13	2
+Netherlands	14	2
+Netherlands	15	2
+Netherlands	16	2
+Netherlands	17	2
+Netherlands	18	1
+Netherlands	19	1
+Netherlands	20	1
+Netherlands	21	1
+Netherlands	22	1
+Netherlands	23	1
+Netherlands	24	1
+Netherlands	25	1
+Netherlands	26	1
+Netherlands	27	1
+Netherlands	28	1
+Netherlands	29	1
+Netherlands	30	1
+Netherlands	31	1
+Netherlands	32	1
+Netherlands	33	1
+Netherlands	34	1
+Netherlands	35	1
+Netherlands	36	1
+Netherlands	37	1
+Netherlands	38	1
+Netherlands	39	1
+Netherlands	40	1
+Netherlands	41	1
+Netherlands	42	1
+Netherlands	43	1
+Netherlands	44	1
+Netherlands	45	1
+Netherlands	46	1
+Netherlands	47	1
+Netherlands	48	1
+Netherlands	49	1
+Netherlands	50	1
+Netherlands	51	1
+Netherlands	52	1
+Netherlands	53	1
+New Zealand	1	2
+New Zealand	2	2
+New Zealand	3	2
+New Zealand	4	2
+New Zealand	5	2
+New Zealand	6	2
+New Zealand	7	2
+New Zealand	8	2
+New Zealand	9	2
+New Zealand	10	2
+New Zealand	11	2
+New Zealand	12	2
+New Zealand	13	2
+New Zealand	14	2
+New Zealand	15	2
+New Zealand	16	1
+New Zealand	17	1
+New Zealand	18	1
+New Zealand	19	1
+New Zealand	20	1
+New Zealand	21	1
+New Zealand	22	1
+New Zealand	23	1
+New Zealand	24	1
+New Zealand	25	1
+New Zealand	26	1
+New Zealand	27	1
+New Zealand	28	1
+New Zealand	29	1
+New Zealand	30	1
+New Zealand	31	1
+New Zealand	32	1
+New Zealand	33	1
+New Zealand	34	1
+New Zealand	35	1
+New Zealand	36	1
+New Zealand	37	1
+New Zealand	38	1
+New Zealand	39	1
+New Zealand	40	1
+New Zealand	41	1
+New Zealand	42	1
+New Zealand	43	1
+New Zealand	44	1
+New Zealand	45	1
+New Zealand	46	1
+New Zealand	47	1
+New Zealand	48	1
+New Zealand	49	1
+New Zealand	50	1
+New Zealand	51	1
+New Zealand	52	1
+New Zealand	53	1
+Norway	1	2
+Norway	2	2
+Norway	3	2
+Norway	4	2
+Norway	5	2
+Norway	6	2
+Norway	7	2
+Norway	8	2
+Norway	9	2
+Norway	10	2
+Norway	11	2
+Norway	12	2
+Norway	13	2
+Norway	14	2
+Norway	15	2
+Norway	16	2
+Norway	17	1
+Norway	18	1
+Norway	19	1
+Norway	20	1
+Norway	21	1
+Norway	22	1
+Norway	23	1
+Norway	24	1
+Norway	25	1
+Norway	26	1
+Norway	27	1
+Norway	28	1
+Norway	29	1
+Norway	30	1
+Norway	31	1
+Norway	32	1
+Norway	33	1
+Norway	34	1
+Norway	35	1
+Norway	36	1
+Norway	37	1
+Norway	38	1
+Norway	39	1
+Norway	40	1
+Norway	41	1
+Norway	42	1
+Norway	43	1
+Norway	44	1
+Norway	45	1
+Norway	46	1
+Norway	47	1
+Norway	48	1
+Norway	49	1
+Norway	50	1
+Norway	51	1
+Norway	52	1
+Norway	53	1
+Peru	1	2
+Peru	2	2
+Peru	3	2
+Peru	4	2
+Peru	5	2
+Peru	6	2
+Peru	7	2
+Peru	8	2
+Peru	9	2
+Peru	10	2
+Peru	11	2
+Peru	12	2
+Peru	13	2
+Peru	14	2
+Peru	15	2
+Peru	16	2
+Peru	17	2
+Peru	18	1
+Peru	19	1
+Peru	20	1
+Peru	21	1
+Peru	22	1
+Peru	23	1
+Peru	24	1
+Peru	25	1
+Peru	26	1
+Peru	27	1
+Peru	28	1
+Peru	29	1
+Peru	30	1
+Peru	31	1
+Peru	32	1
+Peru	33	1
+Peru	34	1
+Peru	35	1
+Peru	36	1
+Peru	37	1
+Peru	38	1
+Peru	39	1
+Peru	40	1
+Peru	41	1
+Peru	42	1
+Peru	43	1
+Peru	44	1
+Peru	45	1
+Peru	46	1
+Peru	47	1
+Peru	48	1
+Peru	49	1
+Peru	50	1
+Peru	51	1
+Peru	52	1
+Peru	53	1
+Poland	1	2
+Poland	2	2
+Poland	3	2
+Poland	4	2
+Poland	5	2
+Poland	6	2
+Poland	7	2
+Poland	8	2
+Poland	9	2
+Poland	10	2
+Poland	11	2
+Poland	12	2
+Poland	13	2
+Poland	14	2
+Poland	15	1
+Poland	16	1
+Poland	17	1
+Poland	18	1
+Poland	19	1
+Poland	20	1
+Poland	21	1
+Poland	22	1
+Poland	23	1
+Poland	24	1
+Poland	25	1
+Poland	26	1
+Poland	27	1
+Poland	28	1
+Poland	29	1
+Poland	30	1
+Poland	31	1
+Poland	32	1
+Poland	33	1
+Poland	34	1
+Poland	35	1
+Poland	36	1
+Poland	37	1
+Poland	38	1
+Poland	39	1
+Poland	40	1
+Poland	41	1
+Poland	42	1
+Poland	43	1
+Poland	44	1
+Poland	45	1
+Poland	46	1
+Poland	47	1
+Poland	48	1
+Poland	49	1
+Poland	50	1
+Poland	51	1
+Poland	52	1
+Poland	53	1
+Portugal	1	2
+Portugal	2	2
+Portugal	3	2
+Portugal	4	2
+Portugal	5	2
+Portugal	6	2
+Portugal	7	2
+Portugal	8	2
+Portugal	9	2
+Portugal	10	2
+Portugal	11	2
+Portugal	12	2
+Portugal	13	2
+Portugal	14	2
+Portugal	15	2
+Portugal	16	1
+Portugal	17	1
+Portugal	18	1
+Portugal	19	1
+Portugal	20	1
+Portugal	21	1
+Portugal	22	1
+Portugal	23	1
+Portugal	24	1
+Portugal	25	1
+Portugal	26	1
+Portugal	27	1
+Portugal	28	1
+Portugal	29	1
+Portugal	30	1
+Portugal	31	1
+Portugal	32	1
+Portugal	33	1
+Portugal	34	1
+Portugal	35	1
+Portugal	36	1
+Portugal	37	1
+Portugal	38	1
+Portugal	39	1
+Portugal	40	1
+Portugal	41	1
+Portugal	42	1
+Portugal	43	1
+Portugal	44	1
+Portugal	45	1
+Portugal	46	1
+Portugal	47	1
+Portugal	48	1
+Portugal	49	1
+Portugal	50	1
+Portugal	51	1
+Portugal	52	1
+Portugal	53	1
+Romania	1	2
+Romania	2	2
+Romania	3	2
+Romania	4	2
+Romania	5	2
+Romania	6	2
+Romania	7	2
+Romania	8	1
+Romania	9	1
+Romania	10	1
+Romania	11	1
+Romania	12	1
+Romania	13	1
+Romania	14	1
+Romania	15	1
+Romania	16	1
+Romania	17	1
+Romania	18	1
+Romania	19	1
+Romania	20	1
+Romania	21	1
+Romania	22	1
+Romania	23	1
+Romania	24	1
+Romania	25	1
+Romania	26	1
+Romania	27	1
+Romania	28	1
+Romania	29	1
+Romania	30	1
+Romania	31	1
+Romania	32	1
+Romania	33	1
+Romania	34	1
+Romania	35	1
+Romania	36	1
+Romania	37	1
+Romania	38	1
+Romania	39	1
+Romania	40	1
+Romania	41	1
+Romania	42	1
+Romania	43	1
+Romania	44	1
+Romania	45	1
+Romania	46	1
+Romania	47	1
+Romania	48	1
+Romania	49	1
+Romania	50	1
+Romania	51	1
+Romania	52	1
+Romania	53	1
+Slovakia	1	2
+Slovakia	2	2
+Slovakia	3	2
+Slovakia	4	2
+Slovakia	5	2
+Slovakia	6	2
+Slovakia	7	2
+Slovakia	8	2
+Slovakia	9	2
+Slovakia	10	2
+Slovakia	11	2
+Slovakia	12	2
+Slovakia	13	1
+Slovakia	14	1
+Slovakia	15	1
+Slovakia	16	1
+Slovakia	17	1
+Slovakia	18	1
+Slovakia	19	1
+Slovakia	20	1
+Slovakia	21	1
+Slovakia	22	1
+Slovakia	23	1
+Slovakia	24	1
+Slovakia	25	1
+Slovakia	26	1
+Slovakia	27	1
+Slovakia	28	1
+Slovakia	29	1
+Slovakia	30	1
+Slovakia	31	1
+Slovakia	32	1
+Slovakia	33	1
+Slovakia	34	1
+Slovakia	35	1
+Slovakia	36	1
+Slovakia	37	1
+Slovakia	38	1
+Slovakia	39	1
+Slovakia	40	1
+Slovakia	41	1
+Slovakia	42	1
+Slovakia	43	1
+Slovakia	44	1
+Slovakia	45	1
+Slovakia	46	1
+Slovakia	47	1
+Slovakia	48	1
+Slovakia	49	1
+Slovakia	50	1
+Slovakia	51	1
+Slovakia	52	1
+Slovakia	53	1
+Slovenia	1	2
+Slovenia	2	2
+Slovenia	3	2
+Slovenia	4	2
+Slovenia	5	2
+Slovenia	6	2
+Slovenia	7	2
+Slovenia	8	2
+Slovenia	9	2
+Slovenia	10	2
+Slovenia	11	2
+Slovenia	12	2
+Slovenia	13	2
+Slovenia	14	2
+Slovenia	15	2
+Slovenia	16	1
+Slovenia	17	1
+Slovenia	18	1
+Slovenia	19	1
+Slovenia	20	1
+Slovenia	21	1
+Slovenia	22	1
+Slovenia	23	1
+Slovenia	24	1
+Slovenia	25	1
+Slovenia	26	1
+Slovenia	27	1
+Slovenia	28	1
+Slovenia	29	1
+Slovenia	30	1
+Slovenia	31	1
+Slovenia	32	1
+Slovenia	33	1
+Slovenia	34	1
+Slovenia	35	1
+Slovenia	36	1
+Slovenia	37	1
+Slovenia	38	1
+Slovenia	39	1
+Slovenia	40	1
+Slovenia	41	1
+Slovenia	42	1
+Slovenia	43	1
+Slovenia	44	1
+Slovenia	45	1
+Slovenia	46	1
+Slovenia	47	1
+Slovenia	48	1
+Slovenia	49	1
+Slovenia	50	1
+Slovenia	51	1
+Slovenia	52	1
+Slovenia	53	1
+South Africa	1	2
+South Africa	2	2
+South Africa	3	2
+South Africa	4	2
+South Africa	5	2
+South Africa	6	2
+South Africa	7	2
+South Africa	8	2
+South Africa	9	2
+South Africa	10	2
+South Africa	11	2
+South Africa	12	2
+South Africa	13	2
+South Africa	14	2
+South Africa	15	2
+South Africa	16	2
+South Africa	17	2
+South Africa	18	1
+South Africa	19	1
+South Africa	20	1
+South Africa	21	1
+South Africa	22	1
+South Africa	23	1
+South Africa	24	1
+South Africa	25	1
+South Africa	26	1
+South Africa	27	1
+South Africa	28	1
+South Africa	29	1
+South Africa	30	1
+South Africa	31	1
+South Africa	32	1
+South Africa	33	1
+South Africa	34	1
+South Africa	35	1
+South Africa	36	1
+South Africa	37	1
+South Africa	38	1
+South Africa	39	1
+South Africa	40	1
+South Africa	41	1
+South Africa	42	1
+South Africa	43	1
+South Africa	44	1
+South Africa	45	1
+South Africa	46	1
+South Africa	47	1
+South Africa	48	1
+South Africa	49	1
+South Africa	50	1
+South Africa	51	1
+South Africa	52	1
+South Africa	53	1
+South Korea	1	2
+South Korea	2	2
+South Korea	3	2
+South Korea	4	2
+South Korea	5	2
+South Korea	6	2
+South Korea	7	2
+South Korea	8	2
+South Korea	9	2
+South Korea	10	1
+South Korea	11	1
+South Korea	12	1
+South Korea	13	1
+South Korea	14	1
+South Korea	15	1
+South Korea	16	1
+South Korea	17	1
+South Korea	18	1
+South Korea	19	1
+South Korea	20	1
+South Korea	21	1
+South Korea	22	1
+South Korea	23	1
+South Korea	24	1
+South Korea	25	1
+South Korea	26	1
+South Korea	27	1
+South Korea	28	1
+South Korea	29	1
+South Korea	30	1
+South Korea	31	1
+South Korea	32	1
+South Korea	33	1
+South Korea	34	1
+South Korea	35	1
+South Korea	36	1
+South Korea	37	1
+South Korea	38	1
+South Korea	39	1
+South Korea	40	1
+South Korea	41	1
+South Korea	42	1
+South Korea	43	1
+South Korea	44	1
+South Korea	45	1
+South Korea	46	1
+South Korea	47	1
+South Korea	48	1
+South Korea	49	1
+South Korea	50	1
+South Korea	51	1
+South Korea	52	1
+South Korea	53	1
+Spain	1	40
+Spain	2	40
+Spain	3	40
+Spain	4	40
+Spain	5	40
+Spain	6	40
+Spain	7	40
+Spain	8	40
+Spain	9	40
+Spain	10	40
+Spain	11	40
+Spain	12	40
+Spain	13	40
+Spain	14	40
+Spain	15	40
+Spain	16	40
+Spain	17	40
+Spain	18	40
+Spain	19	20
+Spain	20	20
+Spain	21	20
+Spain	22	20
+Spain	23	20
+Spain	24	20
+Spain	25	20
+Spain	26	20
+Spain	27	20
+Spain	28	20
+Spain	29	20
+Spain	30	20
+Spain	31	20
+Spain	32	20
+Spain	33	20
+Spain	34	20
+Spain	35	20
+Spain	36	20
+Spain	37	20
+Spain	38	20
+Spain	39	20
+Spain	40	20
+Spain	41	20
+Spain	42	20
+Spain	43	20
+Spain	44	20
+Spain	45	20
+Spain	46	20
+Spain	47	20
+Spain	48	20
+Spain	49	20
+Spain	50	20
+Spain	51	20
+Spain	52	20
+Spain	53	20
+Sweden	1	2
+Sweden	2	2
+Sweden	3	2
+Sweden	4	2
+Sweden	5	2
+Sweden	6	2
+Sweden	7	2
+Sweden	8	2
+Sweden	9	2
+Sweden	10	2
+Sweden	11	2
+Sweden	12	2
+Sweden	13	2
+Sweden	14	2
+Sweden	15	2
+Sweden	16	1
+Sweden	17	1
+Sweden	18	1
+Sweden	19	1
+Sweden	20	1
+Sweden	21	1
+Sweden	22	1
+Sweden	23	1
+Sweden	24	1
+Sweden	25	1
+Sweden	26	1
+Sweden	27	1
+Sweden	28	1
+Sweden	29	1
+Sweden	30	1
+Sweden	31	1
+Sweden	32	1
+Sweden	33	1
+Sweden	34	1
+Sweden	35	1
+Sweden	36	1
+Sweden	37	1
+Sweden	38	1
+Sweden	39	1
+Sweden	40	1
+Sweden	41	1
+Sweden	42	1
+Sweden	43	1
+Sweden	44	1
+Sweden	45	1
+Sweden	46	1
+Sweden	47	1
+Sweden	48	1
+Sweden	49	1
+Sweden	50	1
+Sweden	51	1
+Sweden	52	1
+Sweden	53	1
+Switzerland	1	2
+Switzerland	2	2
+Switzerland	3	2
+Switzerland	4	2
+Switzerland	5	2
+Switzerland	6	2
+Switzerland	7	2
+Switzerland	8	2
+Switzerland	9	2
+Switzerland	10	2
+Switzerland	11	2
+Switzerland	12	2
+Switzerland	13	2
+Switzerland	14	2
+Switzerland	15	2
+Switzerland	16	2
+Switzerland	17	1
+Switzerland	18	1
+Switzerland	19	1
+Switzerland	20	1
+Switzerland	21	1
+Switzerland	22	1
+Switzerland	23	1
+Switzerland	24	1
+Switzerland	25	1
+Switzerland	26	1
+Switzerland	27	1
+Switzerland	28	1
+Switzerland	29	1
+Switzerland	30	1
+Switzerland	31	1
+Switzerland	32	1
+Switzerland	33	1
+Switzerland	34	1
+Switzerland	35	1
+Switzerland	36	1
+Switzerland	37	1
+Switzerland	38	1
+Switzerland	39	1
+Switzerland	40	1
+Switzerland	41	1
+Switzerland	42	1
+Switzerland	43	1
+Switzerland	44	1
+Switzerland	45	1
+Switzerland	46	1
+Switzerland	47	1
+Switzerland	48	1
+Switzerland	49	1
+Switzerland	50	1
+Switzerland	51	1
+Switzerland	52	1
+Switzerland	53	1
+Taiwan	1	1
+Taiwan	2	1
+Taiwan	3	1
+Taiwan	4	1
+Taiwan	5	1
+Taiwan	6	1
+Taiwan	7	1
+Taiwan	8	1
+Taiwan	9	1
+Taiwan	10	1
+Taiwan	11	1
+Taiwan	12	1
+Taiwan	13	1
+Taiwan	14	1
+Taiwan	15	1
+Taiwan	16	1
+Taiwan	17	1
+Taiwan	18	1
+Taiwan	19	1
+Taiwan	20	1
+Taiwan	21	1
+Taiwan	22	1
+Taiwan	23	1
+Taiwan	24	1
+Taiwan	25	1
+Taiwan	26	1
+Taiwan	27	1
+Taiwan	28	1
+Taiwan	29	1
+Taiwan	30	1
+Taiwan	31	1
+Taiwan	32	1
+Taiwan	33	1
+Taiwan	34	1
+Taiwan	35	1
+Taiwan	36	1
+Taiwan	37	1
+Taiwan	38	1
+Taiwan	39	1
+Taiwan	40	1
+Taiwan	41	1
+Taiwan	42	1
+Taiwan	43	1
+Taiwan	44	1
+Taiwan	45	1
+Taiwan	46	1
+Taiwan	47	1
+Taiwan	48	1
+Taiwan	49	1
+Taiwan	50	1
+Taiwan	51	1
+Taiwan	52	1
+Tunisia	1	2
+Tunisia	2	2
+Tunisia	3	2
+Tunisia	4	2
+Tunisia	5	2
+Tunisia	6	2
+Tunisia	7	1
+Tunisia	8	1
+Tunisia	9	1
+Tunisia	10	1
+Tunisia	11	1
+Tunisia	12	1
+Tunisia	13	1
+Tunisia	14	1
+Tunisia	15	1
+Tunisia	16	1
+Tunisia	17	1
+Tunisia	18	1
+Tunisia	19	1
+Tunisia	20	1
+Tunisia	21	1
+Tunisia	22	1
+Tunisia	23	1
+Tunisia	24	1
+Tunisia	25	1
+Tunisia	26	1
+Tunisia	27	1
+Tunisia	28	1
+Tunisia	29	1
+Tunisia	30	1
+Tunisia	31	1
+Tunisia	32	1
+Tunisia	33	1
+Tunisia	34	1
+Tunisia	35	1
+Tunisia	36	1
+Tunisia	37	1
+Tunisia	38	1
+Tunisia	39	1
+Tunisia	40	1
+Tunisia	41	1
+Tunisia	42	1
+Tunisia	43	1
+Tunisia	44	1
+Tunisia	45	1
+Tunisia	46	1
+Tunisia	47	1
+Tunisia	48	1
+Tunisia	49	1
+Tunisia	50	1
+Tunisia	51	1
+Tunisia	52	1
+Turkey	1	1
+Turkey	2	1
+Turkey	3	1
+Turkey	4	1
+Turkey	5	1
+Turkey	6	1
+Turkey	7	1
+Turkey	8	1
+Turkey	9	1
+Turkey	10	1
+Turkey	11	1
+Turkey	12	1
+Turkey	13	1
+Turkey	14	1
+Turkey	15	1
+Turkey	16	1
+Turkey	17	1
+Turkey	18	1
+Turkey	19	1
+Turkey	20	1
+Turkey	21	1
+Turkey	22	1
+Turkey	23	1
+Turkey	24	1
+Turkey	25	1
+Turkey	26	1
+Turkey	27	1
+Turkey	28	1
+Turkey	29	1
+Turkey	30	1
+Turkey	31	1
+Turkey	32	1
+Turkey	33	1
+Turkey	34	1
+Turkey	35	1
+Turkey	36	1
+Turkey	37	1
+Turkey	38	1
+Turkey	39	1
+Turkey	40	1
+Turkey	41	1
+Turkey	42	1
+Turkey	43	1
+Turkey	44	1
+Turkey	45	1
+Turkey	46	1
+Turkey	47	1
+Turkey	48	1
+Turkey	49	1
+Turkey	50	1
+Turkey	51	1
+Turkey	52	1
+Turkey	53	1
+United States	1	106
+United States	2	106
+United States	3	106
+United States	4	106
+United States	5	106
+United States	6	105
+United States	7	105
+United States	8	105
+United States	9	105
+United States	10	105
+United States	11	105
+United States	12	105
+United States	13	104
+United States	14	104
+United States	15	104
+United States	16	53
+United States	17	53
+United States	18	53
+United States	19	53
+United States	20	53
+United States	21	53
+United States	22	53
+United States	23	53
+United States	24	53
+United States	25	53
+United States	26	53
+United States	27	53
+United States	28	53
+United States	29	53
+United States	30	53
+United States	31	53
+United States	32	53
+United States	33	53
+United States	34	53
+United States	35	53
+United States	36	53
+United States	37	53
+United States	38	53
+United States	39	53
+United States	40	53
+United States	41	53
+United States	42	53
+United States	43	53
+United States	44	53
+United States	45	53
+United States	46	53
+United States	47	53
+United States	48	53
+United States	49	53
+United States	50	53
+United States	51	53
+United States	52	53
+United States	53	53

@@ -3,6 +3,7 @@
 #### Changes:
 
 - using @rawgraphs/rawgraphs-core 1.0.0-beta.15
+- _Alluvial diagram_: added message to prevent visualization overflows if the number of items is too high
 
 ## v1.0.0-beta.19
 
