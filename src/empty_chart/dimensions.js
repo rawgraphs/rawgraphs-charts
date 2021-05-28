@@ -22,6 +22,6 @@ export const dimensions = [
     id: 'x',
     name: 'x axis',
     validTypes: ['number'],
-    required: true,
+    required: false,
   },
 ]
