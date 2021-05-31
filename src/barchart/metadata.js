@@ -11,5 +11,5 @@ export const metadata = {
     'It displays a categorical dimension and related amounts. Each bar represents a category, width is proportional to the quantitative dimension.',
   code:
     'https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/barchart',
-  tutorial: 'https://rawgraphs.io/learning/how-to-make-a-stacked-barchart/',
+  tutorial: 'https://rawgraphs.io/learning/how-to-make-a-barchart/',
 }
