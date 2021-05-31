@@ -2,6 +2,11 @@ import * as d3 from 'd3'
 import { legend } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
 
+/*
+Credits:
+Inspired by https://observablehq.com/@d3/parallel-coordinates
+*/
+
 export function render(
   node,
   data,

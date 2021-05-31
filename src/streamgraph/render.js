@@ -3,6 +3,11 @@ import { legend } from '@rawgraphs/rawgraphs-core'
 import * as d3Gridding from 'd3-gridding'
 import '../d3-styles.js'
 
+/*
+Credits:
+Inspired by https://observablehq.com/@d3/streamgraph
+*/
+
 export function render(
   svgNode,
   data,

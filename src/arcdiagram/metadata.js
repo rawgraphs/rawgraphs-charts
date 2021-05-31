@@ -8,5 +8,7 @@ export const metadata = {
   icon,
   categories: ['networks'],
   description: 'Arc diagram description',
-  code: 'https://observablehq.com/@d3/arc-diagram',
+  code:
+    'https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/arcdiagram',
+  tutorial: 'https://rawgraphs.io/learning/how-to-make-an-arc-diagram/',
 }

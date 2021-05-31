@@ -9,6 +9,6 @@ export const metadata = {
   categories: ['distributions'],
   description:
     'It summarize a quantitative distribution with five standard statistics: the smallest value, lower quartile, median, upper quartile, and largest value.',
-  code: 'https://observablehq.com/@d3/box-plot',
-  // tutorial: 'https://rawgraphs.io/learning/',
+  code: 'https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/boxplot',
+  tutorial: 'https://rawgraphs.io/learning/how-to-make-a-boxplot/',
 }

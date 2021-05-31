@@ -9,6 +9,7 @@ export const metadata = {
   categories: ['time series', 'correlations'],
   description:
     'It displays a quantitative dimension over a continuous interval or time period. Horizon graphs combine position and color to reduce vertical space.',
-  // code: 'https://github.com/rawgraphs',
-  // tutorial: 'https://rawgraphs.io/learning/',
+  code:
+    'https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/horizongraph',
+  tutorial: 'https://rawgraphs.io/learning/how-to-make-a-horizon-graph/',
 }

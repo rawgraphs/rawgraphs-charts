@@ -9,6 +9,7 @@ export const metadata = {
   categories: ['time series', 'correlations', 'proportions'],
   description:
     'It allows the comparison of multiple categories over a continuous dimension and the evolution of its sorting. By default, sorting is based on the stream size.',
-  // code: '',
-  // tutorial: "https://rawgraphs.io/learning/",
+  code:
+    'https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/bumpchart',
+  tutorial: 'https://rawgraphs.io/learning/how-to-make-a-bump-chart/',
 }

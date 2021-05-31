@@ -1,5 +1,9 @@
 ## next
 
+#### New features:
+
+- Added links to tutorials and to source code for each chart
+
 #### Changes:
 
 - using @rawgraphs/rawgraphs-core 1.0.0-beta.15

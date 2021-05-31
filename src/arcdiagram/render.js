@@ -2,6 +2,11 @@ import * as d3 from 'd3'
 import * as d3Sankey from 'd3-sankey'
 import * as louvain from 'louvain'
 
+/*
+Credits:
+Inspired by https://observablehq.com/@d3/arc-diagram
+*/
+
 export function render(svgNode, data, visualOptions, mapping, originalData) {
   const {
     // artboard

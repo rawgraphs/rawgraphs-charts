@@ -9,6 +9,7 @@ export const metadata = {
   categories: ['time series', 'correlations'],
   description:
     'It displays a quantitative dimension over a continuous interval or time period. Colour can be optionally used to encode an additional quantitative or categorical dimension.',
-  // code: "https://github.com/rawgraphs/raw",
-  // tutorial: "https://rawgraphs.io/learning/",
+  code:
+    'https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/linechart',
+  tutorial: 'https://rawgraphs.io/learning/how-to-make-a-line-chart/',
 }
