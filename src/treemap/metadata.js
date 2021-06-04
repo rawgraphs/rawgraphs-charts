@@ -9,6 +9,6 @@ export const metadata = {
   categories: ['hierarchies', 'proportions'],
   description:
     'It displays hierarchically structured data and a related quantitative dimension. It is composed of an area divided into small rectangles, representing the last level of the tree structure. The rectangles’ size depends on the quantitative dimension.',
-  code: 'https://observablehq.com/@d3/treemap',
-  // tutorial:'https://rawgraphs.io/learning/'
+  code: 'https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/treemap',
+  tutorial: 'https://rawgraphs.io/learning/how-to-make-a-treemap/',
 }

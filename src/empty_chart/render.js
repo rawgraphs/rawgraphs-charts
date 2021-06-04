@@ -16,7 +16,6 @@ export function render(
     width,
     height,
     background,
-    dotsRadius,
     colorScale,
     // add below other options defined in visualOptions.js
   } = visualOptions

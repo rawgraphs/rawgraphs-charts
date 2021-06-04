@@ -95,13 +95,6 @@ export const visualOptions = {
     default: 'stackOffsetNone',
   },
 
-  streamsPadding: {
-    type: 'number',
-    label: 'Padding',
-    default: 1,
-    group: 'chart',
-  },
-
   showYAxis: {
     type: 'boolean',
     label: 'Show Y axis',

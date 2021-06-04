@@ -9,6 +9,7 @@ export const metadata = {
   categories: ['correlations', 'distributions'],
   description:
     'It shows the estimated density of point clouds, which is especially useful to avoid overplotting in large datasets.',
-  code: 'https://github.com/rawgraphs/raw',
-  tutorial: 'https://rawgraphs.io/learning/',
+  code:
+    'https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/contourPlot',
+  tutorial: 'https://rawgraphs.io/learning/how-to-make-a-contour-plot/',
 }

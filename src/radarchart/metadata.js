@@ -9,6 +9,7 @@ export const metadata = {
   categories: ['correlations'],
   description:
     'It displays multiple continuous dimensions as axes starting from the same point and by disposing them radially. Each dimension is represented as an axis starting from the center of the cart. The same scale is applied to all the axes.',
-  // code: 'https://github.com/rawgraphs/raw',
-  // tutorial: 'https://rawgraphs.io/learning/',
+  code:
+    'https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/radarchart',
+  tutorial: 'https://rawgraphs.io/learning/how-to-make-a-radar-chart/',
 }

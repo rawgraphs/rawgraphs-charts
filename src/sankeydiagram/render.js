@@ -2,6 +2,11 @@ import * as d3 from 'd3'
 import * as d3Sankey from 'd3-sankey'
 import '../d3-styles.js'
 
+/*
+Credits:
+Inspired by https://observablehq.com/@d3/sankey-diagram
+*/
+
 export function render(
   svgNode,
   data,
@@ -10,7 +15,6 @@ export function render(
   originalData,
   styles
 ) {
-
   const {
     width,
     height,

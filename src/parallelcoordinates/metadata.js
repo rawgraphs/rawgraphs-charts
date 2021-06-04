@@ -9,6 +9,7 @@ export const metadata = {
   categories: ['correlations', 'distributions'],
   description:
     'It displays multiple continuous dimensions as axes, and each row in the dataset produces a line connecting its values across the axes.',
-  code: 'https://observablehq.com/@d3/parallel-coordinates',
-  // tutorial: 'https://rawgraphs.io/learning/',
+  code:
+    'https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/parallelcoordinates',
+  tutorial: 'https://rawgraphs.io/learning/how-to-make-parallel-coordinates/',
 }

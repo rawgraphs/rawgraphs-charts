@@ -9,6 +9,7 @@ export const metadata = {
   categories: ['distributions'],
   description:
     'It is useful to show the distribution of a numeric dimension. The shape width represents the amount of items with the same value in the dataset.',
-  // code: 'https://www.d3-graph-gallery.com/graph/violin_basicHist.html',
-  // tutorial: 'https://rawgraphs.io/learning/',
+  code:
+    'https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/violinplot',
+  tutorial: 'https://rawgraphs.io/learning/how-to-make-a-violin-plot/',
 }

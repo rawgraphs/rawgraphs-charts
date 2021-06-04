@@ -9,6 +9,7 @@ export const metadata = {
   categories: ['correlations'],
   description:
     'It displays a categorical dimension and related amounts. Each bar represents a category, width is proportional to the quantitative dimension.',
-  // code: "https://github.com/rawgraphs/raw",
-  // tutorial: "https://rawgraphs.io/learning/",
+  code:
+    'https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/barchart',
+  tutorial: 'https://rawgraphs.io/learning/how-to-make-a-barchart/',
 }
