@@ -69,6 +69,16 @@ export function render(
 
   const griddingData = gridding(nestedData)
 
+  // create the clip path
+  svg
+    .append('clipPath')
+    .attr('id', 'serieClipPath')
+    .append('rect')
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr('width', griddingData[0].width)
+    .attr('height', griddingData[0].height)
+
   // draw the grid if asked
   if (showGrid) {
     svg
@@ -118,6 +128,8 @@ export function render(
   series.each(function (d, seriesIndex) {
     // make a local selection for each serie
     const selection = d3.select(this)
+
+    selection.attr('clip-path', 'url(#serieClipPath)')
 
     // add axes ticks
     selection
@@ -208,5 +220,34 @@ export function render(
       .attr('transform', (d) => `translate(${d.originalX},${d.y})`)
       .attr('text-anchor', (d) => (d.type == 'source' ? 'end' : 'start'))
       .styles(styles.labelSecondary)
+
+    // add series titles
+    if (showSeriesLabels) {
+      selection
+        .append('text')
+        .attr('x', 5)
+        .attr('y', 5)
+        .text((d) => d[0])
+        .styles(styles.seriesLabel)
+    }
   })
+
+  // show legends
+  if (showLegend) {
+    // svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option
+
+    const legendLayer = d3
+      .select(svgNode)
+      .append('g')
+      .attr('id', 'legend')
+      .attr('transform', `translate(${width},${marginTop})`)
+
+    const chartLegend = legend().legendWidth(legendWidth)
+
+    if (mapping.color.value) {
+      chartLegend.addColor(mapping.color.value, colorScale)
+    }
+
+    legendLayer.call(chartLegend)
+  }
 }

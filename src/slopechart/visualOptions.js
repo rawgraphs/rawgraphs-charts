@@ -3,7 +3,7 @@ export const visualOptions = {
   marginTop: {
     type: 'number',
     label: 'Margin (top)',
-    default: 20,
+    default: 40,
     group: 'artboard',
   },
 

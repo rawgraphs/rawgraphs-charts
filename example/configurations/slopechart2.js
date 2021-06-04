@@ -21,5 +21,6 @@ export default {
     marginLeft: 100,
     marginRight: 100,
     marginTop: 50,
+    showLegend: true,
   },
 }
