@@ -36,6 +36,7 @@ export function render(
     showArcValues,
     drawDonut,
     arcTichkness,
+    sortPiesBy,
     // legend
     showLegend,
     legendWidth,
@@ -51,10 +52,37 @@ export function render(
     left: marginLeft,
   }
 
-  data.forEach((d) => (d.totalValue = d3.sum(d.arcs)))
+  data.forEach((d) => {
+    //@TODO change RAWGraphs mapping and output an array with one value if just one is mapped
+    if (typeof d.arcs == 'number') {
+      d.arcs = [d.arcs]
+    }
+    d.totalValue = d3.sum(d.arcs)
+  })
+
+  // bars sorting functions
+  const pieSortings = {
+    totalDescending: function (a, b) {
+      return d3.descending(a.totalValue, b.totalValue)
+    },
+    totalAscending: function (a, b) {
+      return d3.ascending(a.totalValue, b.totalValue)
+    },
+    name: function (a, b) {
+      return d3.ascending(a.name, b.name)
+    },
+    original: function (a, b) {
+      return true
+    },
+  }
+
+  data.sort(pieSortings[sortPiesBy])
 
   // select the SVG element
-  const svg = d3.select(svgNode)
+  const svg = d3
+    .select(svgNode)
+    .attr('width', showLegend ? width + legendWidth : width)
+    .attr('height', height)
 
   // add background
   svg
@@ -131,8 +159,12 @@ export function render(
 
     let arc = d3
       .arc()
-      .innerRadius(drawDonut ? sizeScale(d.totalValue) - arcTichkness : 0)
-      .outerRadius(sizeScale(d.totalValue))
+      .innerRadius(
+        drawDonut && sizeScale(d.totalValue) > arcTichkness
+          ? sizeScale(d.totalValue) - arcTichkness
+          : 0
+      )
+      .outerRadius(radius)
 
     let pie = selection
       .append('g')
@@ -153,7 +185,7 @@ export function render(
       .attr('fill', (d, i) => {
         return colorScale(mapping.arcs.value[i])
       })
-      .attr('stroke', 'white')
+      .attr('stroke', background)
       .attr('d', (e) => arc.startAngle(e.startAngle).endAngle(e.endAngle)())
 
     // add arcs labels
@@ -189,9 +221,11 @@ export function render(
       selection
         .append('text')
         .text((d) => d.name)
-        .attr('y', 4)
-        .attr('x', 4)
+        .attr('y', margin.top + seriesHeight / 2 - radius - 4)
+        .attr('x', margin.left + seriesWidth / 2)
         .styles(styles.seriesLabel)
+        .style('text-anchor', 'middle')
+        .style('dominant-baseline', 'auto')
     }
   })
 

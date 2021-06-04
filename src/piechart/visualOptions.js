@@ -3,28 +3,28 @@ export const visualOptions = {
   marginTop: {
     type: 'number',
     label: 'Margin (top)',
-    default: 0,
+    default: 10,
     group: 'artboard',
   },
 
   marginRight: {
     type: 'number',
     label: 'Margin (right)',
-    default: 0,
+    default: 2,
     group: 'artboard',
   },
 
   marginBottom: {
     type: 'number',
     label: 'Margin (bottom)',
-    default: 0,
+    default: 2,
     group: 'artboard',
   },
 
   marginLeft: {
     type: 'number',
     label: 'Margin (left)',
-    default: 0,
+    default: 2,
     group: 'artboard',
   },
 
@@ -43,20 +43,9 @@ export const visualOptions = {
     disabled: {
       showLegend: false,
     },
-    // container: 'width',
-    // containerCondition: {
-    //   showLegend: true,
-    // },
   },
 
   // chart
-
-  showArcValues: {
-    type: 'boolean',
-    label: 'Show values on arcs',
-    default: true,
-    group: 'chart',
-  },
 
   drawDonut: {
     type: 'boolean',
@@ -70,9 +59,22 @@ export const visualOptions = {
     label: 'Donut thickness',
     default: 10,
     group: 'chart',
-    // disabled: {
-    //   drawDonut: false,
-    // },
+    disabled: {
+      drawDonut: false,
+    },
+  },
+
+  sortPiesBy: {
+    type: 'text',
+    label: 'Sort pies by',
+    group: 'chart',
+    options: [
+      { label: 'Size (descending)', value: 'totalDescending' },
+      { label: 'Size (ascending)', value: 'totalAscending' },
+      { label: 'Name', value: 'name' },
+      { label: 'Original', value: 'original' },
+    ],
+    default: 'name',
   },
 
   // grid
@@ -81,13 +83,6 @@ export const visualOptions = {
     type: 'number',
     label: 'Grid columns',
     default: 0,
-    group: 'grid',
-  },
-
-  showSeriesLabels: {
-    type: 'boolean',
-    label: 'Show pies titles',
-    default: true,
     group: 'grid',
   },
 
@@ -109,5 +104,21 @@ export const visualOptions = {
       interpolator: 'interpolateSpectral',
     },
     group: 'colors',
+  },
+
+  // labels
+
+  showSeriesLabels: {
+    type: 'boolean',
+    label: 'Show pies titles',
+    default: true,
+    group: 'labels',
+  },
+
+  showArcValues: {
+    type: 'boolean',
+    label: 'Show values on arcs',
+    default: false,
+    group: 'labels',
   },
 }
