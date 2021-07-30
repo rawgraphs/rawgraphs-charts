@@ -10,7 +10,7 @@ export const visualOptions = {
   marginRight: {
     type: 'number',
     label: 'Margin (right)',
-    default: 10,
+    default: 40,
     group: 'artboard',
   },
 
@@ -24,7 +24,7 @@ export const visualOptions = {
   marginLeft: {
     type: 'number',
     label: 'Margin (left)',
-    default: 10,
+    default: 40,
     group: 'artboard',
   },
 
@@ -48,9 +48,26 @@ export const visualOptions = {
   // chart
   nonOverlap: {
     type: 'number',
-    label: 'anti overlap strenght',
-    default: 10,
+    label: 'Label repelling force',
+    default: 5,
     group: 'chart',
+  },
+
+  showDots: {
+    type: 'boolean',
+    label: 'Show dots',
+    default: true,
+    group: 'chart',
+  },
+
+  dotsDiameter: {
+    type: 'number',
+    label: 'Dots diameter',
+    default: 5,
+    group: 'chart',
+    disabled: {
+      showDots: false,
+    },
   },
 
   // series

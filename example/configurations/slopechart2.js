@@ -12,7 +12,7 @@ export default {
   mapping: {
     source: { value: ['1970'] },
     target: { value: ['1979'] },
-    name: { value: ['country'] },
+    // name: { value: ['country'] },
     color: { value: ['country'] },
   },
   visualOptions: {

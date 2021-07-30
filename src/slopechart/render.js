@@ -24,6 +24,8 @@ export function render(
     legendWidth,
     // chart
     nonOverlap,
+    showDots,
+    dotsDiameter,
     // series
     columnsNumber,
     showSeriesLabels,
@@ -39,10 +41,11 @@ export function render(
     bottom: marginBottom,
     left: marginLeft,
   }
+  const dotsRadius = dotsDiameter / 2
 
   // if series is exposed, recreate the nested structure
   const nestedData = d3.groups(data, (d) => d.series)
-  console.log(nestedData)
+
   // select the SVG element
   const svg = d3.select(svgNode)
 
@@ -155,35 +158,61 @@ export function render(
       )
 
     //add lines
-    selection
+    let slopes = selection
       .append('g')
-      .attr('fill', 'none')
-      .selectAll('line')
+      .selectAll('g')
       .data(d[1])
-      .join('line')
+      .join('g')
+      .attr('id', (d, i) => d.name)
+
+    slopes
+      .append('line')
       .attr('x1', (d) => xScale(mapping.source.value))
       .attr('x2', (d) => xScale(mapping.target.value))
       .attr('y1', (d) => yGlobalScale(d.source))
       .attr('y2', (d) => yGlobalScale(d.target))
       .attr('stroke', (d) => colorScale(d.color))
+      .attr('fill', 'none')
+
+    if (showDots) {
+      slopes
+        .append('circle')
+        .attr('cx', (d) => xScale(mapping.source.value))
+        .attr('cy', (d) => yGlobalScale(d.source))
+        .attr('r', dotsRadius)
+        .attr('fill', (d) => colorScale(d.color))
+
+      slopes
+        .append('circle')
+        .attr('cx', (d) => xScale(mapping.target.value))
+        .attr('cy', (d) => yGlobalScale(d.target))
+        .attr('r', dotsRadius)
+        .attr('fill', (d) => colorScale(d.color))
+    }
 
     // create a single flat dataset containing all the labels
     let labels = d[1].flatMap((d) => {
       // return the couple for source and target
       return [
         {
-          label: mapping.name ? d.name + ' ' + d.source : d.source,
+          label:
+            mapping.name.value != undefined
+              ? d.name + ' ' + d.source
+              : d.source,
           type: 'source',
-          originalX: xScale(mapping.source.value),
+          originalX: xScale(mapping.source.value) - dotsRadius - 4,
           x: xScale(mapping.source.value),
           y:
             yGlobalScale(d.source) +
             parseInt(styles.labelSecondary.fontSize) / 2,
         },
         {
-          label: mapping.name ? d.name + ' ' + d.target : d.target,
+          label:
+            mapping.name.value != undefined
+              ? d.name + ' ' + d.target
+              : d.target,
           type: 'target',
-          originalX: xScale(mapping.target.value),
+          originalX: xScale(mapping.target.value) + dotsRadius + 4,
           x: xScale(mapping.target.value),
           y:
             yGlobalScale(d.target) +
