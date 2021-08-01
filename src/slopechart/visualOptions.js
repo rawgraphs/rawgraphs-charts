@@ -43,6 +43,10 @@ export const visualOptions = {
     disabled: {
       showLegend: false,
     },
+    container: 'width',
+    containerCondition: {
+      showLegend: true,
+    },
   },
 
   // chart
@@ -89,7 +93,7 @@ export const visualOptions = {
   showGrid: {
     type: 'boolean',
     label: 'Show grid',
-    default: true,
+    default: false,
     group: 'series',
   },
 

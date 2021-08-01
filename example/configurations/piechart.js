@@ -11,7 +11,7 @@ export default {
     Country: 'string',
   },
   mapping: {
-    name: { value: ['Country'] },
+    //name: { value: ['Country'] },
     arcs: {
       //value: ['Service (US$MM)', 'Industrial (US$MM)', 'Agricultural (US$MM)'],
       value: ['Service (US$MM)', 'Industrial (US$MM)'],

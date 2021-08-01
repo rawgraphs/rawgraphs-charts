@@ -1,3 +1,17 @@
+## v1.0.0-beta.22
+
+#### New features:
+
+- _slope chart_: added chart
+
+#### Changes:
+
+- _slope chart_: fixed legend
+
+## v1.0.0-beta.21
+
+- Fixed package info
+
 ## v1.0.0-beta.20
 
 #### New features:
