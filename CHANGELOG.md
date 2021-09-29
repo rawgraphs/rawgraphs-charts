@@ -3,6 +3,7 @@
 #### Changes:
 
 - _bar chart_: fixed sorting
+- _bump chart_: fixed issue related to vertical padding
 
 ## v1.0.0-beta.22
 

@@ -225,25 +225,24 @@ export function render(
 
     //add padding to data
     stackedData[0].map((row, rowIndex) => {
-      // get the value for each vertical stack
+      // get the values for each vertical stack
       let vStack = stackedData.map((d) => d[rowIndex])
       let index = 0
 
       vStack
         .sort((a, b) => d3.ascending(a.rankIndex, b.rankIndex))
-        .forEach((e, i) => {
-          const pv =
-            rowIndex > 0
-              ? stackedData[e.originalIndex][rowIndex - 1]
-              : [null, null]
-
+        .forEach((e) => {
+          // get next value in the horizontal stack.
+          // if is the last one, it is equal to itself.
           const nv =
             rowIndex < stackedData[0].length - 1
               ? stackedData[e.originalIndex][rowIndex + 1]
-              : ['a', 'b']
+              : e
 
           e.padding = index * streamsPadding
 
+          // if the bar size is more than one or the next value is more than one,
+          // increase the padding
           if (e[0] != e[1] || nv[0] != nv[1]) {
             index++
           }
