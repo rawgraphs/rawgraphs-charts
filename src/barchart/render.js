@@ -101,16 +101,16 @@ export function render(
 
   // bars sorting functions
   const barsSortings = {
-    'Total value (descending)': function (a, b) {
+    totalDescending: function (a, b) {
       return d3.descending(a[1], b[1])
     },
-    'Total value (ascending)': function (a, b) {
+    totalAscending: function (a, b) {
       return d3.ascending(a[1], b[1])
     },
-    Name: function (a, b) {
+    name: function (a, b) {
       return d3.ascending(a[0], b[0])
     },
-    Original: function (a, b) {
+    original: function (a, b) {
       return true
     },
   }

@@ -1,3 +1,9 @@
+## upcoming
+
+#### Changes:
+
+- _bar chart_: fixed sorting
+
 ## v1.0.0-beta.22
 
 #### New features:
