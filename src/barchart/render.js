@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-import { legend } from '@rawgraphs/rawgraphs-core'
+import { legend, dateFormats } from '@rawgraphs/rawgraphs-core'
 import * as d3Gridding from 'd3-gridding'
 import '../d3-styles.js'
 
@@ -46,10 +46,22 @@ export function render(
   }
   const horizontalBars = { horizontal: true, vertical: false }[barsOrientation]
 
+  if (mapping.bars.dataType.type === 'date') {
+    // set date format  from input data
+    const timeFormat = d3.timeFormat(
+      dateFormats[mapping.bars.dataType.dateFormat]
+    )
+    // use it to format date
+    data.forEach((d) => (d.bars = timeFormat(d.bars)))
+    console.log(data)
+  }
+
   // create nest structure
   const nestedData = d3
     .groups(data, (d) => d.series)
     .map((d) => ({ data: d, totalSize: d3.sum(d[1], (d) => d.size) }))
+
+  console.log(nestedData)
   // series sorting functions
   const seriesSortings = {
     totalDescending: function (a, b) {
@@ -327,4 +339,44 @@ export function render(
 
     legendLayer.call(chartLegend)
   }
+}
+
+// auto format time scale if used as axis:
+
+function multiFormat(date) {
+  const formatMillisecond = d3.timeFormat('.%L'),
+    formatSecond = d3.timeFormat(':%S'),
+    formatMinute = d3.timeFormat('%I:%M'),
+    formatHour = d3.timeFormat('%I %p'),
+    formatDay = d3.timeFormat('%a %d'),
+    formatWeek = d3.timeFormat('%b %d'),
+    formatMonth = d3.timeFormat('%B'),
+    formatYear = d3.timeFormat('%Y')
+
+  console.log(
+    d3.timeYear(date),
+    d3.timeMonth(date),
+    d3.timeDay(date),
+    d3.timeHour(date),
+    d3.timeMinute(date),
+    d3.timeSecond(date)
+  )
+
+  return (
+    d3.timeSecond(date) < date
+      ? formatMillisecond
+      : d3.timeMinute(date) < date
+      ? formatSecond
+      : d3.timeHour(date) < date
+      ? formatMinute
+      : d3.timeDay(date) < date
+      ? formatHour
+      : d3.timeMonth(date) < date
+      ? d3.timeWeek(date) < date
+        ? formatDay
+        : formatWeek
+      : d3.timeYear(date) < date
+      ? formatMonth
+      : formatYear
+  )(date)
 }
