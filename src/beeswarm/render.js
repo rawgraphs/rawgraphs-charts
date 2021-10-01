@@ -193,6 +193,7 @@ export function render(
   // draw the viz
   const vizLayer = svg
     .append('g')
+    .attr('id', 'visualization')
     .selectAll('g')
     .data(grouped)
     .join('g')
@@ -217,21 +218,23 @@ export function render(
   //add all the circles
   vizLayer
     .append('g')
-    .attr('id', 'cicles')
+    .attr('id', 'circles')
     .selectAll('circle')
     .data((d) => d[1])
     .join('circle')
+    .attr('id', (d) => (Array.isArray(d.label) ? d.label.toString() : d.label))
     .attr('cx', (d) => d.x)
     .attr('cy', (d) => d.y)
     .attr('r', (d) => sizeScale(d.size))
     .style('fill', (d) => colorScale(d.color))
 
-  const labelsLayer = vizLayer.append('g').attr('class', 'labels')
+  const labelsLayer = vizLayer.append('g').attr('id', 'labels')
 
   labelsLayer
     .selectAll('g')
     .data((d) => (mapping.label.value ? d[1] : []))
     .join('g')
+    .attr('id', (d) => (Array.isArray(d.label) ? d.label.toString() : d.label))
     .attr('transform', (d) => `translate(${d.x},${d.y})`)
     .append('text')
     .attr('x', 0)

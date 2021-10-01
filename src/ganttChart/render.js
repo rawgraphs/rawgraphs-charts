@@ -49,7 +49,7 @@ export function render(
         level = 0
       v.forEach(function (item) {
         let l = 0
-        while (overlap(item, levels[l])) l++
+        while (overlap(item, levels[l], mapping.startDate.dataType.type)) l++
         if (!levels[l]) levels[l] = []
         levels[l].push({
           level: l + level,
@@ -183,18 +183,32 @@ export function render(
   }
 }
 
-function overlap(item, g) {
+function overlap(item, g, type) {
   if (!g) return false
   for (const i in g) {
-    if (
-      (item.startDate.getTime() > g[i].startDate.getTime() &&
-        item.startDate.getTime() < g[i].endDate.getTime()) ||
-      (item.endDate.getTime() > g[i].startDate.getTime() &&
-        item.endDate.getTime() < g[i].endDate.getTime()) ||
-      (item.startDate.getTime() < g[i].startDate.getTime() &&
-        item.endDate.getTime() > g[i].endDate.getTime())
-    ) {
-      return true
+    if (type === 'date') {
+      // get time and compare it
+      if (
+        (item.startDate.getTime() > g[i].startDate.getTime() &&
+          item.startDate.getTime() < g[i].endDate.getTime()) ||
+        (item.endDate.getTime() > g[i].startDate.getTime() &&
+          item.endDate.getTime() < g[i].endDate.getTime()) ||
+        (item.startDate.getTime() < g[i].startDate.getTime() &&
+          item.endDate.getTime() > g[i].endDate.getTime())
+      ) {
+        return true
+      }
+    } else if (type === 'number') {
+      // if it's a number, just compare values
+      if (
+        (item.startDate > g[i].startDate && item.startDate < g[i].endDate) ||
+        (item.endDate > g[i].startDate && item.endDate < g[i].endDate) ||
+        (item.startDate < g[i].startDate && item.endDate > g[i].endDate)
+      ) {
+        return true
+      }
+    } else {
+      throw new Error('startDate and endDate must be numbers or dates')
     }
   }
   return false

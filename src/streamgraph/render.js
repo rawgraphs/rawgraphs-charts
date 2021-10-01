@@ -187,9 +187,7 @@ export function render(
     const serieWidth = d.width - margin.right - margin.left
     const serieHeight = d.height - margin.top - margin.bottom
 
-    const stackedData = d.data[1].filter((d) => d3.sum(d[0] + d[1]) > 0)
-
-    console.log(stackedData)
+    const stackedData = d.data[1]
 
     let localDomain = [
       d3.min(stackedData, (d) => d3.min(d, (d) => d[0])),

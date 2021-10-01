@@ -1,3 +1,13 @@
+## v1.0.0-beta.23 (upcoming)
+
+#### Changes:
+
+- _bar chart_: fixed sorting. fixed labes when datatype is date.
+- _beeswarm_: better naming of groups.
+- _bump chart_: fixed issue related to vertical padding.
+- _gantt chart_: now "start date" and "end date" visual variables accepts numbers.
+- _streamgraph_: fixed a bug causing the disappearing of streams.
+
 ## v1.0.0-beta.22
 
 #### New features:
