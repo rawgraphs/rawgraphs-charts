@@ -11,10 +11,10 @@ export default {
     Country: 'string',
   },
   mapping: {
-    //name: { value: ['Country'] },
+    //series: { value: ['Country'] },
     arcs: {
-      //value: ['Service (US$MM)', 'Industrial (US$MM)', 'Agricultural (US$MM)'],
-      value: ['Service (US$MM)', 'Industrial (US$MM)'],
+      value: ['Service (US$MM)', 'Industrial (US$MM)', 'Agricultural (US$MM)'],
+      //value: ['Service (US$MM)', 'Industrial (US$MM)'],
     },
   },
   visualOptions: {
@@ -26,6 +26,9 @@ export default {
     marginLeft: 10,
     showSeriesLabels: true,
     showLegend: true,
+    drawDonut: true,
     sortPiesBy: 'totalDescending',
+    showGrid: true,
+    showArcValues: true,
   },
 }

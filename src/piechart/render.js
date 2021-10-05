@@ -52,196 +52,198 @@ export function render(
     left: marginLeft,
   }
 
-  data.forEach((d) => {
-    //@TODO change RAWGraphs mapping and output an array with one value if just one is mapped
-    if (typeof d.arcs == 'number') {
-      d.arcs = [d.arcs]
-    }
-    d.totalValue = d3.sum(d.arcs)
-  })
+  console.log(data)
 
-  // bars sorting functions
-  const pieSortings = {
-    totalDescending: function (a, b) {
-      return d3.descending(a.totalValue, b.totalValue)
-    },
-    totalAscending: function (a, b) {
-      return d3.ascending(a.totalValue, b.totalValue)
-    },
-    name: function (a, b) {
-      return d3.ascending(a.name, b.name)
-    },
-    original: function (a, b) {
-      return true
-    },
-  }
+  // data.forEach((d) => {
+  //   //@TODO change RAWGraphs mapping and output an array with one value if just one is mapped
+  //   if (typeof d.arcs == 'number') {
+  //     d.arcs = [d.arcs]
+  //   }
+  //   d.totalValue = d3.sum(d.arcs)
+  // })
 
-  data.sort(pieSortings[sortPiesBy])
+  // // bars sorting functions
+  // const pieSortings = {
+  //   totalDescending: function (a, b) {
+  //     return d3.descending(a.totalValue, b.totalValue)
+  //   },
+  //   totalAscending: function (a, b) {
+  //     return d3.ascending(a.totalValue, b.totalValue)
+  //   },
+  //   name: function (a, b) {
+  //     return d3.ascending(a.name, b.name)
+  //   },
+  //   original: function (a, b) {
+  //     return true
+  //   },
+  // }
 
-  console.log(mapping)
+  // data.sort(pieSortings[sortPiesBy])
 
-  // select the SVG element
-  const svg = d3
-    .select(svgNode)
-    .attr('width', showLegend ? width + legendWidth : width)
-    .attr('height', height)
+  // console.log(data)
 
-  // add background
-  svg
-    .append('rect')
-    .attr('width', showLegend ? width + legendWidth : width)
-    .attr('height', height)
-    .attr('x', 0)
-    .attr('y', 0)
-    .attr('fill', background)
-    .attr('id', 'backgorund')
+  // // select the SVG element
+  // const svg = d3
+  //   .select(svgNode)
+  //   .attr('width', showLegend ? width + legendWidth : width)
+  //   .attr('height', height)
 
-  const vizLayer = svg.append('g').attr('id', 'viz')
-  // create the grid
+  // // add background
+  // svg
+  //   .append('rect')
+  //   .attr('width', showLegend ? width + legendWidth : width)
+  //   .attr('height', height)
+  //   .attr('x', 0)
+  //   .attr('y', 0)
+  //   .attr('fill', background)
+  //   .attr('id', 'backgorund')
 
-  // set up grid
-  const gridding = d3Gridding
-    .gridding()
-    .size([width, height])
-    .mode('grid')
-    .padding(0) // no padding, margins will be applied inside
-    .cols(columnsNumber)
+  // const vizLayer = svg.append('g').attr('id', 'viz')
+  // // create the grid
 
-  const griddingData = gridding(data)
+  // // set up grid
+  // const gridding = d3Gridding
+  //   .gridding()
+  //   .size([width, height])
+  //   .mode('grid')
+  //   .padding(0) // no padding, margins will be applied inside
+  //   .cols(columnsNumber)
 
-  const series = vizLayer
-    .selectAll('g')
-    .data(griddingData)
-    .join('g')
-    .attr('id', (d) => d.name)
-    .attr('transform', (d) => 'translate(' + d.x + ',' + d.y + ')')
+  // const griddingData = gridding(data)
 
-  //get max radius
-  const maxRadius =
-    d3.min([
-      griddingData[0].width - margin.right - margin.left,
-      griddingData[0].height - margin.top - margin.bottom,
-    ]) / 2
+  // const series = vizLayer
+  //   .selectAll('g')
+  //   .data(griddingData)
+  //   .join('g')
+  //   .attr('id', (d) => d.name)
+  //   .attr('transform', (d) => 'translate(' + d.x + ',' + d.y + ')')
 
-  //create size scale
-  const sizeScale = d3
-    .scaleSqrt()
-    .domain([0, d3.max(data, (d) => d.totalValue)])
-    .range([0, maxRadius])
+  // //get max radius
+  // const maxRadius =
+  //   d3.min([
+  //     griddingData[0].width - margin.right - margin.left,
+  //     griddingData[0].height - margin.top - margin.bottom,
+  //   ]) / 2
 
-  // add grid
-  if (showGrid) {
-    svg
-      .append('g')
-      .attr('id', 'grid')
-      .selectAll('rect')
-      .data(griddingData)
-      .enter()
-      .append('rect')
-      .attr('x', (d) => d.x)
-      .attr('y', (d) => d.y)
-      .attr('width', (d) => d.width)
-      .attr('height', (d) => d.height)
-      .attr('fill', 'none')
-      .attr('stroke', '#ccc')
-  }
+  // //create size scale
+  // const sizeScale = d3
+  //   .scaleSqrt()
+  //   .domain([0, d3.max(data, (d) => d.totalValue)])
+  //   .range([0, maxRadius])
 
-  // do stuff for each pie
-  series.each(function (d, seriesIndex) {
-    // make a local selection for each serie
-    const selection = d3.select(this)
+  // // add grid
+  // if (showGrid) {
+  //   svg
+  //     .append('g')
+  //     .attr('id', 'grid')
+  //     .selectAll('rect')
+  //     .data(griddingData)
+  //     .enter()
+  //     .append('rect')
+  //     .attr('x', (d) => d.x)
+  //     .attr('y', (d) => d.y)
+  //     .attr('width', (d) => d.width)
+  //     .attr('height', (d) => d.height)
+  //     .attr('fill', 'none')
+  //     .attr('stroke', '#ccc')
+  // }
 
-    // compute each serie width and height
-    const seriesWidth = d.width - margin.right - margin.left
-    const seriesHeight = d.height - margin.top - margin.bottom
+  // // do stuff for each pie
+  // series.each(function (d, seriesIndex) {
+  //   // make a local selection for each serie
+  //   const selection = d3.select(this)
 
-    //create the pie
-    let angles = d3.pie()(d.arcs)
-    let radius = sizeScale(d.totalValue)
+  //   // compute each serie width and height
+  //   const seriesWidth = d.width - margin.right - margin.left
+  //   const seriesHeight = d.height - margin.top - margin.bottom
 
-    let arc = d3
-      .arc()
-      .innerRadius(
-        drawDonut && sizeScale(d.totalValue) > arcTichkness
-          ? sizeScale(d.totalValue) - arcTichkness
-          : 0
-      )
-      .outerRadius(radius)
+  //   //create the pie
+  //   let angles = d3.pie()(d.arcs)
+  //   let radius = sizeScale(d.totalValue)
 
-    let pie = selection
-      .append('g')
-      .attr('id', 'pie')
-      .attr(
-        'transform',
-        'translate(' +
-          (margin.left + seriesWidth / 2) +
-          ',' +
-          (margin.top + seriesHeight / 2) +
-          ')'
-      )
+  //   let arc = d3
+  //     .arc()
+  //     .innerRadius(
+  //       drawDonut && sizeScale(d.totalValue) > arcTichkness
+  //         ? sizeScale(d.totalValue) - arcTichkness
+  //         : 0
+  //     )
+  //     .outerRadius(radius)
 
-    pie
-      .selectAll('path')
-      .data(angles)
-      .join('path')
-      .attr('fill', (d, i) => {
-        return colorScale(mapping.arcs.value[i])
-      })
-      .attr('stroke', background)
-      .attr('d', (e) => arc.startAngle(e.startAngle).endAngle(e.endAngle)())
+  //   let pie = selection
+  //     .append('g')
+  //     .attr('id', 'pie')
+  //     .attr(
+  //       'transform',
+  //       'translate(' +
+  //         (margin.left + seriesWidth / 2) +
+  //         ',' +
+  //         (margin.top + seriesHeight / 2) +
+  //         ')'
+  //     )
 
-    // add arcs labels
-    if (showArcValues) {
-      let pieLabels = pie
-        .append('g')
-        .attr('id', 'labels')
-        .selectAll('g')
-        .data(angles)
-        .join('g')
-        .attr('transform', (e) => {
-          return `translate(${arc
-            .startAngle(e.startAngle)
-            .endAngle(e.endAngle)
-            .centroid(e)})`
-        })
+  //   pie
+  //     .selectAll('path')
+  //     .data(angles)
+  //     .join('path')
+  //     .attr('fill', (d, i) => {
+  //       return colorScale(mapping.arcs.value[i])
+  //     })
+  //     .attr('stroke', background)
+  //     .attr('d', (e) => arc.startAngle(e.startAngle).endAngle(e.endAngle)())
 
-      pieLabels
-        .append('text')
-        .text((d) => mapping.arcs.value[d.index])
-        .attr('text-anchor', 'middle')
-        .styles(styles.labelPrimary)
+  //   // add arcs labels
+  //   if (showArcValues) {
+  //     let pieLabels = pie
+  //       .append('g')
+  //       .attr('id', 'labels')
+  //       .selectAll('g')
+  //       .data(angles)
+  //       .join('g')
+  //       .attr('transform', (e) => {
+  //         return `translate(${arc
+  //           .startAngle(e.startAngle)
+  //           .endAngle(e.endAngle)
+  //           .centroid(e)})`
+  //       })
 
-      pieLabels
-        .append('text')
-        .text((d) => d.data)
-        .attr('y', styles.labelSecondary.fontSize)
-        .attr('text-anchor', 'middle')
-        .styles(styles.labelSecondary)
-    }
+  //     pieLabels
+  //       .append('text')
+  //       .text((d) => mapping.arcs.value[d.index])
+  //       .attr('text-anchor', 'middle')
+  //       .styles(styles.labelPrimary)
 
-    if (showSeriesLabels) {
-      selection
-        .append('text')
-        .text((d) => (d.name ? d.name : ''))
-        .attr('y', margin.top + seriesHeight / 2 - radius - 4)
-        .attr('x', margin.left + seriesWidth / 2)
-        .styles(styles.seriesLabel)
-        .style('text-anchor', 'middle')
-        .style('dominant-baseline', 'auto')
-    }
-  })
+  //     pieLabels
+  //       .append('text')
+  //       .text((d) => d.data)
+  //       .attr('y', styles.labelSecondary.fontSize)
+  //       .attr('text-anchor', 'middle')
+  //       .styles(styles.labelSecondary)
+  //   }
 
-  // add legend
-  if (showLegend) {
-    const legendLayer = svg
-      .append('g')
-      .attr('id', 'legend')
-      .attr('transform', `translate(${width},${marginTop})`)
+  //   if (showSeriesLabels) {
+  //     selection
+  //       .append('text')
+  //       .text((d) => (d.name ? d.name : ''))
+  //       .attr('y', margin.top + seriesHeight / 2 - radius - 4)
+  //       .attr('x', margin.left + seriesWidth / 2)
+  //       .styles(styles.seriesLabel)
+  //       .style('text-anchor', 'middle')
+  //       .style('dominant-baseline', 'auto')
+  //   }
+  // })
 
-    const chartLegend = legend().legendWidth(legendWidth)
+  // // add legend
+  // if (showLegend) {
+  //   const legendLayer = svg
+  //     .append('g')
+  //     .attr('id', 'legend')
+  //     .attr('transform', `translate(${width},${marginTop})`)
 
-    chartLegend.addColor('Colors', colorScale)
+  //   const chartLegend = legend().legendWidth(legendWidth)
 
-    legendLayer.call(chartLegend)
-  }
+  //   chartLegend.addColor('Colors', colorScale)
+
+  //   legendLayer.call(chartLegend)
+  // }
 }

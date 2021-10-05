@@ -5,11 +5,15 @@ export const dimensions = [
     validTypes: ['number'],
     required: true,
     multiple: true,
+    aggregation: true,
+    aggregationDefault: {
+      number: 'sum',
+    },
   },
 
   {
-    id: 'name',
-    name: 'Pie label',
+    id: 'series',
+    name: 'Series',
     validTypes: ['number', 'date', 'string'],
     required: false,
   },
