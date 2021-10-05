@@ -10,7 +10,9 @@ import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core'
 
 export const mapData = function (data, mapping, dataTypes, dimensions) {
   // define aggregators
-  const arcsAggregator = getDimensionAggregator(
+  // as we are working on a multiple dimension (bars), `getDimensionAggregator` will return an array of aggregator functions
+  // the order of aggregators is the same as the value of the mapping
+  const arcsAggregators = getDimensionAggregator(
     'arcs',
     mapping,
     dataTypes,
@@ -27,34 +29,20 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
     (v) => {
       console.log(v)
 
-      arcs = mapping.arcs.value.forEach((arcName) => {
-        console.log(arcName, d[arcName])
-        return arcsAggregator(v.map((d) => d[arcName]))
+      let arcs = mapping.arcs.value.map((arcName, i) => {
+        // getting i-th aggregator
+        const aggregator = arcsAggregators[i]
+        // use it
+        //return { [arcName]: aggregator(v.map((d) => d[arcName])) }
+        return aggregator(v.map((d) => d[arcName]))
       })
 
-      console.log(arcs)
-      // return v.map(d=>{
-      //   let item = {
-      //     series: d[mapping.series.value],
-      //     arcs:
-      //   }
-      // })
-      // return v.map((d) => {
-      //   mapping.arcs.value.forEach((arcName) => {
-      //     let item = {
-      //       name: index, // each line will create a radar
-      //       series: d[mapping.series.value],
-      //       arc: arcName,
-      //       value: d[arcName],
-      //     }
+      let item = {
+        arcs: arcs,
+        series: mapping.series.value,
+      }
 
-      //     results.push(item)
-      //   })
-
-      //   index++
-
-      //   return 'done'
-      // })
+      results.push(item)
     },
     (d) => d[mapping.series.value] // series grouping
   )

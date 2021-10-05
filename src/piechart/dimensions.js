@@ -5,6 +5,7 @@ export const dimensions = [
     validTypes: ['number'],
     required: true,
     multiple: true,
+    operation: 'get',
     aggregation: true,
     aggregationDefault: {
       number: 'sum',
@@ -16,5 +17,6 @@ export const dimensions = [
     name: 'Series',
     validTypes: ['number', 'date', 'string'],
     required: false,
+    operation: 'get',
   },
 ]

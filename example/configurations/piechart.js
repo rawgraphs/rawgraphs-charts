@@ -14,6 +14,7 @@ export default {
     //series: { value: ['Country'] },
     arcs: {
       value: ['Service (US$MM)', 'Industrial (US$MM)', 'Agricultural (US$MM)'],
+      config: { aggregation: ['sum', 'sum', 'sum'] },
       //value: ['Service (US$MM)', 'Industrial (US$MM)'],
     },
   },
