@@ -58,8 +58,6 @@ export function render(
     d.totalValue = d3.sum(mapping.arcs.value.map((arc) => d[arc]))
   })
 
-  console.log(data)
-
   // arcs sorting functions
   const arcsSortings = {
     totalDescending: function (a, b) {
@@ -248,10 +246,7 @@ export function render(
     if (showSeriesLabels) {
       selection
         .append('text')
-        .text((d) => {
-          console.log(d)
-          return d.series ? d.series : ''
-        })
+        .text((d) => (d.series ? d.series : ''))
         .attr('y', margin.top + seriesHeight / 2 - radius - 4)
         .attr('x', margin.left + seriesWidth / 2)
         .styles(styles.seriesLabel)
