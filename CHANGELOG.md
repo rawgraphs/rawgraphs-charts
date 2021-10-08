@@ -1,4 +1,8 @@
-## v1.0.0-beta.23 (upcoming)
+## v1.0.0-beta.23
+
+#### New features:
+
+- _pie chart_: added chart
 
 #### Changes:
 
@@ -7,6 +11,7 @@
 - _bump chart_: fixed issue related to vertical padding.
 - _gantt chart_: now "start date" and "end date" visual variables accepts numbers.
 - _streamgraph_: fixed a bug causing the disappearing of streams.
+- _voronoi diagram_: changed category
 
 ## v1.0.0-beta.22
 
