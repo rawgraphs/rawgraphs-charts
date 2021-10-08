@@ -27,27 +27,21 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
   const result = d3.rollups(
     data,
     (v) => {
-      console.log(v)
+      let item = {
+        series: v[0][mapping.series.value],
+      }
 
-      let arcs = mapping.arcs.value.map((arcName, i) => {
+      let arcs = mapping.arcs.value.forEach((arcName, i) => {
         // getting i-th aggregator
         const aggregator = arcsAggregators[i]
         // use it
-        //return { [arcName]: aggregator(v.map((d) => d[arcName])) }
-        return aggregator(v.map((d) => d[arcName]))
+        item[arcName] = aggregator(v.map((d) => d[arcName]))
       })
-
-      let item = {
-        arcs: arcs,
-        series: mapping.series.value,
-      }
 
       results.push(item)
     },
     (d) => d[mapping.series.value] // series grouping
   )
-
-  console.log(results)
 
   return results
 }

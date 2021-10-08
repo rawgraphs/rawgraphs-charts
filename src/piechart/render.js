@@ -32,11 +32,12 @@ export function render(
     columnsNumber,
     showGrid,
     showSeriesLabels,
+    sortPiesBy,
     // chart
     showArcValues,
     drawDonut,
     arcTichkness,
-    sortPiesBy,
+    sortArcsBy,
     // legend
     showLegend,
     legendWidth,
@@ -52,12 +53,36 @@ export function render(
     left: marginLeft,
   }
 
+  data.forEach((d) => {
+    // compute the total value for each pie
+    d.totalValue = d3.sum(mapping.arcs.value.map((arc) => d[arc]))
+  })
+
   console.log(data)
 
-  data.forEach((d) => {
-    // computet total value
-    d.totalValue = d3.sum(d.arcs)
-  })
+  // arcs sorting functions
+  const arcsSortings = {
+    totalDescending: function (a, b) {
+      return d3.descending(a.value, b.value)
+    },
+    totalAscending: function (a, b) {
+      return d3.ascending(a.value, b.value)
+    },
+    name: function (a, b) {
+      return d3.ascending(a.name, b.name)
+    },
+    original: function (a, b) {
+      return true
+    },
+  }
+
+  // computet the total value for each dimension mapped as arc
+  let arcsSize = mapping.arcs.value.map((arc) => ({
+    name: arc,
+    value: d3.sum(data.map((d) => d[arc])),
+  }))
+  // sort it, will be used later
+  arcsSize.sort(arcsSortings[sortArcsBy])
 
   // pies sorting functions
   const pieSortings = {
@@ -76,8 +101,6 @@ export function render(
   }
 
   data.sort(pieSortings[sortPiesBy])
-
-  console.log(data)
 
   // select the SVG element
   const svg = d3
@@ -155,7 +178,11 @@ export function render(
     const seriesHeight = d.height - margin.top - margin.bottom
 
     //create the pie
-    let angles = d3.pie()(d.arcs)
+    //extrtactt arcs values
+    let arcs = arcsSize.map((arc) => d[arc.name])
+    // computet angles, using tthte give order and setting sort to null
+    let angles = d3.pie().sort(null)(arcs)
+    // compuet biggest radius
     let radius = sizeScale(d.totalValue)
 
     let arc = d3
@@ -184,7 +211,7 @@ export function render(
       .data(angles)
       .join('path')
       .attr('fill', (d, i) => {
-        return colorScale(mapping.arcs.value[i])
+        return colorScale(arcsSize[i].name)
       })
       .attr('stroke', background)
       .attr('d', (e) => arc.startAngle(e.startAngle).endAngle(e.endAngle)())
@@ -221,7 +248,10 @@ export function render(
     if (showSeriesLabels) {
       selection
         .append('text')
-        .text((d) => (d.name ? d.name : ''))
+        .text((d) => {
+          console.log(d)
+          return d.series ? d.series : ''
+        })
         .attr('y', margin.top + seriesHeight / 2 - radius - 4)
         .attr('x', margin.left + seriesWidth / 2)
         .styles(styles.seriesLabel)

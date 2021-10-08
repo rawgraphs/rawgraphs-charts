@@ -64,10 +64,10 @@ export const visualOptions = {
     },
   },
 
-  sortPiesBy: {
+  sortArcsBy: {
     type: 'text',
-    label: 'Sort pies by',
-    group: 'chart',
+    label: 'Sort arcs by',
+    group: 'series',
     options: [
       { label: 'Size (descending)', value: 'totalDescending' },
       { label: 'Size (ascending)', value: 'totalAscending' },
@@ -75,22 +75,6 @@ export const visualOptions = {
       { label: 'Original', value: 'original' },
     ],
     default: 'name',
-  },
-
-  // grid
-
-  columnsNumber: {
-    type: 'number',
-    label: 'Grid columns',
-    default: 0,
-    group: 'grid',
-  },
-
-  showGrid: {
-    type: 'boolean',
-    label: 'Show grid',
-    default: false,
-    group: 'grid',
   },
 
   // colors
@@ -120,5 +104,34 @@ export const visualOptions = {
     label: 'Show values on arcs',
     default: false,
     group: 'labels',
+  },
+
+  // series
+
+  sortPiesBy: {
+    type: 'text',
+    label: 'Sort pies by',
+    group: 'series',
+    options: [
+      { label: 'Size (descending)', value: 'totalDescending' },
+      { label: 'Size (ascending)', value: 'totalAscending' },
+      { label: 'Name', value: 'name' },
+      { label: 'Original', value: 'original' },
+    ],
+    default: 'name',
+  },
+
+  columnsNumber: {
+    type: 'number',
+    label: 'Grid columns',
+    default: 0,
+    group: 'series',
+  },
+
+  showGrid: {
+    type: 'boolean',
+    label: 'Show grid',
+    default: false,
+    group: 'series',
   },
 }
