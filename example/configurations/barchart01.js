@@ -26,6 +26,6 @@ export default {
     width: 1000,
     height: 700,
     padding: 1,
-    horizontalBars: true,
+    barsOrientation: 'vertical',
   },
 }

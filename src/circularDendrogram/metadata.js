@@ -9,6 +9,7 @@ export const metadata = {
   categories: ['hierarchies', 'proportions'],
   description:
     'It displays hierarchically structured data with a radial tree structure, where the root node is in the center with the hierarchies moving outward. The area of nodes can be used to encode a further quantitative dimension and a quantitative or categorical dimension with color.',
-  code: 'https://observablehq.com/@d3/radial-dendrogram',
-  // tutorial:'https://rawgraphs.io/learning/'
+  code:
+    'https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/circularDendrogram',
+  tutorial: 'https://rawgraphs.io/learning/how-to-make-a-circular-dendrogram/',
 }

@@ -29,14 +29,14 @@ export const visualOptions = {
 
   nodesWidth: {
     type: 'number',
-    label: 'Bars width',
+    label: 'Nodes width',
     default: 5,
     group: 'chart',
   },
 
   nodesPadding: {
     type: 'number',
-    label: 'Vertical padding',
+    label: 'Padding',
     default: 5,
     group: 'chart',
   },
@@ -45,13 +45,15 @@ export const visualOptions = {
     type: 'number',
     label: 'Links opacity (0-1)',
     default: 1,
-    group: 'chart',
     step: 0.1,
+    min: 0,
+    max: 1,
+    group: 'chart',
   },
 
   linksBlendMode: {
     type: 'text',
-    label: 'Overlapping links blend mode',
+    label: 'Links blend mode',
     group: 'chart',
     options: ['normal', 'multiply'],
     default: 'multiply',
@@ -62,17 +64,17 @@ export const visualOptions = {
     label: 'Sort nodes by',
     group: 'chart',
     options: [
-      'Total value (descending)',
-      'Total value (ascending)',
-      'Name',
-      'Minimize Overlaps',
+      { label: 'Size (descending)', value: 'sizeDescending' },
+      { label: 'Size (ascending)', value: 'sizeAscending' },
+      { label: 'Name', value: 'name' },
+      { label: 'Minimize Overlaps', value: 'auto' },
     ],
-    default: 'Total value (ascending)',
+    default: 'sizeAscending',
   },
 
   verticalAlignment: {
     type: 'text',
-    label: 'Align bars groups vertically',
+    label: 'Flows alignment',
     group: 'chart',
     options: ['Top', 'Center', 'Bottom'],
     default: 'Center',
@@ -91,7 +93,7 @@ export const visualOptions = {
 
   showValues: {
     type: 'boolean',
-    label: 'show nodes values',
+    label: 'Show nodes values',
     default: false,
     group: 'Labels',
   },

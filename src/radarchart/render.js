@@ -24,14 +24,15 @@ export function render(
     legendWidth,
     // visual model options
     showDots,
-    dotsRadius,
+    dotsDiameter,
     interpolation,
-    innerRadius,
+    innerDiameter,
     fillOpacity,
     //labels
     labelsPadding,
     //series options
     columnsNumber,
+    sortSeriesBy,
     showSeriesLabels,
     showGrid,
     // color otpions
@@ -62,12 +63,26 @@ export function render(
   }
 
   // if series is exposed, recreate the nested structure
-  const nestedData = d3.rollups(
-    data,
-    (v) => v,
-    (d) => d.series,
-    (d) => d.name
-  )
+  const nestedData = d3
+    .rollups(
+      data,
+      (v) => v,
+      (d) => d.series,
+      (d) => d.name
+    )
+    .map((d) => {
+      //calc the total values
+      d.totalSize = d3.sum(d[1].map((e) => e[1]).flat(), (e) => e.value)
+      return d
+    })
+  // sort series
+  nestedData.sort((a, b) => {
+    return {
+      valueDescending: d3.descending(a.totalSize, b.totalSize),
+      valueAscending: d3.ascending(a.totalSize, b.totalSize),
+      name: d3.ascending(a[0], b[0]),
+    }[sortSeriesBy]
+  })
 
   // select the SVG element
   const svg = d3.select(svgNode)
@@ -124,6 +139,8 @@ export function render(
     .round(false)
 
   const maxValue = d3.max(data, (d) => d.value)
+
+  const innerRadius = innerDiameter / 2
 
   const outerRadius = d3.min([
     (griddingData[0].width - margin.right - margin.left) / 2,
@@ -278,7 +295,7 @@ export function render(
         .append('circle')
         .attr('cx', (d) => Math.cos(radialScale(d.axes)) * axesScale(d.value))
         .attr('cy', (d) => Math.sin(radialScale(d.axes)) * axesScale(d.value))
-        .attr('r', dotsRadius)
+        .attr('r', dotsDiameter / 2)
         .attr('stroke', 'none')
         .attr('fill', (d) => colorScale(d.color))
     }

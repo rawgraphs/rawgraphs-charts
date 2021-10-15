@@ -2,6 +2,11 @@ import * as d3 from 'd3'
 import { legend } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
 
+/*
+Credits:
+Inspired by https://observablehq.com/@d3/box-plot
+*/
+
 export function render(
   svgNode,
   data,
@@ -22,7 +27,7 @@ export function render(
     // charts options
     barsWidth,
     iqrMultiplier, // to compute otuliers
-    dotsRadius,
+    dotsDiameter,
     yOrigin,
     //legend
     showLegend,
@@ -179,7 +184,7 @@ export function render(
     .selectAll('circle')
     .data((d) => d[1].outliers)
     .join('circle')
-    .attr('r', dotsRadius)
+    .attr('r', dotsDiameter / 2)
     .attr('cx', (d) => xScale(d.group))
     .attr('cy', (d) => yScale(d.value))
     .attr('fill', background)

@@ -17,7 +17,7 @@ export function render(
     xOrigin,
     yOrigin,
     showPoints,
-    pointsRadius,
+    dotsDiameter,
     groupStrokeWidth,
     groupOpacity,
     showLegend,
@@ -157,7 +157,7 @@ export function render(
       .attr('fill', (d) => {
         return colorScale(d.group)
       })
-      .attr('r', pointsRadius)
+      .attr('r', dotsDiameter / 2)
   }
 
   const labelsLayer = svg.append('g').attr('id', 'labels')

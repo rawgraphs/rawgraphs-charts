@@ -56,14 +56,14 @@ export const visualOptions = {
       { label: 'Original', value: '' },
       { label: 'Start date (ascending)', value: 'ascending' },
       { label: 'Start date (descending)', value: 'descending' },
-      { label: 'Group name (ascending)', value: 'group' },
+      { label: 'Name', value: 'group' },
     ],
     default: '',
   },
 
   barPadding: {
     type: 'number',
-    label: 'Bar padding (%)',
+    label: 'Padding (%)',
     default: 0,
     group: 'chart',
     step: 0.1,

@@ -51,7 +51,7 @@ export const visualOptions = {
 
   xOrigin: {
     type: 'boolean',
-    label: 'Set x origin to 0',
+    label: 'Set X origin to 0',
     default: false,
     group: 'chart',
     requiredDimensions: ['x', 'y'],
@@ -59,15 +59,15 @@ export const visualOptions = {
 
   yOrigin: {
     type: 'boolean',
-    label: 'Set y origin to 0',
+    label: 'Set Y origin to 0',
     default: false,
     group: 'chart',
     requiredDimensions: ['x', 'y'],
   },
 
-  radius: {
+  diameter: {
     type: 'number',
-    label: 'Bin radius',
+    label: 'Bin diameter',
     default: 8,
     step: 1,
     group: 'chart',
@@ -76,7 +76,7 @@ export const visualOptions = {
 
   weightSize: {
     type: 'boolean',
-    label: 'Scale area',
+    label: 'Scale hexagons area',
     default: false,
     group: 'chart',
     requiredDimensions: ['x', 'y'],
@@ -84,16 +84,16 @@ export const visualOptions = {
 
   showPoints: {
     type: 'boolean',
-    label: 'Show dots',
+    label: 'Show dots on data values',
     default: false,
     group: 'chart',
     requiredDimensions: ['x', 'y'],
   },
 
-  pointsRadius: {
+  dotsDiameter: {
     type: 'number',
-    label: 'Dots radius',
-    default: 1,
+    label: 'Dots diameter',
+    default: 2,
     group: 'chart',
     disabled: {
       showPoints: false,

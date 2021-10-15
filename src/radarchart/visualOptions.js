@@ -29,14 +29,14 @@ export const visualOptions = {
 
   showDots: {
     type: 'boolean',
-    label: 'Show dots',
+    label: 'Show dots on data values',
     default: true,
     group: 'chart',
   },
 
-  dotsRadius: {
+  dotsDiameter: {
     type: 'number',
-    label: 'Dots radius',
+    label: 'Dots diameter',
     default: 2,
     group: 'chart',
     disabled: {
@@ -44,9 +44,9 @@ export const visualOptions = {
     },
   },
 
-  innerRadius: {
+  innerDiameter: {
     type: 'number',
-    label: 'Inner radius',
+    label: 'Inner diameter',
     default: 0,
     group: 'chart',
   },
@@ -63,6 +63,9 @@ export const visualOptions = {
     type: 'number',
     label: 'Fill opacity',
     default: 0.5,
+    step: 0.1,
+    min: 0,
+    max: 1,
     group: 'chart',
   },
 
@@ -91,9 +94,22 @@ export const visualOptions = {
     group: 'series',
   },
 
+  sortSeriesBy: {
+    type: 'text',
+    label: 'Sort series by',
+    group: 'series',
+    options: [
+      { label: 'Total value (descending)', value: 'valueDescending' },
+      { label: 'Total value (ascending)', value: 'valueAscending' },
+      { label: 'Name', value: 'nameAscending' },
+      { label: 'Original', value: 'none' },
+    ],
+    default: 'valueDescending',
+  },
+
   showSeriesLabels: {
     type: 'boolean',
-    label: 'Show series labels',
+    label: 'Show series titles',
     default: true,
     group: 'series',
   },

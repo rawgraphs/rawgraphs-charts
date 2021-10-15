@@ -3,6 +3,11 @@ import { legend } from '@rawgraphs/rawgraphs-core'
 import * as d3Gridding from 'd3-gridding'
 import '../d3-styles.js'
 
+/*
+Credits:
+Inspired by https://observablehq.com/@d3/streamgraph
+*/
+
 export function render(
   svgNode,
   data,
@@ -22,7 +27,6 @@ export function render(
     marginLeft,
     // chart options
     streamsOrder,
-    streamsPadding,
     streamsOffset,
     interpolation,
     showYAxis,
@@ -184,34 +188,6 @@ export function render(
     const serieHeight = d.height - margin.top - margin.bottom
 
     const stackedData = d.data[1]
-    // console.log(Object.assign({}, stackedData))
-    //add padding to data
-    stackedData[0].map((row, rowIndex) => {
-      // get the value for each vertical stack
-      let vStack = stackedData.map((d) => d[rowIndex])
-      let index = 0
-      console.log(Object.assign({}, vStack))
-
-      // re-sort them by initial value
-      vStack
-        .sort((a, b) => d3.ascending(a[1], b[1]))
-        .sort((a, b) => d3.ascending(a[0], b[0]))
-
-      vStack.forEach((e, i) => {
-        const pv = rowIndex > 0 ? stackedData[i][rowIndex - 1] : [null, null]
-        // const cv = stackedData[i][rowIndex]
-        const nv =
-          rowIndex < stackedData[0].length - 1
-            ? stackedData[i][rowIndex + 1]
-            : ['a', 'b']
-
-        e.padding = index * streamsPadding
-
-        if (e[0] != e[1] || nv[0] != nv[1] || pv[0] != pv[1]) {
-          index++
-        }
-      })
-    })
 
     let localDomain = [
       d3.min(stackedData, (d) => d3.min(d, (d) => d[0])),
@@ -238,8 +214,8 @@ export function render(
           .area()
           .curve(d3[interpolation])
           .x((d) => xScale(d.data[0]))
-          .y0((d) => sizeScale(d[0]) - d.padding)
-          .y1((d) => sizeScale(d[1]) - d.padding)
+          .y0((d) => sizeScale(d[0]))
+          .y1((d) => sizeScale(d[1]))
       )
       .append('title')
       .text(({ key }) => key)

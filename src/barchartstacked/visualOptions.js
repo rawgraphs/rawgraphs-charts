@@ -50,7 +50,7 @@ export const visualOptions = {
 
   stacksPadding: {
     type: 'number',
-    label: 'Padding between stacks',
+    label: 'Padding',
     default: 1,
     group: 'chart',
   },
@@ -59,14 +59,7 @@ export const visualOptions = {
     type: 'text',
     label: 'Sort stacks by',
     group: 'chart',
-    options: [
-      'Earliest',
-      'Ascending',
-      'Descending',
-      'Inside out',
-      'None',
-      'Reverse',
-    ],
+    options: ['Earliest', 'Ascending', 'Descending', 'None', 'Reverse'],
     default: 'None',
   },
 
@@ -114,6 +107,13 @@ export const visualOptions = {
     type: 'boolean',
     label: 'Show series titles',
     default: true,
+    group: 'series',
+  },
+
+  repeatAxesLabels: {
+    type: 'boolean',
+    label: 'Repeat axis labels for each series',
+    default: false,
     group: 'series',
   },
 

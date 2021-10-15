@@ -27,24 +27,27 @@ export const visualOptions = {
     group: 'artboard',
   },
 
-  minRadius: {
+  minDiameter: {
     type: 'number',
-    label: 'Minimum Radius',
+    label: 'Min diameter',
     default: 2,
     group: 'chart',
   },
 
-  maxRadius: {
+  maxDiameter: {
     type: 'number',
-    label: 'Maxiumum Radius',
+    label: 'Max diameter',
     default: 30,
     group: 'chart',
   },
 
   linkOpacity: {
     type: 'number',
-    label: 'Links opacity',
+    label: 'Links opacity (0-1)',
     default: 0.5,
+    step: 0.1,
+    min: 0,
+    max: 1,
     group: 'chart',
   },
 
@@ -57,30 +60,25 @@ export const visualOptions = {
 
   nodeSize: {
     type: 'text',
-    label: 'Nodes size',
+    label: 'Nodes diameter',
     group: 'chart',
     options: [
-      'Same size',
-      'Total value',
-      'Total outgoing value',
-      'Total incoming value',
-      'Links count',
-      'Outgoing links count',
-      'Incoming links count',
+      { label: 'Same size', value: 'default' },
+      { label: 'Weighted degree', value: 'totalValue' },
+      { label: 'Weighted inDegree', value: 'inValue' },
+      { label: 'Weighted outDegree', value: 'outValue' },
+      { label: 'Links count', value: 'degree' },
+      { label: 'OutDegree', value: 'outDegree' },
+      { label: 'InDegree', value: 'inDegree' },
     ],
-    default: 'Total value',
+    default: 'totalValue',
   },
 
   orderNodesBy: {
     type: 'text',
     label: 'Sort nodes by',
     group: 'chart',
-    options: [
-      'Name',
-      'Links count (degree)',
-      'Total value',
-      'Minimize overlaps',
-    ],
+    options: ['Name', 'Links count (degree)', 'Size', 'Minimize overlaps'],
     default: 'Minimize overlaps',
   },
 }

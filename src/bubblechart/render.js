@@ -16,10 +16,10 @@ export function render(
     background,
     xOrigin,
     yOrigin,
-    maxRadius,
+    maxDiameter,
     showStroke,
     showPoints,
-    pointsRadius,
+    dotsDiameter,
     showLegend,
     legendWidth,
     marginTop,
@@ -63,6 +63,7 @@ export function render(
   y.domain(yDomain).rangeRound([chartHeight, 0]).nice()
 
   // size scale
+  const maxRadius = maxDiameter / 2
   const size = d3
     .scaleSqrt()
     .domain([0, d3.max(data, (d) => d.size)])
@@ -173,7 +174,7 @@ export function render(
       .attr('cx', (d) => x(d.x))
       .attr('cy', (d) => y(d.y))
       .attr('fill', 'black')
-      .attr('r', pointsRadius)
+      .attr('r', dotsDiameter / 2)
   }
 
   const labelsLayer = svg.append('g').attr('id', 'labels')

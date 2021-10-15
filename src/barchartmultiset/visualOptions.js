@@ -109,6 +109,13 @@ export const visualOptions = {
     group: 'series',
   },
 
+  repeatAxesLabels: {
+    type: 'boolean',
+    label: 'Repeat axis labels for each series',
+    default: false,
+    group: 'series',
+  },
+
   showGrid: {
     type: 'boolean',
     label: 'Show series grid',

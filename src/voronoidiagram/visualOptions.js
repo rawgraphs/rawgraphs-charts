@@ -50,7 +50,7 @@ export const visualOptions = {
 
   xOrigin: {
     type: 'boolean',
-    label: 'Set x origin to 0',
+    label: 'Set X origin to 0',
     default: false,
     group: 'chart',
     requiredDimensions: ['x', 'y'],
@@ -58,7 +58,7 @@ export const visualOptions = {
 
   yOrigin: {
     type: 'boolean',
-    label: 'Set y origin to 0',
+    label: 'Set Y origin to 0',
     default: false,
     group: 'chart',
     requiredDimensions: ['x', 'y'],
@@ -66,7 +66,7 @@ export const visualOptions = {
 
   showStroke: {
     type: 'boolean',
-    label: 'Show cells stroke',
+    label: 'Show stroke',
     default: false,
     group: 'chart',
     requiredDimensions: ['x', 'y'],
@@ -74,16 +74,16 @@ export const visualOptions = {
 
   showPoints: {
     type: 'boolean',
-    label: 'Show dots',
+    label: 'Show dots on data values',
     default: false,
     group: 'chart',
     requiredDimensions: ['x', 'y'],
   },
 
-  pointsRadius: {
+  dotsDiameter: {
     type: 'number',
-    label: 'Dots radius',
-    default: 1,
+    label: 'Dots diameter',
+    default: 2,
     group: 'chart',
     disabled: {
       showPoints: false,

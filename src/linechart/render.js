@@ -23,6 +23,8 @@ export function render(
     // chart options
     interpolation,
     showPoints,
+    dotsDiameter,
+    yOrigin,
     pointsRadius,
     // ticks options
     xTicksAuto,
@@ -161,11 +163,16 @@ export function render(
 
     // get domains
     const xDomain = d3.extent(data, (e) => e.x)
+
     const yDomain = useSameScale
       ? // compute extent of the whole dataset
         d3.extent(data, (e) => e.y)
       : // compute extent of the single serie
         d3.extent(d[1].map((e) => e[1]).flat(2), (e) => e.y)
+
+    if (yOrigin) {
+      yDomain[0] = 0
+    }
 
     // define the x scale
     let xScale
@@ -293,7 +300,7 @@ export function render(
         .attr('class', 'dot')
         .attr('cx', (d) => xScale(d.x))
         .attr('cy', (d) => yScale(d.y))
-        .attr('r', pointsRadius)
+        .attr('r', dotsDiameter / 2)
         .attr('fill', (d) => colorScale(d.color))
     }
 

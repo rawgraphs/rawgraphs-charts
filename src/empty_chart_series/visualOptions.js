@@ -1,22 +1,70 @@
 export const visualOptions = {
-  // one object for each visual option
-  // example option
+  // Artboard
+  marginTop: {
+    type: 'number',
+    label: 'Margin (top)',
+    default: 0,
+    group: 'artboard',
+  },
 
-  // optionID: {                // unique id, used in the render.js
-  //   type: 'number',          // type of input. Can be: number, text, boolean, colorScale
-  //   label: 'Option label',   // the label displayed in the interface
-  //   default: 20,             // default value
-  //   group: 'Panel name',        // in which panel of the interface the option will be displayed
-  // },
+  marginRight: {
+    type: 'number',
+    label: 'Margin (right)',
+    default: 0,
+    group: 'artboard',
+  },
 
-  colorScale: {
-    type: 'colorScale',
-    label: 'Color scale',
-    dimension: 'color',
-    default: {
-      scaleType: 'ordinal',
-      interpolator: 'schemeCategory10',
+  marginBottom: {
+    type: 'number',
+    label: 'Margin (bottom)',
+    default: 0,
+    group: 'artboard',
+  },
+
+  marginLeft: {
+    type: 'number',
+    label: 'Margin (left)',
+    default: 0,
+    group: 'artboard',
+  },
+
+  showLegend: {
+    type: 'boolean',
+    label: 'Show legend',
+    default: false,
+    group: 'artboard',
+  },
+
+  legendWidth: {
+    type: 'number',
+    label: 'Legend width',
+    default: 200,
+    group: 'artboard',
+    disabled: {
+      showLegend: false,
     },
-    group: 'chart',
+  },
+
+  // series
+
+  columnsNumber: {
+    type: 'number',
+    label: 'Grid columns',
+    default: 0,
+    group: 'series',
+  },
+
+  showSeriesLabels: {
+    type: 'boolean',
+    label: 'Show pies titles',
+    default: true,
+    group: 'series',
+  },
+
+  showGrid: {
+    type: 'boolean',
+    label: 'Show grid',
+    default: false,
+    group: 'series',
   },
 }

@@ -29,7 +29,7 @@ export const visualOptions = {
 
   padding: {
     type: 'number',
-    label: 'Padding between shapes',
+    label: 'Padding',
     default: 10,
     group: 'chart',
   },
@@ -56,7 +56,7 @@ export const visualOptions = {
 
   interpolation: {
     type: 'text',
-    label: 'curve type',
+    label: 'Curve type',
     default: 'Monotone Y',
     options: [
       'Basis',
@@ -80,9 +80,9 @@ export const visualOptions = {
     group: 'chart',
   },
 
-  dotsRadius: {
+  dotsDiameter: {
     type: 'number',
-    label: 'Dots radius',
+    label: 'Dots diameter',
     disabled: {
       showDots: false,
     },

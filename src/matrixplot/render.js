@@ -11,9 +11,9 @@ export function render(
   styles
 ) {
   const {
-    width = 500,
-    height = 500,
-    background = '#ffffff',
+    width,
+    height,
+    background,
     marginTop,
     marginRight,
     marginBottom,

@@ -1,6 +1,64 @@
-## upcoming
+## v1.0.0-beta.23
+
+#### New features:
+
+- _pie chart_: added chart
+
+#### Changes:
+
+- _bar chart_: fixed sorting. fixed labes when datatype is date.
+- _beeswarm_: better naming of groups.
+- _bump chart_: fixed issue related to vertical padding.
+- _gantt chart_: now "start date" and "end date" visual variables accepts numbers.
+- _streamgraph_: fixed a bug causing the disappearing of streams.
+- _voronoi diagram_: changed category
+
+## v1.0.0-beta.22
+
+#### New features:
+
+- _slope chart_: added chart
+
+#### Changes:
+
+- _slope chart_: fixed legend
+
+## v1.0.0-beta.21
+
+- Fixed package info
+
+## v1.0.0-beta.20
+
+#### New features:
+
+- Added links to tutorials and to source code for each chart
+
+#### Changes:
+
+- using @rawgraphs/rawgraphs-core 1.0.0-beta.15
+- _Alluvial diagram_: added message to prevent visualization overflows if the number of items is too high
+- _Streamgraph_: removed padding (creating many issues). Filtered streams with zero values to avoid glitches.
+- Updated empty bootstrap chart
+
+## v1.0.0-beta.19
+
+#### New features:
+
+- _parallel coordinates_: added chart
+
+#### Changes:
 
 - Fixed dimensions and visual options names
+- all the charts now uses `diameter` as visual variable instead of `radius`
+- _Barchart_: horizontal/vertical orientation of bar variable is now called `barsOrientation` (breaking change)
+- _Multiset barchart_: added repeat axes labels option
+- _Stacked barchart_: added repeat axes labels option
+- _Radar chart_: added series sorting
+
+#### Bugfixing:
+
+- _line chart_: added "Start at 0" option (fix \#79)
+- _alluvial diagram_: now nodes are properly sorted if their label is a number (fix \#82)
 
 ## v1.0.0-beta.18
 

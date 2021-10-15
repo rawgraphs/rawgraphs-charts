@@ -50,16 +50,20 @@ export const visualOptions = {
 
   padding: {
     type: 'number',
-    label: 'Padding between bars',
+    label: 'Padding',
     default: 1,
     group: 'chart',
   },
 
-  horizontalBars: {
-    type: 'boolean',
-    label: 'Show bars horizontally ',
-    default: false,
+  barsOrientation: {
+    type: 'text',
+    label: 'Bars orientation',
     group: 'chart',
+    options: [
+      { label: 'Vertically', value: 'vertical' },
+      { label: 'Horizontally', value: 'horizontal' },
+    ],
+    default: 'vertical',
   },
 
   sortBarsBy: {
@@ -67,12 +71,12 @@ export const visualOptions = {
     label: 'Sort bars by',
     group: 'chart',
     options: [
-      'Total value (descending)',
-      'Total value (ascending)',
-      'Name',
-      'Original',
+      { label: 'Size (descending)', value: 'totalDescending' },
+      { label: 'Size (ascending)', value: 'totalAscending' },
+      { label: 'Name', value: 'name' },
+      { label: 'Original', value: 'original' },
     ],
-    default: 'Name',
+    default: 'name',
   },
 
   useSameScale: {
@@ -111,7 +115,7 @@ export const visualOptions = {
 
   repeatAxesLabels: {
     type: 'boolean',
-    label: 'Show series titles',
+    label: 'Repeat axis labels for each series',
     default: false,
     group: 'series',
   },

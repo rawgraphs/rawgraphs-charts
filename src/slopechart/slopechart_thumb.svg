@@ -1,0 +1,137 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="320" height="160" viewBox="0 0 320 160">
+  <defs>
+    <style>
+      .cls-1, .cls-14, .cls-3 {
+        font-size: 10px;
+        font-family: ArialMT, Arial;
+      }
+
+      .cls-1 {
+        letter-spacing: -0.05518em;
+      }
+
+      .cls-10, .cls-12, .cls-2, .cls-4, .cls-6, .cls-8 {
+        fill: none;
+      }
+
+      .cls-2 {
+        stroke: #000;
+      }
+
+      .cls-4 {
+        stroke: #9e0142;
+      }
+
+      .cls-5 {
+        fill: #9e0142;
+      }
+
+      .cls-6 {
+        stroke: #f88e53;
+      }
+
+      .cls-7 {
+        fill: #f88e53;
+      }
+
+      .cls-8 {
+        stroke: #fbf8b0;
+      }
+
+      .cls-9 {
+        fill: #fbf8b0;
+      }
+
+      .cls-10 {
+        stroke: #89cfa5;
+      }
+
+      .cls-11 {
+        fill: #89cfa5;
+      }
+
+      .cls-12 {
+        stroke: #5e4fa2;
+      }
+
+      .cls-13 {
+        fill: #5e4fa2;
+      }
+
+      .cls-14 {
+        isolation: isolate;
+      }
+    </style>
+  </defs>
+  <g>
+    <g>
+      <g>
+        <text class="cls-1" transform="translate(24.94092 11)">A</text>
+        <line class="cls-2" x1="28" y1="20" x2="28" y2="14"/>
+      </g>
+      <g>
+        <text class="cls-3" transform="translate(288.66504 11)">B</text>
+        <line class="cls-2" x1="292" y1="20" x2="292" y2="14"/>
+      </g>
+    </g>
+    <g>
+      <g>
+        <line class="cls-4" x1="28" y1="84.79729" x2="292" y2="20"/>
+        <circle class="cls-5" cx="28" cy="84.79729" r="2.5"/>
+        <circle class="cls-5" cx="292" cy="20" r="2.5"/>
+      </g>
+      <g>
+        <line class="cls-6" x1="28" y1="102.6937" x2="292" y2="29.87387"/>
+        <circle class="cls-7" cx="28" cy="102.6937" r="2.5"/>
+        <circle class="cls-7" cx="292" cy="29.87387" r="2.5"/>
+      </g>
+      <g>
+        <line class="cls-8" x1="28" y1="105.77928" x2="292" y2="52.09009"/>
+        <circle class="cls-9" cx="28" cy="105.77928" r="2.5"/>
+        <circle class="cls-9" cx="292" cy="52.09009" r="2.5"/>
+      </g>
+      <g>
+        <line class="cls-10" x1="28" y1="123.05856" x2="292" y2="133.54955"/>
+        <circle class="cls-11" cx="28" cy="123.05856" r="2.5"/>
+        <circle class="cls-11" cx="292" cy="133.54955" r="2.5"/>
+      </g>
+      <g>
+        <line class="cls-4" x1="28" y1="133.54955" x2="292" y2="106.39639"/>
+        <circle class="cls-5" cx="28" cy="133.54955" r="2.5"/>
+        <circle class="cls-5" cx="292" cy="106.39639" r="2.5"/>
+      </g>
+      <g>
+        <line class="cls-4" x1="28" y1="142.8063" x2="292" y2="109.48198"/>
+        <circle class="cls-5" cx="28" cy="142.8063" r="2.5"/>
+        <circle class="cls-5" cx="292" cy="109.48198" r="2.5"/>
+      </g>
+      <g>
+        <line class="cls-12" x1="28" y1="157" x2="292" y2="107.63063"/>
+        <circle class="cls-13" cx="28" cy="157" r="2.5"/>
+        <circle class="cls-13" cx="292" cy="107.63063" r="2.5"/>
+      </g>
+      <g>
+        <line class="cls-10" x1="28" y1="157" x2="292" y2="153.2973"/>
+        <circle class="cls-11" cx="28" cy="157" r="2.5"/>
+        <circle class="cls-11" cx="292" cy="153.2973" r="2.5"/>
+      </g>
+    </g>
+    <g>
+      <text class="cls-14" transform="translate(2.03711 89.7973)">46.9</text>
+      <text class="cls-14" transform="translate(298.5 24.93695)">57.4</text>
+      <text class="cls-14" transform="translate(10.37695 104.23651)">44</text>
+      <text class="cls-14" transform="translate(298.5 34.93695)">55.8</text>
+      <text class="cls-14" transform="translate(2.03711 114.23651)">43.5</text>
+      <text class="cls-14" transform="translate(298.5 57.09009)">52.2</text>
+      <text class="cls-14" transform="translate(2.03711 127.69647)">40.7</text>
+      <text class="cls-14" transform="translate(298.5 138.54956)">39</text>
+      <text class="cls-14" transform="translate(10.37695 137.6922)">39</text>
+      <text class="cls-14" transform="translate(298.5 102.85431)">43.4</text>
+      <text class="cls-14" transform="translate(2.03711 147.6875)">37.5</text>
+      <text class="cls-14" transform="translate(298.5 122.82733)">42.9</text>
+      <text class="cls-14" transform="translate(298.5 112.82733)">43.2</text>
+      <text class="cls-14" transform="translate(2.03711 157.66913)">35.2</text>
+      <text class="cls-14" transform="translate(298.5 158.2973)">35.8</text>
+    </g>
+  </g>
+</svg>

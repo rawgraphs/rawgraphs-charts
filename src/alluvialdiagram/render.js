@@ -94,13 +94,42 @@ export function render(
 
   // sort nodes according to options
 
-  network.nodes.sort((a, b) => {
-    return {
-      'Total value (descending)': d3.descending(a.value, b.value),
-      'Total value (ascending)': d3.ascending(a.value, b.value),
-      Name: d3.ascending(a.id, b.id),
-    }[sortNodesBy]
-  })
+  switch (sortNodesBy) {
+    case 'sizeDescending':
+      network.nodes.sort((a, b) => d3.descending(a.value, b.value))
+      break
+    case 'sizeAscending':
+      network.nodes.sort((a, b) => d3.ascending(a.value, b.value))
+      break
+    case 'name':
+      network.nodes
+        //first sort by type
+        .sort((a, b) => d3.ascending(typeof a.name, typeof b.name))
+        // then by actual value
+        .sort((a, b) => d3.ascending(a.name, b.name))
+      break
+  }
+
+  //check the amount of space required
+  let verticalSize = d3.rollups(
+    network.nodes,
+    (v) => v.length - 1,
+    (d) => d.step
+  )
+
+  let maxItemsAmount = d3.max(verticalSize, (d) => d[1])
+
+  if (maxItemsAmount * nodesPadding > chartHeight) {
+    throw new Error(
+      'Padding is too high for artboard height. To represent all the ' +
+        maxItemsAmount +
+        ' items, increase artbort height above ' +
+        (maxItemsAmount * nodesPadding + margin.top + margin.bottom) +
+        'px OR decrase padding below ' +
+        Math.floor(chartHeight / maxItemsAmount) +
+        'px in the panel "chart" > "Padding"'
+    )
+  }
 
   // compute x positions of groups
   // get the first node for each category
@@ -109,7 +138,7 @@ export function render(
 
   const xScale = d3
     .scaleBand()
-    .rangeRound([0, chartWidth - nodesWidth])
+    .range([0, chartWidth - nodesWidth])
     .domain(mapping.steps.value)
     .align(0)
     .paddingInner(1)
