@@ -43,6 +43,12 @@ export function render(
   }
   const dotsRadius = dotsDiameter / 2
 
+  // due to the way rawgraphs core handles empty dimensions
+  // check if the value is an array that means "no values"
+  // @TODO: fix this in core
+  data.forEach((d) => {
+    d.series = Array.isArray(d.series) ? '' : d.series
+  })
   // if series is exposed, recreate the nested structure
   const nestedData = d3.groups(data, (d) => d.series)
 
