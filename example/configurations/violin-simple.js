@@ -27,7 +27,7 @@ export default {
     height: 700,
     padding: 100,
     marginLeft: 100,
-    interpolation: 'Linear',
+    // interpolation: 'Linear',
     sortGroupsBy: 'valueDescending',
   },
 }

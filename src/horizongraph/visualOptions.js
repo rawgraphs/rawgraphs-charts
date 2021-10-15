@@ -44,9 +44,10 @@ export const visualOptions = {
   interpolation: {
     type: 'text',
     label: 'Curve type',
-    default: 'curveMonotoneX',
+    default: 'curveBumpX',
     options: [
       { label: 'Basis', value: 'curveBasis' },
+      { label: 'Bump', value: 'curveBumpX' },
       { label: 'Cardinal', value: 'curveCardinal' },
       { label: 'Catmull–Rom', value: 'curveCatmullRom' },
       { label: 'Linear', value: 'curveLinear' },

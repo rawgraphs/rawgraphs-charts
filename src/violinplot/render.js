@@ -44,20 +44,6 @@ export function render(
   const chartWidth = width - margin.left - margin.right
   const chartHeight = height - margin.top - margin.bottom
 
-  // convert string to d3 functions
-  const curveType = {
-    Basis: d3.curveBasis,
-    Bundle: d3.curveBundle,
-    Cardinal: d3.curveCardinal,
-    'Catmull–Rom': d3.curveCatmullRom,
-    Linear: d3.curveLinear,
-    'Monotone Y': d3.curveMonotoneY,
-    Natural: d3.curveNatural,
-    Step: d3.curveStep,
-    'Step After': d3.curveStepAfter,
-    'Step Before': d3.curveStepBefore,
-  }
-
   //get vertical scale
   const yScale = d3
     .scaleLinear()
@@ -188,7 +174,7 @@ export function render(
         .x0((d) => shapeScale(-d.length))
         .x1((d) => shapeScale(d.length))
         .y((d) => yScale((d.x0 + d.x1) / 2))
-        .curve(curveType[interpolation])
+        .curve(d3[interpolation])
     )
 
   if (showDots) {
