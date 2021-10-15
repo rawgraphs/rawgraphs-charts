@@ -11,7 +11,8 @@ export default {
     Country: 'string',
   },
   mapping: {
-    series: { value: ['Country'] },
+    // series: { value: ['Country'] },
+    series: { value: [] },
     arcs: {
       value: ['Service (US$MM)', 'Industrial (US$MM)', 'Agricultural (US$MM)'],
       config: { aggregation: ['sum', 'sum', 'sum'] },
@@ -29,7 +30,7 @@ export default {
     drawDonut: true,
     sortPiesBy: 'totalDescending',
     showGrid: true,
-    showArcValues: false,
+    showArcValues: true,
     sortArcsBy: 'totalDescending',
   },
 }

@@ -231,14 +231,7 @@ export function render(
 
       pieLabels
         .append('text')
-        .text((d) => mapping.arcs.value[d.index])
-        .attr('text-anchor', 'middle')
-        .styles(styles.labelPrimary)
-
-      pieLabels
-        .append('text')
         .text((d) => d.data)
-        .attr('y', styles.labelSecondary.fontSize)
         .attr('text-anchor', 'middle')
         .styles(styles.labelSecondary)
     }
@@ -265,6 +258,15 @@ export function render(
     const chartLegend = legend().legendWidth(legendWidth)
 
     chartLegend.addColor('Arcs colors', colorScale)
+
+    if (mapping.series.value) {
+      const legendSizeScale = sizeScale.copy()
+      legendSizeScale
+        .domain(d3.extent(data, (d) => d.totalValue))
+        .rangeRound([sizeScale(d3.min(data, (d) => d.totalValue)), maxRadius])
+
+      chartLegend.addSize('Area', legendSizeScale, 'circle')
+    }
 
     legendLayer.call(chartLegend)
   }

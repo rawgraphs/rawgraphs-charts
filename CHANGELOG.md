@@ -1,3 +1,10 @@
+## v1.0.0-beta.25
+
+#### Changes:
+
+- _pie chart_: added size to legend when series are mapped.
+- _pie chart_: labels on arcs now show the arc value
+
 ## v1.0.0-beta.24
 
 #### New features:
