@@ -85,7 +85,7 @@ export const visualOptions = {
 
   showSeriesLabels: {
     type: 'boolean',
-    label: 'Show pies titles',
+    label: 'Show series titles',
     default: true,
     group: 'series',
   },
