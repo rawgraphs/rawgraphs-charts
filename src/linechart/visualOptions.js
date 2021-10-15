@@ -108,7 +108,7 @@ export const visualOptions = {
 
   xTicksAmount: {
     type: 'number',
-    label: 'ticks on x axis',
+    label: 'Max. ticks on x axis',
     default: 1,
     group: 'axes',
     disabled: {

@@ -25,7 +25,6 @@ export function render(
     showPoints,
     dotsDiameter,
     yOrigin,
-    pointsRadius,
     // ticks options
     xTicksAuto,
     xTicksAmount,
@@ -204,8 +203,6 @@ export function render(
       })
       .curve(d3['curve' + interpolation])
 
-    console.log(xTicksAuto, xTicksAmount, xTicksOuter)
-
     const xAxis = (g) => {
       return g
         .attr(
@@ -223,9 +220,6 @@ export function render(
                 ? xScale.ticks(xTicksAmount).concat(xScale.domain())
                 : xScale.ticks(xTicksAmount)
             )
-          // xTicksAuto,
-          // xTicksAmount,
-          // xTicksOuter,
         )
         .call((g) =>
           g
