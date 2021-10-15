@@ -1,3 +1,13 @@
+## v1.0.0-beta.24
+
+#### New features:
+
+- _line chart_: added controls for ticks
+
+#### Changes:
+
+- _slope chart_: fixed error when no values are mapped on the "series" dimension. fixed typos.
+
 ## v1.0.0-beta.23
 
 #### New features:
