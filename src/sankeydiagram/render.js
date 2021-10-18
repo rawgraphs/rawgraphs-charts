@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-import * as d3Sankey from 'd3-sankey'
+import * as d3Sankey from 'd3-sankey-circular'
 import '../d3-styles.js'
 
 /*
@@ -24,7 +24,11 @@ export function render(
     marginBottom,
     marginLeft,
     nodesWidth,
+    //charts
     nodesPadding,
+    linksOpacity,
+    linksBlendMode,
+    circularLinkGap,
     alignment,
     iterations,
     //labels
@@ -63,11 +67,12 @@ export function render(
   }
 
   const sankey = d3Sankey
-    .sankey()
+    .sankeyCircular()
     .nodeId((d) => d.id)
     .nodeAlign(d3Sankey[alignments[alignment]])
     .nodeWidth(nodesWidth)
     .nodePadding(nodesPadding)
+    .circularLinkGap(circularLinkGap)
     .extent([
       [0, 0],
       [chartWidth, chartHeight],
@@ -110,22 +115,21 @@ export function render(
 
   const link = svg
     .append('g')
+    .attr('class', 'links')
     .attr('fill', 'none')
-    .attr('stroke-opacity', 0.5)
-    .selectAll('g')
+    .attr('stroke-opacity', linksOpacity)
+    .selectAll('path')
     .data(network.links)
-    .join('g')
-    .style('mix-blend-mode', 'multiply')
-
-  link
+    .enter()
     .append('path')
-    .attr('d', d3Sankey.sankeyLinkHorizontal())
+    .attr('d', (d) => d.path)
+    .style('stroke-width', (link) => Math.max(1, link.width))
+    .style('mix-blend-mode', linksBlendMode)
     .attr('stroke', (d) => colorScale(d.source.id))
-    .attr('stroke-width', (d) => Math.max(1, d.width))
 
   link
     .append('title')
-    .text((d) => `${d.source.name} → ${d.target.name}: ${d.value}`)
+    .text((d) => `${d.source.id} → ${d.target.id}: ${d.value}`)
 
   const nodesLabels = svg
     .append('g')

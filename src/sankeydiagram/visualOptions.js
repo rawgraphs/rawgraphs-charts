@@ -41,6 +41,33 @@ export const visualOptions = {
     group: 'chart',
   },
 
+  linksOpacity: {
+    type: 'number',
+    label: 'Links opacity (0-1)',
+    default: 1,
+    step: 0.1,
+    min: 0,
+    max: 1,
+    group: 'chart',
+  },
+
+  circularLinkGap: {
+    type: 'number',
+    label: 'Circular links gap',
+    default: 2,
+    step: 1,
+    min: 0,
+    group: 'chart',
+  },
+
+  linksBlendMode: {
+    type: 'text',
+    label: 'Links blend mode',
+    group: 'chart',
+    options: ['normal', 'multiply'],
+    default: 'multiply',
+  },
+
   alignment: {
     type: 'text',
     label: 'Nodes alignment',
