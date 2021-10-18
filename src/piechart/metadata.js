@@ -10,5 +10,5 @@ export const metadata = {
   description:
     'It allows you to see the proportions between values that make up a whole, by using arcs composing a circle.',
   code: 'https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/piechart',
-  // tutorial: 'https://rawgraphs.io/learning/',
+  tutorial: 'https://rawgraphs.io/learning/how-to-make-a-pie-chart/',
 }
