@@ -1,3 +1,9 @@
+## v1.0.0-beta.26
+
+#### Changes:
+
+- added tutorials for _pie chart_ and _slope chart_
+
 ## v1.0.0-beta.25
 
 #### Changes:
