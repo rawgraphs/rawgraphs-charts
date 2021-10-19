@@ -3,6 +3,7 @@
 #### New features:
 
 - _sankey diagram_: circular links are now supported
+- _voronoi treemap_: chart added
 
 #### Changes:
 

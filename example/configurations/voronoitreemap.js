@@ -1,4 +1,4 @@
-import treemap from 'rawcharts/treemap'
+import treemap from 'rawcharts/voronoitreemap'
 import data from '../datasets/WineTasting.tsv'
 
 export default {
