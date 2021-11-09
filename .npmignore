@@ -1,9 +1,0 @@
-example/
-node_modules/
-src/
-.github/
-.gitignore
-.npmrc
-.prettierrc
-rollup.config.js
-webpack.config.js

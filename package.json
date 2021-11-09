@@ -6,6 +6,9 @@
   "unpkg": "lib/index.umd.js",
   "main": "lib/index.cjs.js",
   "module": "lib/index.es.js",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write src",
