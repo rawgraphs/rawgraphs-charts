@@ -1,3 +1,10 @@
+## v1.0.0-beta.27 (upcoming)
+
+#### Changes:
+
+- _stream graph_: fixed series sorting
+- _bump chart_: fixed series sorting
+
 ## v1.0.0-beta.26
 
 #### Changes:
