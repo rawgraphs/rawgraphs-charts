@@ -113,7 +113,6 @@ export function render(
   }
   // sort series
   nestedData.sort(seriesSortings[sortSeriesBy])
-  console.log(nestedData)
 
   // add background
   d3.select(svgNode)
