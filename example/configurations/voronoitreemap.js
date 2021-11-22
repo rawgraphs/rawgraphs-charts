@@ -27,7 +27,7 @@ export default {
     },
   },
   visualOptions: {
-    width: 1000,
+    width: 300,
     height: 700,
     showHierarchyLabels: true,
     drawHierarchy: false,

@@ -65,6 +65,44 @@ export const visualOptions = {
     group: 'chart',
   },
 
+  clipToPolygon: {
+    type: 'boolean',
+    label: 'Clip to polygon',
+    default: true,
+  },
+
+  edges: {
+    type: 'number',
+    label: 'Polygon edges',
+    default: 3,
+    min: 3,
+    group: 'chart',
+    disabled: {
+      clipToPolygon: false,
+    },
+  },
+
+  rotation: {
+    type: 'number',
+    label: 'Polygon rotation',
+    default: 0,
+    min: 0,
+    max: 360,
+    group: 'chart',
+    disabled: {
+      clipToPolygon: false,
+    },
+  },
+
+  isRegular: {
+    type: 'boolean',
+    label: 'Regular polygon',
+    default: true,
+    disabled: {
+      clipToPolygon: false,
+    },
+  },
+
   colorScale: {
     type: 'colorScale',
     label: 'Color scale',

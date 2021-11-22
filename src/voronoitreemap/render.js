@@ -34,6 +34,10 @@ export function render(
     // chart options
     seed,
     padding,
+    clipToPolygon,
+    rotation,
+    edges,
+    isRegular,
     // labels
     showLabelsOutline,
     showHierarchyLabels,
@@ -65,15 +69,41 @@ export function render(
   // this will produce repeatible repeatable results
   const random = d3.randomNormal.source(d3.randomLcg(seed))(0, 1)
 
-  let voronoiTreemap = d3VoronoiTreemap
-    .voronoiTreemap()
-    .prng(random)
-    .clip([
-      [0, 0],
-      [0, chartHeight],
-      [chartWidth, chartHeight],
-      [chartWidth, 0],
-    ]) // sets the clipping polygon
+  let voronoiTreemap = d3VoronoiTreemap.voronoiTreemap().prng(random)
+
+  if (clipToPolygon) {
+    // create the points
+    let points = d3.range(edges).map((i) => {
+      const rad = (rotation * Math.PI) / 180 + (i / edges) * 2 * Math.PI
+      return [Math.cos(rad), Math.sin(rad)]
+    })
+    //calculatet scales
+    let hscale = d3
+      .scaleLinear()
+      .domain(d3.extent(points, (d) => d[0]))
+      .range([-chartWidth / 2, chartWidth / 2])
+
+    let vscale = d3
+      .scaleLinear()
+      .domain(d3.extent(points, (d) => d[1]))
+      .range([-chartHeight / 2, chartHeight / 2])
+
+    // create the shape
+    let clipShape = points.map((d) => {
+      return isRegular
+        ? chartHeight > chartWidth
+          ? // if user asks for a regular polygon,
+            // use the scale of tthe shortest dimension
+            [hscale(d[0]), hscale(d[1])]
+          : [vscale(d[0]), vscale(d[1])]
+        : // else use the two separate scales
+          [hscale(d[0]), vscale(d[1])]
+    })
+    // use clipping
+    voronoiTreemap.clip(clipShape)
+  } else {
+    voronoiTreemap.size([chartWidth, chartHeight])
+  }
 
   // compute the tesselation
   voronoiTreemap(hierarchy)
@@ -83,13 +113,11 @@ export function render(
     .descendants()
     .sort((a, b) => d3.ascending(a.height, b.height))
 
-  //@TODO understand how to place labels for hierarchical cells
-
+  // @TODO understand how to place labels for hierarchical cells
+  // below the old code for normal treemaps
   // if (showHierarchyLabels) {
   //   treemap.paddingTop(12)
   // }
-
-  // const root = treemap(hierarchy)
 
   // add background
   d3.select(svgNode)
@@ -104,8 +132,18 @@ export function render(
   const svg = d3
     .select(svgNode)
     .append('g')
-    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
     .attr('id', 'viz')
+    // translate to the center
+    .attr(
+      'transform',
+      clipToPolygon
+        ? 'translate(' +
+            (margin.left + chartWidth / 2) +
+            ',' +
+            (margin.top + chartHeight / 2) +
+            ')'
+        : 'translate(' + margin.left + ',' + margin.top + ')'
+    )
 
   // draw cells
   svg
@@ -115,9 +153,8 @@ export function render(
     .data(allNodes)
     .enter()
     .append('path')
-    .attr('d', (d) => {
-      return d3.line()(d.polygon) + 'z' // d.polygon is the computed Voronoï cell encoding the relative weight of your underlying original data
-    })
+    // d.polygon is the computed Voronoï cell encoding the relative weight of underlying original data
+    .attr('d', (d) => d3.line()(d.polygon) + 'z')
     .attr('fill', (d) => (d.height > 0 ? 'none' : colorScale(d.data[1].color)))
     .attr('stroke', background)
     .attr('stroke-width', (d) => (d.height + 1) * padding)
@@ -158,7 +195,6 @@ export function render(
   // align labels to the center of polygon
   labels.call((sel) => {
     return sel.attr('transform', (d) => {
-      console.log(d.polygon.site.x)
       const height = sel.node().getBBox().height
       return (
         'translate(' +
