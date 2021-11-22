@@ -69,6 +69,7 @@ export const visualOptions = {
     type: 'boolean',
     label: 'Clip to polygon',
     default: true,
+    group: 'chart',
   },
 
   edges: {
@@ -101,6 +102,7 @@ export const visualOptions = {
     disabled: {
       clipToPolygon: false,
     },
+    group: 'chart',
   },
 
   colorScale: {
