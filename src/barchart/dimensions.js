@@ -1,25 +1,25 @@
+import { t } from '@rawgraphs/rawgraphs-core'
+
 export const dimensions = [
   {
     id: 'bars',
-    name: 'Bars',
+    name: t('dimensions.bars'),
     validTypes: ['number', 'string', 'date'],
     required: true,
     operation: 'get',
   },
-
   {
     id: 'size',
-    name: 'Size',
+    name: t('dimensions.size'),
     operation: 'get',
     validTypes: ['number'],
     required: false,
     aggregation: true,
     aggregationDefault: 'sum',
   },
-
   {
     id: 'color',
-    name: 'Color',
+    name: t('dimensions.color'),
     operation: 'get',
     validTypes: ['number', 'string', 'date'],
     required: false,
@@ -30,10 +30,9 @@ export const dimensions = [
       date: 'csvDistinct',
     },
   },
-
   {
     id: 'series',
-    name: 'Series',
+    name: t('dimensions.series'),
     validTypes: ['number', 'string', 'date'],
     required: false,
     operation: 'get',

@@ -1,3 +1,4 @@
+import { t } from '@rawgraphs/rawgraphs-core'
 import icon from './contourPlot.svg'
 import thumbnail from './contourPlot_thumb.svg'
 
@@ -6,9 +7,8 @@ export const metadata = {
   id: 'rawgraphs.contourplot',
   thumbnail,
   icon,
-  categories: ['correlations', 'distributions'],
-  description:
-    'It shows the estimated density of point clouds, which is especially useful to avoid overplotting in large datasets.',
+  categories: [t('categories.correlations'), t('categories.distributions')],
+  description: t('charts.contourPlot.description'),
   code:
     'https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/contourPlot',
   tutorial: 'https://rawgraphs.io/learning/how-to-make-a-contour-plot/',

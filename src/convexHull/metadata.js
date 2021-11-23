@@ -1,3 +1,4 @@
+import { t } from '@rawgraphs/rawgraphs-core'
 import icon from './convexHull.svg'
 import thumbnail from './convexHull_thumb.svg'
 
@@ -6,9 +7,8 @@ export const metadata = {
   id: 'rawgraphs.convexhull',
   thumbnail,
   icon,
-  categories: ['correlations', 'proportions'],
-  description:
-    'In mathematics, the convex hull is the smallest convex shape containing a set of points. Applied to a scatterplot, it is useful to identify points belonging to the same category.',
+  categories: [t('categories.correlations'), t('categories.proportions')],
+  description: t('charts.convexHull.description'),
   code:
     'https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/convexHull',
   tutorial: 'https://rawgraphs.io/learning/how-to-make-a-convex-hulls-chart/',

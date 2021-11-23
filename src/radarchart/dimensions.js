@@ -1,16 +1,17 @@
+import { t } from '@rawgraphs/rawgraphs-core'
+
 export const dimensions = [
   {
     id: 'axes',
-    name: 'Spokes',
+    name: t('dimensions.axes'),
     validTypes: ['number'],
     required: true,
     multiple: true,
     minValues: 3,
   },
-
   {
     id: 'color',
-    name: 'Color',
+    name: t('dimensions.color'),
     operation: 'get',
     validTypes: ['number', 'string', 'date'],
     required: false,
@@ -21,10 +22,9 @@ export const dimensions = [
       date: 'csvDistinct',
     },
   },
-
   {
     id: 'series',
-    name: 'Series',
+    name: t('dimensions.series'),
     validTypes: ['number', 'string', 'date'],
     required: false,
     operation: 'get',

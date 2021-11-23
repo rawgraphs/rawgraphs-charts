@@ -1,82 +1,96 @@
+import { t } from '@rawgraphs/rawgraphs-core'
+
 export const visualOptions = {
   marginTop: {
     type: 'number',
-    label: 'Margin (top)',
+    label: t('visualOptions.marginTop'),
     default: 10,
     group: 'artboard',
   },
-
   marginRight: {
     type: 'number',
-    label: 'Margin (right)',
+    label: t('visualOptions.marginRight'),
     default: 10,
     group: 'artboard',
   },
-
   marginBottom: {
     type: 'number',
-    label: 'Margin (bottom)',
+    label: t('visualOptions.marginBottom'),
     default: 10,
     group: 'artboard',
   },
-
   marginLeft: {
     type: 'number',
-    label: 'Margin (left)',
+    label: t('visualOptions.marginLeft'),
     default: 10,
     group: 'artboard',
   },
-
   minDiameter: {
     type: 'number',
-    label: 'Min diameter',
+    label: t('visualOptions.minDiameter'),
     default: 2,
     group: 'chart',
   },
-
   maxDiameter: {
     type: 'number',
-    label: 'Max diameter',
+    label: t('visualOptions.maxDiameter'),
     default: 30,
     group: 'chart',
   },
-
   linkOpacity: {
     type: 'number',
-    label: 'Links opacity (0-1)',
+    label: t('visualOptions.linkOpacity'),
     default: 0.5,
     step: 0.1,
     min: 0,
     max: 1,
     group: 'chart',
   },
-
   sameSide: {
     type: 'boolean',
-    label: 'Arcs only on the top',
+    label: t('visualOptions.sameSide'),
     default: false,
     group: 'chart',
   },
-
   nodeSize: {
     type: 'text',
-    label: 'Nodes diameter',
+    label: t('visualOptions.nodeSize'),
     group: 'chart',
     options: [
-      { label: 'Same size', value: 'default' },
-      { label: 'Weighted degree', value: 'totalValue' },
-      { label: 'Weighted inDegree', value: 'inValue' },
-      { label: 'Weighted outDegree', value: 'outValue' },
-      { label: 'Links count', value: 'degree' },
-      { label: 'OutDegree', value: 'outDegree' },
-      { label: 'InDegree', value: 'inDegree' },
+      {
+        label: t('visualOptions.nodeSizeOptions.default'),
+        value: 'default',
+      },
+      {
+        label: t('visualOptions.nodeSizeOptions.totalValue'),
+        value: 'totalValue',
+      },
+      {
+        label: t('visualOptions.nodeSizeOptions.inValue'),
+        value: 'inValue',
+      },
+      {
+        label: t('visualOptions.nodeSizeOptions.outValue'),
+        value: 'outValue',
+      },
+      {
+        label: t('visualOptions.nodeSizeOptions.degree'),
+        value: 'degree',
+      },
+      {
+        label: t('visualOptions.nodeSizeOptions.outDegree'),
+        value: 'outDegree',
+      },
+      {
+        label: t('visualOptions.nodeSizeOptions.inDegree'),
+        value: 'inDegree',
+      },
     ],
     default: 'totalValue',
   },
-
   orderNodesBy: {
     type: 'text',
-    label: 'Sort nodes by',
+    label: t('visualOptions.orderNodesBy'),
     group: 'chart',
     options: ['Name', 'Links count (degree)', 'Size', 'Minimize overlaps'],
     default: 'Minimize overlaps',

@@ -1,23 +1,23 @@
+import { t } from '@rawgraphs/rawgraphs-core'
+
 export const dimensions = [
   {
     id: 'x',
-    name: 'x axis',
+    name: t('dimensions.x'),
     validTypes: ['number', 'date'],
     required: true,
   },
-
   {
     id: 'y',
-    name: 'y axis',
+    name: t('dimensions.y'),
     validTypes: ['number'],
     aggregation: true,
     aggregationDefault: 'sum',
     required: false,
   },
-
   {
     id: 'group',
-    name: 'Groups',
+    name: t('dimensions.group'),
     validTypes: ['number', 'date', 'string'],
     required: false,
   },

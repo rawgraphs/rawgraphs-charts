@@ -1,3 +1,4 @@
+import { t } from '@rawgraphs/rawgraphs-core'
 import icon from './bubblechart.svg'
 import thumbnail from './bubblechart_thumb.svg'
 
@@ -6,9 +7,8 @@ export const metadata = {
   id: 'rawgraphs.bubblechart',
   thumbnail,
   icon,
-  categories: ['correlations', 'proportions'],
-  description:
-    'The basic layout is a scatter plot, which allows to see correlations among two continuous dimensions. A further quantitative dimension with size and a quantitative or categorical dimension with color.',
+  categories: [t('categories.correlations'), t('categories.proportions')],
+  description: t('charts.bubblechart.description'),
   code:
     'https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/bubblechart',
   tutorial: 'https://rawgraphs.io/learning/how-to-make-a-scatterplot/',

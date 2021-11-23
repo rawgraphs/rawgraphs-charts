@@ -1,37 +1,39 @@
+import { t } from '@rawgraphs/rawgraphs-core'
+
 export const dimensions = [
   {
     id: 'x',
-    name: 'X Axis',
+    name: t('dimensions.x'),
     validTypes: ['number', 'date'],
     required: true,
   },
   {
     id: 'y',
-    name: 'Y Axis',
+    name: t('dimensions.y'),
     validTypes: ['number', 'date'],
     required: true,
   },
   {
     id: 'size',
-    name: 'Size',
+    name: t('dimensions.size'),
     validTypes: ['number'],
     required: false,
   },
   {
     id: 'color',
-    name: 'Color',
+    name: t('dimensions.color'),
     validTypes: ['number', 'date', 'string'],
     required: false,
   },
   {
     id: 'connectedBy',
-    name: 'Connection by',
+    name: t('dimensions.connectedBy'),
     validTypes: ['number', 'date'],
     required: false,
   },
   {
     id: 'label',
-    name: 'Label',
+    name: t('dimensions.label'),
     validTypes: ['number', 'date', 'string'],
     required: false,
     multiple: true,

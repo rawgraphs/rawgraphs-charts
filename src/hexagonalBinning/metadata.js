@@ -1,3 +1,4 @@
+import { t } from '@rawgraphs/rawgraphs-core'
 import icon from './hexagonalBinning.svg'
 import thumbnail from './hexagonalBinning_thumb.svg'
 
@@ -6,9 +7,8 @@ export const metadata = {
   id: 'rawgraphs.hexagonalbinning',
   thumbnail,
   icon,
-  categories: ['correlations', 'distributions'],
-  description:
-    'Hexagonal Binning is a way to manage the problem of having too many points that start to overlap. Hexagonal binning plots density, rather than points. Points are binned into gridded hexagons and distribution (the number of points per hexagon) is displayed using either the color or the area of the hexagons.',
+  categories: [t('categories.correlations'), t('categories.distributions')],
+  description: t('charts.hexagonalBinning.description'),
   code:
     'https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/hexagonalBinning',
   tutorial: 'https://rawgraphs.io/learning/how-to-make-an-hexagonal-binning/',

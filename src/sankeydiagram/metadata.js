@@ -1,3 +1,4 @@
+import { t } from '@rawgraphs/rawgraphs-core'
 import icon from './sankeydiagram.svg'
 import thumbnail from './sankeydiagram_thumb.svg'
 
@@ -6,9 +7,8 @@ export const metadata = {
   id: 'rawgraphs.sankeydiagram',
   thumbnail,
   icon,
-  categories: ['networks'],
-  description:
-    'It represents flows among nodes of a network. Nodes are represented as rectangles, the height represents their value. Flows are represented with curved lines whose width is proportional to their value.',
+  categories: [t('categories.networks')],
+  description: t('charts.sankeydiagram.description'),
   code:
     'https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/sankeydiagram',
   tutorial: 'https://rawgraphs.io/learning/how-to-make-a-sankey-diagram/',

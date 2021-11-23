@@ -1,19 +1,21 @@
+import { t } from '@rawgraphs/rawgraphs-core'
+
 export const dimensions = [
   {
     id: 'source',
-    name: 'Source node',
+    name: t('dimensions.sourceNode'),
     validTypes: ['number', 'date', 'string'],
     required: true,
   },
   {
     id: 'target',
-    name: 'Target node',
+    name: t('dimensions.targetNode'),
     validTypes: ['number', 'date', 'string'],
     required: true,
   },
   {
     id: 'size',
-    name: 'Size',
+    name: t('dimensions.size'),
     validTypes: ['number'],
     required: false,
     aggregation: true,

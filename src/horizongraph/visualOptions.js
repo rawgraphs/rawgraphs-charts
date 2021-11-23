@@ -1,78 +1,105 @@
+import { t } from '@rawgraphs/rawgraphs-core'
+
 export const visualOptions = {
   marginTop: {
     type: 'number',
-    label: 'Margin (top)',
+    label: t('visualOptions.marginTop'),
     default: 20,
     group: 'artboard',
   },
-
   marginRight: {
     type: 'number',
-    label: 'Margin (right)',
+    label: t('visualOptions.marginRight'),
     default: 20,
     group: 'artboard',
   },
-
   marginBottom: {
     type: 'number',
-    label: 'Margin (bottom)',
+    label: t('visualOptions.marginBottom'),
     default: 20,
     group: 'artboard',
   },
-
   marginLeft: {
     type: 'number',
-    label: 'Margin (left)',
+    label: t('visualOptions.marginLeft'),
     default: 20,
     group: 'artboard',
   },
-
   bands: {
     type: 'number',
-    label: 'Number of bands',
+    label: t('visualOptions.bands'),
     default: 4,
     group: 'chart',
   },
-
   padding: {
     type: 'number',
-    label: 'Padding',
+    label: t('visualOptions.padding'),
     default: 1,
     group: 'chart',
   },
-
   interpolation: {
     type: 'text',
-    label: 'Curve type',
+    label: t('visualOptions.curveType'),
     default: 'curveMonotoneX',
     options: [
-      { label: 'Basis', value: 'curveBasis' },
-      { label: 'Cardinal', value: 'curveCardinal' },
-      { label: 'Catmull–Rom', value: 'curveCatmullRom' },
-      { label: 'Linear', value: 'curveLinear' },
-      { label: 'Monotone X', value: 'curveMonotoneX' },
-      { label: 'Natural', value: 'curveNatural' },
-      { label: 'Step', value: 'curveStep' },
-      { label: 'Step After', value: 'curveStepAfter' },
-      { label: 'Step Before', value: 'curveStepBefore' },
+      {
+        label: t('visualOptions.interpolationOptions.curveBasis'),
+        value: 'curveBasis',
+      },
+      {
+        label: t('visualOptions.interpolationOptions.curveCardinal'),
+        value: 'curveCardinal',
+      },
+      {
+        label: t('visualOptions.interpolationOptions.curveCatmullRom'),
+        value: 'curveCatmullRom',
+      },
+      {
+        label: t('visualOptions.interpolationOptions.curveLinear'),
+        value: 'curveLinear',
+      },
+      {
+        label: t('visualOptions.interpolationOptions.curveMonotoneX'),
+        value: 'curveMonotoneX',
+      },
+      {
+        label: t('visualOptions.interpolationOptions.curveNatural'),
+        value: 'curveNatural',
+      },
+      {
+        label: t('visualOptions.interpolationOptions.curveStep'),
+        value: 'curveStep',
+      },
+      {
+        label: t('visualOptions.interpolationOptions.curveStepAfter'),
+        value: 'curveStepAfter',
+      },
+      {
+        label: t('visualOptions.interpolationOptions.curveStepBefore'),
+        value: 'curveStepBefore',
+      },
     ],
     group: 'chart',
   },
-
   negativeStyle: {
     type: 'text',
-    label: 'Show negative values as',
+    label: t('visualOptions.negativeStyle'),
     group: 'chart',
     options: [
-      { label: 'Mirrored', value: 'mirrored' },
-      { label: 'Offset', value: 'top' },
+      {
+        label: t('visualOptions.negativeStyleOptions.mirrored'),
+        value: 'mirrored',
+      },
+      {
+        label: t('visualOptions.negativeStyleOptions.top'),
+        value: 'top',
+      },
     ],
     default: 'mirrored',
   },
-
   colorScale: {
     type: 'colorScale',
-    label: 'Color scale',
+    label: t('visualOptions.colorScale'),
     dimension: 'color',
     default: {
       scaleType: 'ordinal',
