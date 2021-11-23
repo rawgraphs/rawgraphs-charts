@@ -1,7 +1,9 @@
+import { t } from '@rawgraphs/rawgraphs-core'
+
 export const dimensions = [
   {
     id: 'steps',
-    name: 'Steps',
+    name: t('dimensions.steps'),
     validTypes: ['number', 'date', 'string'],
     required: true,
     multiple: true,
@@ -9,7 +11,7 @@ export const dimensions = [
   },
   {
     id: 'size',
-    name: 'Size',
+    name: t('dimensions.size'),
     validTypes: ['number'],
     required: false,
     aggregation: true,

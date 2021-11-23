@@ -1,49 +1,45 @@
+import { t } from '@rawgraphs/rawgraphs-core'
+
 export const visualOptions = {
   marginTop: {
     type: 'number',
-    label: 'Margin (top)',
+    label: t('visualOptions.marginTop'),
     default: 10,
     group: 'artboard',
   },
-
   marginRight: {
     type: 'number',
-    label: 'Margin (right)',
+    label: t('visualOptions.marginRight'),
     default: 10,
     group: 'artboard',
   },
-
   marginBottom: {
     type: 'number',
-    label: 'Margin (bottom)',
+    label: t('visualOptions.marginBottom'),
     default: 10,
     group: 'artboard',
   },
-
   marginLeft: {
     type: 'number',
-    label: 'Margin (left)',
+    label: t('visualOptions.marginLeft'),
     default: 10,
     group: 'artboard',
   },
-
   maxDiameter: {
     type: 'number',
-    label: 'Maximum diameter',
+    label: t('visualOptions.maxDiameter'),
     default: 20,
     group: 'chart',
   },
-
   showLegend: {
     type: 'boolean',
-    label: 'Show legend',
+    label: t('visualOptions.showLegend'),
     default: false,
     group: 'artboard',
   },
-
   legendWidth: {
     type: 'number',
-    label: 'Legend width',
+    label: t('visualOptions.legendWidth'),
     default: 200,
     group: 'artboard',
     disabled: {
@@ -54,33 +50,29 @@ export const visualOptions = {
       showLegend: true,
     },
   },
-
   layout: {
     type: 'text',
-    label: 'Layout algorythm',
+    label: t('visualOptions.layout'),
     group: 'chart',
     options: ['Cluster Dendogram', 'Tree'],
     default: 'Tree',
   },
-
   sortBy: {
     type: 'text',
-    label: 'Sort nodes by',
+    label: t('visualOptions.sortBy'),
     group: 'chart',
     options: ['Size (descending)', 'Size (ascending)', 'Name', 'Original'],
     default: 'Size (descending)',
   },
-
   sizeOnlyLeaves: {
     type: 'boolean',
-    label: 'Size only leaf nodes',
+    label: t('visualOptions.sizeOnlyLeaves'),
     default: true,
     group: 'chart',
   },
-
   colorScale: {
     type: 'colorScale',
-    label: 'Color scale',
+    label: t('visualOptions.colorScale'),
     dimension: 'color',
     default: {
       scaleType: 'ordinal',
@@ -88,43 +80,57 @@ export const visualOptions = {
     },
     group: 'color',
   },
-
   showHierarchyLabels: {
     type: 'boolean',
-    label: 'Show hierarchy labels',
+    label: t('visualOptions.showHierarchyLabels'),
     default: true,
     group: 'labels',
   },
-
   hierarchyStyle: {
     type: 'text',
-    label: 'Hierarchy labels',
+    label: t('visualOptions.hierarchyStyle'),
     group: 'labels',
     options: [
-      { label: 'Primary', value: 'labelPrimary' },
-      { label: 'Secondary', value: 'labelSecondary' },
-      { label: 'Italic', value: 'labelItalic' },
+      {
+        label: t('visualOptions.hierarchyStyleOptions.labelPrimary'),
+        value: 'labelPrimary',
+      },
+      {
+        label: t('visualOptions.hierarchyStyleOptions.labelSecondary'),
+        value: 'labelSecondary',
+      },
+      {
+        label: t('visualOptions.hierarchyStyleOptions.labelItalic'),
+        value: 'labelItalic',
+      },
     ],
     default: 'labelPrimary',
   },
-
   labelStyles: {
     type: 'text',
-    label: 'Label',
+    label: t('visualOptions.labelStyles'),
     group: 'labels',
     options: [
-      { label: 'Primary', value: 'labelPrimary' },
-      { label: 'Secondary', value: 'labelSecondary' },
-      { label: 'Italic', value: 'labelItalic' },
+      {
+        label: t('visualOptions.labelStylesOptions.labelPrimary'),
+        value: 'labelPrimary',
+      },
+      {
+        label: t('visualOptions.labelStylesOptions.labelSecondary'),
+        value: 'labelSecondary',
+      },
+      {
+        label: t('visualOptions.labelStylesOptions.labelItalic'),
+        value: 'labelItalic',
+      },
     ],
     default: 'labelPrimary',
     repeatFor: 'label',
     repeatDefault: ['labelPrimary', 'labelSecondary', 'labelItalic'],
   },
-
   showLabelsOutline: {
     type: 'boolean',
-    label: 'Show outline',
+    label: t('visualOptions.showLabelsOutline'),
     default: false,
     group: 'labels',
   },

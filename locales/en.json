@@ -1,0 +1,364 @@
+{
+  "visualOptions": {
+    "marginTop": "Margin (top)",
+    "marginRight": "Margin (right)",
+    "marginBottom": "Margin (bottom)",
+    "marginLeft": "Margin (left)",
+    "nodesWidth": "Nodes width",
+    "nodesPadding": "Padding",
+    "linksOpacity": "Links opacity (0-1)",
+    "linksBlendMode": "Links blend mode",
+    "sortNodesBy": "Sort nodes by",
+    "sortNodesByOptions": {
+      "sizeDescending": "Size (descending)",
+      "sizeAscending": "Size (ascending)",
+      "name": "Name",
+      "auto": "Minimize Overlaps"
+    },
+    "verticalAlignment": "Flows alignment",
+    "colorScale": "Color scale",
+    "showValues": "Show nodes values",
+    "minDiameter": "Min diameter",
+    "maxDiameter": "Max diameter",
+    "linkOpacity": "Links opacity (0-1)",
+    "sameSide": "Arcs only on the top",
+    "nodeSize": "Nodes diameter",
+    "nodeSizeOptions": {
+      "default": "Same size",
+      "totalValue": "Weighted degree",
+      "inValue": "Weighted inDegree",
+      "outValue": "Weighted outDegree",
+      "degree": "Links count",
+      "outDegree": "OutDegree",
+      "inDegree": "InDegree"
+    },
+    "orderNodesBy": "Sort nodes by",
+    "showLegend": "Show legend",
+    "legendWidth": "Legend width",
+    "padding": "Padding",
+    "barsOrientation": "Bars orientation",
+    "barsOrientationOptions": {
+      "vertical": "Vertically",
+      "horizontal": "Horizontally"
+    },
+    "sortBarsBy": "Sort bars by",
+    "sortBarsByOptions": {
+      "totalDescending": "Size (descending)",
+      "totalAscending": "Size (ascending)",
+      "name": "Name",
+      "original": "Original"
+    },
+    "useSameScale": "Use same scale",
+    "columnsNumber": "Number of columns",
+    "sortSeriesBy": "Sort series by",
+    "showSeriesLabels": "Show series titles",
+    "repeatAxesLabels": "Repeat axis labels for each series",
+    "showSeriesGrid": "Show series grid",
+    "setsPadding": "Padding between sets",
+    "barsPadding": "Padding between bars",
+    "SortXAxisBy": "Sort X axis by",
+    "sortSeriesByOptions": {
+      "valueDescending": "Total value (descending)",
+      "valueAscending": "Total value (ascending)",
+      "name": "Name",
+      "none": "Original",
+      "nameAscending": "Name"
+    },
+    "stacksPadding": "Padding",
+    "stacksOrder": "Sort stacks by",
+    "nodePadding": "Padding",
+    "sortGroupsBy": "Sort groups by",
+    "labelStyles": "Label",
+    "labelStylesOptions": {
+      "labelPrimary": "Primary",
+      "labelSecondary": "Secondary",
+      "labelItalic": "Italic"
+    },
+    "showLabelsOutline": "Show outline",
+    "autoHideLabels": "Auto hide labels",
+    "barsWidth": "Bars width",
+    "iqrMultiplier": "Interquartile range multiplier",
+    "dotsDiameter": "Dots diameter",
+    "yOrigin": "Set Y origin to 0",
+    "showBoxPlots": "Show boxpot values",
+    "xOrigin": "Set X origin to 0",
+    "showStroke": "Show stroke",
+    "showDotsOnData": "Show dots on data values",
+    "interpolation": "Curves type",
+    "interpolationOptions": {
+      "curveBasis": "Basis",
+      "curveCardinal": "Cardinal",
+      "curveCatmullRom": "Catmull–Rom",
+      "curveLinear": "Linear",
+      "curveMonotoneX": "Monotone X",
+      "curveNatural": "Natural",
+      "curveStep": "Step",
+      "curveStepAfter": "Step After",
+      "curveStepBefore": "Step Before",
+      "Basis": "Basis",
+      "Bundle": "Bundle",
+      "Cardinal": "Cardinal",
+      "CatmullRom": "Catmull–Rom",
+      "Linear": "Linear",
+      "MonotoneX": "Monotone X",
+      "Natural": "Natural",
+      "Step": "Step",
+      "StepAfter": "Step After",
+      "StepBefore": "Step Before"
+    },
+    "streamsOffset": "Streams vertical alignment",
+    "streamsOffsetOptions": {
+      "stackOffsetExpand": "Expand",
+      "stackOffsetSilhouette": "Silhouette",
+      "stackOffsetNone": "None",
+      "stackOffsetWiggle": "Wiggle"
+    },
+    "streamsPadding": "Padding",
+    "showYAxis": "Show Y axis",
+    "showStreams": "Show streams labels",
+    "labelsType": "Labels position",
+    "sortCirclesBy": "Sort circles by",
+    "sortCirclesByOptions": {
+      "descending": "Size (descending)",
+      "ascending": "Size (ascending)",
+      "original": "Original"
+    },
+    "showHierarchyLabels": "Show hierarchy labels",
+    "hierarchyLabelsStyle": "Hierarchy labels position",
+    "hierarchyLabelsStyleOptions": {
+      "onPath": "On path",
+      "onPoint": "On point"
+    },
+    "layout": "Layout algorythm",
+    "sortBy": "Sort nodes by",
+    "sizeOnlyLeaves": "Size only leaf nodes",
+    "hierarchyStyle": "Hierarchy labels",
+    "hierarchyStyleOptions": {
+      "labelPrimary": "Primary",
+      "labelSecondary": "Secondary",
+      "labelItalic": "Italic"
+    },
+    "bandwidth": "Bandwidth",
+    "showBandLabels": "Show band labels",
+    "labelThresholds": "Labels threshold steps",
+    "groupStrokeWidth": "Groups stroke width",
+    "groupOpacity": "Fill opacity",
+    "sortGroupsByOptions": {
+      "": "Original",
+      "ascending": "Start date (ascending)",
+      "descending": "Start date (descending)",
+      "group": "Name",
+      "valueDescending": "Total value (descending)",
+      "valueAscending": "Total value (ascending)",
+      "name": "Name",
+      "none": "Original"
+    },
+    "barPadding": "Padding (%)",
+    "alignLabels": "Labels position",
+    "diameter": "Bin diameter",
+    "weightSize": "Scale hexagons area",
+    "showCountLabels": "Show count labels",
+    "bands": "Number of bands",
+    "curveType": "Curve type",
+    "negativeStyle": "Show negative values as",
+    "negativeStyleOptions": {
+      "mirrored": "Mirrored",
+      "top": "Offset"
+    },
+    "xTicksAuto": "Auto-place ticks on x axis",
+    "xTicksAmount": "Max. ticks on x axis",
+    "xTicksOuter": "Show min/max on x axis",
+    "showLabels": "Show labels",
+    "labelsPosition": "Labels position",
+    "rounding": "Round Corners",
+    "sortXAxisBy": "Sort X axis by",
+    "sortYAxisBy": "Sort Y axis by",
+    "showGrid": "Show grid",
+    "orientation": "Orientation",
+    "orientationOptions": {
+      "vertical": "Vertical",
+      "horizontal": "Horizontal"
+    },
+    "strokeWidth": "Stroke width",
+    "strokeOpacity": "Lines opacity (0-1)",
+    "drawDonut": "Draw as donuts",
+    "arcTichkness": "Donut thickness",
+    "sortArcsBy": "Sort arcs by",
+    "sortArcsByOptions": {
+      "totalDescending": "Size (descending)",
+      "totalAscending": "Size (ascending)",
+      "name": "Name",
+      "original": "Original"
+    },
+    "showPiesTitles": "Show pies titles",
+    "showArcValues": "Show values on arcs",
+    "sortPiesBy": "Sort pies by",
+    "sortPiesByOptions": {
+      "totalDescending": "Size (descending)",
+      "totalAscending": "Size (ascending)",
+      "name": "Name",
+      "original": "Original"
+    },
+    "gridColumns": "Grid columns",
+    "innerDiameter": "Inner diameter",
+    "fillOpacity": "Fill opacity",
+    "labelsPadding": "Axis labels padding",
+    "alignment": "Nodes alignment",
+    "iterations": "Iterations (attempts to solve overlaps)",
+    "nonOverlap": "Label repelling force",
+    "showDots": "Show dots",
+    "streamsOrder": "Sort streams by",
+    "streamsOrderOptions": {
+      "stackOrderAppearance": "Earliest",
+      "stackOrderAscending": "Ascending",
+      "stackOrderDescending": "Descending",
+      "stackOrderInsideOut": "Inside out",
+      "stackOrderNone": "None",
+      "stackOrderReverse": "Reverse"
+    },
+    "labelHierarchyStyle": "Hierarchy labels",
+    "labelHierarchyStyleOptions": {
+      "labelPrimary": "Primary",
+      "labelSecondary": "Secondary",
+      "labelItalic": "Italic"
+    },
+    "tiling": "Tiling method",
+    "tilingOptions": {
+      "treemapBinary": "Binary",
+      "treemapDice": "Dice",
+      "treemapSlice": "Slice",
+      "treemapSliceDice": "Slice and dice",
+      "treemapSquarify": "Squarify"
+    },
+    "binsNumber": "Number of bins",
+    "sortViolinsBy": "Sort violins by"
+  },
+  "dimensions": {
+    "steps": "Steps",
+    "size": "Size",
+    "sourceNode": "Source node",
+    "targetNode": "Target node",
+    "bars": "Bars",
+    "color": "Color",
+    "series": "Series",
+    "sets": "Sets",
+    "stacks": "x axis",
+    "xValue": "x axis",
+    "label": "Label",
+    "group": "Groups",
+    "value": "y axis",
+    "x": "x axis",
+    "y": "y axis",
+    "connectedBy": "Connection by",
+    "rank": "Ranking",
+    "streams": "Streams",
+    "hierarchy": "Hierarchy",
+    "startDate": "Start date",
+    "endDate": "End Date",
+    "lines": "Lines",
+    "dimensions": "Dimensions",
+    "arcs": "Arcs",
+    "axes": "Spokes",
+    "source": "Source",
+    "target": "Target",
+    "name": "Label",
+    "leafLabel": "Leaf label"
+  },
+  "categories": {
+    "correlations": "correlations",
+    "proportions": "proportions",
+    "networks": "networks",
+    "distributions": "distributions",
+    "time series": "time series",
+    "hierarchies": "hierarchies"
+  },
+  "charts": {
+    "alluvialdiagram": {
+      "description": "It shows correlations between categorical dimensions representing them as flows, visually linking categories with shared items. Each rectangle represents a unique value in the selected dimension, its height is proportional to its value. Correlations are represented with curved lines whose width is proportional to their value."
+    },
+    "arcdiagram": {
+      "description": "A particular kind of network graph, allows seeing relationships among nodes. Nodes are displayed on the horizontal axis, and links as clockwise arcs. An arc above the nodes means a connection from the left to the right, while below means a connection from the right node to the left one."
+    },
+    "barchart": {
+      "description": "It displays a categorical dimension and related amounts. Each bar represents a category, width is proportional to the quantitative dimension."
+    },
+    "barchartmultiset": {
+      "description": "It displays multiple quantitative dimensions related to categories. bars are visually grouped in sets according to the categorical dimension, each bar represents a quantitative dimension, mapped on its height."
+    },
+    "barchartstacked": {
+      "description": "It displays multiple quantitative dimensions related to categories. bars are visually stacked according to the categorical dimension, each bar represents a quantitative dimension, mapped on its height."
+    },
+    "beeswarm": {
+      "description": "It displays the distribution of items over a continuous dimensions. Each (line) is represented with a dot placed on the horizontal axis. The vertical dimension is used to avoid overlaps among circles, showing their distribution. The area of dots can be used to encode a further quantitative dimension and a quantitative or categorical dimension with color."
+    },
+    "boxplot": {
+      "description": "It summarize a quantitative distribution with five standard statistics: the smallest value, lower quartile, median, upper quartile, and largest value."
+    },
+    "bubblechart": {
+      "description": "The basic layout is a scatter plot, which allows to see correlations among two continuous dimensions. A further quantitative dimension with size and a quantitative or categorical dimension with color."
+    },
+    "bumpchart": {
+      "description": "It allows the comparison of multiple categories over a continuous dimension and the evolution of its sorting. By default, sorting is based on the stream size."
+    },
+    "circlepacking": {
+      "description": "It displays values of leaf nodes of a hierarchical structure by using circles areas. The hierarchical structure is depicted using nested circles. A further quantitative dimension with size and a quantitative or categorical dimension with color."
+    },
+    "circularDendrogram": {
+      "description": "It displays hierarchically structured data with a radial tree structure, where the root node is in the center with the hierarchies moving outward. The area of nodes can be used to encode a further quantitative dimension and a quantitative or categorical dimension with color."
+    },
+    "contourPlot": {
+      "description": "It shows the estimated density of point clouds, which is especially useful to avoid overplotting in large datasets."
+    },
+    "convexHull": {
+      "description": "In mathematics, the convex hull is the smallest convex shape containing a set of points. Applied to a scatterplot, it is useful to identify points belonging to the same category."
+    },
+    "dendrogram": {
+      "description": "It displays hierarchically structured data with a tree structure, where the root node is on the left and leaves are on the right. The size of nodes can be used to encode a further quantitative dimension with size and a quantitative or categorical dimension with color."
+    },
+    "ganttChart": {
+      "description": "A Gantt chart is a type of bar chart, developed by Henry Gantt in the 1910s, that illustrates a project schedule. Gantt charts illustrate the start and finish dates of the terminal elements and summary elements of a project."
+    },
+    "hexagonalBinning": {
+      "description": "Hexagonal Binning is a way to manage the problem of having too many points that start to overlap. Hexagonal binning plots density, rather than points. Points are binned into gridded hexagons and distribution (the number of points per hexagon) is displayed using either the color or the area of the hexagons."
+    },
+    "horizongraph": {
+      "description": "It displays a quantitative dimension over a continuous interval or time period. Horizon graphs combine position and color to reduce vertical space."
+    },
+    "linechart": {
+      "description": "It displays a quantitative dimension over a continuous interval or time period. Colour can be optionally used to encode an additional quantitative or categorical dimension."
+    },
+    "matrixplot": {
+      "description": "It allows comparison of two categorical dimensions, disposing them on the horizontal and vertical axes. Each glyph (square or circle) represents a possible correlation among the two dimensions. Associated quantitative variables can be represented with size and/or color."
+    },
+    "parallelcoordinates": {
+      "description": "It displays multiple continuous dimensions as axes, and each row in the dataset produces a line connecting its values across the axes."
+    },
+    "piechart": {
+      "description": "It allows you to see the proportions between values that make up a whole, by using arcs composing a circle."
+    },
+    "radarchart": {
+      "description": "It displays multiple continuous dimensions as axes starting from the same point and by disposing them radially. Each dimension is represented as an axis starting from the center of the cart. The same scale is applied to all the axes."
+    },
+    "sankeydiagram": {
+      "description": "It represents flows among nodes of a network. Nodes are represented as rectangles, the height represents their value. Flows are represented with curved lines whose width is proportional to their value."
+    },
+    "slopechart": {
+      "description": "It allows the comparison of two continuous dimensions showing them as axes, and using a line to show the relationship."
+    },
+    "streamgraph": {
+      "description": "It allows the comparison of multiple categories over a continuous dimension."
+    },
+    "sunburst": {
+      "description": "It displays hierarchically structured data and a related quantitative dimension using concentric circles. The circle in the center represents the root node, with the hierarchies moving outward from the center. The angle of each arc corresponds to the qualitative dimension."
+    },
+    "treemap": {
+      "description": "It displays hierarchically structured data and a related quantitative dimension. It is composed of an area divided into small rectangles, representing the last level of the tree structure. The rectangles’ size depends on the quantitative dimension."
+    },
+    "violinplot": {
+      "description": "It is useful to show the distribution of a numeric dimension. The shape width represents the amount of items with the same value in the dataset."
+    },
+    "voronoidiagram": {
+      "description": "It creates the minimum area around each point defined by two variables. When applied to a scatterplot, it is useful to show the distance between points."
+    }
+  }
+}

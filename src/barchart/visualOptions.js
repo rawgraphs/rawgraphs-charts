@@ -1,42 +1,39 @@
+import { t } from '@rawgraphs/rawgraphs-core'
+
 export const visualOptions = {
   marginTop: {
     type: 'number',
-    label: 'Margin (top)',
+    label: t('visualOptions.marginTop'),
     default: 20,
     group: 'artboard',
   },
-
   marginRight: {
     type: 'number',
-    label: 'Margin (right)',
+    label: t('visualOptions.marginRight'),
     default: 10,
     group: 'artboard',
   },
-
   marginBottom: {
     type: 'number',
-    label: 'Margin (bottom)',
+    label: t('visualOptions.marginBottom'),
     default: 20,
     group: 'artboard',
   },
-
   marginLeft: {
     type: 'number',
-    label: 'Margin (left)',
+    label: t('visualOptions.marginLeft'),
     default: 50,
     group: 'artboard',
   },
-
   showLegend: {
     type: 'boolean',
-    label: 'Show legend',
+    label: t('visualOptions.showLegend'),
     default: false,
     group: 'artboard',
   },
-
   legendWidth: {
     type: 'number',
-    label: 'Legend width',
+    label: t('visualOptions.legendWidth'),
     default: 200,
     group: 'artboard',
     disabled: {
@@ -47,55 +44,67 @@ export const visualOptions = {
       showLegend: true,
     },
   },
-
   padding: {
     type: 'number',
-    label: 'Padding',
+    label: t('visualOptions.padding'),
     default: 1,
     group: 'chart',
   },
-
   barsOrientation: {
     type: 'text',
-    label: 'Bars orientation',
+    label: t('visualOptions.barsOrientation'),
     group: 'chart',
     options: [
-      { label: 'Vertically', value: 'vertical' },
-      { label: 'Horizontally', value: 'horizontal' },
+      {
+        label: t('visualOptions.barsOrientationOptions.vertical'),
+        value: 'vertical',
+      },
+      {
+        label: t('visualOptions.barsOrientationOptions.horizontal'),
+        value: 'horizontal',
+      },
     ],
     default: 'vertical',
   },
-
   sortBarsBy: {
     type: 'text',
-    label: 'Sort bars by',
+    label: t('visualOptions.sortBarsBy'),
     group: 'chart',
     options: [
-      { label: 'Size (descending)', value: 'totalDescending' },
-      { label: 'Size (ascending)', value: 'totalAscending' },
-      { label: 'Name', value: 'name' },
-      { label: 'Original', value: 'original' },
+      {
+        label: t('visualOptions.sortBarsByOptions.totalDescending'),
+        value: 'totalDescending',
+      },
+      {
+        label: t('visualOptions.sortBarsByOptions.totalAscending'),
+        value: 'totalAscending',
+      },
+      {
+        label: t('visualOptions.sortBarsByOptions.name'),
+        value: 'name',
+      },
+      {
+        label: t('visualOptions.sortBarsByOptions.original'),
+        value: 'original',
+      },
     ],
     default: 'name',
   },
-
   useSameScale: {
     type: 'boolean',
-    label: 'Use same scale',
+    label: t('visualOptions.useSameScale'),
     default: true,
     group: 'series',
   },
-
   columnsNumber: {
     type: 'number',
-    label: 'Number of columns',
+    label: t('visualOptions.columnsNumber'),
     default: 0,
     group: 'series',
   },
-
   sortSeriesBy: {
     type: 'text',
-    label: 'Sort series by',
+    label: t('visualOptions.sortSeriesBy'),
     group: 'series',
     options: [
       'Total value (descending)',
@@ -105,31 +114,27 @@ export const visualOptions = {
     ],
     default: 'Total value (descending)',
   },
-
   showSeriesLabels: {
     type: 'boolean',
-    label: 'Show series titles',
+    label: t('visualOptions.showSeriesLabels'),
     default: true,
     group: 'series',
   },
-
   repeatAxesLabels: {
     type: 'boolean',
-    label: 'Repeat axis labels for each series',
+    label: t('visualOptions.repeatAxesLabels'),
     default: false,
     group: 'series',
   },
-
   showGrid: {
     type: 'boolean',
-    label: 'Show series grid',
+    label: t('visualOptions.showSeriesGrid'),
     default: false,
     group: 'series',
   },
-
   colorScale: {
     type: 'colorScale',
-    label: 'Color scale',
+    label: t('visualOptions.colorScale'),
     dimension: 'color',
     default: {
       scaleType: 'ordinal',

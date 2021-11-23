@@ -1,88 +1,92 @@
+import { t } from '@rawgraphs/rawgraphs-core'
+
 export const visualOptions = {
   marginTop: {
     type: 'number',
-    label: 'Margin (top)',
+    label: t('visualOptions.marginTop'),
     default: 10,
     group: 'artboard',
   },
-
   marginRight: {
     type: 'number',
-    label: 'Margin (right)',
+    label: t('visualOptions.marginRight'),
     default: 10,
     group: 'artboard',
   },
-
   marginBottom: {
     type: 'number',
-    label: 'Margin (bottom)',
+    label: t('visualOptions.marginBottom'),
     default: 10,
     group: 'artboard',
   },
-
   marginLeft: {
     type: 'number',
-    label: 'Margin (left)',
+    label: t('visualOptions.marginLeft'),
     default: 10,
     group: 'artboard',
   },
-
   nodesWidth: {
     type: 'number',
-    label: 'Nodes width',
+    label: t('visualOptions.nodesWidth'),
     default: 5,
     group: 'chart',
   },
-
   nodesPadding: {
     type: 'number',
-    label: 'Padding',
+    label: t('visualOptions.nodesPadding'),
     default: 5,
     group: 'chart',
   },
-
   linksOpacity: {
     type: 'number',
-    label: 'Links opacity (0-1)',
+    label: t('visualOptions.linksOpacity'),
     default: 1,
     step: 0.1,
     min: 0,
     max: 1,
     group: 'chart',
   },
-
   linksBlendMode: {
     type: 'text',
-    label: 'Links blend mode',
+    label: t('visualOptions.linksBlendMode'),
     group: 'chart',
     options: ['normal', 'multiply'],
     default: 'multiply',
   },
-
   sortNodesBy: {
     type: 'text',
-    label: 'Sort nodes by',
+    label: t('visualOptions.sortNodesBy'),
     group: 'chart',
     options: [
-      { label: 'Size (descending)', value: 'sizeDescending' },
-      { label: 'Size (ascending)', value: 'sizeAscending' },
-      { label: 'Name', value: 'name' },
-      { label: 'Minimize Overlaps', value: 'auto' },
+      {
+        label: t('visualOptions.sortNodesByOptions.sizeDescending'),
+        value: 'sizeDescending',
+      },
+      {
+        label: t('visualOptions.sortNodesByOptions.sizeAscending'),
+        value: 'sizeAscending',
+      },
+      {
+        label: t('visualOptions.sortNodesByOptions.name'),
+        value: 'name',
+      },
+      {
+        label: t('visualOptions.sortNodesByOptions.auto'),
+        value: 'auto',
+      },
     ],
     default: 'sizeAscending',
   },
-
   verticalAlignment: {
     type: 'text',
-    label: 'Flows alignment',
+    label: t('visualOptions.verticalAlignment'),
     group: 'chart',
     options: ['Top', 'Center', 'Bottom'],
     default: 'Center',
   },
-
   colorScale: {
     type: 'colorScale',
-    label: 'Color scale',
+    label: t('visualOptions.colorScale'),
     dimension: 'source',
     default: {
       scaleType: 'ordinal',
@@ -90,10 +94,9 @@ export const visualOptions = {
     },
     group: 'colors',
   },
-
   showValues: {
     type: 'boolean',
-    label: 'Show nodes values',
+    label: t('visualOptions.showValues'),
     default: false,
     group: 'Labels',
   },

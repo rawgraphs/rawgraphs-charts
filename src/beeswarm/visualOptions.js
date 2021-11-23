@@ -1,42 +1,39 @@
+import { t } from '@rawgraphs/rawgraphs-core'
+
 export const visualOptions = {
   marginTop: {
     type: 'number',
-    label: 'Margin (top)',
+    label: t('visualOptions.marginTop'),
     default: 10,
     group: 'artboard',
   },
-
   marginRight: {
     type: 'number',
-    label: 'Margin (right)',
+    label: t('visualOptions.marginRight'),
     default: 50,
     group: 'artboard',
   },
-
   marginBottom: {
     type: 'number',
-    label: 'Margin (bottom)',
+    label: t('visualOptions.marginBottom'),
     default: 50,
     group: 'artboard',
   },
-
   marginLeft: {
     type: 'number',
-    label: 'Margin (left)',
+    label: t('visualOptions.marginLeft'),
     default: 50,
     group: 'artboard',
   },
-
   showLegend: {
     type: 'boolean',
-    label: 'Show legend',
+    label: t('visualOptions.showLegend'),
     default: false,
     group: 'artboard',
   },
-
   legendWidth: {
     type: 'number',
-    label: 'Legend width',
+    label: t('visualOptions.legendWidth'),
     default: 200,
     group: 'artboard',
     disabled: {
@@ -47,31 +44,27 @@ export const visualOptions = {
       showLegend: true,
     },
   },
-
   minDiameter: {
     type: 'number',
-    label: 'Min diameter',
+    label: t('visualOptions.minDiameter'),
     default: 1,
     group: 'chart',
   },
-
   maxDiameter: {
     type: 'number',
-    label: 'Max diameter',
+    label: t('visualOptions.maxDiameter'),
     default: 20,
     group: 'chart',
   },
-
   nodePadding: {
     type: 'number',
-    label: 'Padding',
+    label: t('visualOptions.nodePadding'),
     default: 1,
     group: 'chart',
   },
-
   sortSeriesBy: {
     type: 'text',
-    label: 'Sort groups by',
+    label: t('visualOptions.sortGroupsBy'),
     group: 'series',
     options: [
       'Total value (descending)',
@@ -81,10 +74,9 @@ export const visualOptions = {
     ],
     default: 'Original',
   },
-
   colorScale: {
     type: 'colorScale',
-    label: 'Color scale',
+    label: t('visualOptions.colorScale'),
     dimension: 'color',
     default: {
       scaleType: 'ordinal',
@@ -92,35 +84,39 @@ export const visualOptions = {
     },
     group: 'colors',
   },
-
   labelStyles: {
     type: 'text',
-    label: 'Label',
+    label: t('visualOptions.labelStyles'),
     group: 'labels',
     options: [
-      { label: 'Primary', value: 'labelPrimary' },
-      { label: 'Secondary', value: 'labelSecondary' },
-      { label: 'Italic', value: 'labelItalic' },
+      {
+        label: t('visualOptions.labelStylesOptions.labelPrimary'),
+        value: 'labelPrimary',
+      },
+      {
+        label: t('visualOptions.labelStylesOptions.labelSecondary'),
+        value: 'labelSecondary',
+      },
+      {
+        label: t('visualOptions.labelStylesOptions.labelItalic'),
+        value: 'labelItalic',
+      },
     ],
     default: 'labelPrimary',
     repeatFor: 'label',
     repeatDefault: ['labelPrimary', 'labelSecondary', 'labelItalic'],
   },
-
   showLabelsOutline: {
     type: 'boolean',
-    label: 'Show outline',
+    label: t('visualOptions.showLabelsOutline'),
     default: false,
     group: 'labels',
   },
-
   autoHideLabels: {
     type: 'boolean',
-    label: 'Auto hide labels',
+    label: t('visualOptions.autoHideLabels'),
     default: false,
     group: 'labels',
   },
-}
-
-// showLegend,
+} // showLegend,
 // legendWidth,

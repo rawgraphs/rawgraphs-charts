@@ -1,87 +1,90 @@
+import { t } from '@rawgraphs/rawgraphs-core'
+
 export const visualOptions = {
   // Artboard
   marginTop: {
     type: 'number',
-    label: 'Margin (top)',
+    label: t('visualOptions.marginTop'),
     default: 10,
     group: 'artboard',
   },
-
   marginRight: {
     type: 'number',
-    label: 'Margin (right)',
+    label: t('visualOptions.marginRight'),
     default: 2,
     group: 'artboard',
   },
-
   marginBottom: {
     type: 'number',
-    label: 'Margin (bottom)',
+    label: t('visualOptions.marginBottom'),
     default: 2,
     group: 'artboard',
   },
-
   marginLeft: {
     type: 'number',
-    label: 'Margin (left)',
+    label: t('visualOptions.marginLeft'),
     default: 2,
     group: 'artboard',
   },
-
   showLegend: {
     type: 'boolean',
-    label: 'Show legend',
+    label: t('visualOptions.showLegend'),
     default: false,
     group: 'artboard',
   },
-
   legendWidth: {
     type: 'number',
-    label: 'Legend width',
+    label: t('visualOptions.legendWidth'),
     default: 200,
     group: 'artboard',
     disabled: {
       showLegend: false,
     },
   },
-
   // chart
-
   drawDonut: {
     type: 'boolean',
-    label: 'Draw as donuts',
+    label: t('visualOptions.drawDonut'),
     default: false,
     group: 'chart',
   },
-
   arcTichkness: {
     type: 'number',
-    label: 'Donut thickness',
+    label: t('visualOptions.arcTichkness'),
     default: 10,
     group: 'chart',
     disabled: {
       drawDonut: false,
     },
   },
-
   sortArcsBy: {
     type: 'text',
-    label: 'Sort arcs by',
+    label: t('visualOptions.sortArcsBy'),
     group: 'series',
     options: [
-      { label: 'Size (descending)', value: 'totalDescending' },
-      { label: 'Size (ascending)', value: 'totalAscending' },
-      { label: 'Name', value: 'name' },
-      { label: 'Original', value: 'original' },
+      {
+        label: t('visualOptions.sortArcsByOptions.totalDescending'),
+        value: 'totalDescending',
+      },
+      {
+        label: t('visualOptions.sortArcsByOptions.totalAscending'),
+        value: 'totalAscending',
+      },
+      {
+        label: t('visualOptions.sortArcsByOptions.name'),
+        value: 'name',
+      },
+      {
+        label: t('visualOptions.sortArcsByOptions.original'),
+        value: 'original',
+      },
     ],
     default: 'name',
   },
-
   // colors
-
   colorScale: {
     type: 'colorScale',
-    label: 'Color scale',
+    label: t('visualOptions.colorScale'),
     domain: 'colorDomain',
     default: {
       scaleType: 'ordinal',
@@ -89,48 +92,53 @@ export const visualOptions = {
     },
     group: 'colors',
   },
-
   // labels
-
   showSeriesLabels: {
     type: 'boolean',
-    label: 'Show pies titles',
+    label: t('visualOptions.showPiesTitles'),
     default: true,
     group: 'labels',
   },
-
   showArcValues: {
     type: 'boolean',
-    label: 'Show values on arcs',
+    label: t('visualOptions.showArcValues'),
     default: false,
     group: 'labels',
   },
-
   // series
-
   sortPiesBy: {
     type: 'text',
-    label: 'Sort pies by',
+    label: t('visualOptions.sortPiesBy'),
     group: 'series',
     options: [
-      { label: 'Size (descending)', value: 'totalDescending' },
-      { label: 'Size (ascending)', value: 'totalAscending' },
-      { label: 'Name', value: 'name' },
-      { label: 'Original', value: 'original' },
+      {
+        label: t('visualOptions.sortPiesByOptions.totalDescending'),
+        value: 'totalDescending',
+      },
+      {
+        label: t('visualOptions.sortPiesByOptions.totalAscending'),
+        value: 'totalAscending',
+      },
+      {
+        label: t('visualOptions.sortPiesByOptions.name'),
+        value: 'name',
+      },
+      {
+        label: t('visualOptions.sortPiesByOptions.original'),
+        value: 'original',
+      },
     ],
     default: 'name',
   },
-
   columnsNumber: {
     type: 'number',
-    label: 'Grid columns',
+    label: t('visualOptions.gridColumns'),
     default: 0,
     group: 'series',
   },
-
   showGrid: {
     type: 'boolean',
-    label: 'Show grid',
+    label: t('visualOptions.showGrid'),
     default: false,
     group: 'series',
   },

@@ -1,3 +1,4 @@
+import { t } from '@rawgraphs/rawgraphs-core'
 import icon from './barchartstacked.svg'
 import thumbnail from './barchartstacked_thumb.svg'
 
@@ -6,9 +7,8 @@ export const metadata = {
   id: 'rawgraphs.barchartstacked',
   thumbnail,
   icon,
-  categories: ['correlations', 'proportions'],
-  description:
-    'It displays multiple quantitative dimensions related to categories. bars are visually stacked according to the categorical dimension, each bar represents a quantitative dimension, mapped on its height.',
+  categories: [t('categories.correlations'), t('categories.proportions')],
+  description: t('charts.barchartstacked.description'),
   code:
     'https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/barchartstacked',
   tutorial: 'https://rawgraphs.io/learning/how-to-make-a-stacked-barchart/',

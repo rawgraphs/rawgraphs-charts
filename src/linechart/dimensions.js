@@ -1,33 +1,32 @@
+import { t } from '@rawgraphs/rawgraphs-core'
+
 export const dimensions = [
   {
     id: 'x',
-    name: 'X Axis',
+    name: t('dimensions.x'),
     operation: 'get',
     validTypes: ['number', 'date'],
     required: true,
   },
-
   {
     id: 'y',
-    name: 'Y Axis',
+    name: t('dimensions.y'),
     operation: 'get',
     validTypes: ['number', 'date'],
     required: true,
     aggregation: true,
     aggregationDefault: 'sum',
   },
-
   {
     id: 'lines',
-    name: 'Lines',
+    name: t('dimensions.lines'),
     validTypes: ['number', 'string', 'date'],
     required: false,
     operation: 'get',
   },
-
   {
     id: 'color',
-    name: 'Color',
+    name: t('dimensions.color'),
     operation: 'get',
     validTypes: ['number', 'string', 'date'],
     required: false,
@@ -38,10 +37,9 @@ export const dimensions = [
       date: 'csvDistinct',
     },
   },
-
   {
     id: 'series',
-    name: 'Series',
+    name: t('dimensions.series'),
     validTypes: ['number', 'string', 'date'],
     required: false,
     operation: 'get',

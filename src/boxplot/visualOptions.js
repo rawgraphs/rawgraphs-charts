@@ -1,70 +1,63 @@
+import { t } from '@rawgraphs/rawgraphs-core'
+
 export const visualOptions = {
   marginTop: {
     type: 'number',
-    label: 'Margin (top)',
+    label: t('visualOptions.marginTop'),
     default: 10,
     group: 'artboard',
   },
-
   marginRight: {
     type: 'number',
-    label: 'Margin (right)',
+    label: t('visualOptions.marginRight'),
     default: 10,
     group: 'artboard',
   },
-
   marginBottom: {
     type: 'number',
-    label: 'Margin (bottom)',
+    label: t('visualOptions.marginBottom'),
     default: 30,
     group: 'artboard',
   },
-
   marginLeft: {
     type: 'number',
-    label: 'Margin (left)',
+    label: t('visualOptions.marginLeft'),
     default: 50,
     group: 'artboard',
   },
-
   barsWidth: {
     type: 'number',
-    label: 'Bars width',
+    label: t('visualOptions.barsWidth'),
     default: 20,
     group: 'chart',
   },
-
   iqrMultiplier: {
     type: 'number',
-    label: 'Interquartile range multiplier',
+    label: t('visualOptions.iqrMultiplier'),
     default: 1.5,
     group: 'chart',
   },
-
   dotsDiameter: {
     type: 'number',
-    label: 'Dots diameter',
+    label: t('visualOptions.dotsDiameter'),
     default: 2,
     group: 'chart',
   },
-
   yOrigin: {
     type: 'boolean',
-    label: 'Set Y origin to 0',
+    label: t('visualOptions.yOrigin'),
     default: false,
     group: 'chart',
   },
-
   showLegend: {
     type: 'boolean',
-    label: 'Show legend',
+    label: t('visualOptions.showLegend'),
     default: false,
     group: 'artboard',
   },
-
   legendWidth: {
     type: 'number',
-    label: 'Legend width',
+    label: t('visualOptions.legendWidth'),
     default: 200,
     group: 'artboard',
     disabled: {
@@ -75,10 +68,9 @@ export const visualOptions = {
       showLegend: true,
     },
   },
-
   colorScale: {
     type: 'colorScale',
-    label: 'Color scale',
+    label: t('visualOptions.colorScale'),
     dimension: 'color',
     default: {
       scaleType: 'ordinal',
@@ -86,10 +78,9 @@ export const visualOptions = {
     },
     group: 'colors',
   },
-
   showValues: {
     type: 'boolean',
-    label: 'Show boxpot values',
+    label: t('visualOptions.showBoxPlots'),
     default: true,
     group: 'labels',
   },

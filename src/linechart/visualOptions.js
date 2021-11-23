@@ -1,42 +1,39 @@
+import { t } from '@rawgraphs/rawgraphs-core'
+
 export const visualOptions = {
   marginTop: {
     type: 'number',
-    label: 'Margin (top)',
+    label: t('visualOptions.marginTop'),
     default: 10,
     group: 'artboard',
   },
-
   marginRight: {
     type: 'number',
-    label: 'Margin (right)',
+    label: t('visualOptions.marginRight'),
     default: 15,
     group: 'artboard',
   },
-
   marginBottom: {
     type: 'number',
-    label: 'Margin (bottom)',
+    label: t('visualOptions.marginBottom'),
     default: 20,
     group: 'artboard',
   },
-
   marginLeft: {
     type: 'number',
-    label: 'Margin (left)',
+    label: t('visualOptions.marginLeft'),
     default: 50,
     group: 'artboard',
   },
-
   showLegend: {
     type: 'boolean',
-    label: 'Show legend',
+    label: t('visualOptions.showLegend'),
     default: false,
     group: 'artboard',
   },
-
   legendWidth: {
     type: 'number',
-    label: 'Legend width',
+    label: t('visualOptions.legendWidth'),
     default: 200,
     group: 'artboard',
     disabled: {
@@ -47,88 +44,109 @@ export const visualOptions = {
       showLegend: true,
     },
   },
-
   showPoints: {
     type: 'boolean',
-    label: 'Show dots on data values',
+    label: t('visualOptions.showDotsOnData'),
     default: false,
     group: 'chart',
   },
-
   dotsDiameter: {
     type: 'number',
-    label: 'Dots diameter',
+    label: t('visualOptions.dotsDiameter'),
     default: 2,
     group: 'chart',
     disabled: {
       showPoints: false,
     },
   },
-
   interpolation: {
     type: 'text',
-    label: 'Curve type',
+    label: t('visualOptions.curveType'),
     default: 'Linear',
     options: [
-      { label: 'Basis', value: 'Basis' },
-      { label: 'Bundle', value: 'Bundle' },
-      { label: 'Cardinal', value: 'Cardinal' },
-      { label: 'Catmull–Rom', value: 'CatmullRom' },
-      { label: 'Linear', value: 'Linear' },
-      { label: 'Monotone X', value: 'MonotoneX' },
-      { label: 'Natural', value: 'Natural' },
-      { label: 'Step', value: 'Step' },
-      { label: 'Step After', value: 'StepAfter' },
-      { label: 'Step Before', value: 'StepBefore' },
+      {
+        label: t('visualOptions.interpolationOptions.Basis'),
+        value: 'Basis',
+      },
+      {
+        label: t('visualOptions.interpolationOptions.Bundle'),
+        value: 'Bundle',
+      },
+      {
+        label: t('visualOptions.interpolationOptions.Cardinal'),
+        value: 'Cardinal',
+      },
+      {
+        label: t('visualOptions.interpolationOptions.CatmullRom'),
+        value: 'CatmullRom',
+      },
+      {
+        label: t('visualOptions.interpolationOptions.Linear'),
+        value: 'Linear',
+      },
+      {
+        label: t('visualOptions.interpolationOptions.MonotoneX'),
+        value: 'MonotoneX',
+      },
+      {
+        label: t('visualOptions.interpolationOptions.Natural'),
+        value: 'Natural',
+      },
+      {
+        label: t('visualOptions.interpolationOptions.Step'),
+        value: 'Step',
+      },
+      {
+        label: t('visualOptions.interpolationOptions.StepAfter'),
+        value: 'StepAfter',
+      },
+      {
+        label: t('visualOptions.interpolationOptions.StepBefore'),
+        value: 'StepBefore',
+      },
     ],
     group: 'chart',
   },
-
   yOrigin: {
     type: 'boolean',
-    label: 'Set Y origin to 0',
+    label: t('visualOptions.yOrigin'),
     default: false,
     group: 'chart',
     requiredDimensions: ['y'],
   },
-
   columnsNumber: {
     type: 'number',
-    label: 'Number of columns',
+    label: t('visualOptions.columnsNumber'),
     default: 0,
     group: 'series',
   },
-
   xTicksAuto: {
     type: 'boolean',
-    label: 'Auto-place ticks on x axis',
+    label: t('visualOptions.xTicksAuto'),
     default: true,
     group: 'axes',
   },
-
   xTicksAmount: {
     type: 'number',
-    label: 'Max. ticks on x axis',
+    label: t('visualOptions.xTicksAmount'),
     default: 1,
     group: 'axes',
     disabled: {
       xTicksAuto: true,
     },
   },
-
   xTicksOuter: {
     type: 'boolean',
-    label: 'Show min/max on x axis',
+    label: t('visualOptions.xTicksOuter'),
     default: false,
     group: 'axes',
     disabled: {
       xTicksAuto: true,
     },
   },
-
   sortSeriesBy: {
     type: 'text',
-    label: 'Sort series by',
+    label: t('visualOptions.sortSeriesBy'),
     group: 'series',
     options: [
       'Total value (descending)',
@@ -138,38 +156,33 @@ export const visualOptions = {
     ],
     default: 'Total value (descending)',
   },
-
   useSameScale: {
     type: 'boolean',
-    label: 'Use same scale',
+    label: t('visualOptions.useSameScale'),
     default: true,
     group: 'series',
   },
-
   showSeriesLabels: {
     type: 'boolean',
-    label: 'Show series titles',
+    label: t('visualOptions.showSeriesLabels'),
     default: true,
     group: 'series',
   },
-
   repeatAxesLabels: {
     type: 'boolean',
-    label: 'Repeat axis labels for each series',
+    label: t('visualOptions.repeatAxesLabels'),
     default: false,
     group: 'series',
   },
-
   showLabels: {
     type: 'boolean',
-    label: 'Show labels',
+    label: t('visualOptions.showLabels'),
     default: true,
     group: 'labels',
   },
-
   labelsPosition: {
     type: 'text',
-    label: 'Labels position',
+    label: t('visualOptions.labelsPosition'),
     options: ['inline', 'side'],
     default: 'inline',
     group: 'labels',
@@ -177,17 +190,15 @@ export const visualOptions = {
       showLabels: false,
     },
   },
-
   showGrid: {
     type: 'boolean',
-    label: 'Show series grid',
+    label: t('visualOptions.showSeriesGrid'),
     default: true,
     group: 'series',
   },
-
   colorScale: {
     type: 'colorScale',
-    label: 'Color scale',
+    label: t('visualOptions.colorScale'),
     dimension: 'color',
     default: {
       scaleType: 'ordinal',

@@ -1,43 +1,40 @@
+import { t } from '@rawgraphs/rawgraphs-core'
+
 export const visualOptions = {
   // Artboard
   marginTop: {
     type: 'number',
-    label: 'Margin (top)',
+    label: t('visualOptions.marginTop'),
     default: 40,
     group: 'artboard',
   },
-
   marginRight: {
     type: 'number',
-    label: 'Margin (right)',
+    label: t('visualOptions.marginRight'),
     default: 40,
     group: 'artboard',
   },
-
   marginBottom: {
     type: 'number',
-    label: 'Margin (bottom)',
+    label: t('visualOptions.marginBottom'),
     default: 10,
     group: 'artboard',
   },
-
   marginLeft: {
     type: 'number',
-    label: 'Margin (left)',
+    label: t('visualOptions.marginLeft'),
     default: 40,
     group: 'artboard',
   },
-
   showLegend: {
     type: 'boolean',
-    label: 'Show legend',
+    label: t('visualOptions.showLegend'),
     default: false,
     group: 'artboard',
   },
-
   legendWidth: {
     type: 'number',
-    label: 'Legend width',
+    label: t('visualOptions.legendWidth'),
     default: 200,
     group: 'artboard',
     disabled: {
@@ -48,58 +45,50 @@ export const visualOptions = {
       showLegend: true,
     },
   },
-
   // chart
   nonOverlap: {
     type: 'number',
-    label: 'Label repelling force',
+    label: t('visualOptions.nonOverlap'),
     default: 5,
     group: 'chart',
   },
-
   showDots: {
     type: 'boolean',
-    label: 'Show dots',
+    label: t('visualOptions.showDots'),
     default: true,
     group: 'chart',
   },
-
   dotsDiameter: {
     type: 'number',
-    label: 'Dots diameter',
+    label: t('visualOptions.dotsDiameter'),
     default: 5,
     group: 'chart',
     disabled: {
       showDots: false,
     },
   },
-
   // series
-
   columnsNumber: {
     type: 'number',
-    label: 'Grid columns',
+    label: t('visualOptions.gridColumns'),
     default: 0,
     group: 'series',
   },
-
   showSeriesLabels: {
     type: 'boolean',
-    label: 'Show series titles',
+    label: t('visualOptions.showSeriesLabels'),
     default: true,
     group: 'series',
   },
-
   showGrid: {
     type: 'boolean',
-    label: 'Show grid',
+    label: t('visualOptions.showGrid'),
     default: false,
     group: 'series',
   },
-
   colorScale: {
     type: 'colorScale',
-    label: 'Color scale',
+    label: t('visualOptions.colorScale'),
     dimension: 'color',
     default: {
       scaleType: 'ordinal',

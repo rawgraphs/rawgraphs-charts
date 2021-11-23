@@ -1,15 +1,16 @@
+import { t } from '@rawgraphs/rawgraphs-core'
+
 export const dimensions = [
   {
     id: 'groups',
-    name: 'Sets',
+    name: t('dimensions.sets'),
     validTypes: ['number', 'string', 'date'],
     required: true,
     operation: 'get',
   },
-
   {
     id: 'bars',
-    name: 'Size',
+    name: t('dimensions.size'),
     validTypes: ['number'],
     required: true,
     multiple: true,
@@ -19,10 +20,9 @@ export const dimensions = [
       number: 'sum',
     },
   },
-
   {
     id: 'series',
-    name: 'Series',
+    name: t('dimensions.series'),
     validTypes: ['number', 'string', 'date'],
     required: false,
     operation: 'get',

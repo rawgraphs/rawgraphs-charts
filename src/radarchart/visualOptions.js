@@ -1,84 +1,76 @@
+import { t } from '@rawgraphs/rawgraphs-core'
+
 export const visualOptions = {
   marginTop: {
     type: 'number',
-    label: 'Margin (top)',
+    label: t('visualOptions.marginTop'),
     default: 30,
     group: 'artboard',
   },
-
   marginRight: {
     type: 'number',
-    label: 'Margin (right)',
+    label: t('visualOptions.marginRight'),
     default: 20,
     group: 'artboard',
   },
-
   marginBottom: {
     type: 'number',
-    label: 'Margin (bottom)',
+    label: t('visualOptions.marginBottom'),
     default: 0,
     group: 'artboard',
   },
-
   marginLeft: {
     type: 'number',
-    label: 'Margin (left)',
+    label: t('visualOptions.marginLeft'),
     default: 20,
     group: 'artboard',
   },
-
   showDots: {
     type: 'boolean',
-    label: 'Show dots on data values',
+    label: t('visualOptions.showDotsOnData'),
     default: true,
     group: 'chart',
   },
-
   dotsDiameter: {
     type: 'number',
-    label: 'Dots diameter',
+    label: t('visualOptions.dotsDiameter'),
     default: 2,
     group: 'chart',
     disabled: {
       showDots: false,
     },
   },
-
   innerDiameter: {
     type: 'number',
-    label: 'Inner diameter',
+    label: t('visualOptions.innerDiameter'),
     default: 0,
     group: 'chart',
   },
-
   interpolation: {
     type: 'text',
-    label: 'Curve type',
+    label: t('visualOptions.curveType'),
     default: 'Catmull–Rom',
     options: ['Basis', 'Cardinal', 'Catmull–Rom', 'Linear'],
     group: 'chart',
   },
-
   fillOpacity: {
     type: 'number',
-    label: 'Fill opacity',
+    label: t('visualOptions.fillOpacity'),
     default: 0.5,
     step: 0.1,
     min: 0,
     max: 1,
     group: 'chart',
   },
-
   labelsPadding: {
     type: 'number',
-    label: 'Axis labels padding',
+    label: t('visualOptions.labelsPadding'),
     default: 10,
     group: 'labels',
   },
-
   colorScale: {
     type: 'colorScale',
-    label: 'Color scale',
+    label: t('visualOptions.colorScale'),
     dimension: 'color',
     default: {
       scaleType: 'ordinal',
@@ -86,51 +78,57 @@ export const visualOptions = {
     },
     group: 'colors',
   },
-
   columnsNumber: {
     type: 'number',
-    label: 'Number of columns',
+    label: t('visualOptions.columnsNumber'),
     default: 0,
     group: 'series',
   },
-
   sortSeriesBy: {
     type: 'text',
-    label: 'Sort series by',
+    label: t('visualOptions.sortSeriesBy'),
     group: 'series',
     options: [
-      { label: 'Total value (descending)', value: 'valueDescending' },
-      { label: 'Total value (ascending)', value: 'valueAscending' },
-      { label: 'Name', value: 'nameAscending' },
-      { label: 'Original', value: 'none' },
+      {
+        label: t('visualOptions.sortSeriesByOptions.valueDescending'),
+        value: 'valueDescending',
+      },
+      {
+        label: t('visualOptions.sortSeriesByOptions.valueAscending'),
+        value: 'valueAscending',
+      },
+      {
+        label: t('visualOptions.sortSeriesByOptions.nameAscending'),
+        value: 'nameAscending',
+      },
+      {
+        label: t('visualOptions.sortSeriesByOptions.none'),
+        value: 'none',
+      },
     ],
     default: 'valueDescending',
   },
-
   showSeriesLabels: {
     type: 'boolean',
-    label: 'Show series titles',
+    label: t('visualOptions.showSeriesLabels'),
     default: true,
     group: 'series',
   },
-
   showGrid: {
     type: 'boolean',
-    label: 'Show series grid',
+    label: t('visualOptions.showSeriesGrid'),
     default: true,
     group: 'series',
   },
-
   showLegend: {
     type: 'boolean',
-    label: 'Show legend',
+    label: t('visualOptions.showLegend'),
     default: false,
     group: 'artboard',
   },
-
   legendWidth: {
     type: 'number',
-    label: 'Legend width',
+    label: t('visualOptions.legendWidth'),
     default: 200,
     group: 'artboard',
     disabled: {

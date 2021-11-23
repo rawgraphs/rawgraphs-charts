@@ -1,21 +1,21 @@
+import { t } from '@rawgraphs/rawgraphs-core'
+
 export const dimensions = [
   {
     id: 'value',
-    name: 'Y Axis',
+    name: t('dimensions.value'),
     validTypes: ['number'],
     required: true,
   },
-
   {
     id: 'group',
-    name: 'Groups',
+    name: t('dimensions.group'),
     validTypes: ['number', 'date', 'string'],
     required: false,
   },
-
   {
     id: 'color',
-    name: 'Color',
+    name: t('dimensions.color'),
     operation: 'get',
     validTypes: ['number', 'string', 'date'],
     required: false,

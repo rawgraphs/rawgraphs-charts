@@ -1,0 +1,364 @@
+{
+  "visualOptions": {
+    "marginTop": "Marge (haut)",
+    "marginRight": "marge (à droite)",
+    "marginBottom": "marge (en bas)",
+    "marginLeft": "marge (à gauche)",
+    "nodesWidth": "largeur des nœuds",
+    "nodesPadding": "Rembourrage",
+    "linksOpacity": "liens opacité (0-1)",
+    "linksBlendMode": "mode de mélange de liens",
+    "sortNodesBy": "Trier les nœuds par",
+    "sortNodesByOptions": {
+      "sizeDescending": "taille (descendante)",
+      "sizeAscending": "taille (ascendante)",
+      "name": "Nom",
+      "auto": "minimise les chevauchements"
+    },
+    "verticalAlignment": "flux alignement",
+    "colorScale": "échelle de couleur",
+    "showValues": "Afficher les valeurs des nœuds",
+    "minDiameter": "diamètre min",
+    "maxDiameter": "diamètre max",
+    "linkOpacity": "liens opacité (0-1)",
+    "sameSide": "arcs seulement sur le dessus",
+    "nodeSize": "diamètre des nœuds",
+    "nodeSizeOptions": {
+      "default": "Même taille",
+      "totalValue": "degré pondéré",
+      "inValue": "Degre pondéré",
+      "outValue": "Poids pondéré",
+      "degree": "liens comptent",
+      "outDegree": "NOTEGREE",
+      "inDegree": "Degree"
+    },
+    "orderNodesBy": "Trier les nœuds par",
+    "showLegend": "montre légende",
+    "legendWidth": "largeur de légende",
+    "padding": "Rembourrage",
+    "barsOrientation": "orientation des barres",
+    "barsOrientationOptions": {
+      "vertical": "Verticalement",
+      "horizontal": "horizontalement"
+    },
+    "sortBarsBy": "de tri des barres par",
+    "sortBarsByOptions": {
+      "totalDescending": "taille (descendante)",
+      "totalAscending": "taille (ascendante)",
+      "name": "Nom",
+      "original": "Original"
+    },
+    "useSameScale": "utiliser la même échelle",
+    "columnsNumber": "Le nombre de colonnes",
+    "sortSeriesBy": "Série de tri par",
+    "showSeriesLabels": "titres de la série Afficher",
+    "repeatAxesLabels": "Répéter les étiquettes d'axe pour chaque série",
+    "showSeriesGrid": "montre la grille de la série",
+    "setsPadding": "rembourrage entre les ensembles",
+    "barsPadding": "rembourrage entre les barres",
+    "SortXAxisBy": "trier x axe par",
+    "sortSeriesByOptions": {
+      "valueDescending": "valeur totale (descendante)",
+      "valueAscending": "valeur totale (ascendante)",
+      "name": "Nom",
+      "none": "Original",
+      "nameAscending": "Nom"
+    },
+    "stacksPadding": "Rembourrage",
+    "stacksOrder": "Trier les piles par",
+    "nodePadding": "Rembourrage",
+    "sortGroupsBy": "Trier les groupes par",
+    "labelStyles": "Étiqueter",
+    "labelStylesOptions": {
+      "labelPrimary": "Primaire",
+      "labelSecondary": "Secondaire",
+      "labelItalic": "Italique"
+    },
+    "showLabelsOutline": "spectacle contour",
+    "autoHideLabels": "Masquer automatiquement les étiquettes",
+    "barsWidth": "largeur de barres",
+    "iqrMultiplier": "multiplicateur de plage interquartile",
+    "dotsDiameter": "diamètre des points",
+    "yOrigin": "SET Y Origine à 0",
+    "showBoxPlots": "Afficher les valeurs BOXPOT",
+    "xOrigin": "Set X Origine à 0",
+    "showStroke": "montre un coup",
+    "showDotsOnData": "Afficher les points sur les valeurs de données",
+    "interpolation": "type de courbes",
+    "interpolationOptions": {
+      "curveBasis": "Base",
+      "curveCardinal": "Cardinal",
+      "curveCatmullRom": "catmull-rom",
+      "curveLinear": "Linéaire",
+      "curveMonotoneX": "monotone x",
+      "curveNatural": "Naturel",
+      "curveStep": "Étape",
+      "curveStepAfter": "étape après",
+      "curveStepBefore": "étape avant",
+      "Basis": "Base",
+      "Bundle": "Empaqueter",
+      "Cardinal": "Cardinal",
+      "CatmullRom": "catmull-rom",
+      "Linear": "Linéaire",
+      "MonotoneX": "monotone x",
+      "Natural": "Naturel",
+      "Step": "Étape",
+      "StepAfter": "étape après",
+      "StepBefore": "étape avant"
+    },
+    "streamsOffset": "flux alignement vertical",
+    "streamsOffsetOptions": {
+      "stackOffsetExpand": "Développer",
+      "stackOffsetSilhouette": "Silhouette",
+      "stackOffsetNone": "Rien",
+      "stackOffsetWiggle": "Remuer"
+    },
+    "streamsPadding": "Rembourrage",
+    "showYAxis": "montre Y axe",
+    "showStreams": "Afficher les étiquettes de flux",
+    "labelsType": "position d'étiquettes",
+    "sortCirclesBy": "Trier les cercles par",
+    "sortCirclesByOptions": {
+      "descending": "taille (descendante)",
+      "ascending": "taille (ascendante)",
+      "original": "Original"
+    },
+    "showHierarchyLabels": "montre les étiquettes de hiérarchie",
+    "hierarchyLabelsStyle": "Etiquettes de hiérarchie Position",
+    "hierarchyLabelsStyleOptions": {
+      "onPath": "sur le chemin",
+      "onPoint": "Sur le point"
+    },
+    "layout": "algorythm de la mise en page",
+    "sortBy": "Trier les nœuds par",
+    "sizeOnlyLeaves": "Nœuds de feuilles de taille seulement",
+    "hierarchyStyle": "étiquettes de hiérarchie",
+    "hierarchyStyleOptions": {
+      "labelPrimary": "Primaire",
+      "labelSecondary": "Secondaire",
+      "labelItalic": "Italique"
+    },
+    "bandwidth": "bande passante",
+    "showBandLabels": "show band labels",
+    "labelThresholds": "étapes seuils d'étiquettes",
+    "groupStrokeWidth": "largeur de course de groupes",
+    "groupOpacity": "Remplir l'opacité",
+    "sortGroupsByOptions": {
+      "": "Original",
+      "ascending": "Date de début (ascendante)",
+      "descending": "Date de début (décroissant)",
+      "group": "Nom",
+      "valueDescending": "valeur totale (descendante)",
+      "valueAscending": "valeur totale (ascendante)",
+      "name": "Nom",
+      "none": "Original"
+    },
+    "barPadding": "rembourrage (%)",
+    "alignLabels": "position d'étiquettes",
+    "diameter": "diamètre bin",
+    "weightSize": "Scale Hexagons Zone",
+    "showCountLabels": "Afficher les étiquettes de comptage",
+    "bands": "Nombre de bandes",
+    "curveType": "type de courbe",
+    "negativeStyle": "montre des valeurs négatives comme",
+    "negativeStyleOptions": {
+      "mirrored": "miroir",
+      "top": "Décalage"
+    },
+    "xTicksAuto": "ticks à la place automatique sur l'axe x",
+    "xTicksAmount": "max. Ticks sur x axe",
+    "xTicksOuter": "montre min / max sur x axe",
+    "showLabels": "Afficher les étiquettes",
+    "labelsPosition": "position d'étiquettes",
+    "rounding": "coins ronds",
+    "sortXAxisBy": "trier x axe par",
+    "sortYAxisBy": "Trier Y Axe par",
+    "showGrid": "montre la grille",
+    "orientation": "Orientation",
+    "orientationOptions": {
+      "vertical": "Verticale",
+      "horizontal": "Horizontal"
+    },
+    "strokeWidth": "Largeur du trait",
+    "strokeOpacity": "opacité de lignes (0-1)",
+    "drawDonut": "dessine comme beignets",
+    "arcTichkness": "épaisseur de beignet",
+    "sortArcsBy": "Trier les arcs par",
+    "sortArcsByOptions": {
+      "totalDescending": "taille (descendante)",
+      "totalAscending": "taille (ascendante)",
+      "name": "Nom",
+      "original": "Original"
+    },
+    "showPiesTitles": "Afficher les titres de tartes",
+    "showArcValues": "montre les valeurs sur arcs",
+    "sortPiesBy": "Trier les tartes par",
+    "sortPiesByOptions": {
+      "totalDescending": "taille (descendante)",
+      "totalAscending": "taille (ascendante)",
+      "name": "Nom",
+      "original": "Original"
+    },
+    "gridColumns": "colonnes de grille",
+    "innerDiameter": "Diamètre intérieur",
+    "fillOpacity": "Remplir l'opacité",
+    "labelsPadding": "Etiquettes d'axe Rembourrage",
+    "alignment": "alignement des nœuds",
+    "iterations": "itérations (tente de résoudre les chevauchements)",
+    "nonOverlap": "Labraque d'étiquette",
+    "showDots": "montre des points",
+    "streamsOrder": "Trier les flux par",
+    "streamsOrderOptions": {
+      "stackOrderAppearance": "le plus tôt",
+      "stackOrderAscending": "Ascendant",
+      "stackOrderDescending": "Descendant",
+      "stackOrderInsideOut": "À l'envers",
+      "stackOrderNone": "Rien",
+      "stackOrderReverse": "Inverser"
+    },
+    "labelHierarchyStyle": "étiquettes de hiérarchie",
+    "labelHierarchyStyleOptions": {
+      "labelPrimary": "Primaire",
+      "labelSecondary": "Secondaire",
+      "labelItalic": "Italique"
+    },
+    "tiling": "méthode de carrelage",
+    "tilingOptions": {
+      "treemapBinary": "Binaire",
+      "treemapDice": "Dé",
+      "treemapSlice": "Tranche",
+      "treemapSliceDice": "Émincer",
+      "treemapSquarify": "Quarifie"
+    },
+    "binsNumber": "Nombre de bacs",
+    "sortViolinsBy": "trier les violons par"
+  },
+  "dimensions": {
+    "steps": "Pas",
+    "size": "Taille",
+    "sourceNode": "noeud source",
+    "targetNode": "nœud cible",
+    "bars": "bars",
+    "color": "Couleur",
+    "series": "Séries",
+    "sets": "sets",
+    "stacks": "x axe",
+    "xValue": "x axe",
+    "label": "Étiqueter",
+    "group": "Groupes",
+    "value": "axe y",
+    "x": "x axe",
+    "y": "axe y",
+    "connectedBy": "connexion par",
+    "rank": "Classement",
+    "streams": "Ruisseaux",
+    "hierarchy": "Hiérarchie",
+    "startDate": "Date de début",
+    "endDate": "Date de fin",
+    "lines": "Lignes",
+    "dimensions": "Dimensions",
+    "arcs": "arcs",
+    "axes": "rayons",
+    "source": "La source",
+    "target": "Cible",
+    "name": "Étiqueter",
+    "leafLabel": "label feuille"
+  },
+  "categories": {
+    "correlations": "corrélations",
+    "proportions": "proportions",
+    "networks": "réseaux",
+    "distributions": "distributions",
+    "time series": "des séries chronologiques",
+    "hierarchies": "hiérarchies"
+  },
+  "charts": {
+    "alluvialdiagram": {
+      "description": "Il affiche des corrélations entre les dimensions catégoriques les représentant en tant que flux, reliant visuellement les catégories avec des éléments partagés. Chaque rectangle représente une valeur unique dans la dimension sélectionnée, sa hauteur est proportionnelle à sa valeur. Les corrélations sont représentées avec des lignes courbes dont la largeur est proportionnelle à leur valeur."
+    },
+    "arcdiagram": {
+      "description": "Un type particulier de graphique de réseau permet de voir des relations entre les nœuds. Les nœuds sont affichés sur l'axe horizontal et des liens comme des arcs dans le sens des aiguilles d'une montre. Un arc au-dessus des nœuds signifie une connexion de gauche à droite, tandis que ci-dessous signifie une connexion du nœud droit à la gauche."
+    },
+    "barchart": {
+      "description": "Il affiche une dimension catégorique et des quantités connexes. Chaque barre représente une catégorie, la largeur est proportionnelle à la dimension quantitative."
+    },
+    "barchartmultiset": {
+      "description": "Il affiche plusieurs dimensions quantitatives liées aux catégories. Les barres sont regroupées visuellement dans des ensembles selon la dimension catégorique, chaque barre représente une dimension quantitative, mappée sur sa hauteur."
+    },
+    "barchartstacked": {
+      "description": "Il affiche plusieurs dimensions quantitatives liées aux catégories. Les barres sont visuellement empilées selon la dimension catégorique, chaque barre représente une dimension quantitative, mappée sur sa hauteur."
+    },
+    "beeswarm": {
+      "description": "Il affiche la distribution d'éléments sur une dimension continue. Chaque (ligne) est représentée avec un point placé sur l'axe horizontal. La dimension verticale est utilisée pour éviter les chevauchements entre les cercles, montrant leur distribution. La zone de points peut être utilisée pour coder une autre dimension quantitative et une dimension quantitative ou catégorique avec la couleur."
+    },
+    "boxplot": {
+      "description": "Il résume une distribution quantitative avec cinq statistiques standard: la plus petite valeur, le quartile inférieur, la médiane, le quartile supérieur et la plus grande valeur."
+    },
+    "bubblechart": {
+      "description": "La disposition de base est une parcelle de dispersion, ce qui permet de voir des corrélations entre deux dimensions continues. Une autre dimension quantitative avec une taille et une dimension quantitative ou catégorique avec la couleur."
+    },
+    "bumpchart": {
+      "description": "Il permet la comparaison de plusieurs catégories sur une dimension continue et l'évolution de son tri. Par défaut, le tri est basé sur la taille du flux."
+    },
+    "circlepacking": {
+      "description": "Il affiche des valeurs des nœuds de feuilles d'une structure hiérarchique en utilisant des zones de cercles. La structure hiérarchique est décrite avec des cercles imbriqués. Une autre dimension quantitative avec une taille et une dimension quantitative ou catégorique avec la couleur."
+    },
+    "circularDendrogram": {
+      "description": "Il affiche des données structurées hiérarchiquement avec une structure arborescente radiale, où le nœud racine est au centre avec les hiérarchies se déplaçant vers l'extérieur. La zone de nœuds peut être utilisée pour coder une autre dimension quantitative et une dimension quantitative ou catégorique avec la couleur."
+    },
+    "contourPlot": {
+      "description": "Il montre la densité estimée des nuages ​​de points, qui est particulièrement utile pour éviter de surcharger dans de grands ensembles de données."
+    },
+    "convexHull": {
+      "description": "en mathématiques, la coque convexe est la plus petite forme convexe contenant un ensemble de points. Appliqué à une diffamationPLOT, il est utile d'identifier des points appartenant à la même catégorie."
+    },
+    "dendrogram": {
+      "description": "Il affiche des données structurées hiérarchiquement avec une structure d'arborescence, où le nœud racine est à gauche et les feuilles sont à droite. La taille des nœuds peut être utilisée pour coder une autre dimension quantitative avec une taille et une dimension quantitative ou catégorique avec la couleur."
+    },
+    "ganttChart": {
+      "description": "Un diagramme de Gantt est un type de graphique à barres, développé par Henry Gantt dans les années 1910, qui illustre un programme de projet. Les diagrammes de Gantt illustrent les dates de début et de fin des éléments de terminal et des éléments de résumé d'un projet."
+    },
+    "hexagonalBinning": {
+      "description": "Binning hexagonal est un moyen de gérer le problème d'avoir trop de points qui commencent à se chevaucher. Densité des parcelles de binning hexagonales, plutôt que des points. Les points sont enfreignés dans des hexagones et une distribution dilapées (le nombre de points par hexagone) s'affiche à l'aide de la couleur ou de la zone des hexagones."
+    },
+    "horizongraph": {
+      "description": "affiche une dimension quantitative sur un intervalle ou une période continue. Horizon Graphiques Combinez la position et la couleur pour réduire l'espace vertical."
+    },
+    "linechart": {
+      "description": "affiche une dimension quantitative sur un intervalle ou une période continue. La couleur peut être éventuellement utilisée pour coder une dimension quantitative ou catégorique supplémentaire."
+    },
+    "matrixplot": {
+      "description": "Il permet de comparer deux dimensions catégoriques, les disposant sur les axes horizontaux et verticaux. Chaque glyphe (carré ou cercle) représente une éventuelle corrélation entre les deux dimensions. Les variables quantitatives associées peuvent être représentées avec la taille et / ou la couleur."
+    },
+    "parallelcoordinates": {
+      "description": "Il affiche plusieurs dimensions continues sous forme d'axes et chaque ligne de l'ensemble de données produit une ligne connectant ses valeurs sur les axes."
+    },
+    "piechart": {
+      "description": "Il vous permet de voir les proportions entre les valeurs qui composent un ensemble, en utilisant des arcs composant un cercle."
+    },
+    "radarchart": {
+      "description": "Il affiche plusieurs dimensions continues sous forme d'axes à partir du même point et en les disposant radialement. Chaque dimension est représentée comme un axe à partir du centre du chariot. La même échelle est appliquée à tous les axes."
+    },
+    "sankeydiagram": {
+      "description": "Il représente les flux entre les nœuds d'un réseau. Les nœuds sont représentés sous forme de rectangles, la hauteur représente leur valeur. Les flux sont représentés avec des lignes courbes dont la largeur est proportionnelle à leur valeur."
+    },
+    "slopechart": {
+      "description": "Il permet la comparaison de deux dimensions continues montrant comme des axes et en utilisant une ligne pour afficher la relation."
+    },
+    "streamgraph": {
+      "description": "Il permet la comparaison de plusieurs catégories sur une dimension continue."
+    },
+    "sunburst": {
+      "description": "Il affiche des données structurées hiérarchiquement et une dimension quantitative liée à l'aide de cercles concentriques. Le cercle au centre représente le nœud racine, les hiérarchies se déplaçant vers l'extérieur du centre. L'angle de chaque ARC correspond à la dimension qualitative."
+    },
+    "treemap": {
+      "description": "Il affiche des données structurées hiérarchiquement et une dimension quantitative liée. Il est composé d'une zone divisée en petits rectangles, représentant le dernier niveau de la structure des arbres. La taille des rectangles dépend de la dimension quantitative."
+    },
+    "violinplot": {
+      "description": "Il est utile de montrer la distribution d'une dimension numérique. La largeur de forme représente la quantité d'éléments de la même valeur dans l'ensemble de données."
+    },
+    "voronoidiagram": {
+      "description": "Il crée la zone minimale autour de chaque point défini par deux variables. Lorsqu'il est appliqué sur une plante de dispersion, il est utile de montrer la distance entre les points."
+    }
+  }
+}

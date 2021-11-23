@@ -1,42 +1,39 @@
+import { t } from '@rawgraphs/rawgraphs-core'
+
 export const visualOptions = {
   marginTop: {
     type: 'number',
-    label: 'Margin (top)',
+    label: t('visualOptions.marginTop'),
     default: 50,
     group: 'artboard',
   },
-
   marginRight: {
     type: 'number',
-    label: 'Margin (right)',
+    label: t('visualOptions.marginRight'),
     default: 50,
     group: 'artboard',
   },
-
   marginBottom: {
     type: 'number',
-    label: 'Margin (bottom)',
+    label: t('visualOptions.marginBottom'),
     default: 50,
     group: 'artboard',
   },
-
   marginLeft: {
     type: 'number',
-    label: 'Margin (left)',
+    label: t('visualOptions.marginLeft'),
     default: 50,
     group: 'artboard',
   },
-
   showLegend: {
     type: 'boolean',
-    label: 'Show legend',
+    label: t('visualOptions.showLegend'),
     default: false,
     group: 'artboard',
   },
-
   legendWidth: {
     type: 'number',
-    label: 'Legend width',
+    label: t('visualOptions.legendWidth'),
     default: 200,
     group: 'artboard',
     disabled: {
@@ -47,42 +44,37 @@ export const visualOptions = {
       showLegend: true,
     },
   },
-
   xOrigin: {
     type: 'boolean',
-    label: 'Set X origin to 0',
+    label: t('visualOptions.xOrigin'),
     default: false,
     group: 'chart',
     requiredDimensions: ['x', 'y'],
   },
-
   yOrigin: {
     type: 'boolean',
-    label: 'Set Y origin to 0',
+    label: t('visualOptions.yOrigin'),
     default: false,
     group: 'chart',
     requiredDimensions: ['x', 'y'],
   },
-
   showStroke: {
     type: 'boolean',
-    label: 'Show stroke',
+    label: t('visualOptions.showStroke'),
     default: false,
     group: 'chart',
     requiredDimensions: ['x', 'y'],
   },
-
   showPoints: {
     type: 'boolean',
-    label: 'Show dots on data values',
+    label: t('visualOptions.showDotsOnData'),
     default: false,
     group: 'chart',
     requiredDimensions: ['x', 'y'],
   },
-
   dotsDiameter: {
     type: 'number',
-    label: 'Dots diameter',
+    label: t('visualOptions.dotsDiameter'),
     default: 2,
     group: 'chart',
     disabled: {
@@ -90,10 +82,9 @@ export const visualOptions = {
     },
     requiredDimensions: ['x', 'y'],
   },
-
   colorScale: {
     type: 'colorScale',
-    label: 'Color scale',
+    label: t('visualOptions.colorScale'),
     dimension: 'color',
     default: {
       scaleType: 'ordinal',
@@ -101,31 +92,37 @@ export const visualOptions = {
     },
     group: 'colors',
   },
-
   labelStyles: {
     type: 'text',
-    label: 'Label',
+    label: t('visualOptions.labelStyles'),
     group: 'labels',
     options: [
-      { label: 'Primary', value: 'labelPrimary' },
-      { label: 'Secondary', value: 'labelSecondary' },
-      { label: 'Italic', value: 'labelItalic' },
+      {
+        label: t('visualOptions.labelStylesOptions.labelPrimary'),
+        value: 'labelPrimary',
+      },
+      {
+        label: t('visualOptions.labelStylesOptions.labelSecondary'),
+        value: 'labelSecondary',
+      },
+      {
+        label: t('visualOptions.labelStylesOptions.labelItalic'),
+        value: 'labelItalic',
+      },
     ],
     default: 'labelPrimary',
     repeatFor: 'label',
     repeatDefault: ['labelPrimary', 'labelSecondary', 'labelItalic'],
   },
-
   showLabelsOutline: {
     type: 'boolean',
-    label: 'Show outline',
+    label: t('visualOptions.showLabelsOutline'),
     default: false,
     group: 'labels',
   },
-
   autoHideLabels: {
     type: 'boolean',
-    label: 'Auto hide labels',
+    label: t('visualOptions.autoHideLabels'),
     default: false,
     group: 'labels',
   },
