@@ -1,4 +1,4 @@
-## v1.0.0-beta.27 (upcoming)
+## v1.0.0-beta.27
 
 #### New features:
 
