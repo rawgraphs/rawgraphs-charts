@@ -17,7 +17,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "css": "^3.0.0",
-    "d3": "^7.1.1",
+    "d3": "^7.2.0",
     "d3-contour": "^3.0.1",
     "d3-gridding": "^0.2.0",
     "d3-hexbin": "^0.2.2",
