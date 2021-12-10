@@ -1,6 +1,6 @@
 {
   "name": "@rawgraphs/rawgraphs-charts",
-  "version": "v1.0.0-beta.26",
+  "version": "v1.0.0-beta.27",
   "description": "RAWGRAPHS charts",
   "jsdelivr": "lib/index.umd.js",
   "unpkg": "lib/index.umd.js",
@@ -19,11 +19,13 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "d3": "^6.5.0",
-    "d3-contour": "^2.0.0",
+    "d3": "^7.2.0",
+    "d3-contour": "^3.0.1",
     "d3-gridding": "^0.2.0",
     "d3-hexbin": "^0.2.2",
     "d3-sankey": "^0.12.3",
+    "d3-sankey-circular": "^0.34.0",
+    "d3-voronoi-treemap": "^1.1.1",
     "louvain": "^1.2.0"
   },
   "devDependencies": {

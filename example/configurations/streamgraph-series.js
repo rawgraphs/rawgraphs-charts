@@ -17,8 +17,8 @@ export default {
     },
   },
   mapping: {
-    // series: { value: ['Category'] },
-    streams: { value: ['Category'] },
+    series: { value: ['Category'] },
+    streams: { value: ['Format'] },
     x: { value: ['Year_date'] },
     size: { value: ['Revenues-Adjusted'] },
     //color: { value: ['Category'] },
@@ -28,5 +28,6 @@ export default {
     streamsOffset: 'Wiggle',
     streamsPadding: 100,
     streamsOrder: 'stackOrderAppearance',
+    sortSeriesBy: 'name',
   },
 }

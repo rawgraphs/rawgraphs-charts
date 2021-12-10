@@ -59,7 +59,7 @@ export default ['esm', 'cjs', 'umd'].map((format) => ({
     format == 'umd'
       ? [
           resolve(),
-          // terser()
+          terser()
         ]
       : []
   ),

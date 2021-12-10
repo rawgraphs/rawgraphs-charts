@@ -27,7 +27,7 @@ export default {
     width: 1000,
     height: 700,
     showPoints: true,
-    interpolation: 'Natural',
+    interpolation: 'curveBumpX',
     pointsRadius: 2,
     marginLeft: 50,
     marginBottom: 20,

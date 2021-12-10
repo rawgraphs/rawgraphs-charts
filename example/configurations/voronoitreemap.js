@@ -1,4 +1,4 @@
-import treemap from 'rawcharts/treemap'
+import treemap from 'rawcharts/voronoitreemap'
 import data from '../datasets/WineTasting.tsv'
 
 export default {
@@ -27,7 +27,7 @@ export default {
     },
   },
   visualOptions: {
-    width: 1000,
+    width: 300,
     height: 700,
     showHierarchyLabels: true,
     drawHierarchy: false,

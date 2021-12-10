@@ -1,3 +1,19 @@
+## v1.0.0-beta.27 (upcoming)
+
+#### New features:
+
+- _sankey diagram_: circular links are now supported
+- _voronoi treemap_: chart added
+
+#### Changes:
+
+- updated d3 to v7.1.1
+- updated d3-contour to v3.0.1
+- changed Sankey library to enable circular links. New dependency: d3-sankey-circular by @tomshanley
+- _stream graph_: fixed series sorting
+- _bump chart_: fixed series sorting
+
+
 ## v1.0.0-beta.26
 
 #### Changes:
