@@ -126,18 +126,25 @@ export function render(
       },
       (d) => d.series
     )
-    .map((d) => ({ data: d, totalSize: d3.sum(d[1], (d) => d.size) }))
+    .map((d) => ({
+      data: d,
+      totalSize: d3.sum(d[1].flat(), (e) => e[1] - e[0]), // compute the total size (in pixels) for each stream
+      name: d[0],
+    }))
 
   // series sorting functions
   const seriesSortings = {
-    'Total value (descending)': function (a, b) {
-      return d3.descending(a.totalValue, b.totalValue)
+    totalDescending: function (a, b) {
+      return d3.descending(a.totalSize, b.totalSize)
     },
-    'Total value (ascending)': function (a, b) {
-      return d3.ascending(a.totalValue, b.totalValue)
+    totalAscending: function (a, b) {
+      return d3.ascending(a.totalSize, b.totalSize)
     },
-    Name: function (a, b) {
-      return d3.ascending(a[0], b[0])
+    name: function (a, b) {
+      return d3.ascending(a.name, b.name)
+    },
+    original: function (a, b) {
+      return 1
     },
   }
   // sort series
