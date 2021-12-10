@@ -1,0 +1,11 @@
+source,target,value
+0,a,10
+a,b,10
+b,c,5
+b,d,5
+d,a,5
+c,a,3
+c,b,1
+d,a,4
+c,e,1
+e,d,1

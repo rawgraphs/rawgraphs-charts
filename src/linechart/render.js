@@ -201,7 +201,7 @@ export function render(
       .y(function (d) {
         return yScale(d.y)
       })
-      .curve(d3['curve' + interpolation])
+      .curve(d3[interpolation])
 
     const xAxis = (g) => {
       return g

@@ -1,0 +1,161 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="320" height="160" viewBox="0 0 320 160">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: #a0d9a3;
+      }
+
+      .cls-10, .cls-11, .cls-12, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9 {
+        stroke: #fff;
+      }
+
+      .cls-3 {
+        fill: #4ba0b1;
+      }
+
+      .cls-4 {
+        fill: #5e4fa2;
+      }
+
+      .cls-5 {
+        fill: #9e0142;
+      }
+
+      .cls-6 {
+        fill: #e1524a;
+      }
+
+      .cls-7 {
+        fill: #fba35e;
+      }
+
+      .cls-8 {
+        fill: #fee89a;
+      }
+
+      .cls-9 {
+        fill: #ebf7a6;
+      }
+
+      .cls-10, .cls-11, .cls-12 {
+        fill: none;
+      }
+
+      .cls-10 {
+        stroke-width: 2px;
+      }
+
+      .cls-11 {
+        stroke-width: 3px;
+      }
+
+      .cls-12 {
+        stroke-width: 4px;
+      }
+
+      .cls-13, .cls-14, .cls-15 {
+        isolation: isolate;
+      }
+
+      .cls-14, .cls-15 {
+        font-size: 10px;
+        font-family: Helvetica;
+      }
+
+      .cls-15 {
+        letter-spacing: -0.03662em;
+      }
+    </style>
+  </defs>
+  <rect id="backgorund" class="cls-1" width="320" height="160"/>
+  <g id="viz">
+    <g id="cells">
+      <path class="cls-2" d="M217.91072,0l3.25015,46.58606L320,20.35637V0Z"/>
+      <path id="F" class="cls-3" d="M249.89369,86.99118l-4.321-46.88346-24.41181,6.47834,2.62427,37.615Z"/>
+      <path class="cls-3" d="M245.57268,40.10772l4.321,46.88346L320,94.48325V20.35637Z"/>
+      <path id="U" class="cls-4" d="M229.07338,160h49.51979L265.483,109.02322l-39.69063,3.949Z"/>
+      <path id="V" class="cls-4" d="M225.7924,112.97219l39.69063-3.949,10.362-19.25869L223.78514,84.201Z"/>
+      <path class="cls-4" d="M275.845,89.76453l-10.362,19.25869L278.59317,160H320V94.48325Z"/>
+      <path id="N" class="cls-5" d="M153.07951,0l5.271,30.11477L218.20277,4.186,217.91072,0Z"/>
+      <path class="cls-5" d="M121.29969,46.16569l37.0508-16.05092L153.07951,0H102.5489L97.10481,36.20037Z"/>
+      <path id="O" class="cls-6" d="M121.29969,46.16569l3.807,15.48685L221.84,56.31982,218.20277,4.186Z"/>
+      <path class="cls-6" d="M229.07338,160,221.84,56.31982l-96.73333,5.33272L149.28221,160Z"/>
+      <path id="P" class="cls-7" d="M86.77927,104.86l48.50615-1.79961L121.29969,46.16569,97.10481,36.20037Z"/>
+      <path class="cls-7" d="M78.48689,160h70.79532l-13.99679-56.93965L86.77927,104.86Z"/>
+      <path id="Q" class="cls-8" d="M101.26022,0H31.28686L66.53431,70.5893,90.29607,72.906Z"/>
+      <path class="cls-8" d="M67.823,70.5893,32.57554,0H0V63.97677Z"/>
+      <path class="cls-9" d="M0,137.739l66.337-11.16227,5.75427-55.57128L0,63.97677Z"/>
+      <path id="R" class="cls-9" d="M72.09129,71.00545,66.337,126.57673l15.17877,13.28263L91.58475,72.906Z"/>
+      <path id="S" class="cls-9" d="M78.48689,160l3.0289-20.14064L66.337,126.57673,0,137.739V160Z"/>
+      <path id="I" class="cls-10" d="M221.16087,46.58606,320,20.35637V0H217.91072Z"/>
+      <path id="L" class="cls-10" d="M320,20.35637,221.16087,46.58606l2.62427,37.615L320,94.48325Z"/>
+      <path id="M" class="cls-10" d="M320,160V94.48325L223.78514,84.201,229.07338,160Z"/>
+      <path id="D" class="cls-10" d="M217.91072,0H102.5489L97.10481,36.20037l24.19488,9.96532L218.20277,4.186Z"/>
+      <path id="E" class="cls-10" d="M218.20277,4.186,121.29969,46.16569,149.28221,160h79.79117Z"/>
+      <path id="F-2" data-name="F" class="cls-10" d="M149.28221,160,121.29969,46.16569,97.10481,36.20037,78.48689,160Z"/>
+      <path id="G" class="cls-10" d="M0,0V63.97677L91.58475,72.906,102.5489,0Z"/>
+      <path id="H" class="cls-10" d="M91.58475,72.906,0,63.97677V160H78.48689Z"/>
+      <path id="A" class="cls-11" d="M320,0H217.91072l11.16266,160H320Z"/>
+      <path id="B" class="cls-11" d="M102.5489,0l-24.062,160H229.07338L217.91072,0Z"/>
+      <path id="C" class="cls-11" d="M78.48689,160,102.5489,0H0V160Z"/>
+      <path class="cls-12" d="M0,0V160H320V0Z"/>
+    </g>
+    <g id="labels">
+      <g class="cls-13">
+        <text class="cls-14" transform="translate(259.50024 20.35635)">I</text>
+      </g>
+      <g class="cls-13">
+        <text class="cls-15" transform="translate(231.99979 69.25293)">L</text>
+      </g>
+      <g class="cls-13">
+        <text class="cls-15" transform="translate(280.76285 63.97699)">L</text>
+      </g>
+      <g class="cls-13">
+        <text class="cls-14" transform="translate(245.84453 139.85962)">M</text>
+      </g>
+      <g class="cls-13">
+        <text class="cls-14" transform="translate(242.52585 103.06012)">M</text>
+      </g>
+      <g class="cls-13">
+        <text class="cls-14" transform="translate(289.59265 131.5304)">M</text>
+      </g>
+      <g class="cls-13">
+        <text class="cls-14" transform="translate(170.00024 15.05737)">D</text>
+      </g>
+      <g class="cls-13">
+        <text class="cls-14" transform="translate(125.10663 23.29276)">D</text>
+      </g>
+      <g class="cls-13">
+        <text class="cls-14" transform="translate(176.81143 46.16534)">E</text>
+      </g>
+      <g class="cls-13">
+        <text class="cls-14" transform="translate(181.91458 107.41504)">E</text>
+      </g>
+      <g class="cls-13">
+        <text class="cls-14" transform="translate(104.93845 80.00031)">F</text>
+      </g>
+      <g class="cls-13">
+        <text class="cls-14" transform="translate(110.49994 134.51129)">F</text>
+      </g>
+      <g class="cls-13">
+        <text class="cls-14" transform="translate(67.82294 30.11441)">G</text>
+      </g>
+      <g class="cls-13">
+        <text class="cls-14" transform="translate(23.29321 42.90967)">G</text>
+      </g>
+      <g class="cls-13">
+        <text class="cls-14" transform="translate(31.28674 100.85803)">H</text>
+      </g>
+      <g class="cls-13">
+        <text class="cls-14" transform="translate(73.28812 104.86041)">H</text>
+      </g>
+      <g class="cls-13">
+        <text class="cls-14" transform="translate(43.99997 149.49066)">H</text>
+      </g>
+    </g>
+  </g>
+</svg>
