@@ -8,7 +8,9 @@ module.exports = {
     publicPath: '/',
   },
   devServer: {
-    contentBase: './example',
+    static: {
+      directory: path.join(__dirname, 'example'),
+    },
     historyApiFallback: true,
     port: 9000,
   },
@@ -30,18 +32,19 @@ module.exports = {
         },
       },
       {
+        test: /\.raw.css$/i,
+        use: path.resolve('./bundler/webpackRAWGraphCssLoader.js'),
+        exclude: [path.resolve(__dirname, 'example')],
+      },
+      {
         test: /\.css$/i,
         use: 'raw-loader',
-        exclude: [
-          path.resolve(__dirname, "example")
-        ],
+        exclude: [path.resolve(__dirname, 'example'), /\.raw.css$/i],
       },
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
-        include: [
-          path.resolve(__dirname, "example")
-        ],
+        include: [path.resolve(__dirname, 'example')],
       },
       {
         test: /\.tsv$/,
@@ -61,5 +64,5 @@ module.exports = {
     alias: {
       rawcharts: path.resolve(__dirname, 'src'),
     },
-  }
+  },
 }
