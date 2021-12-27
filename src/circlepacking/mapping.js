@@ -32,6 +32,7 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
     data,
     (v) => {
       const item = {
+        series: mapping.series.value ? v[0][mapping.series.value] : undefined,
         hierarchy: new Map(mapping.hierarchy.value.map((d) => [d, v[0][d]])), //get the first one since it's grouped
         size: mapping.size.value
           ? sizeAggregator(v.map((d) => d[mapping.size.value]))
@@ -49,6 +50,7 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
       results.push(item)
       return item
     },
+    (d) => d[mapping.series.value], // series grouping
     ...mapping.hierarchy.value.map((level) => (d) => d[level]) // create a grouping for each level of the hierarchy
   )
   return results

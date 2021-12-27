@@ -35,4 +35,11 @@ export const dimensions = [
     aggregation: true,
     aggregationDefault: 'csvDistinct',
   },
+  {
+    id: 'series',
+    name: 'Series',
+    validTypes: ['number', 'string', 'date'],
+    required: false,
+    operation: 'get',
+  },
 ]

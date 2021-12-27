@@ -1,5 +1,6 @@
 import * as d3 from 'd3'
 import { legend, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
+import * as d3Gridding from 'd3-gridding'
 import '../d3-styles.js'
 
 /*
@@ -39,6 +40,8 @@ export function render(
     hierarchyLabelsStyle,
     autoHideLabels,
     labelStyles,
+    // series
+    showGrid = true,
   } = visualOptions
 
   const margin = {
@@ -52,35 +55,30 @@ export function render(
   const chartHeight = height - margin.top - margin.bottom
 
   // create the hierarchical structure
-  const nest = d3.rollup(
+  const nestedData = d3.rollups(
     data,
-    (v) => v[0],
-    ...mapping.hierarchy.value.map((level) => (d) => d.hierarchy.get(level))
+    (v) =>
+      d3.rollup(
+        v,
+        (w) => w[0],
+        ...mapping.hierarchy.value.map((level) => (d) => d.hierarchy.get(level))
+      ),
+    (d) => d.series
   )
+  console.log(nestedData)
 
-  const hierarchy = d3
-    .hierarchy(nest)
-    .sum((d) => (d[1] instanceof Map ? 0 : d[1].size)) // since maps have a .size porperty in native javascript, sum only values for leaves, and not for Maps
-    .sort((a, b) => {
-      if (sortCirclesBy !== 'original') {
-        return d3[sortCirclesBy](a.value, b.value)
-      }
-    })
+  // set up grid
+  const gridding = d3Gridding
+    .gridding()
+    .size([width, height])
+    .mode('grid')
+    .padding(0) // no padding, margins will be applied inside
+  //.cols(mapping.series.value ? columnsNumber : 1) @TODO readd
 
-  const pack = (data) =>
-    d3
-      .pack()
-      .size([chartWidth, chartHeight])
-      .padding(showHierarchyLabels ? padding + 4 : padding)(hierarchy)
+  const griddingData = gridding(nestedData)
 
-  const root = pack(nest)
-
-  const circle = d3
-    .arc()
-    .innerRadius(0)
-    .outerRadius((d) => d)
-    .startAngle(-Math.PI)
-    .endAngle(Math.PI)
+  // select the SVG element
+  const svg = d3.select(svgNode)
 
   // add background
   d3.select(svgNode)
@@ -92,20 +90,161 @@ export function render(
     .attr('fill', background)
     .attr('id', 'backgorund')
 
-  const svg = d3
-    .select(svgNode)
-    .append('g')
-    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-    .attr('id', 'viz')
+  // create the clip path
+  svg
+    .append('clipPath')
+    .attr('id', 'serieClipPath')
+    .append('rect')
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr('width', griddingData[0].width)
+    .attr('height', griddingData[0].height)
 
-  const node = svg
-    .append('g')
-    .attr('id', 'nodes')
+  // create the grid
+  const series = svg
     .selectAll('g')
-    .data(root.descendants())
+    .data(griddingData)
     .join('g')
-    .attr('transform', (d) => `translate(${d.x + 1},${d.y + 1})`)
-    .attr('id', (d) => d.data[0])
+    .attr('id', (d) => d[0])
+    .attr('transform', (d) => 'translate(' + d.x + ',' + d.y + ')')
+
+  // add grid
+  if (showGrid) {
+    svg
+      .append('g')
+      .attr('id', 'grid')
+      .selectAll('rect')
+      .data(griddingData)
+      .enter()
+      .append('rect')
+      .attr('x', (d) => d.x)
+      .attr('y', (d) => d.y)
+      .attr('width', (d) => d.width)
+      .attr('height', (d) => d.height)
+      .attr('fill', 'none')
+      .attr('stroke', '#ccc')
+  }
+
+  /*
+    CODE FOR ALL THE SERIES
+   */
+
+  // we must pre-calculate all the packings to find the correct sizes of each serie
+  griddingData.forEach(function (serie) {
+    // compute max serie width and height
+    const seriesWidth = serie.width - margin.right - margin.left
+    const seriesHeight = serie.height - margin.top - margin.bottom
+    // get the data
+    let nest = serie[1]
+    // compute hierarchy
+    serie.hierarchy = d3
+      .hierarchy(nest)
+      .sum((d) => (d[1] instanceof Map ? 0 : d[1].size)) // since maps have a .size porperty in native javascript, sum only values for leaves, and not for Maps
+      .sort((a, b) => {
+        if (sortCirclesBy !== 'original') {
+          return d3[sortCirclesBy](a.value, b.value)
+        }
+      })
+    // compute packing
+    // by calling d3.pack() it will add to the hierarchy all the needed metadata to draw it
+    d3
+      .pack()
+      .size([seriesWidth, seriesHeight])
+      .padding(showHierarchyLabels ? padding + 4 : padding)(serie.hierarchy)
+
+    //compute scale
+    let sizeScale = d3
+      .scaleSqrt()
+      .domain(d3.extent(serie.hierarchy.leaves(), (d) => d.value))
+      .range(d3.extent(serie.hierarchy.leaves(), (d) => d.r))
+
+    serie.scale = sizeScale
+    serie.scaleDensity = sizeScale.domain()[1] / sizeScale.range()[1]
+  })
+
+  //get the maximum scale
+
+  let globalScale =
+    griddingData[d3.maxIndex(griddingData, (d) => d.scaleDensity)].scaleDensity
+
+  console.log(globalScale)
+
+  /*
+    CODE FOR EACH SERIE
+  */
+  series.each(function (serie) {
+    // make a local selection for each serie
+    const selection = d3.select(this)
+    // apply clipPath
+    selection.attr('clip-path', 'url(#serieClipPath)')
+
+    // get the data
+    let nest = serie[1]
+
+    // normalize values
+    let norm = serie.scaleDensity / globalScale
+    console.log(norm)
+    // compute each serie width and height
+    const seriesWidth = (serie.width - margin.right - margin.left) * norm
+    const seriesHeight = (serie.height - margin.top - margin.bottom) * norm
+
+    // create the axis and the grid
+    let viz = selection
+      .append('g')
+      .attr('id', serie[0])
+      .attr('transform', `translate(${margin.left}, ${margin.top})`)
+    // compute hierarchy
+    const hierarchy = d3
+      .hierarchy(nest)
+      .sum((d) => (d[1] instanceof Map ? 0 : d[1].size)) // since maps have a .size porperty in native javascript, sum only values for leaves, and not for Maps
+      .sort((a, b) => {
+        if (sortCirclesBy !== 'original') {
+          return d3[sortCirclesBy](a.value, b.value)
+        }
+      })
+    // compute packing
+    // by calling d3.pack() it will add to the hierarchy all the needed metadata to draw it
+    d3
+      .pack()
+      .size([seriesWidth, seriesHeight])
+      .padding(showHierarchyLabels ? padding + 4 : padding)(hierarchy)
+
+    const circle = d3
+      .arc()
+      .innerRadius(0)
+      .outerRadius((d) => d)
+      .startAngle(-Math.PI)
+      .endAngle(Math.PI)
+
+    //check
+    let sizeScale = d3
+      .scaleSqrt()
+      .domain(d3.extent(hierarchy.leaves(), (d) => d.value))
+      .range(d3.extent(hierarchy.leaves(), (d) => d.r))
+
+    console.log(sizeScale.domain()[1] / sizeScale.range()[1])
+
+    const node = viz
+      .append('g')
+      .attr('id', 'nodes')
+      .selectAll('g')
+      .data(hierarchy.descendants())
+      .join('g')
+      .attr('transform', (d) => `translate(${d.x + 1},${d.y + 1})`)
+      .attr('id', (d) => d.data[0])
+
+    node
+      .append('path')
+      .attr('id', (d) => 'p_' + (d.x + d.y + d.r + d.depth + d.height))
+      .attr('d', (d) => circle(d.r))
+      .attr('fill', (d) => (d.children ? 'none' : colorScale(d.data[1].color)))
+      .attr('stroke', (d) => (d.children ? '#ccc' : 'none'))
+  })
+
+  /*
+
+
+  
 
   node
     .append('path')
@@ -239,4 +378,5 @@ export function render(
 
     legendLayer.call(chartLegend)
   }
+  */
 }

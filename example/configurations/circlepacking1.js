@@ -12,7 +12,8 @@ export default {
     results: 'number',
   },
   mapping: {
-    hierarchy: { value: ['Root', 'Level1', 'Level2', 'Level3'] },
+    series: { value: ['Root'] },
+    hierarchy: { value: ['Level1', 'Level2', 'Level3'] },
     color: {
       value: ['Root'],
       config: { aggregation: ['csvDistinct'] },
