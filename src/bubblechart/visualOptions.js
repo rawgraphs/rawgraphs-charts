@@ -138,4 +138,54 @@ export const visualOptions = {
     default: false,
     group: 'labels',
   },
+
+  //series
+
+  columnsNumber: {
+    type: 'number',
+    label: 'Number of columns',
+    default: 0,
+    group: 'series',
+  },
+
+  showGrid: {
+    type: 'boolean',
+    label: 'Show series grid',
+    default: true,
+    group: 'series',
+  },
+
+  showSeriesLabels: {
+    type: 'boolean',
+    label: 'Show series titles',
+    default: true,
+    group: 'series',
+  },
+
+  sortSeriesBy: {
+    type: 'text',
+    label: 'Sort series by',
+    group: 'series',
+    options: [
+      { label: 'Total size (descending)', value: 'totalDescending' },
+      { label: 'Total size (ascending)', value: 'totalAscending' },
+      { label: 'Name', value: 'name' },
+      { label: 'Original', value: 'original' },
+    ],
+    default: 'totalDescending',
+  },
+
+  useSameYScale: {
+    type: 'boolean',
+    label: 'Use same Y scale',
+    default: true,
+    group: 'series',
+  },
+
+  useSameXScale: {
+    type: 'boolean',
+    label: 'Use same X scale',
+    default: true,
+    group: 'series',
+  },
 }

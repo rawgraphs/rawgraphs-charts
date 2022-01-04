@@ -5,4 +5,5 @@ export const mapData = {
   color: 'get',
   label: 'get',
   connectedBy: 'get',
+  series: 'get',
 }

@@ -36,4 +36,11 @@ export const dimensions = [
     required: false,
     multiple: true,
   },
+  {
+    id: 'series',
+    name: 'Series',
+    validTypes: ['number', 'date', 'string'],
+    required: false,
+    multiple: false,
+  },
 ]
