@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-import { legend } from '@rawgraphs/rawgraphs-core'
+import { legend, dateFormats } from '@rawgraphs/rawgraphs-core'
 import * as d3Gridding from 'd3-gridding'
 import '../d3-styles.js'
 
@@ -43,6 +43,19 @@ export function render(
     right: marginRight,
     bottom: marginBottom,
     left: marginLeft,
+  }
+  console.log(mapping)
+  console.log(data)
+
+  // format dates if used as bars
+  if (mapping.groups.dataType.type === 'date') {
+    // set date format  from input data
+    const timeFormat = d3.timeFormat(
+      dateFormats[mapping.groups.dataType.dateFormat]
+    )
+    // use it to format date
+    data.forEach((d) => (d.groups = timeFormat(d.groups)))
+    console.log(data)
   }
 
   // create nest structure

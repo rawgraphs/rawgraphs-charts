@@ -46,6 +46,8 @@ export function render(
   }
   const horizontalBars = { horizontal: true, vertical: false }[barsOrientation]
 
+  console.log(mapping)
+
   if (mapping.bars.dataType.type === 'date') {
     // set date format  from input data
     const timeFormat = d3.timeFormat(
@@ -53,7 +55,6 @@ export function render(
     )
     // use it to format date
     data.forEach((d) => (d.bars = timeFormat(d.bars)))
-    console.log(data)
   }
 
   // create nest structure
@@ -362,21 +363,19 @@ function multiFormat(date) {
     d3.timeSecond(date)
   )
 
-  return (
-    d3.timeSecond(date) < date
-      ? formatMillisecond
-      : d3.timeMinute(date) < date
-      ? formatSecond
-      : d3.timeHour(date) < date
-      ? formatMinute
-      : d3.timeDay(date) < date
-      ? formatHour
-      : d3.timeMonth(date) < date
-      ? d3.timeWeek(date) < date
-        ? formatDay
-        : formatWeek
-      : d3.timeYear(date) < date
-      ? formatMonth
-      : formatYear
-  )(date)
+  return (d3.timeSecond(date) < date
+    ? formatMillisecond
+    : d3.timeMinute(date) < date
+    ? formatSecond
+    : d3.timeHour(date) < date
+    ? formatMinute
+    : d3.timeDay(date) < date
+    ? formatHour
+    : d3.timeMonth(date) < date
+    ? d3.timeWeek(date) < date
+      ? formatDay
+      : formatWeek
+    : d3.timeYear(date) < date
+    ? formatMonth
+    : formatYear)(date)
 }
