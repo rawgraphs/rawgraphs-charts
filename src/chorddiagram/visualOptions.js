@@ -1,11 +1,4 @@
-/*
-Copied and customized from:
-https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/arcdiagram/visualOptions.js
-*/
-
-
 export const visualOptions = {
-
   marginTop: {
     type: 'number',
     label: 'Margin (top)',
@@ -43,29 +36,56 @@ export const visualOptions = {
 
   chordPadding: {
     type: 'number',
-    label: 'Category padding',
+    label: 'Groups padding',
     default: 10,
     group: 'chart',
   },
 
   chordPaddingSource: {
     type: 'number',
-    label: 'Chord padding (source)',
+    label: 'Chords padding (source)',
     default: 10,
     group: 'chart',
   },
 
   chordPaddingTarget: {
     type: 'number',
-    label: 'Chord padding (target)',
+    label: 'Chords padding (target)',
     default: 30,
     group: 'chart',
   },
 
-  /*
-  Inspired and customized from barchart:
-  https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/barchart
-  */
+  sortNodesBy: {
+    type: 'text',
+    label: 'Sort groups by',
+    group: 'chart',
+    options: [
+      { label: 'Size (descending)', value: 'totalDescending' },
+      { label: 'Size (ascending)', value: 'totalAscending' },
+      { label: 'None', value: 'none' },
+    ],
+    default: 'none',
+  },
+
+  sortRibbonsBy: {
+    type: 'text',
+    label: 'Sort chords by',
+    group: 'chart',
+    options: [
+      { label: 'Size (descending)', value: 'totalDescending' },
+      { label: 'Size (ascending)', value: 'totalAscending' },
+      { label: 'None', value: 'none' },
+    ],
+    default: 'none',
+  },
+
+  headRadius: {
+    type: 'number',
+    label: 'Head Radius',
+    default: 30,
+    group: 'chart',
+  },
+
   chordColors: {
     type: 'colorScale',
     label: 'Chord Colors',
@@ -87,11 +107,6 @@ export const visualOptions = {
     group: 'colors',
   },
 
-
-  /*
-  Copied and customized from linechart:
-  https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/linechart
-  */
   showChordGroupLabels: {
     type: 'boolean',
     label: 'Show Chord Group Labels',
@@ -99,27 +114,10 @@ export const visualOptions = {
     group: 'labels',
   },
 
-  fontSize: {
-    type: 'number',
-    label: 'Font size',
-    default: 12,
+  showValues: {
+    type: 'boolean',
+    label: 'Show nodes values',
+    default: true,
     group: 'labels',
   },
-
-  /*
-  Inspired and customized from barchart:
-  https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/barchart
-  */
-  fontFamily: {
-    type: 'text',
-    label: 'Font family',
-    group: 'labels',
-    options: [
-      { label: 'Serif', value: 'serif' },
-      { label: 'Sans-serif', value: 'sans-serif' },
-      { label: 'Monospace', value: 'monospace' },
-    ],
-    default: 'sans-serif',
-  },
-
 }
