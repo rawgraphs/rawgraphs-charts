@@ -41,16 +41,23 @@ export const visualOptions = {
     group: 'chart',
   },
 
+  ribbonPadding: {
+    type: 'number',
+    label: 'Chords padding',
+    default: 1,
+    group: 'chart',
+  },
+
   chordPaddingSource: {
     type: 'number',
-    label: 'Chords padding (source)',
+    label: 'Source inner padding',
     default: 10,
     group: 'chart',
   },
 
   chordPaddingTarget: {
     type: 'number',
-    label: 'Chords padding (target)',
+    label: 'Target inner padding',
     default: 30,
     group: 'chart',
   },
@@ -79,9 +86,19 @@ export const visualOptions = {
     default: 'none',
   },
 
+  showHeads: {
+    type: 'boolean',
+    label: 'Show arrow heads',
+    default: false,
+    group: 'chart',
+  },
+
   headRadius: {
+    disabled: {
+      showHeads: false,
+    },
     type: 'number',
-    label: 'Head Radius',
+    label: 'Arrows heads radius',
     default: 30,
     group: 'chart',
   },

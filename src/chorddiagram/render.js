@@ -13,10 +13,6 @@ and on the official instructions for adding a new card;
 https://github.com/rawgraphs/rawgraphs-charts/blob/master/docs/add-a-new-chart.md
 */
 
-// @TODO:
-// - sorting
-// - arrowHead
-
 import * as d3 from 'd3'
 import '../d3-styles.js'
 
@@ -40,13 +36,16 @@ export function render(
     //chart
     ringWidth,
     chordPadding,
+    ribbonPadding,
     chordPaddingSource,
     chordPaddingTarget,
     sortNodesBy,
+    sortRibbonsBy,
     chordColors,
     chordOpacity,
     showChordGroupLabels,
     showValues,
+    showHeads,
     headRadius,
   } = visualOptions
 
@@ -128,9 +127,9 @@ export function render(
             return 0
             break
         }
-      }) //@TODO
+      })
       .sortSubgroups((a, b) => {
-        switch (sortNodesBy) {
+        switch (sortRibbonsBy) {
           case 'totalDescending':
             return d3.descending(a, b)
             break
@@ -141,8 +140,8 @@ export function render(
             return 0
             break
         }
-      }) //@TODO
-      .sortChords(d3.ascending) //@TODO
+      })
+      .sortChords(d3.ascending)
     return chords(matrix)
   }
 
@@ -160,9 +159,12 @@ export function render(
   }
 
   function drawChords(svg, chords, innerRadius) {
-    const ribbon = d3
-      .ribbonArrow()
-      .headRadius(headRadius)
+    const ribbon = showHeads
+      ? d3.ribbonArrow().headRadius(headRadius)
+      : d3.ribbon()
+
+    ribbon
+      .padAngle(ribbonPadding / innerRadius)
       .sourceRadius(() => innerRadius - chordPaddingSource)
       .targetRadius(() => innerRadius - chordPaddingTarget)
 
