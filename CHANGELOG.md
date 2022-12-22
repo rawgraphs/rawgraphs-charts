@@ -1,3 +1,9 @@
+## v1.0.0-beta.28
+
+#### New features:
+
+- _chord diagram_: chart added
+
 ## v1.0.0-beta.27
 
 #### New features:
@@ -12,7 +18,6 @@
 - changed Sankey library to enable circular links. New dependency: d3-sankey-circular by @tomshanley
 - _stream graph_: fixed series sorting
 - _bump chart_: fixed series sorting
-
 
 ## v1.0.0-beta.26
 
