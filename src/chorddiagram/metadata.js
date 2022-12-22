@@ -13,8 +13,8 @@ export const metadata = {
   icon,
   categories: ['networks'],
   description:
-    '', //TODO
-  // code:
-  //   'https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/arcdiagram',
+    'It shows relationships among nodes. Nodes size represent the sum of incoming and outgoing links. Relationships are drawn as arcs whose width represent their values.', //TODO
+  code:
+    'https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/chorddiagram',
   // tutorial: 'https://rawgraphs.io/learning/how-to-make-an-arc-diagram/',
 }
