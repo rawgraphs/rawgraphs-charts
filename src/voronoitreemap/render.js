@@ -71,6 +71,9 @@ export function render(
 
   let voronoiTreemap = d3VoronoiTreemap.voronoiTreemap().prng(random)
 
+  // set the minimum weight ratio to zero to get more proportional areas
+  voronoiTreemap.minWeightRatio(0)
+
   if (clipToPolygon) {
     // create the points
     let points = d3.range(edges).map((i) => {
