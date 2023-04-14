@@ -46,6 +46,13 @@ export function render(
     left: marginLeft,
   }
 
+  //check if there are negative values, in case throw error
+  data.forEach((d) => {
+    if (d.size < 0) {
+      throw new Error('"Size" values cannot be negative')
+    }
+  })
+
   // if series is exposed, recreate the nested structure
   const nestedData = d3.groups(data, (d) => d.series)
 

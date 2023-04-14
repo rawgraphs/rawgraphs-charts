@@ -41,6 +41,13 @@ export function render(
   let chartWidth = width - margin.left - margin.right
   let chartHeight = height - margin.top - margin.bottom
 
+  //check if there are negative values, in case throw error
+  data.forEach((d) => {
+    if (d.size < 0) {
+      throw new Error('Values cannot be negative')
+    }
+  })
+
   // sort data
   let rowsValues = d3
     .rollups(
