@@ -41,6 +41,13 @@ export function render(
     left: marginLeft,
   }
 
+  //check if there are negative values, in case throw error
+  data.forEach((d) => {
+    if (d.size < 0) {
+      throw new Error('"Size" values cannot be negative')
+    }
+  })
+
   const chartWidth = width - margin.left - margin.right
   const chartHeight = height - margin.top - margin.bottom
 

@@ -44,6 +44,13 @@ export function render(
     left: marginLeft,
   }
 
+  //check if there are negative values, in case throw error
+  data.forEach((d) => {
+    if (d.size < 0) {
+      throw new Error('"Size" values cannot be negative')
+    }
+  })
+
   // create nest structure
   const grouped = d3.groups(data, (d) => d.series)
   // reduce them for sorting
