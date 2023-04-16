@@ -8,7 +8,7 @@ export const metadata = {
   icon,
   categories: ['hierarchies', 'proportions'],
   description:
-    'It displays hierarchically structured data and a related quantitative dimension. It is composed of an area divided into small cells, representing the last level of the tree structure, computed using the Voronoi tessellation. The cells’ size depends on the quantitative dimension.',
+    'It displays hierarchically structured data and a related quantitative dimension. It is composed of an area divided into small cells, representing the last level of the tree structure, computed using the Voronoi tessellation. The cells’ size depends on the quantitative dimension. the dimensions are calculated iteratively, therefore area could be not fully representative of the mapped value.',
   code: 'https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/treemap',
   tutorial: 'https://rawgraphs.io/learning/how-to-make-a-treemap/',
 }
