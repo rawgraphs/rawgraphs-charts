@@ -63,7 +63,7 @@ export function render(
     .attr('x', 0)
     .attr('y', 0)
     .attr('fill', background)
-    .attr('id', 'backgorund')
+    .attr('id', 'background')
 
   // add the visualization layer
   const vizLayer = svg.append('g').attr('id', 'viz')

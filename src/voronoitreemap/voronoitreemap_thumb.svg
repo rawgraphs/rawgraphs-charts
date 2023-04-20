@@ -71,7 +71,7 @@
       }
     </style>
   </defs>
-  <rect id="backgorund" class="cls-1" width="320" height="160"/>
+  <rect id="background" class="cls-1" width="320" height="160"/>
   <g id="viz">
     <g id="cells">
       <path class="cls-2" d="M217.91072,0l3.25015,46.58606L320,20.35637V0Z"/>

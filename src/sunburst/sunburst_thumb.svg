@@ -73,7 +73,7 @@
   </defs>
   <g class="cls-2">
     <g>
-      <rect id="backgorund" class="cls-3" x="60" y="-20" width="200" height="200"/>
+      <rect id="background" class="cls-3" x="60" y="-20" width="200" height="200"/>
       <g id="viz">
         <g>
           <path class="cls-4" d="M160.1225,32a48,48,0,0,1,45.1469,63.9585l-22.1433-7.87A24.5,24.5,0,0,0,160.1225,55.5Z"/>

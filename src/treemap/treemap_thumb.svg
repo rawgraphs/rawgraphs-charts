@@ -174,8 +174,8 @@
       <rect class="cls-1" x="260" y="123" width="55" height="32"/>
     </clipPath>
   </defs>
-  <rect id="backgorund" class="cls-2" width="320" height="160"/>
-  <rect id="backgorund-2" data-name="backgorund" class="cls-2" width="320" height="160"/>
+  <rect id="background" class="cls-2" width="320" height="160"/>
+  <rect id="background-2" data-name="background" class="cls-2" width="320" height="160"/>
   <g id="viz">
     <g id="leaves">
       <g>

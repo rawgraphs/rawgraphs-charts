@@ -53,7 +53,7 @@
       <rect class="cls-1" width="320" height="160"/>
     </clipPath>
   </defs>
-  <rect id="backgorund" class="cls-2" width="320" height="160"/>
+  <rect id="background" class="cls-2" width="320" height="160"/>
   <g class="cls-3">
     <g id="viz">
       <g id="nodes">

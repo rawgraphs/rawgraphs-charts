@@ -156,7 +156,7 @@
       }
     </style>
   </defs>
-  <rect id="backgorund" class="cls-1" width="320" height="160"/>
+  <rect id="background" class="cls-1" width="320" height="160"/>
   <g id="viz">
     <g>
       <path class="cls-2" d="M20.5,20.5h290"/>

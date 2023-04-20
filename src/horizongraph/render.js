@@ -101,7 +101,7 @@ export function render(
     .attr('x', 0)
     .attr('y', 0)
     .attr('fill', background)
-    .attr('id', 'backgorund')
+    .attr('id', 'background')
 
   // append areas
   let viz = svg

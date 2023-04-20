@@ -68,7 +68,7 @@
       }
     </style>
   </defs>
-  <rect id="backgorund" class="cls-1" width="320" height="160"/>
+  <rect id="background" class="cls-1" width="320" height="160"/>
   <g id="viz">
     <g id="links">
       <path class="cls-2" d="M5,77.1025c48.6667,0,48.6667-55.1349,97.3333-55.1349"/>
