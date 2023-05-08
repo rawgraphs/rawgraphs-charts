@@ -52,7 +52,9 @@ export function render(
       dateFormats[mapping.groups.dataType.dateFormat]
     )
     // use it to format date
-    data.forEach((d) => (d.groups = timeFormat(d.groups)))
+    data.forEach((d) => {
+      d.groups = timeFormat(Date.parse(d.groups))
+    })
   }
 
   // create nest structure

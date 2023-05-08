@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-import { legend } from '@rawgraphs/rawgraphs-core'
+import { legend, dateFormats } from '@rawgraphs/rawgraphs-core'
 import * as d3Gridding from 'd3-gridding'
 import '../d3-styles.js'
 
@@ -51,6 +51,18 @@ export function render(
       throw new Error('Values cannot be negative')
     }
   })
+
+  // parse eventual dates
+  if (mapping.stacks.dataType.type === 'date') {
+    // set date format  from input data
+    const timeFormat = d3.timeFormat(
+      dateFormats[mapping.stacks.dataType.dateFormat]
+    )
+    // use it to format date
+    data.forEach((d) => {
+      d.stacks = timeFormat(Date.parse(d.stacks))
+    })
+  }
 
   // create nest structure
   const nestedData = d3
