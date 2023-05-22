@@ -103,7 +103,7 @@ export function render(
   // compute padding
   const padding = (chartHeight - totalValue) / (hierarchy.leaves().length - 1)
 
-  // dictionary to choose algorythm according to options
+  // dictionary to choose algorithm according to options
   const layouts = {
     'Cluster Dendogram': d3.cluster(),
     Tree: d3.tree(),
