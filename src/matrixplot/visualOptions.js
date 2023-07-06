@@ -49,7 +49,7 @@ export const visualOptions = {
 
   rounding: {
     type: 'number',
-    label: 'Round Corners',
+    label: 'Round Corners (%)',
     default: 0,
     min: 0,
     max: 100,

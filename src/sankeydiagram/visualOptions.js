@@ -36,7 +36,7 @@ export const visualOptions = {
 
   nodesPadding: {
     type: 'number',
-    label: 'Padding',
+    label: 'Min. vertical padding',
     default: 5,
     group: 'chart',
   },
