@@ -137,10 +137,10 @@ export const visualOptions = {
     group: 'labels',
   },
 
-  showHierarchyLabels: {
-    type: 'boolean',
-    label: 'Show hierarchy labels',
-    default: false,
-    group: 'labels',
-  },
+  // showHierarchyLabels: {
+  //   type: 'boolean',
+  //   label: 'Show hierarchy labels',
+  //   default: false,
+  //   group: 'labels',
+  // },
 }

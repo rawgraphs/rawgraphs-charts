@@ -40,7 +40,7 @@ export function render(
     isRegular,
     // labels
     showLabelsOutline,
-    showHierarchyLabels,
+    //showHierarchyLabels,
     labelStyles,
   } = visualOptions
 
@@ -211,7 +211,7 @@ export function render(
 
   if (showLabelsOutline) {
     // NOTE: Adobe Illustrator does not support paint-order attr
-    d3.selectAll('.txt').styles(styles.labelOutline)
+    labels.styles(styles.labelOutline)
   }
 
   if (showLegend) {

@@ -9,15 +9,16 @@ Starting from this release, version naming will be based on Semantic Versioning.
 
 #### Changes:
 
+- _barchart_: padding in horizontal bar charts now works
 - _beeswarm plot_: added error message when using negative values for size
 - _circle packing_: added error message when using negative values for size
 - _circular dendrogram_: added error message when using negative values for size
 - _grouped barcharts_: fixed dateformats. Axis ticks are now prettier when using dates
 - _linear dendrogram_: added error message when using negative values for size
-- _stacked barcharts_: fixed dateformats. Axis ticks are now prettier when using dates
-- _barchart_: padding in horizontal bar charts now works
-- _sankey diagram_: better labeling of visual options
 - _matrix plot_: better labeling of visual options
+- _sankey diagram_: better labeling of visual options
+- _stacked barcharts_: fixed dateformats. Axis ticks are now prettier when using dates
+- _voronoi treemap_: fixed label styles
 
 ## v1.0.0-beta.27
 
