@@ -114,7 +114,7 @@ export function render(
     .attr('x', 0)
     .attr('y', 0)
     .attr('fill', background)
-    .attr('id', 'backgorund')
+    .attr('id', 'background')
 
   const vizLayer = svg.append('g').attr('id', 'viz')
   // create the grid

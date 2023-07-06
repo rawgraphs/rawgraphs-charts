@@ -65,7 +65,7 @@
       }
     </style>
   </defs>
-  <rect id="backgorund" class="cls-1" width="320" height="160"/>
+  <rect id="background" class="cls-1" width="320" height="160"/>
   <g id="viz">
     <g>
       <g id="axes">

@@ -95,7 +95,7 @@ export function render(
     .attr('x', 0)
     .attr('y', 0)
     .attr('fill', background)
-    .attr('id', 'backgorund')
+    .attr('id', 'background')
 
   // set up grid
   const gridding = d3Gridding
