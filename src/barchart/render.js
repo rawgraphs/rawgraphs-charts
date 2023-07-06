@@ -182,7 +182,7 @@ export function render(
       //convert padding from px to percentage
       .padding(
         padding /
-          (horizontalBars ? seriesHeight : seriesWidth / barsDomain.length)
+          ((horizontalBars ? seriesHeight : seriesWidth) / barsDomain.length)
       )
 
     const seriesDomain = d3.extent(d.data[1], (d) => d.size)
