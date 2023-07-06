@@ -1,8 +1,20 @@
-## v1.0.0-beta.28
+## v1.0.1
+
+Starting from this release, version naming will be based on Semantic Versioning.
 
 #### New features:
 
-- _chord diagram_: chart added
+- _chord diagram_: added chart by merging @blindguardian50 pull request
+- _voronoi Treemap_: exposed minimum weight ratio option, which allows you to better control the area fitting
+
+#### Changes:
+
+- _beeswarm plot_: added error message when using negative values for size
+- _circle packing_: added error message when using negative values for size
+- _circular dendrogram_: added error message when using negative values for size
+- _grouped barcharts_: fixed dateformats. Axis ticks are now prettier when using dates
+- _linear dendrogram_: added error message when using negative values for size
+- _stacked barcharts_: fixed dateformats. Axis ticks are now prettier when using dates
 
 ## v1.0.0-beta.27
 

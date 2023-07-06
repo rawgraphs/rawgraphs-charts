@@ -51,14 +51,14 @@ export const visualOptions = {
   chordPaddingSource: {
     type: 'number',
     label: 'Source inner padding',
-    default: 10,
+    default: 1,
     group: 'chart',
   },
 
   chordPaddingTarget: {
     type: 'number',
     label: 'Target inner padding',
-    default: 30,
+    default: 5,
     group: 'chart',
   },
 
@@ -89,7 +89,7 @@ export const visualOptions = {
   showHeads: {
     type: 'boolean',
     label: 'Show arrow heads',
-    default: false,
+    default: true,
     group: 'chart',
   },
 
@@ -99,7 +99,7 @@ export const visualOptions = {
     },
     type: 'number',
     label: 'Arrows heads radius',
-    default: 30,
+    default: 20,
     group: 'chart',
   },
 
