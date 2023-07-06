@@ -4,21 +4,22 @@ Starting from this release, version naming will be based on Semantic Versioning.
 
 #### New features:
 
-- _chord diagram_: added chart by merging @blindguardian50 pull request
-- _voronoi Treemap_: exposed minimum weight ratio option, which allows you to better control the area fitting
+- _Chord diagram_: Added chart by merging pull request by @blindguardian50, @steve1711, @TheAlmightySpaceWarrior, @wizardry8, and @kandrews99.
+- _Voronoi Treemap_: Exposed minimum weight ratio option, allowing better control of area fitting.
 
 #### Changes:
 
-- _barchart_: padding in horizontal bar charts now works
-- _beeswarm plot_: added error message when using negative values for size
-- _circle packing_: added error message when using negative values for size
-- _circular dendrogram_: added error message when using negative values for size
-- _grouped barcharts_: fixed dateformats. Axis ticks are now prettier when using dates
-- _linear dendrogram_: added error message when using negative values for size
-- _matrix plot_: better labeling of visual options
-- _sankey diagram_: better labeling of visual options
-- _stacked barcharts_: fixed dateformats. Axis ticks are now prettier when using dates
-- _voronoi treemap_: fixed label styles
+- _Barchart_: Padding in horizontal bar charts now works.
+- _Beeswarm plot_: Added error message when using negative values for size.
+- _Circle packing_: Added error message when using negative values for size.
+- _Circular dendrogram_: Added error message when using negative values for size.
+- _Grouped barcharts_: Fixed date formats. Axis ticks are now prettier when using dates.
+- _Linear dendrogram_: Added error message when using negative values for size.
+- _Matrix plot_: Improved labeling of visual options.
+- _Sankey diagram_: Improved labeling of visual options.
+- _Stacked barcharts_: Fixed date formats. Axis ticks are now prettier when using dates.
+- _Voronoi treemap_: Fixed label styles.
+- Fixed some typos (thanks to @SaarthakMaini and @TomFevrier!).
 
 ## v1.0.0-beta.27
 
