@@ -57,7 +57,7 @@ export const visualOptions = {
 
   layout: {
     type: 'text',
-    label: 'Layout algorythm',
+    label: 'Layout algorithm',
     group: 'chart',
     options: ['Cluster Dendogram', 'Tree'],
     default: 'Tree',
