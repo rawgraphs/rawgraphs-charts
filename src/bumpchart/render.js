@@ -256,6 +256,8 @@ export function render(
         })
     })
 
+    console.log(stackedData)
+
     let localDomain = [
       d3.min(stackedData, (d) => d3.min(d, (d) => d[0])),
       d3.max(stackedData, (d) => d3.max(d, (d) => d[1])),
@@ -345,7 +347,7 @@ export function render(
               .line()
               .curve(d3[interpolation])
               .x((d) => xScale(d.data[0]))
-              .y((d) => sizeScale((d[0] + d[1]) / 2))
+              .y((d) => sizeScale((d[0] + d[1]) / 2) - d.padding)
           )
 
         selection
@@ -392,7 +394,12 @@ export function render(
             // get x position
             return xScale(d.maxElement.data[0])
           })
-          .attr('y', (d) => sizeScale((d.maxElement[0] + d.maxElement[1]) / 2))
+          .attr(
+            'y',
+            (d) =>
+              sizeScale((d.maxElement[0] + d.maxElement[1]) / 2) -
+              d.maxElement.padding
+          )
           .attr('text-anchor', (d) =>
             xScale(d.maxElement.data[0]) > serieWidth - 10
               ? 'end'

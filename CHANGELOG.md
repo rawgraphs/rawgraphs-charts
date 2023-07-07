@@ -11,6 +11,7 @@ Starting from this release, version naming will be based on Semantic Versioning.
 
 - _Barchart_: Padding in horizontal bar charts now works.
 - _Beeswarm plot_: Added error message when using negative values for size.
+- _Bump chart_: labels are now correct when using padding
 - _Circle packing_: Added error message when using negative values for size.
 - _Circular dendrogram_: Added error message when using negative values for size.
 - _Grouped barcharts_: Fixed date formats. Axis ticks are now prettier when using dates.
