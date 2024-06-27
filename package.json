@@ -12,7 +12,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write src",
-    "sandbox": "webpack-dev-server",
+    "sandbox": "webpack-dev-server --port 9001",
     "prebuild": "rimraf lib",
     "build": "rollup -c"
   },

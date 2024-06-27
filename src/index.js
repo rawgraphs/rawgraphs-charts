@@ -1,4 +1,5 @@
 export { default as alluvialdiagram } from './alluvialdiagram'
+export { default as alluvialdiagram_tnxo } from './alluvialdiagram_tnxo'
 export { default as arcdiagram } from './arcdiagram'
 export { default as barchart } from './barchart'
 export { default as barchartmultiset } from './barchartmultiset'
