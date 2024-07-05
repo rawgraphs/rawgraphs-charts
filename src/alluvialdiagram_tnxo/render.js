@@ -46,6 +46,37 @@ export function render(
   // links are a deep copy of the dataset, to avoid modification of origina data variable
   const links = data.map((d) => Object.assign({}, d))
 
+  // data contains 7 columns to plot the alluvial diagram:
+  // sourceName,sourceStep,source,targetName,targetStep,target,value
+  // SourceName is the name of the regimen, eg 1L - DVd
+  // sourceStep refers to the step (1L, 2L, 3L, etc)
+  // Value is the number of patient in this category.
+  // To get the number of patient (total_patients) and calculate the percentage for each category, I 
+  // calculate the sum of the values for the first source step (eg 1L)
+
+  function getUniqueValuesAndSums(data, column) {
+    const uniqueValues = new Set();
+    const sums = [];
+
+    data.forEach(row => {
+      const value = row[column];
+      if (!uniqueValues.has(value)) {
+        uniqueValues.add(value);
+        sums.push({
+          value: value,
+          sum: row.value
+        });
+      } else {
+        sums.find(item => item.value === value).sum += row.value;
+      }
+    });
+
+    return sums;
+  }
+  const sums = getUniqueValuesAndSums(data, 'sourceStep');
+  const total_patients = sums.length > 0 ? sums[0].sum : 0;
+
+
   //get unique nodes from links. @TODO: probably it could be improved
   let nodes = links
     .flatMap((l) => [
@@ -254,7 +285,11 @@ export function render(
       .attr('alignment-baseline', 'middle')
       .attr('x', (d) => (d.x0 < width / 2 ? d.x1 + 4 : d.x0 - 4))
       .attr('dy', parseFloat(styles.labelPrimary.fontSize) + 2)
-      .text((d) => `${d.value}%`) // Add percentage sign using backtips
+      // .text((d) => `${d.value} patients`) // Add patients using backtips
+      .text((d) => {
+        const percentage = (d.value / total_patients) * 100;
+        return `${percentage < 1 ? 1 : Math.round(percentage)}%`;
+      })
       .styles(styles.labelSecondary)
 
     nodesLabels.attr(
