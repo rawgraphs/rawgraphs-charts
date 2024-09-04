@@ -2,7 +2,7 @@ import icon from './alluvialdiagram_tnxo.svg'
 import thumbnail from './alluvialdiagram_tnxo_thumb.svg'
 
 export const metadata = {
-  name: 'Alluvial Diagram with percentages shown',
+  name: 'Alluvial Diagram with %',
   id: 'rawgraphs.alluvialdiagram_tnxo',
   thumbnail,
   icon,
