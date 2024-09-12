@@ -274,7 +274,7 @@ export function render(
 
   // oneLine_threshold
   const show_threshold = 1
-  const oneLine_threshold = 6
+  const oneLine_threshold = 7
 
   // Pre-compute and round percentages
   const nodePercentages = nodesLabels.data().map(d => {
@@ -309,16 +309,17 @@ export function render(
       .append('tspan')
       .attr('alignment-baseline', 'middle')
       .attr('x', (d) => (d.x0 < width / 2 ? d.x1 + 4 : d.x0 - 4))
-      .attr('dy', (d) => d.roundedPercentage >= oneLine_threshold
-        ? parseFloat(styles.labelPrimary.fontSize) + 2
-        : -2)  // Adjust dy based on condition
+      .attr('dy', (d) => parseFloat(styles.labelPrimary.fontSize) + 2)
       .text((d) => `${d.roundedPercentage}%`)
       .styles(styles.labelSecondary)
 
-    nodesLabels.attr(
-      'transform',
-      `translate(0,${-parseFloat(styles.labelSecondary.fontSize) / 2})`
-    )
+    // This part shift up the text only if the percentage is above show_threshold and oneLine_threshold
+    nodesLabels
+      .filter((d) => d.roundedPercentage > show_threshold && d.roundedPercentage > oneLine_threshold)
+      .attr(
+        'transform',
+        `translate(0,${-parseFloat(styles.labelSecondary.fontSize) / 2})`
+      )
   }
 
   // add steps titles
@@ -330,7 +331,7 @@ export function render(
     .data(firstNodes)
     .join('text')
     .attr('x', (d) => d.x0 + nodesWidth / 2)
-    .attr('y', (d) => d.y0 - 4)
+    .attr('y', (d) => d.y0 - 10)
     .attr('text-anchor', 'middle')
     .text((d) => d.step)
     .styles(styles.axisLabel)

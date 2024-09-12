@@ -1,11 +1,11 @@
 .axisLabel {
   font-family: 'Arial, sans-serif';
-  font-size: 12px;
-  fill: #7b7b7b;
+  font-size: 20px;
+  fill: #000000;
   font-weight: bold;
 }
 
-.axisLine{
+.axisLine {
   stroke: #ccc;
 }
 
