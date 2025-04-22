@@ -1,0 +1,4 @@
+beautifulsoup4==4.12.3
+certifi==2024.8.30
+google==3.0.0
+soupsieve==2.6
