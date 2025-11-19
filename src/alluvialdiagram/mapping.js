@@ -17,7 +17,7 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
     //get the second step
     const step2 = mapping.steps.value[index + 1]
 
-    const result = d3.rollups(
+    d3.rollups(
       data,
       (v) => {
         const item = {
@@ -38,5 +38,5 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
     )
   })
 
-  return results
+  return results.filter((d) => d.value > 0)
 }

@@ -1,0 +1,100 @@
+step 1,step 2,step 3,step 4,Value
+Fibers,yes,Corrugated Cardboard,Trash,0
+Fibers,no,Soiled Cardboard,Trash,0
+Fibers,no,Waxed Cardboard,Trash,0
+Fibers,yes,Mixed Paper,Trash,1.66
+Fibers,no,Soiled Paper,Trash,0
+Fibers,no,Tissue Paper,Trash,0.21
+Fibers,no,Gable top & Aseptic  Cartons,Trash,0
+Fibers,no,Other Coated Paper Containers,Trash,0.06
+Glass,yes,Glass Bottles & Jars,Trash,0
+Glass,no,Soiled Glass,Trash,0
+Glass,no,Other Glass,Trash,0
+Metal,yes,Aluminum Containers,Trash,0.08
+Metal,no,Soiled Metals,Trash,0
+Metal,yes,Other Metals,Trash,0
+Plastics,yes,Rigid Plastics (#1-2),Trash,0.03
+Plastics,yes,Rigid Plastics (#5),Trash,0.26
+Plastics,no,Other Rigid Plastics,Trash,0
+Plastics,no,Non-woven Polypropylene Pouches,Trash,0
+Plastics,no,Film Plastics,Trash,0.21
+Plastics,no,Waste Disposal Bags,Trash,0.83
+Plastics,no,Foams,Trash,0
+Organics,no,Food Waste,Trash,5.08
+Organics,no,Paper Fibers and FSP,Trash,2.78
+Organics,no,Certified Compostables,Trash,0.21
+Organics,no,Certified Compostables (TBD),Trash,0
+Organics,no,Other Organics,Trash,0
+Unacceptable,unacceptable,E/U Waste,Trash,0
+Unacceptable,unacceptable,Textiles,Trash,0.21
+Unacceptable,unacceptable,Reusables,Trash,0.21
+Unacceptable,unacceptable,Other Unacceptable,Trash,0
+Unacceptable,unacceptable,Liquids,Trash,0
+Other Materials,no,Single-use Makeup Applicators,Trash,0.31
+Other Materials,no,Residual Materials,Trash,2.18
+Fibers,yes,Corrugated Cardboard,Mixed Recycling,0.14
+Fibers,no,Soiled Cardboard,Mixed Recycling,0
+Fibers,no,Waxed Cardboard,Mixed Recycling,0
+Fibers,yes,Mixed Paper,Mixed Recycling,2.73
+Fibers,no,Soiled Paper,Mixed Recycling,0
+Fibers,no,Tissue Paper,Mixed Recycling,0.11
+Fibers,no,Gable top & Aseptic  Cartons,Mixed Recycling,0
+Fibers,no,Other Coated Paper Containers,Mixed Recycling,0.06
+Glass,yes,Glass Bottles & Jars,Mixed Recycling,1.89
+Glass,no,Soiled Glass,Mixed Recycling,0
+Glass,no,Other Glass,Mixed Recycling,0
+Metal,yes,Aluminum Containers,Mixed Recycling,0.84
+Metal,no,Soiled Metals,Mixed Recycling,0
+Metal,yes,Other Metals,Mixed Recycling,0
+Plastics,yes,Rigid Plastics (#1-2),Mixed Recycling,0.63
+Plastics,yes,Rigid Plastics (#5),Mixed Recycling,0.21
+Plastics,no,Other Rigid Plastics,Mixed Recycling,0
+Plastics,no,Non-woven Polypropylene Pouches,Mixed Recycling,0
+Plastics,no,Film Plastics,Mixed Recycling,0.53
+Plastics,no,Waste Disposal Bags,Mixed Recycling,0.21
+Plastics,no,Foams,Mixed Recycling,0
+Organics,no,Food Waste,Mixed Recycling,0
+Organics,no,Paper Fibers and FSP,Mixed Recycling,0.32
+Organics,no,Certified Compostables,Mixed Recycling,0.11
+Organics,no,Certified Compostables (TBD),Mixed Recycling,0
+Organics,no,Other Organics,Mixed Recycling,0
+Unacceptable,unacceptable,E/U Waste,Mixed Recycling,0
+Unacceptable,unacceptable,Textiles,Mixed Recycling,0
+Unacceptable,unacceptable,Reusables,Mixed Recycling,0
+Unacceptable,unacceptable,Other Unacceptable,Mixed Recycling,0
+Unacceptable,unacceptable,Liquids,Mixed Recycling,0
+Other Materials,no,Single-use Makeup Applicators,Mixed Recycling,0
+Other Materials,no,Residual Materials,Mixed Recycling,0.42
+Fibers,yes,Corrugated Cardboard,Cardboard Recycling,11.2
+Fibers,no,Soiled Cardboard,Cardboard Recycling,0
+Fibers,no,Waxed Cardboard,Cardboard Recycling,0
+Fibers,yes,Mixed Paper,Cardboard Recycling,0
+Fibers,no,Soiled Paper,Cardboard Recycling,0
+Fibers,no,Tissue Paper,Cardboard Recycling,0
+Fibers,no,Gable top & Aseptic  Cartons,Cardboard Recycling,0
+Fibers,no,Other Coated Paper Containers,Cardboard Recycling,0
+Glass,yes,Glass Bottles & Jars,Cardboard Recycling,0
+Glass,no,Soiled Glass,Cardboard Recycling,0
+Glass,no,Other Glass,Cardboard Recycling,0
+Metal,yes,Aluminum Containers,Cardboard Recycling,0
+Metal,no,Soiled Metals,Cardboard Recycling,0
+Metal,yes,Other Metals,Cardboard Recycling,0
+Plastics,yes,Rigid Plastics (#1-2),Cardboard Recycling,0
+Plastics,yes,Rigid Plastics (#5),Cardboard Recycling,0
+Plastics,no,Other Rigid Plastics,Cardboard Recycling,0
+Plastics,no,Non-woven Polypropylene Pouches,Cardboard Recycling,0
+Plastics,no,Film Plastics,Cardboard Recycling,0
+Plastics,no,Waste Disposal Bags,Cardboard Recycling,0
+Plastics,no,Foams,Cardboard Recycling,0
+Organics,no,Food Waste,Cardboard Recycling,0
+Organics,no,Paper Fibers and FSP,Cardboard Recycling,0
+Organics,no,Certified Compostables,Cardboard Recycling,0
+Organics,no,Certified Compostables (TBD),Cardboard Recycling,0
+Organics,no,Other Organics,Cardboard Recycling,0
+Unacceptable,unacceptable,E/U Waste,Cardboard Recycling,0
+Unacceptable,unacceptable,Textiles,Cardboard Recycling,0
+Unacceptable,unacceptable,Reusables,Cardboard Recycling,0
+Unacceptable,unacceptable,Other Unacceptable,Cardboard Recycling,0
+Unacceptable,unacceptable,Liquids,Cardboard Recycling,0
+Other Materials,no,Single-use Makeup Applicators,Cardboard Recycling,0
+Other Materials,no,Residual Materials,Cardboard Recycling,0
