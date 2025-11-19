@@ -62,10 +62,8 @@ At the moment, we won't accept usolicited pull request with charts not in the ro
 
 Before pulling a new request, please check the following resources to comply with the practices we've defined so far. If you plan to add a new chart, check the RAWGraphs API documentation to understaind how to use them.
 
-- [RAWGraphs glossary](https://rawgraphs.io/rawgraphs-core/docs/glossary)
-- [General principles](docs/good-practices.md)
-- [Adding a new chart](docs/add-a-new-chart.md)
-- [RAWGraphs core API reference](https://rawgraphs.io/rawgraphs-core)
+- [Adding a new chart](https://rawgraphs.github.io/rawgraphs-core/docs/chart-interface/)
+- [RAWGraphs core API reference](https://rawgraphs.github.io/rawgraphs-core/docs/)
 
 ## License
 
