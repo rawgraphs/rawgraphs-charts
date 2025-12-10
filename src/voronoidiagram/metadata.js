@@ -6,7 +6,7 @@ export const metadata = {
   id: 'rawgraphs.voronoidiagram',
   thumbnail,
   icon,
-  categories: ['Correlations'],
+  categories: ['correlations'],
   description:
     'It creates the minimum area around each point defined by two variables. When applied to a scatterplot, it is useful to show the distance between points.',
   code: 'https://github.com/rawgraphs/rawgraphs-charts/tree/master/src/voronoidiagram',
