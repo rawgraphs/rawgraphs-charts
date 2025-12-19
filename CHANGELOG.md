@@ -1,3 +1,11 @@
+## Unreleased
+
+#### Changes:
+
+- Axes: consolidated shared helpers for x/y axes and tick de-duplication.
+- Added tick controls (auto/max/outer) and wired shared axes for: line chart, streamgraph, bump chart, horizon graph, contour plot, hexagonal binning, voronoi diagram, convex hull, bubble chart, beeswarm, gantt chart, violin plot.
+- Fixed axis ticks handling for band/ordinal axes when sharing helpers.
+
 ## v1.0.1
 
 Starting from this release, version naming will be based on Semantic Versioning.
