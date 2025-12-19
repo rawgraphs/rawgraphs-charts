@@ -28,6 +28,7 @@ export function render(
     xTicksAuto,
     xTicksAmount,
     xTicksOuter,
+    xAxisPosition,
   } = visualOptions
 
   const margin = {
@@ -112,6 +113,7 @@ export function render(
     showLabel: true,
     axisLabelStyles: styles.axisLabel,
     tickSizeOuter: 0,
+    position: xAxisPosition,
   })
 
   const artboardBackground = d3

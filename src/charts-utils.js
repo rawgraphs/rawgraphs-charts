@@ -51,6 +51,7 @@ export const createXAxis = ({
   showLabel = true,
   axisLabelStyles = {},
   tickSizeOuter,
+  position = 'bottom',
 }) => {
   const tickValues = getAxisTickValues({
     scale: xScale,
@@ -69,20 +70,26 @@ export const createXAxis = ({
     g
       .attr(
         'transform',
-        `translate(0,${yDomain[0] >= 0 ? serieHeight : yScale(0)})`
+        `translate(0,${
+          position === 'top'
+            ? 0
+            : yDomain[0] >= 0
+            ? serieHeight
+            : yScale(0)
+        })`
       )
-      .call(axis)
+      .call(position === 'top' ? d3.axisTop(xScale).tickValues(tickValues) : axis)
       .call((selection) => {
         if (!label) return
         selection
           .append('text')
-          .attr('x', serieWidth)
-          .attr('dy', -5)
-          .attr('text-anchor', 'end')
+          .attr('x', position === 'top' ? 0 : serieWidth)
+          .attr('dy', position === 'top' ? -5 : -5)
+          .attr('text-anchor', position === 'top' ? 'start' : 'end')
           .attr('display', showLabel ? null : 'none')
           .text(label)
           .styles(axisLabelStyles)
-  })
+      })
 }
 
 // Reusable left axis for continuous charts with optional label.

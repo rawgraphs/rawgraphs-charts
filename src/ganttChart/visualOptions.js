@@ -115,4 +115,12 @@ export const visualOptions = {
       xTicksAuto: true,
     },
   },
+
+  xAxisPosition: {
+    type: 'text',
+    label: 'X axis position',
+    options: ['bottom', 'top'],
+    default: 'bottom',
+    group: 'axes',
+  },
 }
