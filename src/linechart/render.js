@@ -2,7 +2,7 @@ import * as d3 from 'd3'
 import { legend } from '@rawgraphs/rawgraphs-core'
 import * as d3Gridding from 'd3-gridding'
 import '../d3-styles'
-import { createXAxis } from '../charts-utils'
+import { createXAxis, createYAxis } from '../charts-utils'
 
 export function render(
   svgNode,
@@ -30,6 +30,9 @@ export function render(
     xTicksAuto,
     xTicksAmount,
     xTicksOuter,
+    yTicksAuto,
+    yTicksAmount,
+    yTicksOuter,
     // series options
     columnsNumber,
     useSameScale, // @TODO: add
@@ -218,32 +221,20 @@ export function render(
       axisLabelStyles: styles.axisLabel,
     })
 
-    const yAxis = (g) => {
-      return g
-        .attr(
-          'transform',
-          (d) =>
-            'translate(' +
-            (mapping.x.dataType.type === 'date' || xDomain[0] >= 0
-              ? 0
-              : xScale(0)) +
-            ',0)'
-        )
-        .call(d3.axisLeft(yScale).tickSizeOuter(0))
-        .call((g) =>
-          g
-            .append('text')
-            .attr('x', 4)
-            .attr('text-anchor', 'start')
-            .attr('dominant-baseline', 'hanging')
-            .attr(
-              'display',
-              serieIndex == 0 || repeatAxesLabels ? null : 'none'
-            )
-            .text(mapping['y'].value)
-            .styles(styles.axisLabel)
-        )
-    }
+    const yAxis = createYAxis({
+      yScale,
+      xOffset:
+        mapping.x.dataType.type === 'date' || xDomain[0] >= 0
+          ? 0
+          : xScale(0),
+      yTicksAuto,
+      yTicksAmount,
+      yTicksOuter,
+      label: mapping['y'].value,
+      showLabel: serieIndex == 0 || repeatAxesLabels,
+      axisLabelStyles: styles.axisLabel,
+      tickSizeOuter: 0,
+    })
 
     const axisLayer = selection.append('g').attr('id', 'axis')
 

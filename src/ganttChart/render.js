@@ -1,6 +1,7 @@
 import * as d3 from 'd3'
 import { legend, dateFormats, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
+import { createXAxis } from '../charts-utils'
 
 export function render(
   svgNode,
@@ -24,6 +25,9 @@ export function render(
     barPadding,
     colorScale,
     alignLabels,
+    xTicksAuto,
+    xTicksAmount,
+    xTicksOuter,
   } = visualOptions
 
   const margin = {
@@ -95,11 +99,20 @@ export function render(
   const lineHeight = heightScale.bandwidth()
   const lineStep = heightScale.step()
 
-  const xAxis = (g) => {
-    return g
-      .attr('transform', `translate(0,${chartHeight})`)
-      .call(d3.axisBottom(x))
-  }
+  const xAxis = createXAxis({
+    xScale: x,
+    yScale: d3.scaleLinear().domain([0, 1]).range([0, chartHeight]),
+    serieHeight: chartHeight,
+    serieWidth: chartWidth,
+    yDomain: [0, 1],
+    xTicksAuto,
+    xTicksAmount,
+    xTicksOuter,
+    label: mapping.startDate.value,
+    showLabel: true,
+    axisLabelStyles: styles.axisLabel,
+    tickSizeOuter: 0,
+  })
 
   const artboardBackground = d3
     .select(svgNode)

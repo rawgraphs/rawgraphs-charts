@@ -2,7 +2,7 @@ import * as d3 from 'd3'
 import * as d3Hexbin from 'd3-hexbin'
 import { legend, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
-import { createXAxis } from '../charts-utils'
+import { createXAxis, createYAxis } from '../charts-utils'
 
 export function colorDomain(data, mapping, visualOptions) {
   const {
@@ -101,6 +101,9 @@ export function render(
     xTicksAuto,
     xTicksAmount,
     xTicksOuter,
+    yTicksAuto,
+    yTicksAmount,
+    yTicksOuter,
   } = visualOptions
 
   const margin = {
@@ -147,19 +150,15 @@ export function render(
     axisLabelStyles: styles.axisLabel,
   })
 
-  const yAxis = (g) => {
-    return g
-      .call(d3.axisLeft(y))
-      .call((g) =>
-        g
-          .append('text')
-          .attr('x', 4)
-          .attr('text-anchor', 'start')
-          .attr('dominant-baseline', 'hanging')
-          .text(mapping['y'].value)
-          .styles(styles.axisLabel)
-      )
-  }
+  const yAxis = createYAxis({
+    yScale: y,
+    yTicksAuto,
+    yTicksAmount,
+    yTicksOuter,
+    label: mapping['y'].value,
+    showLabel: true,
+    axisLabelStyles: styles.axisLabel,
+  })
 
   const artboardBackground = d3
     .select(svgNode)

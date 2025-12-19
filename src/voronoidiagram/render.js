@@ -1,7 +1,7 @@
 import * as d3 from 'd3'
 import { legend, dateFormats, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
-import { createXAxis } from '../charts-utils'
+import { createXAxis, createYAxis } from '../charts-utils'
 
 export function render(
   node,
@@ -30,9 +30,13 @@ export function render(
     showLabelsOutline,
     autoHideLabels,
     labelStyles,
+    //ticks
     xTicksAuto,
     xTicksAmount,
     xTicksOuter,
+    yTicksAuto,
+    yTicksAmount,
+    yTicksOuter,
   } = visualOptions
 
   const margin = {
@@ -93,19 +97,15 @@ export function render(
     axisLabelStyles: styles.axisLabel,
   })
 
-  const yAxis = (g) => {
-    return g
-      .call(d3.axisLeft(yScale))
-      .call((g) =>
-        g
-          .append('text')
-          .attr('x', 4)
-          .attr('text-anchor', 'start')
-          .attr('dominant-baseline', 'hanging')
-          .text(mapping['y'].value)
-          .styles(styles.axisLabel)
-      )
-  }
+  const yAxis = createYAxis({
+    yScale,
+    yTicksAuto,
+    yTicksAmount,
+    yTicksOuter,
+    label: mapping['y'].value,
+    showLabel: true,
+    axisLabelStyles: styles.axisLabel,
+  })
 
   const vizLayer = svg
     .append('g')

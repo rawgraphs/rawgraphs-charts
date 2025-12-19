@@ -1,7 +1,7 @@
 import * as d3 from 'd3'
 import { legend } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
-import { createXAxis } from '../charts-utils'
+import { createXAxis, createYAxis } from '../charts-utils'
 
 export function render(
   node,
@@ -30,9 +30,13 @@ export function render(
     negativeStyle,
     // color
     colorScale,
+    // ticks
     xTicksAuto,
     xTicksAmount,
     xTicksOuter,
+    yTicksAuto,
+    yTicksAmount,
+    yTicksOuter,
   } = visualOptions
 
   // Margin convention
@@ -174,9 +178,15 @@ export function render(
       }
     })
 
-  const yAxis = (g) => {
-    return g.call(d3.axisLeft(groupsScale).tickSizeOuter(0))
-  }
+  const yAxis = createYAxis({
+    yScale: groupsScale,
+    yTicksAuto,
+    yTicksAmount,
+    yTicksOuter,
+    label: null,
+    showLabel: false,
+    tickSizeOuter: 0,
+  })
 
   const xAxis = createXAxis({
     xScale,

@@ -2,7 +2,7 @@ import * as d3 from 'd3'
 import { legend } from '@rawgraphs/rawgraphs-core'
 import * as d3Gridding from 'd3-gridding'
 import '../d3-styles.js'
-import { createXAxis } from '../charts-utils'
+import { createXAxis, createYAxis } from '../charts-utils'
 
 export function render(
   svgNode,
@@ -313,11 +313,20 @@ export function render(
       )
 
     if (showYAxis) {
-      const yAxis = selection
+      selection
         .append('g')
         .attr('id', 'yAxis')
-        //.attr('transform', 'translate(0,' + serieHeight + ')')
-        .call(d3.axisLeft(sizeScale).tickSizeOuter(0))
+        .call(
+          createYAxis({
+            yScale: sizeScale,
+            yTicksAuto,
+            yTicksAmount,
+            yTicksOuter,
+            label: null,
+            showLabel: false,
+            tickSizeOuter: 0,
+          })
+        )
     }
 
     if (showSeriesLabels) {

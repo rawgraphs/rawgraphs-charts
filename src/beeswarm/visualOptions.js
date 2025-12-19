@@ -69,6 +69,33 @@ export const visualOptions = {
     group: 'chart',
   },
 
+  xTicksAuto: {
+    type: 'boolean',
+    label: 'Auto-place ticks on x axis',
+    default: true,
+    group: 'axes',
+  },
+
+  xTicksAmount: {
+    type: 'number',
+    label: 'Max. ticks on x axis',
+    default: 1,
+    group: 'axes',
+    disabled: {
+      xTicksAuto: true,
+    },
+  },
+
+  xTicksOuter: {
+    type: 'boolean',
+    label: 'Show min/max on x axis',
+    default: false,
+    group: 'axes',
+    disabled: {
+      xTicksAuto: true,
+    },
+  },
+
   sortSeriesBy: {
     type: 'text',
     label: 'Sort groups by',

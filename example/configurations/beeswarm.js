@@ -7,7 +7,10 @@ export default {
   dataTypes: {
     'IMDB ID': 'string',
     Rank: 'number',
-    Year: 'number',
+    Year: {
+      type: 'date',
+      dateFormat: 'YYYY',
+    },
     Title: 'string',
     Genre: 'string',
     Rating: 'number',
@@ -32,5 +35,8 @@ export default {
     marginLeft: 50,
     marginBottom: 50,
     autoHideLabels: true,
+    xTicksAuto: false,
+    xTicksAmount: 0,
+    xTicksOuter: true,
   },
 }

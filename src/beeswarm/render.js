@@ -1,6 +1,7 @@
 import * as d3 from 'd3'
 import { legend, dateFormats, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
+import { createXAxis } from '../charts-utils'
 
 export function render(
   svgNode,
@@ -29,6 +30,9 @@ export function render(
     simulationStrength,
     nodePadding,
     sortSeriesBy,
+    xTicksAuto,
+    xTicksAmount,
+    xTicksOuter,
     // colors
     colorScale,
     showLabelsOutline,
@@ -145,20 +149,19 @@ export function render(
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
     .attr('id', 'viz')
 
-  const xAxis = (g) => {
-    return g
-      .attr('transform', `translate(0,${chartHeight})`)
-      .call(d3.axisBottom(xScale))
-      .call((g) =>
-        g
-          .append('text')
-          .attr('x', chartWidth)
-          .attr('dy', -5)
-          .attr('text-anchor', 'end')
-          .text(mapping['xValue'].value)
-          .styles(styles.axisLabel)
-      )
-  }
+  const xAxis = createXAxis({
+    xScale,
+    yScale: d3.scaleLinear().domain([0, 1]).range([0, chartHeight]),
+    serieHeight: chartHeight,
+    serieWidth: chartWidth,
+    yDomain: [0, 1],
+    xTicksAuto,
+    xTicksAmount,
+    xTicksOuter,
+    label: mapping['xValue'].value,
+    showLabel: true,
+    axisLabelStyles: styles.axisLabel,
+  })
 
   const yAxis = (g) => {
     return g

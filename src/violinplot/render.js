@@ -1,6 +1,7 @@
 import * as d3 from 'd3'
 import { legend } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
+import { createYAxis } from '../charts-utils'
 
 export function render(
   svgNode,
@@ -31,6 +32,9 @@ export function render(
     legendWidth,
     // color dimension option, defined in visualOptions.js
     colorScale,
+    yTicksAuto,
+    yTicksAmount,
+    yTicksOuter,
   } = visualOptions
 
   // Margin convention
@@ -115,13 +119,17 @@ export function render(
   svg
     .append('g')
     .attr('id', 'y axis')
-    .call(d3.axisLeft(yScale))
-    .append('text')
-    .attr('x', 4)
-    .attr('text-anchor', 'start')
-    .attr('dominant-baseline', 'hanging')
-    .text(mapping['value'].value)
-    .styles(styles.axisLabel)
+    .call(
+      createYAxis({
+        yScale,
+        yTicksAuto,
+        yTicksAmount,
+        yTicksOuter,
+        label: mapping['value'].value,
+        showLabel: true,
+        axisLabelStyles: styles.axisLabel,
+      })
+    )
 
   svg
     .append('g')
