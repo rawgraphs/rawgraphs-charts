@@ -2,6 +2,7 @@ import * as d3 from 'd3'
 import { legend } from '@rawgraphs/rawgraphs-core'
 import * as d3Gridding from 'd3-gridding'
 import '../d3-styles'
+import { createXAxis } from '../charts-utils'
 
 export function render(
   svgNode,
@@ -203,52 +204,19 @@ export function render(
       })
       .curve(d3[interpolation])
 
-    const getUniqueTicks = (values) => {
-      const seen = new Set()
-      return values.filter((value) => {
-        const key = +value
-        if (seen.has(key)) {
-          return false
-        }
-        seen.add(key)
-        return true
-      })
-    }
-
-    const xAxis = (g) => {
-      return g
-        .attr(
-          'transform',
-          (d) =>
-            'translate(0,' + (yDomain[0] >= 0 ? serieHeight : yScale(0)) + ')'
-        )
-        .call(
-          d3
-            .axisBottom(xScale)
-            .tickValues(
-              xTicksAuto
-                ? xScale.ticks()
-                : xTicksOuter
-                ? getUniqueTicks(
-                    xScale.ticks(xTicksAmount).concat(xScale.domain())
-                  )
-                : xScale.ticks(xTicksAmount)
-            )
-        )
-        .call((g) =>
-          g
-            .append('text')
-            .attr('x', serieWidth)
-            .attr('dy', -5)
-            .attr('text-anchor', 'end')
-            .attr(
-              'display',
-              serieIndex == 0 || repeatAxesLabels ? null : 'none'
-            )
-            .text(mapping['x'].value)
-            .styles(styles.axisLabel)
-        )
-    }
+    const xAxis = createXAxis({
+      xScale,
+      yScale,
+      serieHeight,
+      serieWidth,
+      yDomain,
+      xTicksAuto,
+      xTicksAmount,
+      xTicksOuter,
+      label: mapping['x'].value,
+      showLabel: serieIndex == 0 || repeatAxesLabels,
+      axisLabelStyles: styles.axisLabel,
+    })
 
     const yAxis = (g) => {
       return g

@@ -25,5 +25,8 @@ export default {
     xOrigin: false,
     showLegend: true,
     showPoints: true,
+    xTicksAuto: false,
+    xTicksAmount: 3,
+    xTicksOuter: false,
   },
 }

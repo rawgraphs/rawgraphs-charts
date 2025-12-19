@@ -2,6 +2,7 @@ import * as d3 from 'd3'
 import { legend, dateFormats, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
 import * as d3Gridding from 'd3-gridding'
 import '../d3-styles.js'
+import { createXAxis } from '../charts-utils'
 
 export function render(
   svgNode,
@@ -37,6 +38,9 @@ export function render(
     sortSeriesBy,
     useSameYScale,
     useSameXScale,
+    xTicksAuto,
+    xTicksAmount,
+    xTicksOuter,
   } = visualOptions
 
   const margin = {
@@ -221,20 +225,19 @@ export function render(
 
     // create axis functions
     // x axis
-    const xAxis = (g) => {
-      return g
-        .attr('transform', `translate(0,${seriesHeight})`)
-        .call(d3.axisBottom(xScale))
-        .call((g) =>
-          g
-            .append('text')
-            .attr('x', seriesWidth)
-            .attr('dy', -5)
-            .attr('text-anchor', 'end')
-            .text(mapping['x'].value)
-            .styles(styles.axisLabel)
-        )
-    }
+    const xAxis = createXAxis({
+      xScale,
+      yScale,
+      serieHeight: seriesHeight,
+      serieWidth: seriesWidth,
+      yDomain: yScale.domain(),
+      xTicksAuto,
+      xTicksAmount,
+      xTicksOuter,
+      label: mapping['x'].value,
+      showLabel: true,
+      axisLabelStyles: styles.axisLabel,
+    })
 
     // y axis
     const yAxis = (g) => {

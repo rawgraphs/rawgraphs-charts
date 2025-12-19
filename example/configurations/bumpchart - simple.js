@@ -7,7 +7,10 @@ export default {
   dataTypes: {
     Category: 'string',
     Format: 'string',
-    Year: 'number',
+    Year: {
+      type: 'date',
+      dateFormat: 'YYYY',
+    },
     Units: 'number',
     Revenues: 'number',
     'Revenues-Adjusted': 'number',
