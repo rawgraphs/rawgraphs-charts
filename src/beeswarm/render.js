@@ -97,10 +97,16 @@ export function render(
       break
   }
   // create scale for sizes
+  const sizeDomain = d3.extent(data, (d) => d.size)
   const sizeScale = d3
     .scaleSqrt()
-    .domain(d3.extent(data, (d) => d.size))
+    .domain(sizeDomain)
     .range([minDiameter / 2, maxDiameter / 2])
+
+  // If all sizes are identical, fall back to the maximum diameter for clarity.
+  const isFlatSizeDomain = sizeDomain[0] === sizeDomain[1]
+  const resolvedSize = (d) =>
+    isFlatSizeDomain ? maxDiameter / 2 : sizeScale(d.size)
 
   // create y scale
   const yScale = d3
@@ -129,7 +135,7 @@ export function render(
     )
     .force(
       'collision',
-      d3.forceCollide().radius((d) => sizeScale(d.size) + nodePadding)
+      d3.forceCollide().radius((d) => resolvedSize(d) + nodePadding)
     )
 
   // add background
@@ -235,7 +241,7 @@ export function render(
     .attr('id', (d) => (Array.isArray(d.label) ? d.label.toString() : d.label))
     .attr('cx', (d) => d.x)
     .attr('cy', (d) => d.y)
-    .attr('r', (d) => sizeScale(d.size))
+    .attr('r', (d) => resolvedSize(d))
     .style('fill', (d) => colorScale(d.color))
 
   const labelsLayer = vizLayer.append('g').attr('id', 'labels')

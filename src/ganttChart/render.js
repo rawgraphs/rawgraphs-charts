@@ -3,6 +3,75 @@ import { legend, dateFormats, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
 import { createXAxis } from '../charts-utils'
 
+const normalizeDateTypes = (mapping) => {
+  const type = mapping.startDate.dataType.type
+  if (type !== mapping.endDate.dataType.type) {
+    throw new Error('startDate and endDate must have the same data type')
+  }
+  return type
+}
+
+const intervalsOverlap = (item, levelItems = [], type) => {
+  // Return true if the interval overlaps with any item in the given level.
+  return levelItems.some((existing) => {
+    if (type === 'date') {
+      const s = item.startDate.getTime()
+      const e = item.endDate.getTime()
+      const es = existing.startDate.getTime()
+      const ee = existing.endDate.getTime()
+      return (s > es && s < ee) || (e > es && e < ee) || (s < es && e > ee)
+    }
+    if (type === 'number') {
+      const s = item.startDate
+      const e = item.endDate
+      const es = existing.startDate
+      const ee = existing.endDate
+      return (s > es && s < ee) || (e > es && e < ee) || (s < es && e > ee)
+    }
+    throw new Error('startDate and endDate must be numbers or dates')
+  })
+}
+
+const sortGroups = (groups, sortGroupsBy) => {
+  if (!sortGroupsBy) return
+  if (sortGroupsBy === 'group') {
+    groups.sort((a, b) => d3.ascending(a[0], b[0]))
+    return
+  }
+  groups.sort((a, b) => d3[sortGroupsBy](a[1][0].startDate, b[1][0].startDate))
+}
+
+const layoutGroups = (data, mapping, sortGroupsBy) => {
+  const type = normalizeDateTypes(mapping)
+
+  const groups = d3.rollups(
+    data,
+    (values) => {
+      values.sort((a, b) => d3.ascending(a.startDate, b.startDate))
+      const levels = []
+      values.forEach((item) => {
+        let levelIndex = 0
+        while (intervalsOverlap(item, levels[levelIndex], type)) levelIndex++
+        if (!levels[levelIndex]) levels[levelIndex] = []
+        levels[levelIndex].push({ level: levelIndex, ...item })
+      })
+      return levels.flat()
+    },
+    (d) => (d.group && d.group.length ? d.group : null)
+  )
+
+  sortGroups(groups, sortGroupsBy)
+
+  // compute cumulative offsets for vertical positioning
+  let offset = 0
+  groups.forEach((group) => {
+    group.offset = offset
+    offset += d3.max(group[1], (d) => d.level + 1)
+  })
+
+  return groups
+}
+
 export function render(
   svgNode,
   data,
@@ -41,41 +110,7 @@ export function render(
   const chartWidth = width - margin.left - margin.right
   const chartHeight = height - margin.top - margin.bottom
 
-  if (mapping.startDate.dataType.type != mapping.endDate.dataType.type) {
-    throw new Error('startDate and endDate must have the same data type')
-  }
-
-  const groups = d3.rollups(
-    data,
-    (v) => {
-      v.sort((a, b) => d3.ascending(a.startDate, b.startDate))
-
-      let levels = [],
-        level = 0
-      v.forEach(function (item) {
-        let l = 0
-        while (overlap(item, levels[l], mapping.startDate.dataType.type)) l++
-        if (!levels[l]) levels[l] = []
-        levels[l].push({
-          level: l + level,
-          ...item,
-        })
-      })
-
-      level++
-      return levels.flat()
-    },
-    (d) => (d.group && d.group.length ? d.group : null)
-  )
-
-  groups.sort((a, b) => {
-    if (!sortGroupsBy) return
-    if (sortGroupsBy === 'group') {
-      return d3.ascending(a[0], b[0])
-    } else {
-      return d3[sortGroupsBy](a[1][0].startDate, b[1][0].startDate)
-    }
-  })
+  const groups = layoutGroups(data, mapping, sortGroupsBy)
 
   // x scale
   const xMin = d3.min(data, (d) => d.startDate)
@@ -136,36 +171,26 @@ export function render(
 
   axisLayer.append('g').call(xAxis)
 
-  let stack = d3
-    .stack()
-    .keys(groups.map((d) => d[0]))
-    .value((d, key) => {
-      const a = d.filter((f) => f[0] === key)[0]
-      return d3.max(a[1].map((c) => c.level)) + 1
-    })
-
   const vizLayer = svg.append('g').attr('id', 'viz')
   const groupsG = vizLayer
     .selectAll('g')
-    .data(stack([groups]))
+    .data(groups)
     .join('g')
-    .attr('id', (d) => d.key)
-    .attr('transform', (d) => `translate(0,${d[0][0] * lineStep})`)
+    .attr('id', (d) => d[0])
+    .attr('transform', (d) => `translate(0,${d.offset * lineStep})`)
 
   groupsG
     .append('text')
-    .attr('x', (d) =>
-      alignLabels ? x(d[0].data[d.index][1][0].startDate) - 4 : -4
-    )
+    .attr('x', (d) => (alignLabels ? x(d[1][0].startDate) - 4 : -4))
     .attr('y', lineStep / 2)
     .attr('text-anchor', 'end')
     .attr('dominant-baseline', 'middle')
-    .text((d) => d.key)
+    .text((d) => d[0])
     .styles(styles.labelSecondary)
 
   groupsG
     .selectAll('rect')
-    .data((d, i) => d[0].data[d.index][1])
+    .data((d) => d[1])
     .join('rect')
     .attr('x', (d) => x(d.startDate))
     .attr('y', (d) => lineStep * d.level + (lineStep - lineHeight) / 2)
@@ -196,35 +221,4 @@ export function render(
 
     legendLayer.call(chartLegend)
   }
-}
-
-function overlap(item, g, type) {
-  if (!g) return false
-  for (const i in g) {
-    if (type === 'date') {
-      // get time and compare it
-      if (
-        (item.startDate.getTime() > g[i].startDate.getTime() &&
-          item.startDate.getTime() < g[i].endDate.getTime()) ||
-        (item.endDate.getTime() > g[i].startDate.getTime() &&
-          item.endDate.getTime() < g[i].endDate.getTime()) ||
-        (item.startDate.getTime() < g[i].startDate.getTime() &&
-          item.endDate.getTime() > g[i].endDate.getTime())
-      ) {
-        return true
-      }
-    } else if (type === 'number') {
-      // if it's a number, just compare values
-      if (
-        (item.startDate > g[i].startDate && item.startDate < g[i].endDate) ||
-        (item.endDate > g[i].startDate && item.endDate < g[i].endDate) ||
-        (item.startDate < g[i].startDate && item.endDate > g[i].endDate)
-      ) {
-        return true
-      }
-    } else {
-      throw new Error('startDate and endDate must be numbers or dates')
-    }
-  }
-  return false
 }

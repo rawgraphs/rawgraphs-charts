@@ -26,8 +26,8 @@ export default {
     xValue: { value: ['Year'] },
     series: { value: ['Genre'] },
     color: { value: ['Genre'] },
-    label: { value: ['Title', 'Year'] },
-    size: { value: ['Budget (Millions, adjusted for inflation)'] },
+    //label: { value: ['Title', 'Year'] },
+    //size: { value: ['Budget (Millions, adjusted for inflation)'] },
   },
   visualOptions: {
     width: 500,
@@ -38,5 +38,6 @@ export default {
     xTicksAuto: false,
     xTicksAmount: 0,
     xTicksOuter: true,
+    maxDiameter: 10,
   },
 }
