@@ -27,7 +27,7 @@ export default {
     width: 1000,
     height: 800,
     showPoints: true,
-    interpolation: 'Natural',
+    interpolation: 'curveNatural',
     pointsRadius: 2,
     columnsNumber: 2,
     gutterX: 50,

@@ -17,8 +17,8 @@ export default {
     },
   },
   mapping: {
-    //series: { value: undefined },
-    lines: { value: ['Category'] },
+    series: { value: ['Category'] },
+    lines: { value: ['Format'] },
     x: { value: ['Year_date'] },
     y: { value: ['Revenues-Adjusted'] },
     //color: { value: ['Category'] },

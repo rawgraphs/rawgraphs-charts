@@ -41,7 +41,6 @@ export default {
     repeatAxesLabels: true,
     showLabels: true,
     labelsPosition: 'side',
-    interpolation: 'Natural',
     pointsRadius: 1.5,
     sortSeriesBy: 'Total value (descending)',
   },

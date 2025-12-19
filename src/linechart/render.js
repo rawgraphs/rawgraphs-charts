@@ -203,6 +203,18 @@ export function render(
       })
       .curve(d3[interpolation])
 
+    const getUniqueTicks = (values) => {
+      const seen = new Set()
+      return values.filter((value) => {
+        const key = +value
+        if (seen.has(key)) {
+          return false
+        }
+        seen.add(key)
+        return true
+      })
+    }
+
     const xAxis = (g) => {
       return g
         .attr(
@@ -217,7 +229,9 @@ export function render(
               xTicksAuto
                 ? xScale.ticks()
                 : xTicksOuter
-                ? xScale.ticks(xTicksAmount).concat(xScale.domain())
+                ? getUniqueTicks(
+                    xScale.ticks(xTicksAmount).concat(xScale.domain())
+                  )
                 : xScale.ticks(xTicksAmount)
             )
         )
