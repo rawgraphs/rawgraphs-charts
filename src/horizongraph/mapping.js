@@ -29,5 +29,5 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
     (d) => d[mapping.x.value] // group functions
   )
 
-  return results
+  return results.sort((a, b) => d3.ascending(a.x, b.x))
 }

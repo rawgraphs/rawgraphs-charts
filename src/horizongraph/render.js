@@ -34,9 +34,6 @@ export function render(
     xTicksAuto,
     xTicksAmount,
     xTicksOuter,
-    yTicksAuto,
-    yTicksAmount,
-    yTicksOuter,
   } = visualOptions
 
   // Margin convention
@@ -178,11 +175,11 @@ export function render(
       }
     })
 
+  console.log(data)
+
   const yAxis = createYAxis({
     yScale: groupsScale,
-    yTicksAuto,
-    yTicksAmount,
-    yTicksOuter,
+    yTicksAuto: true,
     label: null,
     showLabel: false,
     tickSizeOuter: 0,
