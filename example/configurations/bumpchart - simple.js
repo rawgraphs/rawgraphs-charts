@@ -7,7 +7,10 @@ export default {
   dataTypes: {
     Category: 'string',
     Format: 'string',
-    Year: 'number',
+    Year: {
+      type: 'date',
+      dateFormat: 'YYYY',
+    },
     Units: 'number',
     Revenues: 'number',
     'Revenues-Adjusted': 'number',
@@ -29,5 +32,8 @@ export default {
     streamsOrder: 'stackOrderInsideOut',
     interpolation: 'curveLinear',
     streamsPadding: 10,
+    xTicksAuto: false,
+    xTicksAmount: 3,
+    xTicksOuter: true,
   },
 }

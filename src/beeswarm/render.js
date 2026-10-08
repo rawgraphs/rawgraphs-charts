@@ -1,6 +1,7 @@
 import * as d3 from 'd3'
 import { legend, dateFormats, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
+import { createXAxis } from '../charts-utils'
 
 export function render(
   svgNode,
@@ -29,6 +30,10 @@ export function render(
     simulationStrength,
     nodePadding,
     sortSeriesBy,
+    forceOnlyY,
+    xTicksAuto,
+    xTicksAmount,
+    xTicksOuter,
     // colors
     colorScale,
     showLabelsOutline,
@@ -93,10 +98,16 @@ export function render(
       break
   }
   // create scale for sizes
+  const sizeDomain = d3.extent(data, (d) => d.size)
   const sizeScale = d3
     .scaleSqrt()
-    .domain(d3.extent(data, (d) => d.size))
+    .domain(sizeDomain)
     .range([minDiameter / 2, maxDiameter / 2])
+
+  // If all sizes are identical, fall back to the maximum diameter for clarity.
+  const isFlatSizeDomain = sizeDomain[0] === sizeDomain[1]
+  const resolvedSize = (d) =>
+    isFlatSizeDomain ? maxDiameter / 2 : sizeScale(d.size)
 
   // create y scale
   const yScale = d3
@@ -108,24 +119,31 @@ export function render(
 
   // prepare data with initial vales, so the simulation won't start from 0,0
   data.forEach((d) => {
-    d.x = xScale(d.xValue)
+    d.x = xScale(d.xValue);
     d.y = yScale(d.series) + yScale.bandwidth() / 2
+    if(forceOnlyY) {
+      d.fx = d.x
+    }
   })
 
   // initialise simulation
-  let simulation = d3
-    .forceSimulation(data)
-    .force(
+  let simulation = d3.forceSimulation(data)
+
+  if (!forceOnlyY) {
+    simulation = simulation.force(
       'x',
       d3.forceX().x((d) => xScale(d.xValue))
     )
+  }
+
+  simulation
     .force(
       'y',
       d3.forceY((d) => yScale(d.series) + yScale.bandwidth() / 2)
     )
     .force(
       'collision',
-      d3.forceCollide().radius((d) => sizeScale(d.size) + nodePadding)
+      d3.forceCollide().radius((d) => resolvedSize(d) + nodePadding)
     )
 
   // add background
@@ -145,20 +163,19 @@ export function render(
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
     .attr('id', 'viz')
 
-  const xAxis = (g) => {
-    return g
-      .attr('transform', `translate(0,${chartHeight})`)
-      .call(d3.axisBottom(xScale))
-      .call((g) =>
-        g
-          .append('text')
-          .attr('x', chartWidth)
-          .attr('dy', -5)
-          .attr('text-anchor', 'end')
-          .text(mapping['xValue'].value)
-          .styles(styles.axisLabel)
-      )
-  }
+  const xAxis = createXAxis({
+    xScale,
+    yScale: d3.scaleLinear().domain([0, 1]).range([0, chartHeight]),
+    serieHeight: chartHeight,
+    serieWidth: chartWidth,
+    yDomain: [0, 1],
+    xTicksAuto,
+    xTicksAmount,
+    xTicksOuter,
+    label: mapping['xValue'].value,
+    showLabel: true,
+    axisLabelStyles: styles.axisLabel,
+  })
 
   const yAxis = (g) => {
     return g
@@ -232,7 +249,7 @@ export function render(
     .attr('id', (d) => (Array.isArray(d.label) ? d.label.toString() : d.label))
     .attr('cx', (d) => d.x)
     .attr('cy', (d) => d.y)
-    .attr('r', (d) => sizeScale(d.size))
+    .attr('r', (d) => resolvedSize(d))
     .style('fill', (d) => colorScale(d.color))
 
   const labelsLayer = vizLayer.append('g').attr('id', 'labels')

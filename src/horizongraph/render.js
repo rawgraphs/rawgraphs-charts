@@ -1,6 +1,7 @@
 import * as d3 from 'd3'
 import { legend } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
+import { createXAxis, createYAxis } from '../charts-utils'
 
 export function render(
   node,
@@ -29,6 +30,10 @@ export function render(
     negativeStyle,
     // color
     colorScale,
+    // ticks
+    xTicksAuto,
+    xTicksAmount,
+    xTicksOuter,
   } = visualOptions
 
   // Margin convention
@@ -170,23 +175,28 @@ export function render(
       }
     })
 
-  const yAxis = (g) => {
-    return g.call(d3.axisLeft(groupsScale).tickSizeOuter(0))
-  }
-  const xAxis = (g) => {
-    return g
-      .attr('transform', `translate(0,${chartHeight})`)
-      .call(d3.axisBottom(xScale).tickSizeOuter(0))
-      .call((g) =>
-        g
-          .append('text')
-          .attr('x', chartWidth)
-          .attr('dy', -5)
-          .attr('text-anchor', 'end')
-          .text(mapping['x'].value)
-          .styles(styles.axisLabel)
-      )
-  }
+  const yAxis = createYAxis({
+    yScale: groupsScale,
+    yTicksAuto: true,
+    label: null,
+    showLabel: false,
+    tickSizeOuter: 0,
+  })
+
+  const xAxis = createXAxis({
+    xScale,
+    yScale,
+    serieHeight: chartHeight,
+    serieWidth: chartWidth,
+    yDomain: yScale.domain(),
+    xTicksAuto,
+    xTicksAmount,
+    xTicksOuter,
+    label: mapping['x'].value,
+    showLabel: true,
+    axisLabelStyles: styles.axisLabel,
+    tickSizeOuter: 0,
+  })
 
   const axisLayer = viz.append('g').attr('id', 'axis')
 

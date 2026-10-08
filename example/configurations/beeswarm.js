@@ -7,7 +7,10 @@ export default {
   dataTypes: {
     'IMDB ID': 'string',
     Rank: 'number',
-    Year: 'number',
+    Year: {
+      type: 'date',
+      dateFormat: 'YYYY',
+    },
     Title: 'string',
     Genre: 'string',
     Rating: 'number',
@@ -21,7 +24,7 @@ export default {
   },
   mapping: {
     xValue: { value: ['Year'] },
-    series: { value: ['Genre'] },
+    //series: { value: ['Genre'] },
     color: { value: ['Genre'] },
     label: { value: ['Title', 'Year'] },
     size: { value: ['Budget (Millions, adjusted for inflation)'] },
@@ -32,5 +35,10 @@ export default {
     marginLeft: 50,
     marginBottom: 50,
     autoHideLabels: true,
+    xTicksAuto: false,
+    xTicksAmount: 0,
+    xTicksOuter: true,
+    maxDiameter: 10,
+    forceOnlyY: false,
   },
 }

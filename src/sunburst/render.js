@@ -141,7 +141,6 @@ export function render(
     .selectAll('tspan')
     // if node not a leaf, show just its name.
     .data((d) => {
-      console.log(d)
       if (d.children) {
         return [
           {

@@ -2,6 +2,7 @@ import * as d3 from 'd3'
 import { legend } from '@rawgraphs/rawgraphs-core'
 import * as d3Gridding from 'd3-gridding'
 import '../d3-styles.js'
+import { createXAxis, createYAxis } from '../charts-utils'
 
 export function render(
   svgNode,
@@ -26,6 +27,9 @@ export function render(
     streamsOffset,
     interpolation,
     showYAxis,
+    xTicksAuto,
+    xTicksAmount,
+    xTicksOuter,
     // series options
     columnsNumber,
     useSameScale,
@@ -256,8 +260,6 @@ export function render(
         })
     })
 
-    console.log(stackedData)
-
     let localDomain = [
       d3.min(stackedData, (d) => d3.min(d, (d) => d[0])),
       d3.max(stackedData, (d) => d3.max(d, (d) => d[1])),
@@ -289,18 +291,40 @@ export function render(
       .append('title')
       .text(({ key }) => key)
 
-    const xAxis = selection
+    selection
       .append('g')
       .attr('id', 'xAxis')
-      .attr('transform', 'translate(0,' + serieHeight + ')')
-      .call(d3.axisBottom(xScale).tickSizeOuter(0))
+      .call(
+        createXAxis({
+          xScale,
+          yScale: sizeScale,
+          serieHeight,
+          serieWidth,
+          yDomain: sizeScale.domain(),
+          xTicksAuto,
+          xTicksAmount,
+          xTicksOuter,
+          label: null,
+          showLabel: false,
+          tickSizeOuter: 0,
+        })
+      )
 
     if (showYAxis) {
-      const yAxis = selection
+      selection
         .append('g')
         .attr('id', 'yAxis')
-        //.attr('transform', 'translate(0,' + serieHeight + ')')
-        .call(d3.axisLeft(sizeScale).tickSizeOuter(0))
+        .call(
+          createYAxis({
+            yScale: sizeScale,
+            yTicksAuto,
+            yTicksAmount,
+            yTicksOuter,
+            label: null,
+            showLabel: false,
+            tickSizeOuter: 0,
+          })
+        )
     }
 
     if (showSeriesLabels) {

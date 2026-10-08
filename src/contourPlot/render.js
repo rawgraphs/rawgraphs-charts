@@ -2,6 +2,7 @@ import * as d3 from 'd3'
 import * as d3Contour from 'd3-contour'
 import { legend, dateFormats, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
+import { createXAxis, createYAxis } from '../charts-utils'
 
 export function colorDomain(data, mapping, visualOptions) {
   const {
@@ -94,6 +95,12 @@ export function render(
     labelThresholds,
     showLabelsOutline,
     autoHideLabels,
+    xTicksAuto,
+    xTicksAmount,
+    xTicksOuter,
+    yTicksAuto,
+    yTicksAmount,
+    yTicksOuter,
   } = visualOptions
 
   const margin = {
@@ -126,34 +133,29 @@ export function render(
 
   y.domain(yDomain).rangeRound([chartHeight, 0]).nice()
 
-  const xAxis = (g) => {
-    return g
-      .attr('transform', `translate(0,${chartHeight})`)
-      .call(d3.axisBottom(x))
-      .call((g) =>
-        g
-          .append('text')
-          .attr('x', chartWidth)
-          .attr('dy', -5)
-          .attr('text-anchor', 'end')
-          .text(mapping['x'].value)
-          .styles(styles.axisLabel)
-      )
-  }
+  const xAxis = createXAxis({
+    xScale: x,
+    yScale: y,
+    serieHeight: chartHeight,
+    serieWidth: chartWidth,
+    yDomain: y.domain(),
+    xTicksAuto,
+    xTicksAmount,
+    xTicksOuter,
+    label: mapping['x'].value,
+    showLabel: true,
+    axisLabelStyles: styles.axisLabel,
+  })
 
-  const yAxis = (g) => {
-    return g
-      .call(d3.axisLeft(y))
-      .call((g) =>
-        g
-          .append('text')
-          .attr('x', 4)
-          .attr('text-anchor', 'start')
-          .attr('dominant-baseline', 'hanging')
-          .text(mapping['y'].value)
-          .styles(styles.axisLabel)
-      )
-  }
+  const yAxis = createYAxis({
+    yScale: y,
+    yTicksAuto,
+    yTicksAmount,
+    yTicksOuter,
+    label: mapping['y'].value,
+    showLabel: true,
+    axisLabelStyles: styles.axisLabel,
+  })
 
   const artboardBackground = d3
     .select(svgNode)

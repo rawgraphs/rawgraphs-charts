@@ -147,4 +147,58 @@ export const visualOptions = {
     },
     requiredDimensions: ['x', 'y'],
   },
+
+  xTicksAuto: {
+    type: 'boolean',
+    label: 'Auto-place ticks on x axis',
+    default: true,
+    group: 'axes',
+  },
+
+  xTicksAmount: {
+    type: 'number',
+    label: 'Max. ticks on x axis',
+    default: 1,
+    group: 'axes',
+    disabled: {
+      xTicksAuto: true,
+    },
+  },
+
+  xTicksOuter: {
+    type: 'boolean',
+    label: 'Show min/max on x axis',
+    default: false,
+    group: 'axes',
+    disabled: {
+      xTicksAuto: true,
+    },
+  },
+
+  yTicksAuto: {
+    type: 'boolean',
+    label: 'Auto-place ticks on y axis',
+    default: true,
+    group: 'axes',
+  },
+
+  yTicksAmount: {
+    type: 'number',
+    label: 'Max. ticks on y axis',
+    default: 1,
+    group: 'axes',
+    disabled: {
+      yTicksAuto: true,
+    },
+  },
+
+  yTicksOuter: {
+    type: 'boolean',
+    label: 'Show min/max on y axis',
+    default: false,
+    group: 'axes',
+    disabled: {
+      yTicksAuto: true,
+    },
+  },
 }

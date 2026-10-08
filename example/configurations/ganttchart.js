@@ -30,5 +30,7 @@ export default {
     marginBottom: 20,
     marginRight: 15,
     marginLeft: 50,
+    xAxisPosition: 'bottom',
+    xTicksAuto: false
   },
 }

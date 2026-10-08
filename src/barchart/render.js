@@ -62,7 +62,6 @@ export function render(
     .groups(data, (d) => d.series)
     .map((d) => ({ data: d, totalSize: d3.sum(d[1], (d) => d.size) }))
 
-  console.log(nestedData)
   // series sorting functions
   const seriesSortings = {
     totalDescending: function (a, b) {
@@ -353,15 +352,6 @@ function multiFormat(date) {
     formatWeek = d3.timeFormat('%b %d'),
     formatMonth = d3.timeFormat('%B'),
     formatYear = d3.timeFormat('%Y')
-
-  console.log(
-    d3.timeYear(date),
-    d3.timeMonth(date),
-    d3.timeDay(date),
-    d3.timeHour(date),
-    d3.timeMinute(date),
-    d3.timeSecond(date)
-  )
 
   return (d3.timeSecond(date) < date
     ? formatMillisecond
