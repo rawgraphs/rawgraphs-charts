@@ -1,5 +1,5 @@
 import { createFilter } from 'rollup-pluginutils'
-import convertCSS from './convertCSS'
+import convertCSS from './convertCSS.js'
 
 export function rawGraphCss(opts = {}) {
   if (!opts.include) {

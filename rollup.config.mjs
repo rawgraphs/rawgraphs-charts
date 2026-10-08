@@ -1,12 +1,14 @@
+import { createRequire } from 'module'
 import babel from '@rollup/plugin-babel'
-import { terser } from 'rollup-plugin-terser'
+import terser from '@rollup/plugin-terser'
 import localResolve from 'rollup-plugin-local-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import resolve from '@rollup/plugin-node-resolve'
 import image from '@rollup/plugin-image'
 import { string } from 'rollup-plugin-string'
-import { rawGraphCss } from './bundler/rollupPluginRAWGraphCss'
-import pkg from './package.json'
+import { rawGraphCss } from './bundler/rollupPluginRAWGraphCss.js'
+
+const pkg = createRequire(import.meta.url)('./package.json')
 
 const vendors = []
   // Make all external dependencies to be exclude from rollup
