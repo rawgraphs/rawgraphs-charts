@@ -260,8 +260,6 @@ export function render(
         })
     })
 
-    console.log(stackedData)
-
     let localDomain = [
       d3.min(stackedData, (d) => d3.min(d, (d) => d[0])),
       d3.max(stackedData, (d) => d3.max(d, (d) => d[1])),

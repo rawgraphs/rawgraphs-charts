@@ -175,8 +175,6 @@ export function render(
       }
     })
 
-  console.log(data)
-
   const yAxis = createYAxis({
     yScale: groupsScale,
     yTicksAuto: true,

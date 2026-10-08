@@ -155,9 +155,6 @@ export function render(
     .append('text')
     .attr('x', 0)
     .attr('y', 0)
-    .attr('test', (d) => {
-      console.log(d)
-    })
     .attr('text-anchor', 'middle')
     .attr('dominant-baseline', 'text-before-edge')
     .selectAll('tspan')

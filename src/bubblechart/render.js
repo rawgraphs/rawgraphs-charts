@@ -288,7 +288,6 @@ export function render(
       .selectAll('g')
       .data(
         serieData.sort((a, b) => {
-          console.log(a, b)
           const sortValueA = mapping.size.value ? sizeScale(a.size) : maxRadius
           const sortValueB = mapping.size.value ? sizeScale(b.size) : maxRadius
           return sortValueB - sortValueA

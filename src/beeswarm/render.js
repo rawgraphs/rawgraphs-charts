@@ -119,8 +119,11 @@ export function render(
 
   // prepare data with initial vales, so the simulation won't start from 0,0
   data.forEach((d) => {
-    d.x = xScale(d.xValue)
+    d.x = xScale(d.xValue);
     d.y = yScale(d.series) + yScale.bandwidth() / 2
+    if(forceOnlyY) {
+      d.fx = d.x
+    }
   })
 
   // initialise simulation

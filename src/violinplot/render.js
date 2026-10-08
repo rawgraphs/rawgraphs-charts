@@ -78,8 +78,6 @@ export function render(
     }[sortGroupsBy]
   })
 
-  console.log(nestedData)
-
   // add background
   d3.select(svgNode)
     .append('rect')
@@ -172,9 +170,6 @@ export function render(
       return completeShape
     }) // So now we are working bin per bin
     .style('stroke', 'none')
-    .attr('teest', (d) => {
-      // console.log(d)
-    })
     .attr(
       'd',
       d3

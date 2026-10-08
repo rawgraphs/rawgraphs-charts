@@ -24,7 +24,7 @@ export default {
   },
   mapping: {
     xValue: { value: ['Year'] },
-    series: { value: ['Genre'] },
+    //series: { value: ['Genre'] },
     color: { value: ['Genre'] },
     label: { value: ['Title', 'Year'] },
     size: { value: ['Budget (Millions, adjusted for inflation)'] },
@@ -39,5 +39,6 @@ export default {
     xTicksAmount: 0,
     xTicksOuter: true,
     maxDiameter: 10,
+    forceOnlyY: false,
   },
 }
